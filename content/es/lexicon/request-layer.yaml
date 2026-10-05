@@ -1,0 +1,513 @@
+# Reglas de la capa de la petición.
+#
+# Doctrina: una petición solo es una petición cuando las dos partes pueden
+# comprobar después si se cumplió. En positivo, concreta, comprobable.
+#
+# Die Härteregeln sind risikosensitiv (`risk_sensitive: true`): Wer bei der
+# Deutlichkeit „Sin rodeos" gewählt hat, will Klartext, und dann ist „a
+# partir de ahora" kein Fehler, sondern die Absicht. Der Linter stuft solche
+# Befunde dort auf einen Hinweis herab, statt sie anzumahnen.
+#
+# ── Was im Spanischen anders ist ───────────────────────────────────────
+#
+# Der verneinte Imperativ steht im Subjunktiv („no me interrumpas"). Die
+# Endung allein verrät ihn nicht — siehe `neg-no` —, deshalb zählt das
+# Muster die Verben auf, die in einem Verbot typischerweise stehen.
+#
+# Die klassische Bitte der Comunicación No Violenta, „¿Estarías dispuesto
+# a …?", ist im Korpus bewusst selten: Sie verlangt ein Geschlecht
+# (dispuesto/dispuesta), das der Korpus nicht kennt. Er greift zu „¿Me
+# dirías …?", „Te pido que …" und zum Imperativ mit Zeitangabe.
+
+layer: request
+
+groups:
+  - kind: negative_request
+    severity: block
+    source: "Marshall B. Rosenberg: pedir en positivo"
+    why: |
+      «Deja de interrumpirme» dice qué debe terminar, no qué debe pasar. La
+      otra parte tiene que adivinar qué pones en su lugar, y adivinará algo
+      que no querías decir. Una petición que no nombra ninguna acción no se
+      puede aceptar, solo acatar.
+    rules:
+      - id: neg-deja-de
+        match: "deja de (\\p{L}+)|para de (\\p{L}+)|basta ya|ya basta|déjalo ya|dejalo ya|córtate|cortate"
+        message: "«{match}» dice qué debe terminar, no qué debe pasar."
+        ask: "¿Qué debería hacer en su lugar?"
+        offer:
+          - "déjame terminar antes de responder"
+          - "dime antes del jueves si te va bien"
+        tests:
+          hits: ["Deja de interrumpirme", "Para de cambiar el plan"]
+          misses: ["Dejé el informe en tu mesa", "Lo hago para decidir"]
+
+      - id: neg-no
+        # Aufgezählte Verben statt einer Endung: Am Wortende lässt sich der
+        # Subjunktiv des verneinten Imperativs nicht vom Indikativ trennen —
+        # „no me interrumpas" (Subj., -ar) endet wie „no me escuchas" (Ind.,
+        # -ar), „no te comprometes" (Ind., -er) wie „no me hables" (Subj.).
+        # Die erste Fassung riet über die Endung und traf prompt eine
+        # einwandfreie Bitte des eigenen Korpus.
+        match: "no (vuelvas|vuelvan) a|no (me|te|lo|la|los|las|nos|le|les) (interrumpas|hables|grites|llames|escribas|mandes|toques|cojas|mires|digas|cuentes|hagas|vengas|metas|presiones|ignores|mientas|critiques|corrijas|dejes|cambies|uses|abras|muevas|quites|pidas|compares)|no (hagas|digas|toques|cojas|cambies|decidas|entres|abras|cuentes|vengas|grites|interrumpas|llames|escribas|uses|tires|muevas|quites)"
+        message: "«{match}» es una prohibición, no una petición."
+        ask: "Dale la vuelta: ¿qué quieres que pase?"
+        tests:
+          hits: ["No me interrumpas", "No vuelvas a hacerlo", "No hagas eso"]
+          misses: ["No me importa esperar", "No pasa nada", "En mi nombre no te comprometes a nada"]
+
+      - id: neg-nunca-mas
+        match: "nunca más|nunca mas|ni una más|ni una mas|no quiero volver a|que no se repita|que no vuelva a pasar"
+        message: "«{match}» cierra una puerta sin abrir otra."
+        ask: "Nombra en una frase la conducta que sí quieres."
+        tests:
+          hits: ["Nunca más así", "Que no se repita"]
+          misses: ["Dime antes del jueves si te va bien"]
+
+  - kind: vague_request
+    severity: warn
+    source: "Marshall B. Rosenberg: una petición concreta y comprobable"
+    why: |
+      «Muéstrame más respeto» no se puede cumplir, porque nadie sabe qué
+      contaría como tal. Los dos creeréis haber sido razonables, y ninguno
+      podrá señalar nada concreto.
+    rules:
+      - id: vague-mas
+        match: "más (respeto|consideración|consideracion|esfuerzo|apoyo|comprensión|comprension|compromiso|atención|atencion|interés|interes|empatía|empatia|implicación|implicacion)|mas (respeto|esfuerzo|apoyo|compromiso)"
+        message: "«{match}» no se puede comprobar después."
+        ask: "¿Cómo se vería eso, en concreto, la semana que viene?"
+        offer:
+          - "dime antes del jueves a mediodía si el trabajo llega"
+          - "pregúntame antes de decidir sobre mi parte"
+        tests:
+          hits: ["Quiero más respeto", "Pon más esfuerzo"]
+          misses: ["Un café más, por favor", "Vino más gente de la esperada"]
+
+      - id: vague-algun-dia
+        match: "algún día|algun dia|en algún momento|en algun momento|cuando puedas|cuando sea|tarde o temprano|de alguna manera|de alguna forma|como sea"
+        message: "«{match}» deja el momento abierto, así que no se acuerda nada."
+        ask: "¿Para cuándo? Una fecha hace que la petición se pueda comprobar."
+        tests:
+          hits: ["Contéstame en algún momento", "Cuando puedas lo arreglamos"]
+          misses: ["Es algún tipo de error"]
+
+      - id: vague-cambiar
+        match: "cambia de actitud|cambiar de actitud|cambies de actitud|cambiar tu actitud|ponte las pilas|pon de tu parte|esfuérzate más|esfuerzate mas|sé más (\\p{L}+)|pórtate mejor|portate mejor|hazlo mejor"
+        message: "«{match}» pide otra persona, no otra acción."
+        ask: "¿Qué acción concreta te gustaría ver?"
+        tests:
+          hits: ["Ponte las pilas", "Sé más considerado"]
+          misses: ["Hoy hace mejor tiempo"]
+
+  - kind: absolute_demand
+    severity: warn
+    source: "Marshall B. Rosenberg: petición, no exigencia"
+    risk_sensitive: true
+    why: |
+      Una exigencia no deja espacio para decir que sí. Donde no hay espacio
+      para estar de acuerdo, lo que obtienes es obediencia o negativa, y las
+      dos cuestan más que lo que pedías.
+    rules:
+      - id: dem-tienes-que
+        match: "tienes que|tendrás que|tendras que|me tienes que|debes (\\p{L}+)|has de|te exijo|exijo|te ordeno|no te queda otra"
+        message: "«{match}» es una exigencia, no una petición."
+        ask: "¿Funcionaría también como petición? Prueba con «Te pido que …»."
+        tests:
+          hits: ["Tienes que avisarme antes", "Exijo una explicación"]
+          misses: ["Tengo que irme a las seis", "Tenemos que hablar"]
+
+      - id: dem-ya
+        match: "inmediatamente|de inmediato|ahora mismo|ya mismo|en el acto|a partir de ahora|desde ahora|a partir de hoy|desde hoy|sin falta"
+        message: "«{match}» marca un ritmo que la otra parte no puede negociar."
+        ask: "¿La urgencia es real? Si lo es, di por qué; si no, pon una fecha."
+        tests:
+          hits: ["Quiero eso a partir de ahora", "Contéstame ahora mismo"]
+          misses: ["El tren sale ahora", "Ahora que estamos de acuerdo"]
+
+  - kind: threat
+    severity: block
+    source: "Friedrich Glasl: la amenaza como etapa de escalada"
+    more: glasl-eskalationsstufen
+    why: |
+      Una amenaza termina la conversación y abre una negociación sobre el
+      poder. Lo que querías ya no está sobre la mesa; lo que está sobre la
+      mesa es si lo decías en serio.
+    rules:
+      - id: threat-si-no
+        match: "o si no|de lo contrario|si no lo haces,? (me|te|voy)|si no,? me voy|última advertencia|ultima advertencia|última oportunidad|ultima oportunidad"
+        message: "«{match}» es una amenaza."
+        ask: "¿Qué quieres de verdad? Una consecuencia va después, si acaso."
+        tests:
+          hits: ["Hazlo, o si no ya verás", "De lo contrario me voy"]
+          misses: ["Si no te va bien el jueves, dime otro día", "Te llamo luego"]
+
+      - id: threat-consecuencias
+        match: "habrá consecuencias|habra consecuencias|tendrá consecuencias|tendra consecuencias|te vas a arrepentir|te arrepentirás|te arrepentiras|no me obligues|te vas a enterar"
+        message: "«{match}» amenaza en lugar de pedir."
+        ask: "Di la petición sin más. La presión consigue lo contrario de lo que quieres."
+        tests:
+          hits: ["Habrá consecuencias", "Te vas a arrepentir"]
+          misses: ["Las consecuencias se comentaron en el informe"]
+
+  - kind: dissolving_softener
+    severity: info
+    source: "Asertividad: una petición puede ser clara"
+    why: |
+      Un poco de cortesía es educación. Demasiada disuelve la petición: si
+      solo «a lo mejor, si acaso» quieres algo, la otra parte tiene derecho a
+      entender que no importa.
+    rules:
+      - id: soft-a-lo-mejor
+        match: "a lo mejor podrías|a lo mejor podrias|si no es mucha molestia|si no es molestia|no sé,? pero|no se,? pero|si no te importa mucho|igual podrías|igual podrias"
+        message: "«{match}» suaviza tanto que la petición desaparece."
+        ask: "Dilo una vez, claro. La cortesía lo aguanta."
+        tests:
+          hits: ["Si no es mucha molestia", "A lo mejor podrías ayudar"]
+          misses: ["Quizás el viernes", "Podría ayudarte"]
+
+      - id: soft-pregunta-disfrazada
+        match: "sería posible|seria posible|habría alguna posibilidad|habria alguna posibilidad|podrías quizás|podrias quizas|te importaría quizás|te importaria quizas"
+        message: "«{match}» envuelve la petición en una vía de escape."
+        ask: "Di directamente lo que pides."
+        tests:
+          hits: ["¿Sería posible que me avises?", "¿Habría alguna posibilidad?"]
+          misses: ["¿Me lo dices el jueves?"]
+
+  - kind: missing_addressee_action
+    severity: warn
+    source: "Marshall B. Rosenberg: una petición concreta y comprobable"
+    why: |
+      Sin un verbo no hay nada que hacer. Una frase que nombra un deseo pero
+      ninguna acción os deja a los dos con una sensación en vez de con un
+      acuerdo.
+    rules: []
+    absence_check:
+      id: req-missing-verb
+      message: "Aquí todavía no hay ninguna acción."
+      ask: "¿Qué debería hacer exactamente la otra persona? Un verbo hace la petición comprobable."
+      # Schlägt an, wenn keine dieser Handlungsformen vorkommt.
+      #
+      # Die schwächste Stelle des Regelwerks, im Spanischen noch mehr als im
+      # Deutschen: Ein Verb erscheint als Infinitiv („decirme"), Imperativ
+      # („dime"), Subjunktiv nach „te pido que" („me digas") und mit
+      # angehängten Pronomen („dímelo", „avísame"). Ohne Morphologie bleibt
+      # nur, die Formen einzeln zu führen. Fehlt eine, entsteht eine falsche
+      # Mahnung — dann gehört sie ergänzt.
+      vocabulary:
+        # decir
+        - di
+        - dime
+        - dímelo
+        - dimelo
+        - digas
+        - diga
+        - decir
+        - decirme
+        - decírmelo
+        - dices
+        - dirías
+        - dirias
+        # avisar
+        - avisa
+        - avísame
+        - avisame
+        - avises
+        - avisar
+        - avisarme
+        # preguntar
+        - pregunta
+        - pregúntame
+        - preguntame
+        - preguntes
+        - preguntar
+        - preguntarme
+        # contar / explicar
+        - cuenta
+        - cuéntame
+        - cuentame
+        - cuentes
+        - contar
+        - contarme
+        - explica
+        - explícame
+        - explicame
+        - expliques
+        - explicar
+        - explicarme
+        # escuchar / oír
+        - escucha
+        - escúchame
+        - escuchame
+        - escuches
+        - escuchar
+        - escucharme
+        - oye
+        - oír
+        - oir
+        # responder / contestar
+        - responde
+        - respóndeme
+        - respondeme
+        - respondas
+        - responder
+        - responderme
+        - contesta
+        - contéstame
+        - contestame
+        - contestes
+        - contestar
+        - contestarme
+        # confirmar / acordar / decidir
+        - confirma
+        - confírmame
+        - confirmame
+        - confirmes
+        - confirmar
+        - confirmarme
+        - acordemos
+        - acordar
+        - acordamos
+        - decide
+        - decidas
+        - decidir
+        - decidimos
+        - decidamos
+        # hablar / sentarse / ver
+        - habla
+        - háblame
+        - hablame
+        - hables
+        - hablar
+        - hablemos
+        - hablamos
+        - sentarnos
+        - sentémonos
+        - sentemonos
+        - siéntate
+        - sientate
+        - veamos
+        - vemos
+        - mira
+        - mires
+        - mirar
+        - revisa
+        - revises
+        - revisar
+        - repasemos
+        - repasar
+        - repasamos
+        # dar / mandar / enviar / escribir / llamar
+        - da
+        - dame
+        - des
+        - dar
+        - darme
+        - manda
+        - mándame
+        - mandame
+        - mandes
+        - mandar
+        - envía
+        - envíame
+        - enviame
+        - envíes
+        - envies
+        - enviar
+        - escribe
+        - escríbeme
+        - escribeme
+        - escribas
+        - escribir
+        - escribirme
+        - escribamos
+        - pongamos
+        - pon
+        - pongas
+        - poner
+        - ponemos
+        - llama
+        - llámame
+        - llamame
+        - llames
+        - llamar
+        - llamarme
+        # dejar / esperar / incluir / consultar
+        - deja
+        - déjame
+        - dejame
+        - dejes
+        - dejar
+        - dejemos
+        - dejarlo
+        - espera
+        - esperes
+        - esperar
+        - incluye
+        - inclúyeme
+        - incluyeme
+        - incluyas
+        - incluir
+        - incluirme
+        - consulta
+        - consúltame
+        - consultame
+        - consultes
+        - consultar
+        - consultarme
+        # cumplir / mantener / comprometerse
+        - cumple
+        - cumplas
+        - cumplir
+        - mantén
+        - manten
+        - mantengas
+        - mantener
+        - comprométete
+        - comprometete
+        - comprometas
+        - comprometerte
+        - fijemos
+        - fijar
+        - fija
+        - fijamos
+        # cerrar / terminar / repartir / aclarar
+        - cerremos
+        - cerrar
+        - cierra
+        - cierres
+        - cerramos
+        - terminemos
+        - terminar
+        - termina
+        - termines
+        - acabemos
+        - acabar
+        - repartamos
+        - repartir
+        - aclaremos
+        - aclarar
+        - aclara
+        - aclares
+        - resolvamos
+        - resolver
+        - resolvemos
+        - busquemos
+        - buscar
+        - pensemos
+        - pensar
+        - piensa
+        # tomarse tiempo / volver / quedar
+        - tómate
+        - tomate
+        - tomar
+        - vuelve
+        - vuelvas
+        - volver
+        - quedemos
+        - quedar
+        - queda
+        - quede
+        - comenta
+        - comentes
+        - comentar
+        - comentarlo
+        - comentemos
+        - pide
+        - pidas
+        - pedir
+        - ayuda
+        - ayúdame
+        - ayudame
+        - ayudes
+        - ayudar
+        - entiende
+        - entender
+        - entienda
+        - acompáñame
+        - acompañame
+        - ven
+        - vengas
+        - venir
+        - trae
+        - traigas
+        - traer
+        - anota
+        - anotemos
+        - anotar
+        - apunta
+        - apuntemos
+        - apuntar
+        - cuenta conmigo
+        - termino
+        - pongo
+        - doy
+        - planifico
+        - decido
+        - decides
+        - decidiréis
+        - quedamos
+        # Nachgezogen beim ersten Lint-Lauf: Diese Formen fehlten und haben
+        # 21 einwandfreie Bitten des eigenen Korpus angemahnt — vor allem die
+        # Frageform („¿Me cuentas …?") und Pronomen am Imperativ.
+        - cuentas
+        - cuéntamelo
+        - cuentamelo
+        - escuchas
+        - explícamelo
+        - explicamelo
+        - háblalo
+        - hablalo
+        - dímelos
+        - dimelos
+        - dímela
+        - dimela
+        - pensamos
+        - piensas
+        - aclaramos
+        - dejamos
+        - cerrarlo
+        - cerrarla
+        - despedirnos
+        - acuerda
+        - repasa
+        - repases
+        - asumamos
+        - asumir
+        - damos
+        - demos
+        - avisaras
+        - respetes
+        - respeta
+        - respetar
+        - revisamos
+        - hagamos
+        - hacemos
+        # Die Frage im Präsens ist im Spanischen eine der häufigsten Formen
+        # einer Bitte („¿Me avisas …?", „¿Me lo mandas?") — eigene Formen.
+        - avisas
+        - preguntas
+        - llamas
+        - escribes
+        - mandas
+        - envías
+        - envias
+        - confirmas
+        - explicas
+        - contestas
+        - respondes
+        - consultas
+        - incluyes
+        - esperas
+        - dejas
+        - das
+        - ayudas
+        - comentas
+        - repasas
+        - revisas
+        - apuntas
+        - fijas
+      tests:
+        hits: ["Más respeto por tu parte"]
+        misses:
+          - "Te pido que me digas antes del jueves a mediodía si te va bien"
+          - "Pregúntame antes de decidir"

@@ -1,0 +1,85 @@
+# Arranques y herramientas para la conversación.
+#
+# Aquí se recompone: las tres capas ya comprobadas se unen en una frase de
+# arranque. Las plantillas son seguras porque solo colocan bloques completos y
+# ya validados uno junto a otro; no se generan formas de palabras.
+#
+# Marcadores: {example} {impact} {request}
+# Claves: opening_style × tone = 5 × 3 = 15 casillas.
+#
+# Die Rahmensätze stehen ohne Geschlecht und ohne „usted" — dieselbe
+# Entscheidung wie im ganzen Korpus. Wer mit der Chefin siezen will, passt
+# den Einstieg ohnehin an; ein tú-Korpus mit einem usted-Rahmen ergäbe
+# gemischte Sätze.
+
+min_per_bucket: 1
+
+openings:
+  - { style: observational, tone: warm, template: "Hay algo que he notado y me gustaría compartirlo contigo. {example} {impact} {request}" }
+  - { style: observational, tone: neutral, template: "Hay algo que quiero comentarte. {example} {impact} {request}" }
+  - { style: observational, tone: firm, template: "Te cuento de qué se trata. {example} {impact} {request}" }
+
+  - { style: curious_question, tone: warm, template: "Me gustaría saber cómo lo ves tú. {example} {impact} {request}" }
+  - { style: curious_question, tone: neutral, template: "Tengo una pregunta sobre esto. {example} {impact} {request}" }
+  - { style: curious_question, tone: firm, template: "Quiero entender esto antes de seguir. {example} {impact} {request}" }
+
+  - { style: appreciation_then_topic, tone: warm, template: "Esto me importa, y por eso lo saco. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: neutral, template: "Muchas cosas funcionan bien entre tú y yo; hay un punto que me ronda la cabeza. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: firm, template: "Valoro trabajar contigo, y justo por eso te lo digo con claridad. {example} {impact} {request}" }
+
+  - { style: direct, tone: warm, template: "Te lo digo tal cual, porque me importas. {example} {impact} {request}" }
+  - { style: direct, tone: neutral, template: "Voy directamente al grano. {example} {impact} {request}" }
+  - { style: direct, tone: firm, template: "Te lo digo sin adornos. {example} {impact} {request}" }
+
+  - { style: clear_boundary, tone: warm, template: "Quiero nombrar un límite sin que se interponga entre tú y yo. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: neutral, template: "Aquí hay un límite para mí. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: firm, template: "Esto es un límite para mí, y lo nombro con claridad. {example} {impact} {request}" }
+
+# Preguntas de seguimiento: lo que mantiene abierta la conversación después
+# del arranque.
+followups:
+  - { kind: clarifying, tone: warm, text: "¿Cómo viviste tú la situación?" }
+  - { kind: clarifying, tone: neutral, text: "¿Cómo fue desde tu lado?" }
+  - { kind: clarifying, tone: firm, text: "¿Cuál fue el motivo, desde tu punto de vista?" }
+  - { kind: agreement, tone: warm, text: "¿Con qué parte de esto podrías estar de acuerdo?" }
+  - { kind: agreement, tone: neutral, text: "¿Qué podemos acordar para la próxima vez?" }
+  - { kind: agreement, tone: firm, text: "¿A qué te comprometes exactamente?" }
+
+# Resistencias: lo que suele volver, y una respuesta que se queda en el asunto
+# sin rebajar a la otra persona.
+pushback:
+  - kind: denial
+    label: "«No fue así.»"
+    response: "Puede que lo recuerdes de otra manera. De lo que quiero hablar es de lo que viví yo, y eso es lo que traigo."
+  - kind: counterattack
+    label: "«¿Y tú qué?»"
+    response: "Tu punto puede tener su turno, y me lo tomo en serio. Terminemos primero este."
+  - kind: minimizing
+    label: "«Tampoco es para tanto.»"
+    response: "Para ti puede ser poca cosa. Para mí no lo es, y por eso lo saco."
+  - kind: withdrawal
+    label: "Silencio o retirada"
+    response: "Veo que ahora mismo es mucho. ¿Hacemos una pausa y lo retomamos dentro de una hora?"
+
+# Salidas: cómo terminar una conversación que ha dejado de ser útil.
+exits:
+  - { tone: warm, text: "Me gustaría parar aquí y seguir más tarde; me importa que nos despidamos bien." }
+  - { tone: neutral, text: "Me gustaría dejarlo aquí y seguir en otro momento." }
+  - { tone: firm, text: "Termino la conversación aquí y la retomaré cuando tengamos más calma." }
+
+# Consejos breves según la situación, para antes de la conversación.
+microtips:
+  - when: { state: angry }
+    text: "Con mucha tensión ayuda un marco de tiempo: plantéate ofrecer una pausa a los quince minutos."
+  - when: { state: exhausted }
+    text: "Las conversaciones que se tienen sin fuerzas suelen acabar en concesiones de las que luego te arrepientes. Si puedes, aplázala."
+  - when: { state: hurt }
+    text: "El dolor busca reconocimiento, no un veredicto. Si lo que te provocó llega a la otra persona, ya se ha conseguido mucho."
+  - when: { risk: high }
+    text: "Hablar claro llega más lejos cuando sabes de antemano qué harás si la otra parte no acompaña."
+  - when: { risk: low }
+    text: "Mantener la paz es un objetivo legítimo. Aun así, asegúrate de que la petición siga siendo comprobable."
+  - when: { goal: closure }
+    text: "Cerrar no necesita estar de acuerdo sobre el pasado, solo claridad sobre lo que vale a partir de ahora."
+  - when: { relationship: manager }
+    text: "Cuando hay diferencia de poder, ayuda ponerlo por escrito: resume el acuerdo después en dos frases."

@@ -1,0 +1,145 @@
+# Checks for every layer (English).
+#
+# From the multi-school concept (04.10.2026, research D2): they look at how a
+# sentence is said, not at which layer it belongs to, so they run on the
+# occasion, the impact and the request alike. cmd/corpusc copies every group
+# of this file into each of the three layers.
+#
+# All of them are hints, not doctrine. Only contempt costs something
+# (`warn`); the rest is `info`.
+#
+# Same rules as the layer files: `match` is RE2 without \b, every rule brings
+# its own `hits` and `misses`, `source` is the background line under a hint.
+#
+# Checked against the existing English rules so that nothing fires twice:
+#   - "maybe you could possibly" is soft-stack (request layer).
+#   - "the worst", "outrageous" are esc-worst (occasion layer).
+
+layer: any
+
+groups:
+  - kind: yes_but
+    severity: info
+    source: "Stone, Patton & Heen: “and”, not “but”"
+    why: |
+      After an acknowledgement, "but" takes it back. Only what follows is
+      heard, and the acknowledgement sounds like a run-up. With "and" both
+      halves stand: your view counts, and so does mine.
+    rules:
+      - id: but-after-ack
+        match: "(i understand|i get (it|that)|i know|i see|i appreciate|you'?re right|you are right|that'?s true|of course|thanks|thank you)[^.!?]{0,80},? but"
+        message: "After an acknowledgement, “but” takes it back."
+        ask: "Try “and”: “I know you had a lot on, and the input was due on Thursday.”"
+        tests:
+          hits:
+            - "I know you had a lot on, but the input only arrived on Friday."
+            - "You're right, but this can't go on."
+            - "Thanks for helping, but I need the list by Monday."
+          misses:
+            - "But on Tuesday no message came."
+            - "I know you had a lot on, and the input was due on Thursday."
+
+  - kind: why_question
+    severity: info
+    source: "Thomas Gordon and motivational interviewing: open questions (practice wisdom)"
+    why: |
+      A why-question asks for a justification. The other person starts
+      looking for reasons they can defend instead of telling you what was
+      going on. "What happened?" asks the same and invites the story.
+    rules:
+      - id: why-you
+        match: "why (did|do|does|didn'?t|don'?t|doesn'?t|would|wouldn'?t|can'?t|couldn'?t|are|were|aren'?t|weren'?t|have|haven'?t|won'?t|is|isn'?t) you|why'?d you|how come you"
+        message: "“{match}” asks for a justification."
+        ask: "Ask instead: “What happened?” or “How did it come to that?”"
+        tests:
+          hits:
+            - "Why didn't you tell me?"
+            - "Why do you always do this?"
+            - "How come you never called?"
+          misses:
+            - "I don't know why I got so loud."
+            - "What happened?"
+
+  - kind: over_apology
+    severity: info
+    source: "Assertiveness training: asking without apologising for it"
+    why: |
+      Apologising for raising something at all tells the other person your
+      concern doesn't really count. You're allowed to ask. An apology for
+      something you did is different — that one stays.
+    rules:
+      - id: apology-for-asking
+        match: "sorry (to bother|to be a pain|to nag|for bothering|for asking|for bringing (this|it) up|to bring (this|it) up)|i don'?t want to (nag|be a pain|bother you|make a fuss)|this (might|may) sound (silly|stupid|petty|daft)|(probably|maybe) a (silly|stupid|daft) (question|thing)|just a quick (one|thing)"
+        message: "“{match}” apologises for the concern itself."
+        ask: "You're allowed to ask. Drop the apology and say what it's about."
+        tests:
+          hits:
+            - "Sorry to bother you, but the list is still missing."
+            - "I don't want to nag, but the list is still missing."
+            - "This might sound petty."
+          misses:
+            - "I'm sorry I raised my voice."
+            - "I'd like to talk about the list."
+
+  - kind: speak_for_yourself
+    severity: info
+    source: "Ruth Cohn: speak for yourself, say “I”"
+    more: ich-botschaften
+    why: |
+      "Everyone thinks so" brings in backup that isn't in the room. The other
+      person can't talk to an invisible majority — only to you. And your own
+      impression is reason enough for the conversation.
+    rules:
+      - id: speak-everyone
+        match: "everyone (thinks|says|knows|sees|agrees|noticed)|everybody (thinks|says|knows|sees|agrees|noticed)|we all (think|know|agree)|nobody (likes|wants|thinks)|people (are saying|think|say)|one (just )?doesn'?t do that|that'?s (just )?not done|that'?s not how (it'?s done|we do things)"
+        message: "“{match}” speaks for others instead of for you."
+        ask: "Say “I”: what did you see, what matters to you?"
+        tests:
+          hits:
+            - "Everyone thinks this isn't working."
+            - "We all know the deadline was Friday."
+            - "That's just not done."
+          misses:
+            - "I think this isn't working."
+            - "Everyone was at the meeting."
+
+  - kind: contempt
+    severity: warn
+    source: "John Gottman: contempt"
+    more: vier-gifte
+    why: |
+      Sarcasm and eye-rolling land faster than any argument — as a put-down.
+      Of all the patterns that tip a conversation, contempt is the one the
+      other side reacts to most strongly.
+    rules:
+      - id: contempt-markers
+        match: "yeah,? right|oh,? great|oh,? brilliant|oh,? wonderful|well done,? you|congratulations,? you|big surprise|what a surprise|how original|whatever[.,!]|🙄|eye-?roll\\p{L}*"
+        message: "“{match}” will be heard as sarcasm."
+        ask: "Say what happened, without the irony. Sarcasm puts people on the defensive."
+        tests:
+          hits:
+            - "Oh great, the list is missing."
+            - "Yeah right, you were busy."
+            - "Whatever, do what you want."
+            - "The list came on Friday 🙄"
+          misses:
+            - "The result was great."
+            - "I'm glad it worked out."
+
+  - kind: monologue
+    severity: info
+    source: "Thomas Gordon: speaking and listening in turns"
+    why: |
+      A long paragraph is a speech, not an opening. The more comes in one go,
+      the more points the other person can hook into — and the less they hear
+      the one that matters.
+    length_check:
+      id: monologue-long
+      max_words: 50
+      message: "{words} words in one go — that is already a small speech."
+      ask: "Say one thing, then listen. Which single sentence has to be here?"
+      tests:
+        hits:
+          - "On Tuesday the input was due at noon, and I waited for it all morning, then I asked, then nothing came back, then I had to put the client off, and on Friday the file finally arrived, but by then the meeting had moved and half the week was gone and I had to replan everything from scratch."
+        misses:
+          - "On Tuesday the input was due at noon; it arrived on Friday."

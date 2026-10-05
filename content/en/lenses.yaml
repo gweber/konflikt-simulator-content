@@ -1,0 +1,117 @@
+# Lens content, English: "Myself", "The other", "Listen" and the conversation card.
+# See content/de/lenses.yaml for the structure and the rules.
+
+sources:
+  ears: "Four sides of a message after Friedemann Schulz von Thun (our own drawing)"
+  interests: "Interests, not positions, after Roger Fisher and William Ury"
+  circle: "Vicious circle after Schulz von Thun and Thomann; punctuation after Paul Watzlawick"
+  identity: "The three conversations after Douglas Stone, Bruce Patton and Sheila Heen"
+  values: "Value and development square after Friedemann Schulz von Thun"
+  distance: "Self-distancing after Ethan Kross"
+  feelings: "Feeling and need words after Marshall B. Rosenberg"
+  listen: "Active listening after Carl Rogers and Thomas Gordon; open questions after Miller and Rollnick"
+  agreement: "An agreement with a check-in date, after the Harvard approach and the steps of mediation"
+
+ears:
+  reliability_deadlines:
+    fact: "An agreement was not kept."
+    self: "Reliability matters to you, and you are disappointed."
+    relation: "You think I am unreliable."
+    appeal: "Stick to what we agreed."
+  criticism_feedback:
+    fact: "Something about how we work together is not going well, as you see it."
+    self: "This has been on your mind for a while."
+    relation: "You are not happy with me."
+    appeal: "Do it differently."
+  boundary_violation:
+    fact: "Something happened that you did not want."
+    self: "Something came too close; it hurt you."
+    relation: "You see me as inconsiderate."
+    appeal: "Ask me first."
+  misunderstanding:
+    fact: "Something landed differently from how it was meant."
+    self: "You are unsettled and want to clear it up."
+    relation: "You think I misunderstood you on purpose."
+    appeal: "Explain to me how you meant it."
+  power_decision:
+    fact: "A decision was made without you."
+    self: "You feel passed over and want a say."
+    relation: "You are questioning my decision."
+    appeal: "Involve me beforehand."
+  breakup_closure:
+    fact: "Something is ending, or should end."
+    self: "This is not easy for you; you want clarity."
+    relation: "You are blaming me."
+    appeal: "Let us end this cleanly."
+  textchat:
+    fact: "Something in the chat landed badly with you."
+    self: "You read the message more than once; without a voice it sounded cold."
+    relation: "You think I am mean -- and I said it in front of everyone."
+    appeal: "Write to me directly, not to the group."
+
+open_question:
+  reliability_deadlines: "What got in the way between the promise and the deadline?"
+  criticism_feedback: "How did you experience the situation?"
+  boundary_violation: "How does this look from your side?"
+  misunderstanding: "How did that land with you?"
+  power_decision: "What spoke for this decision at the time?"
+  breakup_closure: "What do you need for this to feel finished for you?"
+  textchat: "How did you read my message when it arrived?"
+
+reflections:
+  - "So you are saying …"
+  - "If I understand you right, …"
+  - "It sounds as if …"
+
+identity:
+  question: "What does this conflict say about you — and is that true?"
+  chips:
+    competence:
+      label: "Whether I am competent"
+      line: "This conflict does not say whether you are competent. It says there is one thing to sort out."
+    goodness:
+      label: "Whether I am a good person"
+      line: "Raising something does not make you a bad person. Both of you contributed, and both may say so."
+    worth:
+      label: "Whether I am liked"
+      line: "Your worth does not hang on this answer. You can be clear and still stay in the relationship."
+
+values:
+  line: "Your value, {value}, has a sister virtue: {sister}. On its own it easily tips into {alone} — together it holds."
+  pairs:
+    - { key: reliability, value: "reliability", sister: "calm", alone: "control" }
+    - { key: honesty, value: "honesty", sister: "tact", alone: "bluntness" }
+    - { key: closeness, value: "closeness", sister: "independence", alone: "clinging" }
+    - { key: assertion, value: "assertiveness", sister: "consideration", alone: "harshness" }
+    - { key: thrift, value: "thrift", sister: "generosity", alone: "stinginess" }
+    - { key: order, value: "order", sister: "flexibility", alone: "rigidity" }
+    - { key: loyalty, value: "loyalty", sister: "your own judgement", alone: "submission" }
+    - { key: care, value: "care", sister: "trust", alone: "smothering" }
+
+distance: "Imagine a good friend describing your situation in the third person. What would they say?"
+
+feeling_template: "I feel {feeling}, because "
+feelings:
+  - disappointed
+  - hurt
+  - angry
+  - sad
+  - exhausted
+  - unsure
+  - overwhelmed
+  - at a loss
+  - worried
+  - annoyed
+  - helpless
+  - alone
+needs:
+  - reliability
+  - respect
+  - clarity
+  - calm
+  - a say
+  - closeness
+  - recognition
+  - fairness
+  - safety
+  - space

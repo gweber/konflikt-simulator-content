@@ -1,0 +1,206 @@
+# Regeln für die Wirkungs-Ebene (Empfinden).
+#
+# Doktrin: Ich-Botschaft über die eigene Reaktion. Die Wirkung gehört dir,
+# also steht sie in der ersten Person. Keine Schuldzuweisung, keine als
+# Gefühl getarnte Bewertung.
+#
+# Diese Ebene enthält die einzigen automatischen Umformulierungen des
+# Systems (`rewrite`). Sie sind bewusst auf geschlossene, grammatisch sichere
+# Satzmuster begrenzt — siehe CONTENT.md → "Warum so wenig automatisch
+# umgeschrieben wird".
+
+layer: impact
+
+groups:
+  - kind: you_message
+    severity: block
+    source: "Thomas Gordon, Ich-Botschaften"
+    more: ich-botschaften
+    why: |
+      "Du machst mich wütend" macht die andere Person zur Ursache deines
+      Gefühls. Das ist sachlich angreifbar (sie hat nichts "gemacht", du hast
+      reagiert) und erzeugt Gegenwehr. Die Ich-Form behauptet weniger und
+      trägt weiter.
+    rules:
+      - id: you-machst-mich
+        match: "du machst mich (\\p{L}+)"
+        message: "„{match}“ macht die andere Person zur Ursache deines Gefühls."
+        ask: "Die Reaktion ist deine. Formuliere sie in der Ich-Form."
+        rewrite:
+          - template: "ich werde $1"
+            note: "Aus der Zuschreibung wird die eigene Reaktion."
+        tests:
+          hits: ["Du machst mich wütend"]
+          misses: ["Ich werde wütend"]
+
+      - id: you-hast-mich
+        # Bewusst eine GESCHLOSSENE Partizipliste statt \p{L}+.
+        #
+        # Ein offenes Muster würde auch "du hast mich gesehen" treffen und
+        # daraus "ich habe mich gesehen gefühlt" machen. Die Vorlage trägt
+        # nur für Partizipien, die eine Wirkung auf die eigene Person
+        # beschreiben — also zählen wir sie auf. Das ist der Preis dafür,
+        # ohne Morphologie-Analyse verlässlich zu bleiben.
+        match: "du hast mich (verletzt|übergangen|uebergangen|ignoriert|enttäuscht|enttaeuscht|kritisiert|bloßgestellt|blossgestellt|übersehen|uebersehen|angegriffen|unterbrochen|ausgeschlossen|hintergangen|belogen|beschämt|beschaemt|gekränkt|gekraenkt)"
+        message: "„{match}“ schreibt der anderen Person die Wirkung zu."
+        ask: "Beschreibe, wie es bei dir angekommen ist."
+        rewrite:
+          - template: "ich habe mich $1 gefühlt"
+            note: "Das Partizip bleibt, die Perspektive wechselt."
+        tests:
+          hits: ["Du hast mich übergangen", "Du hast mich verletzt"]
+          misses: ["Ich habe mich geärgert", "Du hast mich gesehen"]
+
+      - id: you-wegen-dir
+        # BEWUSST OHNE `rewrite`.
+        #
+        # Ersatzloses Streichen ergibt aus "Wegen dir bin ich unruhig" das
+        # Fragment "bin ich unruhig": das gestrichene Vorfeld lässt die
+        # Verbzweitstellung als Inversion zurück. Eine Korrektur bräuchte
+        # Satzgliedanalyse. Also fragen wir, statt zu raten.
+        match: "wegen dir|deinetwegen|durch dich"
+        message: "„{match}“ benennt eine Schuldfrage."
+        ask: "Lass die Ursachenzuweisung weg und beginne bei dir: „Ich bin …“"
+        tests:
+          hits: ["Wegen dir bin ich unruhig", "Deinetwegen kam ich zu spät"]
+          misses: ["Ich mache es für dich"]
+
+      - id: you-bringst-mich
+        match: "du bringst mich|du treibst mich|du zwingst mich"
+        message: "„{match}“ stellt dich als fremdgesteuert dar."
+        ask: "Was löst es bei dir aus? Formuliere es als eigene Reaktion."
+        tests:
+          hits: ["Du bringst mich zur Weißglut", "Du zwingst mich dazu"]
+          misses: ["Ich bringe dich zum Bahnhof"]
+
+  - kind: pseudo_i_message
+    severity: warn
+    source: "Thomas Gordon, Ich-Botschaften; Ruth Cohn: „ich“ statt „man“"
+    more: ich-botschaften
+    why: |
+      "Ich habe das Gefühl, dass du mich nicht ernst nimmst" beginnt mit "ich",
+      ist aber eine Aussage über die andere Person. Die Ich-Form allein macht
+      noch keine Ich-Botschaft — entscheidend ist, worüber der Satz redet.
+    rules:
+      - id: pseudo-gefuehl-dass-du
+        match: "ich habe das Gefühl, dass du|ich habe das Gefuehl, dass du|ich finde, dass du|ich finde du"
+        message: "„{match}“ ist eine Bewertung im Ich-Gewand."
+        ask: "Was fühlst du? Ein Gefühlswort statt eines Urteils über die andere Person."
+        tests:
+          hits: ["Ich habe das Gefühl, dass du mich übergehst", "Ich finde du bist unfair"]
+          misses: ["Ich habe ein ungutes Gefühl"]
+
+      - id: pseudo-man
+        match: "man fühlt sich|man wird da|da fühlt man sich|man kann sich"
+        message: "„{match}“ verallgemeinert dein Empfinden zu einem allgemeinen."
+        ask: "Sag „ich“. Deine Wirkung ist der Punkt, nicht die allgemeine."
+        tests:
+          hits: ["Da fühlt man sich übergangen", "Man fühlt sich klein"]
+          misses: ["Ich fühle mich übergangen"]
+
+  - kind: faux_feeling
+    severity: info
+    source: "Marshall B. Rosenberg: Gefühl oder Deutung"
+    more: ich-botschaften
+    why: |
+      „Ich fühle mich übergangen“ ist nicht falsch — es sagt nur mehr über
+      die andere Person als über dich: was du denkst, dass sie getan hat.
+      Das Gefühl darunter (gekränkt, traurig, wütend) ist schwerer zu
+      bestreiten und leichter zu hören. Beides darf stehen bleiben.
+    rules:
+      - id: faux-fuehle-mich
+        match: "(fühle|fuehle|fühlte|fuehlte) mich (so |total |echt |sehr |völlig |voellig |ziemlich |richtig |etwas |ein bisschen )?(übergangen|uebergangen|ignoriert|ausgenutzt|manipuliert|kontrolliert|bevormundet|angegriffen|abgewertet|nicht ernst genommen|nicht gesehen|nicht gehört|nicht gehoert|im Stich gelassen|ausgeschlossen|kritisiert|verurteilt|benutzt|hintergangen|belogen|bloßgestellt|blossgestellt|übersehen|uebersehen|unter Druck gesetzt|abgelehnt|zurückgewiesen|zurueckgewiesen)|(habe|hab) mich (so |total |echt |sehr |völlig |voellig |ziemlich |richtig |etwas |ein bisschen )?(übergangen|uebergangen|ignoriert|ausgenutzt|manipuliert|kontrolliert|bevormundet|angegriffen|abgewertet|nicht ernst genommen|nicht gesehen|nicht gehört|nicht gehoert|im Stich gelassen|ausgeschlossen|kritisiert|verurteilt|benutzt|hintergangen|belogen|bloßgestellt|blossgestellt|übersehen|uebersehen|unter Druck gesetzt|abgelehnt|zurückgewiesen|zurueckgewiesen) (gefühlt|gefuehlt)"
+        message: "„{match}“ — das sagt, was du denkst, dass die andere Person getan hat."
+        ask: "Was fühlst du darunter — gekränkt, traurig, wütend?"
+        tests:
+          hits:
+            - "Ich fühle mich übergangen."
+            - "Ich habe mich ignoriert gefühlt."
+            - "Ich fühlte mich total bevormundet."
+          misses:
+            - "Ich fühle mich gekränkt."
+            - "Ich bin traurig."
+
+  - kind: blame_framing
+    severity: warn
+    source: "John Gottman: sanfter Gesprächseinstieg"
+    more: ich-botschaften
+    why: |
+      Wer die Wirkung als Vorwurf verpackt, bekommt eine Rechtfertigung zurück
+      statt Verständnis. Die Wirkungs-Ebene ist die verletzlichste Stelle des
+      Gesprächs; ein Vorwurf hier kostet am meisten.
+    rules:
+      - id: blame-immer-noch
+        match: "schon wieder|wieder einmal|immer noch nicht|nach all der Zeit"
+        message: "„{match}“ hängt der Wirkung einen Vorwurf an."
+        ask: "Die Wirkung wirkt für sich. Streich die Vorgeschichte."
+        tests:
+          hits: ["Ich bin schon wieder enttäuscht", "Immer noch nicht angekommen"]
+          misses: ["Ich bin enttäuscht"]
+
+      - id: blame-musst-wissen
+        match: "das musst du doch|das müsstest du wissen|muesstest du wissen|jeder würde|jeder wuerde"
+        message: "„{match}“ macht aus deinem Empfinden eine Erwartung an die andere Person."
+        ask: "Bleib bei dir: Was hat es mit dir gemacht?"
+        tests:
+          hits: ["Das musst du doch merken", "Jeder würde sich ärgern"]
+          misses: ["Ich muss los"]
+
+  - kind: missing_feeling
+    severity: warn
+    source: "Thomas Gordon, Ich-Botschaften"
+    more: ich-botschaften
+    why: |
+      Ohne benanntes Gefühl bleibt die Wirkungs-Ebene abstrakt und die
+      Gegenseite kann nichts damit anfangen. Ein Gefühlswort ist der
+      eigentliche Inhalt dieses Schritts.
+    # Diese Gruppe wird nicht über `match` ausgewertet, sondern über das
+    # Vokabular unten: schlägt an, wenn KEINES der Wörter vorkommt.
+    absence_check:
+      id: feel-missing
+      message: "Hier steht noch kein Gefühl."
+      ask: "Welches Gefühl war da? Ein Wort genügt."
+      vocabulary:
+        - verletzt
+        - enttäuscht
+        - wütend
+        - ärgerlich
+        - traurig
+        - unsicher
+        - hilflos
+        - ohnmächtig
+        - erschöpft
+        - müde
+        - angespannt
+        - unruhig
+        - überfordert
+        - übergangen
+        - allein
+        - kleingemacht
+        - beschämt
+        - gekränkt
+        - frustriert
+        - ratlos
+        - besorgt
+        - nervös
+        - gestresst
+        - genervt
+        - resigniert
+        - fassungslos
+        # Faux feelings count as a feeling here: they get their own soft
+        # hint (faux-fuehle-mich), never "no feeling yet".
+        - ignoriert
+        - ausgenutzt
+        - manipuliert
+        - kontrolliert
+        - bevormundet
+        - angegriffen
+        - abgewertet
+        - ausgeschlossen
+        - übersehen
+        - hintergangen
+        - bloßgestellt
+        - benutzt
+      tests:
+        hits: ["Das war nicht in Ordnung", "So geht das nicht weiter"]
+        misses: ["Ich bin enttäuscht", "Ich fühle mich übergangen", "Ich fühle mich ignoriert"]

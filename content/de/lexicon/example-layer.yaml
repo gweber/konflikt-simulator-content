@@ -1,0 +1,195 @@
+# Regeln für die Anlass-Ebene (Fakten).
+#
+# Doktrin: Was hätte eine Kamera aufgezeichnet? Nur beobachtbares Verhalten,
+# keine Zuschreibung, keine Verallgemeinerung, keine Absichtsunterstellung.
+#
+# Jede Regel trägt ihre eigenen Testfälle (`hits` / `misses`). `make lint`
+# prüft sie — eine Regel, die ihre eigenen Beispiele nicht trifft, bricht den
+# Build. Damit ist das Lexikon ausführbare Doktrin und nicht nur Prosa.
+#
+# `match` ist ein RE2-Muster OHNE \b-Anker. Der Lader klammert es selbst in
+# deutsche Wortgrenzen ([^\p{L}]), weil Gos \b nur ASCII kennt und sonst
+# mitten in Wörtern mit Umlauten trifft. Details: internal/rules/load.go.
+
+layer: example
+
+groups:
+  - kind: generalizer
+    severity: block
+    source: "Denkfallen (Kognitive Verhaltenstherapie): Übergeneralisierung"
+    more: beobachten-statt-bewerten
+    why: |
+      Verallgemeinerungen sind nicht überprüfbar und laden zum Gegenbeweis ein.
+      Ein einziges Gegenbeispiel ("letzte Woche war ich pünktlich") kippt das
+      ganze Gespräch auf die Sachfrage, ob "immer" stimmt — statt auf den
+      Anlass, um den es dir geht.
+    rules:
+      - id: gen-immer
+        match: "immer|stets|andauernd|permanent|ununterbrochen|laufend"
+        message: "„{match}“ ist eine Verallgemeinerung."
+        ask: "Woran hast du es zuletzt konkret gemerkt? Nenne den einen Anlass."
+        tests:
+          hits: ["Du kommst immer zu spät", "Das geht andauernd so"]
+          misses: ["Immerhin hast du angerufen", "Beim letzten Termin"]
+
+      - id: gen-nie
+        match: "nie|niemals|kein einziges Mal"
+        message: "„{match}“ ist eine Verallgemeinerung."
+        ask: "Gab es eine konkrete Situation, in der es dir gefehlt hat? Beschreibe die."
+        tests:
+          hits: ["Du hörst mir nie zu", "Niemals sagst du Bescheid"]
+          misses: ["Die Niederlage war knapp"]
+
+      - id: gen-staendig
+        match: "ständig|staendig|dauernd|jedes Mal|jedesmal"
+        message: "„{match}“ behauptet ein Muster statt eines Vorfalls."
+        ask: "Welcher einzelne Vorfall steht für dich stellvertretend? Den nimm."
+        tests:
+          hits: ["Du unterbrichst mich ständig", "Jedes Mal dasselbe"]
+          misses: ["Der Ständer ist kaputt"]
+
+      - id: gen-wieder
+        match: "schon wieder|wieder mal|mal wieder|typisch"
+        message: "„{match}“ ruft die Vorgeschichte auf, nicht den Anlass."
+        ask: "Lass die Vorgeschichte für den Einstieg weg. Was ist diesmal passiert?"
+        tests:
+          hits: ["Schon wieder nichts gesagt", "Typisch für dich"]
+          misses: ["Ich komme wieder"]
+
+  - kind: attribution
+    severity: block
+    source: "Marshall B. Rosenberg: beobachten statt bewerten"
+    more: beobachten-statt-bewerten
+    why: |
+      Eigenschaftswörter beschreiben nicht das Verhalten, sondern die Person.
+      Die Gegenseite kann sich gegen ein Verhalten nicht wehren, das sie nicht
+      genannt bekommt — sie wehrt sich stattdessen gegen das Etikett. Damit
+      verhandelt ihr über ihren Charakter statt über die Sache.
+    rules:
+      - id: attr-zuverlaessigkeit
+        match: "unzuverlässig|unzuverlaessig|nachlässig|nachlaessig|schlampig|schludrig"
+        message: "„{match}“ bewertet die Person statt das Verhalten."
+        ask: "Welches Verhalten hat zu dieser Einschätzung geführt?"
+        offer:
+          - "die Zusage von Dienstag wurde nicht eingehalten"
+          - "die Abgabe kam zwei Tage nach dem vereinbarten Termin"
+          - "auf meine Nachfrage kam bis heute keine Antwort"
+        tests:
+          hits: ["Du bist unzuverlässig", "Das war schlampig"]
+          misses: ["Die Lieferung war zuverlässig"]
+
+      - id: attr-respekt
+        match: "respektlos|herablassend|arrogant|überheblich|ueberheblich|von oben herab"
+        message: "„{match}“ ist eine Bewertung, kein beobachtbares Verhalten."
+        ask: "Was genau wurde gesagt oder getan?"
+        offer:
+          - "ich wurde in der Besprechung zweimal unterbrochen"
+          - "mein Vorschlag wurde ohne Rückfrage übergangen"
+          - "die Antwort kam vor versammelter Runde"
+        tests:
+          hits: ["Das ist respektlos", "Er war herablassend"]
+          misses: ["Ich habe Respekt vor der Leistung"]
+
+      - id: attr-egoismus
+        match: "egoistisch|rücksichtslos|ruecksichtslos|selbstsüchtig|selbstsuechtig|ichbezogen"
+        message: "„{match}“ schreibt der Person ein Motiv zu."
+        ask: "Welche Handlung hat dich das denken lassen?"
+        offer:
+          - "der Termin wurde ohne Absprache verlegt"
+          - "die Entscheidung fiel, bevor ich gefragt wurde"
+        tests:
+          hits: ["Das ist egoistisch", "Du bist rücksichtslos"]
+          misses: ["Rücksicht wäre schön"]
+
+      - id: attr-kompetenz
+        match: "unfähig|unfaehig|inkompetent|unprofessionell|chaotisch|planlos"
+        message: "„{match}“ greift die Fähigkeit an, nicht den Vorgang."
+        ask: "Welcher konkrete Vorgang ist schiefgelaufen?"
+        offer:
+          - "in der Auswertung fehlten drei der fünf Positionen"
+          - "die Unterlagen kamen ohne die vereinbarte Zusammenfassung"
+        tests:
+          hits: ["Total unprofessionell", "Das ist chaotisch hier"]
+          misses: ["Der Plan steht"]
+
+      - id: attr-haltung
+        match: "faul|bequem|gleichgültig|gleichgueltig|ignorant|desinteressiert|illoyal|unfair"
+        message: "„{match}“ ist ein Urteil über die Haltung."
+        ask: "Woran war das für dich sichtbar?"
+        tests:
+          hits: ["Du bist einfach faul", "Das ist unfair"]
+          misses: ["Der Faulbaum blüht"]
+
+  - kind: mind_reading
+    severity: block
+    source: "Denkfallen (Kognitive Verhaltenstherapie): Gedankenlesen"
+    more: beobachten-statt-bewerten
+    why: |
+      Absichten sind nicht beobachtbar. Wer der Gegenseite ein Motiv
+      unterstellt, bekommt fast zwangsläufig eine Rechtfertigung zurück —
+      und das Gespräch dreht sich ab dann um die Absicht statt um die Wirkung.
+    rules:
+      - id: mind-absicht
+        match: "absichtlich|mit Absicht|extra|bewusst|mit voller Absicht|vorsätzlich|vorsaetzlich"
+        message: "„{match}“ unterstellt eine Absicht."
+        ask: "Die Absicht kannst du nicht wissen. Was war beobachtbar?"
+        tests:
+          hits: ["Du hast das absichtlich gemacht", "Das war extra"]
+          misses: ["Die Absichtserklärung liegt vor"]
+
+      - id: mind-egal
+        match: "ist dir egal|interessiert dich nicht|kümmert dich nicht|kuemmert dich nicht|scheint dich nicht zu stören"
+        message: "„{match}“ ist eine Annahme über das Innenleben der anderen Person."
+        ask: "Was du wahrnehmen kannst, ist das Verhalten. Welches war es?"
+        tests:
+          hits: ["Es ist dir egal wie es mir geht", "Das interessiert dich nicht"]
+          misses: ["Mir ist das nicht egal"]
+
+      - id: mind-du-willst
+        match: "du willst mich|du wolltest mich|du versuchst mich|du denkst wohl|du hältst mich für|du haeltst mich fuer"
+        message: "„{match}“ legt der anderen Person eine Absicht in den Mund."
+        ask: "Beschreibe stattdessen, was passiert ist — die Wirkung kommt im nächsten Schritt."
+        tests:
+          hits: ["Du willst mich provozieren", "Du denkst wohl das geht so"]
+          misses: ["Willst du einen Kaffee"]
+
+  - kind: escalator
+    severity: block
+    source: "John Gottman: Verachtung; Friedrich Glasl: Eskalationsstufen"
+    more: vier-gifte
+    why: |
+      Herabsetzungen beenden das Gespräch, bevor es beginnt. Sie sind der
+      einzige Fall, in dem der Simulator nicht umformuliert, sondern abrät.
+    rules:
+      - id: esc-abwertung
+        # Auch die Nominalform: "eine Unverschämtheit" wertet genauso ab wie
+        # "unverschämt", und die Wortgrenzen-Klammerung trifft sie sonst nicht.
+        match: "lächerlich|laecherlich|peinlich|erbärmlich|erbaermlich|dreist|frech|unverschämt|unverschaemt|unverschämtheit|unverschaemtheit|frechheit"
+        message: "„{match}“ ist eine Herabsetzung."
+        ask: "Herabsetzungen führen in die Verteidigung. Was ist die Tatsache darunter?"
+        tests:
+          hits: ["Das ist ja lächerlich", "So eine Unverschämtheit gibt es nicht"]
+          misses: ["Ich habe gelacht"]
+
+      - id: esc-nie-wieder
+        match: "ich lasse mir das nicht|das lasse ich mir nicht|nicht mit mir|reicht mir jetzt"
+        message: "„{match}“ ist eine Ankündigung, kein Anlass."
+        ask: "Das gehört in die Bitte, nicht in den Anlass. Was ist konkret vorgefallen?"
+        tests:
+          hits: ["Das lasse ich mir nicht gefallen", "Nicht mit mir"]
+          misses: ["Ich lasse mir Zeit"]
+
+  - kind: hedge
+    severity: info
+    source: "Selbstsicherheitstraining: klar benennen, was war"
+    why: |
+      Weichmacher im Anlass lassen offen, ob überhaupt etwas vorgefallen ist.
+      Die Gegenseite kann dann bestreiten, dass es ein Thema gibt.
+    rules:
+      - id: hedge-vielleicht
+        match: "vielleicht|eventuell|irgendwie|so ein bisschen|ein wenig|womöglich|womoeglich"
+        message: "„{match}“ schwächt die Tatsache ab."
+        ask: "Der Anlass darf klar stehen. Streich den Weichmacher."
+        tests:
+          hits: ["Du hast vielleicht was vergessen", "Das war irgendwie komisch"]
+          misses: ["Der Weg war weit"]

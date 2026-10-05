@@ -1,0 +1,402 @@
+# Reglas de la capa del sentimiento (mensajes en primera persona).
+#
+# Doctrina: describe tu propia reacción. Nadie puede discutir lo que
+# sentiste; todo el mundo discutirá lo que afirmas que te hicieron.
+#
+# ── Zur Reichweite der Umformulierungen ───────────────────────────────
+#
+# Die Engine formuliert nur am Satzanfang um (internal/rules, global). Im
+# Spanischen kommt eine zweite Schranke dazu, die es im Deutschen und
+# Englischen nicht gibt: das grammatische Geschlecht.
+#
+# „Me has humillado" ließe sich nur zu „Me he sentido humillado" oder
+# „… humillada" umschreiben — und welche Form stimmt, weiß das Werkzeug
+# nicht. Ein Vorschlag mit dem falschen Geschlecht ist schlimmer als keiner.
+# Deshalb haben `you-me-has` und `you-por-tu-culpa` gar keine Umschreibung.
+#
+# Umgeschrieben wird nur dort, wo das Adjektiv aus dem Satz der Nutzerin
+# stammt und unverändert übernommen wird: „Me pones nerviosa" → „Me pongo
+# nerviosa". Das Geschlecht steht dann schon da; die Vorlage tauscht nur
+# das Verb. Die Einsetzstelle ist trotzdem eine geschlossene Liste — „me
+# pones un café" soll nicht zu „me pongo un café" werden.
+
+layer: impact
+
+groups:
+  - kind: you_message
+    severity: block
+    source: "Thomas Gordon, mensajes en primera persona"
+    more: ich-botschaften
+    why: |
+      «Me pones de los nervios» afirma una causa, y una causa se puede negar.
+      «Me pongo de los nervios» describe lo que de verdad ocurre y no admite
+      discusión. La frase pierde fuerza como acusación y gana fuerza como
+      efecto.
+    rules:
+      - id: you-me-pones
+        match: "(?:tú |tu )?me pones (nervios[oa]|furios[oa]|histéric[oa]|histeric[oa]|triste|enferm[oa]|mal|fatal|de los nervios|de mal humor|a cien)"
+        message: "«{match}» convierte a la otra persona en la causa de lo que sientes."
+        ask: "La reacción es tuya. Dilo en primera persona."
+        rewrite:
+          - template: "me pongo $1"
+            note: "La acusación se convierte en tu propia reacción."
+        tests:
+          hits: ["Me pones nervioso", "Tú me pones de los nervios"]
+          misses: ["Me pongo nerviosa", "¿Me pones un café?"]
+
+      - id: you-me-haces-sentir
+        match: "(?:tú |tu )?me haces sentir (pequeñ[oa]|pequen[oa]|tont[oa]|inútil|inutil|culpable|ridícul[oa]|ridicul[oa]|invisible|mal|fatal|sol[oa]|incómod[oa]|incomod[oa]|insegur[oa])"
+        message: "«{match}» le pasa a la otra persona la responsabilidad de lo que sientes."
+        ask: "Di lo que sentiste sin convertirla en la autora."
+        rewrite:
+          - template: "me siento $1"
+            note: "El sentimiento se queda, cambia la perspectiva."
+        tests:
+          hits: ["Me haces sentir pequeña", "me haces sentir culpable"]
+          misses: ["Me siento pequeña", "Esa música hace sentir calma"]
+
+      - id: you-me-has
+        # Geschlossene Liste, keine Umschreibung — siehe Kopf der Datei.
+        match: "(?:tú |tu )?me (has herido|has ignorado|has ninguneado|has humillado|has criticado|has interrumpido|has excluido|has dejado de lado|has engañado|has mentido|has decepcionado|has avergonzado|has ofendido|has traicionado|heriste|ignoraste|ninguneaste|humillaste|criticaste|interrumpiste|excluiste|dejaste de lado|engañaste|mentiste|decepcionaste|avergonzaste|ofendiste|traicionaste)"
+        message: "«{match}» le atribuye el efecto a la otra persona."
+        ask: "Describe cómo te llegó a ti. ¿Qué sentiste?"
+        tests:
+          hits: ["Me has ignorado", "Me humillaste delante de todos"]
+          misses: ["Me he sentido ignorada", "Me viste en la estación"]
+
+      - id: you-por-tu-culpa
+        match: "por tu culpa|por culpa tuya|es culpa tuya|es tu culpa|la culpa es tuya"
+        message: "«{match}» señala a un culpable en lugar de una reacción."
+        ask: "Deja la causa fuera del arranque. ¿Qué te pasa a ti?"
+        tests:
+          hits: ["Por tu culpa no he dormido", "Es culpa tuya"]
+          misses: ["Por culpa de la lluvia nos quedamos en casa"]
+
+      - id: you-me-sacas
+        match: "me sacas de quicio|me sacas de mis casillas|me haces enfadar|me haces rabiar|me vuelves loc[oa]|me obligas a"
+        message: "«{match}» le da a la otra persona el mando sobre tu reacción."
+        ask: "¿Qué pasa en ti cuando ocurre? Dilo con tus palabras."
+        tests:
+          hits: ["Me sacas de quicio", "Me vuelves loca"]
+          misses: ["Me saqué el carné", "Me vuelvo a casa"]
+
+  - kind: pseudo_i_message
+    severity: warn
+    source: "Thomas Gordon, mensajes en primera persona"
+    more: ich-botschaften
+    why: |
+      «Siento que no me escuchas» empieza con «siento», pero habla de la otra
+      persona. La primera persona por sí sola no hace un mensaje en primera
+      persona: lo que cuenta es de quién habla la frase. Y se oye como un
+      reproche, con el enfado añadido de venir disfrazado.
+    rules:
+      - id: pseudo-siento-que
+        match: "siento que (tú|eres|estás|estas|no me|me ignoras|pasas|te da)|tengo la sensación de que|tengo la sensacion de que|me da la sensación de que|me da la sensacion de que|creo que (tú|eres|estás|estas)|me parece que (tú|eres|estás|estas)"
+        message: "«{match}» es un juicio con forma de sentimiento."
+        ask: "¿Cuál es el sentimiento en sí? Basta una palabra."
+        tests:
+          hits: ["Siento que no me escuchas", "Tengo la sensación de que pasas de mí", "Creo que eres injusto"]
+          misses: ["Me siento cansada", "Siento que esto me cuesta"]
+
+
+      - id: pseudo-uno
+        match: "uno se siente|una se siente|cualquiera se sentiría|cualquiera se sentiria|cualquiera se pondría|cualquiera se pondria|te sientes como"
+        message: "«{match}» convierte tu vivencia en una general."
+        ask: "Di «yo». El punto es cómo te afecta a ti, no a cualquiera."
+        tests:
+          hits: ["Uno se siente ninguneado", "Cualquiera se sentiría mal"]
+          misses: ["Me siento mal"]
+
+  - kind: faux_feeling
+    severity: info
+    source: "Marshall B. Rosenberg: sentimiento o interpretación"
+    more: ich-botschaften
+    why: |
+      «Me siento ignorado» no está mal: solo dice más de la otra persona que
+      de ti, lo que crees que hizo. El sentimiento que hay debajo (dolor,
+      tristeza, rabia) es más difícil de discutir y más fácil de escuchar.
+      Las dos cosas pueden quedarse.
+    rules:
+      - id: pseudo-me-siento-x
+        # Rosenberg's pseudo-feelings: they describe what the other person
+        # supposedly did, not what goes on in me. Both genders via [oa].
+        match: "me (siento|sentí|senti|he sentido|sentía|sentia) (muy |tan |un poco |bastante |totalmente )?(ignorad[oa]|atacad[oa]|manipulad[oa]|controlad[oa]|juzgad[oa]|ningunead[oa]|utilizad[oa]|engañad[oa]|despreciad[oa]|rechazad[oa]|traicionad[oa]|presionad[oa]|criticad[oa]|apartad[oa]|excluid[oa]|infravalorad[oa]|abandonad[oa])"
+        message: "«{match}»: eso dice lo que crees que hizo la otra persona."
+        ask: "¿Qué sientes debajo: dolor, tristeza, rabia?"
+        tests:
+          hits: ["Me siento ignorado", "Me siento manipulada", "Me he sentido muy juzgada"]
+          misses: ["Me siento inquieta", "Siento rabia"]
+
+  - kind: blame_framing
+    severity: warn
+    source: "John Gottman: empezar con suavidad"
+    more: ich-botschaften
+    why: |
+      Una frase que empieza por el fallo de la otra persona ya ha elegido su
+      tema. Lo que venga después se oye como pliego de cargos, no como tu
+      vivencia.
+    rules:
+      - id: blame-siempre-me
+        match: "(?:tú |tu )?(siempre|nunca|jamás|jamas) me (\\p{L}+)"
+        message: "«{match}» convierte tu reacción en su historial."
+        ask: "Empieza por ti. ¿Qué te provocó esta ocasión concreta?"
+        tests:
+          hits: ["Nunca me escuchas", "Siempre me interrumpes"]
+          misses: ["Me siento sola", "Me lo dijiste ayer"]
+
+      - id: blame-otra-vez
+        match: "otra vez|una vez más|una vez mas|sigues sin|después de tanto tiempo|despues de tanto tiempo|después de todo este tiempo|despues de todo este tiempo"
+        message: "«{match}» convierte tu reacción en su historial."
+        ask: "Empieza por ti. ¿Qué te provocó esta ocasión concreta?"
+        tests:
+          hits: ["Otra vez estoy decepcionada", "Sigues sin entenderlo"]
+          misses: ["Estoy decepcionada"]
+
+      - id: blame-deberias-saber
+        match: "deberías saberlo|deberias saberlo|ya deberías saber|ya deberias saber|tendrías que saber|tendrias que saber|eso lo sabe cualquiera|cualquiera lo vería|cualquiera lo veria|no hace falta que te lo diga"
+        message: "«{match}» da por hecho que la otra persona tendría que adivinarlo."
+        ask: "Dilo tú, aquí y ahora. ¿Qué te pasa con ello?"
+        tests:
+          hits: ["Deberías saberlo", "Eso lo sabe cualquiera"]
+          misses: ["No sabía qué decir"]
+
+      - id: blame-si-hubieras
+        match: "si (?:tú |tu )?(hubieras|hubieses) (\\p{L}+)"
+        message: "«{match}» discute sobre un pasado que ya no se puede cambiar."
+        ask: "¿Qué es verdad ahora? Di eso."
+        tests:
+          hits: ["Si hubieras preguntado", "Si tú hubieses avisado"]
+          misses: ["Si yo hubiera sabido", "Si quieres, empezamos ahora"]
+
+  - kind: missing_feeling
+    severity: warn
+    source: "Thomas Gordon, mensajes en primera persona"
+    more: ich-botschaften
+    why: |
+      Sin un sentimiento, esta capa no dice nada que la otra parte no pudiera
+      deducir sola. El sentimiento es lo que es tuyo y nadie puede discutir;
+      dejarlo fuera es renunciar justo a lo que hace la frase indiscutible.
+    rules: []
+    absence_check:
+      id: feel-missing
+      message: "Aquí todavía no hay ningún sentimiento."
+      ask: "¿Qué sentiste? Basta una palabra."
+      # Schlägt an, wenn keine dieser Formen vorkommt.
+      #
+      # Im Spanischen dreifach gepflegt, weil ein Gefühl auf drei Wegen in
+      # den Satz kommt: als Adjektiv in beiden Geschlechtern („enfadado",
+      # „enfadada"), als Substantiv („siento rabia") und als Verb mit
+      # Dativ („me duele", „me preocupa"). Die Substantiv- und Verbformen
+      # sind die geschlechtsneutralen — der Korpus benutzt sie bevorzugt.
+      # Eher zu lang als zu kurz: Ein übersehenes Gefühlswort erzeugt eine
+      # falsche Mahnung, ein überflüssiges nur eine ausbleibende.
+      vocabulary:
+        # Adjektive, beide Geschlechter
+        - dolido
+        - dolida
+        - herido
+        - herida
+        - triste
+        - tristes
+        - enfadado
+        - enfadada
+        - enojado
+        - enojada
+        - furioso
+        - furiosa
+        - molesto
+        - molesta
+        - irritado
+        - irritada
+        - frustrado
+        - frustrada
+        - decepcionado
+        - decepcionada
+        - desilusionado
+        - desilusionada
+        - preocupado
+        - preocupada
+        - inquieto
+        - inquieta
+        - intranquilo
+        - intranquila
+        - nervioso
+        - nerviosa
+        - ansioso
+        - ansiosa
+        - angustiado
+        - angustiada
+        - asustado
+        - asustada
+        - impotente
+        - agotado
+        - agotada
+        - cansado
+        - cansada
+        - harto
+        - harta
+        - avergonzado
+        - avergonzada
+        - aliviado
+        - aliviada
+        - desbordado
+        - desbordada
+        - abrumado
+        - abrumada
+        - agobiado
+        - agobiada
+        - desanimado
+        - desanimada
+        - resentido
+        - resentida
+        - inseguro
+        - insegura
+        - incómodo
+        - incómoda
+        - incomodo
+        - incomoda
+        - estresado
+        - estresada
+        - me siento solo
+        - sola
+        - expuesto
+        - expuesta
+        - apartado
+        - apartada
+        # Faux feelings count as a feeling here: they get their own soft hint
+        # (pseudo-me-siento-x), never "no feeling yet".
+        - ignorado
+        - ignorada
+        - atacado
+        - atacada
+        - manipulado
+        - manipulada
+        - juzgado
+        - juzgada
+        - ninguneado
+        - ninguneada
+        - utilizado
+        - utilizada
+        - despreciado
+        - despreciada
+        - rechazado
+        - rechazada
+        - criticado
+        - criticada
+        - excluido
+        - excluida
+        - pequeño
+        - pequeña
+        - desconcertado
+        - desconcertada
+        - confundido
+        - confundida
+        - tenso
+        - tensa
+        - indignado
+        - indignada
+        - disgustado
+        - disgustada
+        - quemado
+        - quemada
+        - desgastado
+        - desgastada
+        - dividido
+        - dividida
+        - desprotegido
+        - desprotegida
+        - vulnerable
+        - me siento perdido
+        - me siento perdida
+        - fuera de lugar
+        - sin fuerzas
+        # Substantive
+        - dolor
+        - tristeza
+        - me da pena
+        - siento pena
+        - enfado
+        - rabia
+        - ira
+        - furia
+        - molestia
+        - irritación
+        - irritacion
+        - frustración
+        - frustracion
+        - decepción
+        - decepcion
+        - desilusión
+        - desilusion
+        - preocupación
+        - preocupacion
+        - inquietud
+        - intranquilidad
+        - nervios
+        - ansiedad
+        - angustia
+        - miedo
+        - impotencia
+        - agotamiento
+        - cansancio
+        - hartazgo
+        - vergüenza
+        - verguenza
+        - alivio
+        - desánimo
+        - desanimo
+        - resentimiento
+        - inseguridad
+        - incomodidad
+        - estrés
+        - estres
+        - soledad
+        - desconcierto
+        - confusión
+        - confusion
+        - tensión
+        - tension
+        - indignación
+        - indignacion
+        - disgusto
+        - desgaste
+        - agobio
+        - fastidio
+        - vacío
+        - vacio
+        # Verben mit Dativ („me duele", „me preocupa")
+        - duele
+        - dolió
+        - dolio
+        - molesta
+        - molestó
+        - preocupa
+        - preocupó
+        - inquietó
+        - agota
+        - agotó
+        - cansa
+        - enfada
+        - enfadó
+        - irrita
+        - irritó
+        - frustra
+        - frustró
+        - entristece
+        - entristeció
+        - agobia
+        - agobió
+        - fastidia
+        - fastidió
+        - me pesa
+        - me pesó
+        - asusta
+        - asustó
+        - avergüenza
+        - duelen
+        - decepciona
+        - decepcionó
+        - decepciono
+      tests:
+        hits: ["Pasó el martes y reorganicé mi día"]
+        misses: ["Estoy molesta porque reorganicé mi día dos veces", "Siento rabia", "Me duele", "Me siento ignorada"]

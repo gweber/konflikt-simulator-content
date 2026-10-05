@@ -1,0 +1,136 @@
+# Crisis net, Spanish patterns and the Spanish help texts.
+#
+# Source of truth: consim/safety.py and consim/locales/es.json "safety".
+# Numbers verbatim; internal/content/safety_drift_test.go guards them.
+# Mechanics and format: see content/de/safety.yaml and internal/safety.
+#
+# The careful rules from consim are kept as they are:
+#   - "matarme" is a crisis only after quiero / voy a / pienso en / ganas de.
+#     "Mi madre me va a matar si llego tarde" and "esto me está matando" are
+#     figures of speech and stay out.
+#   - "me ha amenazado con matarme" is violence, not crisis.
+#   - "me muero de vergüenza" stays out.
+# Deliberate differences from consim (sentences written TO the other person):
+#   - tú-forms are added ("me pegas", "me pegaste", "me has pegado").
+#   - "me ahog…" is left out: "me ahogas con tus celos" is the common, figurative
+#     use; strangling is caught by "estrangul…".
+#   - "no quiero estar aquí cuando…", "acabar con todo esto", "cortarme el
+#     pelo", "violación de nuestro acuerdo", "abusas de mi confianza", "esa
+#     idea me persigue" stay out.
+#   - ANAR (minors, from consim's violence text) is named in the crisis block
+#     too, so that a young person in crisis also sees a line for them.
+
+rules:
+  - id: es-crisis-die
+    kind: crisis
+    match: 'quiero morir(me)?|me quiero morir|ganas de morir(me)?|no quiero (vivir|seguir viviendo|estar aquí|estar aqui)|mejor sin mí|(estarían|estarian|vivirían|vivirian|todos) mejor sin m(í|i)|quitarme la vida|suicid\p{L}*|acabar con (todo|mi vida)|no puedo m(á|a)s|no aguanto m(á|a)s'
+    unless:
+      - 'no quiero estar aqu(í|i) (cuando|si|mientras|con|en)'
+      - 'acabar con todo (esto|eso|lo)'
+    tests:
+      hits:
+        - "Quiero morirme."
+        - "Me quiero morir."
+        - "No quiero vivir así."
+        - "Todos estarían mejor sin mí."
+        - "Pienso en el suicidio."
+        - "Quiero acabar con todo."
+        - "Ya no puedo más."
+        - "No aguanto más."
+      misses:
+        - "No quiero estar aquí cuando llegue tu madre."
+        - "Quiero acabar con todo esto de una vez."
+        - "Quiero vivir tranquila."
+        - "Me quiero ir de vacaciones."
+
+  - id: es-crisis-kill-self
+    kind: crisis
+    match: '(quiero|voy a|pienso en|ganas de) matarme|hacerme daño|autolesi\p{L}*|cortarme|me corto'
+    unless:
+      - '(cortarme|me corto) (el|las|la|los) (pelo|uñas|flequillo|barba|dedo)'
+    tests:
+      hits:
+        - "quiero matarme"
+        - "A veces pienso en matarme."
+        - "Tengo ganas de hacerme daño."
+        - "Me corto los brazos cuando estoy sola."
+      misses:
+        - "Mañana me corto el pelo."
+        - "Mi madre me va a matar si llego tarde."
+        - "Me estás matando con tanta espera."
+
+  - id: es-violence-hit
+    kind: violence
+    match: 'me (pega|pegas|pegó|pegaste|pegaba|pegabas|golpea|golpeas|golpeó|golpeaste|golpeaba|maltrata|maltratas|maltrató|maltrataste)|me ha(s)? (pegado|golpeado|maltratado|estrangulado)|me estrangul\p{L}*|maltrato'
+    tests:
+      hits:
+        - "Mi marido me pega."
+        - "Me pegaste delante de los niños."
+        - "Me ha golpeado."
+        - "Esto es maltrato."
+      misses:
+        - "Me pones de los nervios."
+
+  - id: es-violence-threat
+    kind: violence
+    match: 'me amenaz\p{L}*.{0,40}(matar|pegar|hacer daño|cuchillo|arma|quitar a los niños|quitarme a los niños)|amenaz\p{L}* (con|de) matar\p{L}*|amenaz\p{L}* de muerte'
+    tests:
+      hits:
+        - "Me ha amenazado con matarme."
+        - "Me amenaza con quitarme a los niños."
+        - "Me amenazó con un cuchillo."
+      misses:
+        - "Me amenazas con dejarme si no voy."
+
+  - id: es-violence-abuse
+    kind: violence
+    match: 'violencia de género|violencia de genero|violencia doméstica|violencia domestica|me viol(a|ó|o|aste|aba)|violación|abus\p{L}* de mí|abuso sexual'
+    unless:
+      - 'violación (de|del) (la|las|los|el|mi|tu|su|nuestra|nuestro|un|una|acuerdo|contrato)'
+      - 'me viol\p{L}* (la|el|mi|mis) (intimidad|privacidad|espacio|derechos)'
+    tests:
+      hits:
+        - "Esto es violencia de género."
+        - "Abusó de mí cuando era pequeña."
+        - "Me violó."
+      misses:
+        - "Abusas de mi confianza."
+        - "Es una violación de nuestro acuerdo."
+
+  - id: es-violence-fear
+    kind: violence
+    match: 'miedo (de|a) (él|ella|ti)|me (acosa|acosas|acosó|acosaste|acosaba|acosan)|me persigue|me (encierra|encierras|encerró|encerraste|encerraba)'
+    unless:
+      - 'no (le |te )?tengo miedo'
+      - '(idea|pensamiento|recuerdo|culpa|esa|ese|esto|eso) me persigue'
+    tests:
+      hits: ["Tengo miedo de él.", "Mi ex me acosa.", "Me encierra en casa."]
+      misses: ["Esa idea me persigue desde ayer.", "No tengo miedo de ti.", "Me acostumbré a tus horarios."]
+
+misses:
+  - "Me muero de vergüenza."
+  - "Esto me está matando."
+  - "Siempre llegas tarde y eres un desastre."
+  - "Comunicación no violenta: ejemplos"
+  - "Me has humillado delante de todos."
+
+# Texts and numbers from consim/locales/es.json "safety"; the bot's "/inicio"
+# line is replaced by the come-back line.
+help:
+  crisis:
+    title: "Lo que escribes suena serio."
+    lead: "Si estás pensando en no querer vivir: no tienes que estar solo/a con esto. Habla con alguien ahora, gratis, de forma confidencial, a cualquier hora:"
+    lines:
+      - "España: 024 (Línea de atención a la conducta suicida) · Teléfono de la Esperanza 717 003 717"
+      - "Menores: ANAR 900 20 20 10 (24 h)"
+      - "Otros países: findahelpline.com tiene una línea para el tuyo"
+      - "Emergencias: 112 (Europa) · 911 (América)"
+    note: "Esta herramienta es un entrenador de conversaciones y no puede sustituir la ayuda; por eso aquí no reformula tu frase. Cuando quieras, puedes volver y seguir practicando."
+  violence:
+    title: "Parece que se trata de violencia o amenazas."
+    lead: "Entonces preparar una conversación no es el camino: primero va tu seguridad, y una confrontación puede ser peligrosa. Ayuda, gratis y confidencial:"
+    lines:
+      - "España: 016 (violencia contra las mujeres; no aparece en la factura; también WhatsApp 600 000 016) · ANAR 900 20 20 10 (menores, 24 h)"
+      - "Otros países: findahelpline.com"
+      - "Emergencias: 112 (Europa) · 911 (América)"
+    note: "Por eso aquí la herramienta no reformula tu frase. Si quieres preparar otra conversación, puedes volver cuando quieras."

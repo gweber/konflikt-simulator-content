@@ -1,0 +1,293 @@
+# "If they say …" block, English.
+#
+# If-then plans (Peter Gollwitzer's implementation intentions): the user picks
+# the sentence they most fear to hear and gets one calm answer to keep ready,
+# plus one repair phrase for when the conversation has already slipped.
+# A typed sentence is matched by keywords (lower-case word beginnings) to the
+# closest item, else it gets the generic answer. Every test sentence is
+# checked by `go run ./cmd/corpusc -check`; see internal/corpus/ifthen.go.
+#
+# Items without situations apply to all six situations; the others to the
+# situations listed. Each situation shows six items.
+source: "If-then plans (Peter Gollwitzer)"
+items:
+  # --- Common to all situations ---
+  - id: exaggerate
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "You're overreacting."
+    answer: "Maybe it looks small from where you're standing. I'd still like you to hear how it landed for me."
+    repair: "Can we start again? I got louder than I meant to."
+    keywords: ["overreact", "over-react", "exaggerat", "dramatic", "drama", "blowing it out", "blow it out", "out of proportion", "mountain out", "molehill", "making a big deal", "big deal", "hysterical", "over the top"]
+    tests:
+      - "You're overreacting."
+      - "you are being so dramatic"
+      - "Stop exaggerating, honestly"
+      - "You're blowing this out of proportion"
+      - "It's not a big deal"
+  - id: not_true
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "That's just not true."
+    answer: "We remember it differently, and that's okay. I don't need to be right – I just want you to know how it was for me."
+    repair: "We're arguing about who's right, and that's not what I came for. Shall we have another go?"
+    keywords: ["not true", "isn't true", "isnt true", "untrue", "that's wrong", "thats wrong", "not what happened", "never happened", "rubbish", "nonsense", "made that up", "making it up", "making that up", "lying", "liar"]
+    tests:
+      - "That's just not true."
+      - "That never happened"
+      - "What rubbish, it wasn't like that at all"
+      - "You're making it up"
+      - "You're lying"
+  - id: always_my_fault
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "So it's always my fault."
+    answer: "I'm not looking for someone to blame. I want to sort out this one thing so it goes better next time."
+    repair: "That probably sounded like an accusation. It wasn't meant as one. Let me try it another way."
+    keywords: ["my fault", "always me", "always the one", "blame", "blaming", "scapegoat", "always the bad", "the bad guy", "the villain"]
+    tests:
+      - "So it's always my fault."
+      - "Of course, blame me again"
+      - "It's always me, isn't it?"
+      - "I'm always the bad guy"
+      - "Everything is my fault as usual"
+  - id: silence
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "(Goes quiet or walks out.)"
+    answer: "Okay, let's take a break. How about we pick this up tomorrow at the same time? It matters to me."
+    repair: "I think I threw too much at you at once. I'm sorry. Can we try again, more slowly?"
+    keywords: ["silent", "silence", "goes quiet", "says nothing", "won't say", "walks out", "walks off", "walks away", "leaves the room", "storms off", "storms out", "slams", "ignores", "ignoring", "won't talk", "doesn't answer", "hangs up", "stops talking", "not talking", "done talking"]
+    tests:
+      - "He just goes quiet."
+      - "She says nothing and walks out"
+      - "He storms off and slams the door"
+      - "I'm not talking about this any more."
+      - "She ignores me completely"
+
+  # --- reliability_deadlines ---
+  - id: too_much_on
+    situations: [reliability_deadlines]
+    say: "I've just had too much on."
+    answer: "I believe you. Then let's work out how you can give me a heads-up sooner next time."
+    repair: "I got a bit impatient just now, sorry. All I want is to be able to count on you."
+    keywords: ["too much on", "a lot on", "my plate", "too busy", "so busy", "swamped", "snowed under", "stressed", "overloaded", "didn't get round", "didn't get around", "didnt get round", "didnt get around", "forgot", "no time"]
+    tests:
+      - "I've just had too much on."
+      - "Sorry, I've been swamped"
+      - "I had a lot on my plate"
+      - "I didn't get round to it"
+      - "I forgot, I was so busy"
+  - id: its_done_now
+    situations: [reliability_deadlines]
+    say: "It's done now, isn't it? What more do you want?"
+    answer: "Good that it's here. What I mean is next time – knowing beforehand where I stand."
+    repair: "I think I just gave you a lecture. Didn't mean to. Thanks for getting it done."
+    keywords: ["done now", "it's done", "its done", "it's here now", "what more", "what else do you want", "finished now", "in the end", "few days late", "couple of days", "what's the problem", "whats the problem", "so what"]
+    tests:
+      - "It's done now, what more do you want?"
+      - "It got done in the end, didn't it?"
+      - "So what if it was a few days late"
+      - "It's here now, what's the problem?"
+
+  # --- criticism_feedback ---
+  - id: not_perfect_either
+    situations: [criticism_feedback]
+    say: "Well, you're not perfect either."
+    answer: "True, I'm not. We can talk about me as well in a moment – first I'd like to finish this."
+    repair: "Now we're both listing each other's mistakes. That won't get either of us anywhere. Start over?"
+    keywords: ["perfect", "what about you", "you do it too", "you're no better", "youre no better", "no better yourself", "pot calling", "kettle", "look who's talking", "look whos talking", "you can talk", "glass houses"]
+    tests:
+      - "Well, you're not perfect either."
+      - "And what about you?"
+      - "Look who's talking"
+      - "You're no better, you do it too"
+  - id: do_it_yourself
+    situations: [criticism_feedback]
+    say: "Then do it yourself."
+    answer: "That's not what I'm after. I want to do this with you – just differently at this one point."
+    repair: "That came out harsher than I meant. I know how much you do – this was only about one point."
+    keywords: ["yourself", "know better", "do it better", "do better", "know it all", "know-it-all", "your way then", "you do it then"]
+    tests:
+      - "Then do it yourself."
+      - "Fine, do it yourself if you know better"
+      - "If you can do it better, go ahead"
+      - "Okay, you do it then"
+
+  # --- boundary_violation ---
+  - id: dont_make_fuss
+    situations: [boundary_violation]
+    say: "Don't make such a fuss."
+    answer: "For me it was too much. I'm telling you so it doesn't happen again."
+    repair: "I got sharp with you just now. I still mean it, though – let me say it again, calmly."
+    keywords: ["fuss", "sensitive", "touchy", "thin-skinned", "thin skinned", "snowflake", "get over it", "grow up", "toughen up", "man up", "calm down", "chill", "relax"]
+    tests:
+      - "Don't make such a fuss."
+      - "You're way too sensitive"
+      - "Oh, get over it"
+      - "Chill out, it's fine"
+      - "Stop being so touchy"
+  - id: just_joking
+    situations: [boundary_violation]
+    say: "It was only a joke."
+    answer: "Maybe it was a joke for you. It wasn't funny for me, so please stop."
+    repair: "I'm not saying you meant it nastily. It just matters to me that it stops."
+    keywords: ["joke", "joking", "kidding", "banter", "only messing", "just messing", "messing about", "messing around", "a laugh", "sense of humour", "sense of humor", "lighten up", "didn't mean it", "didnt mean it"]
+    tests:
+      - "It was only a joke."
+      - "I was just kidding"
+      - "It's just banter, mate"
+      - "Where's your sense of humour?"
+      - "Lighten up, I was only messing"
+
+  # --- misunderstanding ---
+  - id: never_said
+    situations: [misunderstanding]
+    say: "I never said that."
+    answer: "Then maybe I got you wrong. Tell me what you meant – and I'll tell you how it came across to me."
+    repair: "We're stuck on single words. Let's step back: what did you actually want to tell me?"
+    keywords: ["never said", "didn't say", "didnt say", "did not say", "not what i said", "not what i meant", "didn't mean", "didnt mean", "never meant", "never claimed", "meant something else"]
+    tests:
+      - "I never said that."
+      - "That's not what I said"
+      - "I didn't mean it like that"
+      - "I meant something else entirely"
+  - id: hear_what_you_want
+    say: "You only hear what you want to hear."
+    situations: [misunderstanding]
+    answer: "Then tell me again – I'm listening. Afterwards I'll say back what I understood."
+    repair: "I cut you off earlier. Sorry – please finish."
+    keywords: ["want to hear", "wanna hear", "only hear", "never listen", "not listening", "don't listen", "dont listen", "twist", "words in my mouth", "read into", "reading into", "reading too much"]
+    tests:
+      - "You only hear what you want to hear."
+      - "You never listen to me properly"
+      - "You're twisting my words"
+      - "Don't put words in my mouth"
+      - "You're reading too much into it"
+
+  # --- power_decision ---
+  - id: my_decision
+    situations: [power_decision]
+    say: "It's still my call."
+    answer: "I'm not trying to take the decision away from you. I'd just like to be asked before something gets decided that affects me."
+    repair: "I got quite worked up there. I'm not trying to take anything from you – I just want a say."
+    keywords: ["my call", "my decision", "i decide", "i make the decisions", "boss", "in charge", "my house", "my rules", "not your decision", "not up to you", "none of your business"]
+    tests:
+      - "It's still my call."
+      - "That's my decision, not yours"
+      - "I'm the boss here"
+      - "My house, my rules"
+      - "It's none of your business"
+  - id: no_time
+    situations: [power_decision]
+    say: "There wasn't time for that."
+    answer: "That may well be. How can we make sure I at least hear about it briefly beforehand next time?"
+    repair: "I'm not holding it against you that it had to be quick. Let's just agree how we handle it from now on."
+    keywords: ["no time", "wasn't time", "wasnt time", "didn't have time", "didnt have time", "had to be quick", "had to move fast", "short notice", "last minute", "last-minute", "urgent", "in a hurry", "couldn't reach", "couldnt reach", "couldn't wait", "couldnt wait"]
+    tests:
+      - "There wasn't time for that."
+      - "It had to be quick"
+      - "It was all very last minute"
+      - "I couldn't reach you, it was urgent"
+
+  # --- breakup_closure ---
+  - id: ruining_everything
+    situations: [breakup_closure]
+    say: "You're ruining everything."
+    answer: "I understand it feels like that to you. I've thought it through, and I'm sticking with it."
+    repair: "This is hard for both of us right now. I don't want us to part in a row – can we take a breath?"
+    keywords: ["ruin", "wreck", "destroy", "throwing it all away", "throw it all away", "throwing away", "throw away", "throwing everything", "spoil", "messing everything up", "mess everything up"]
+    tests:
+      - "You're ruining everything."
+      - "You're throwing it all away"
+      - "You're wrecking what we had"
+      - "You're destroying everything we built"
+  - id: after_all_i_did
+    situations: [breakup_closure]
+    say: "After everything I've done for you?"
+    answer: "I know what you've done for me, and I'm grateful for it. It doesn't change my decision, though."
+    repair: "That sounded as if it had all been for nothing. That's not what I mean – a lot of it was good."
+    keywords: ["after everything", "after all i", "all i've done", "all ive done", "all i have done", "done for you", "did for you", "ungrateful", "how you thank", "how you repay", "repay", "sacrificed"]
+    tests:
+      - "After everything I've done for you?"
+      - "You're so ungrateful"
+      - "So this is how you repay me"
+      - "I sacrificed so much for you"
+
+  # --- textchat: a fight in the group chat / class chat (04.10.2026) -- the chat's own six, the spoken items stay out ---
+  - id: lol
+    situations: [textchat]
+    say: "lol"
+    answer: "I mean this seriously. Can you read it once without the lol and tell me what you make of it?"
+    repair: "That came out too sharp. Let me start again: it's about the photo from yesterday."
+    keywords: ["lol", "lmao", "haha", "😂", "🤣", "rofl"]
+    tests:
+      - "lol"
+      - "hahaha what"
+      - "😂😂😂"
+      - "lol ok"
+      - "lmao"
+  - id: sorry_what
+    situations: [textchat]
+    say: "Sorry??"
+    answer: "Yes, I mean it like that. I'm not after a fight -- I want you to know how it landed with me."
+    repair: "That must have read like an attack. It wasn't meant that way. Let me try again, differently."
+    keywords: ["sorry?", "sorry??", "excuse me", "what's that supposed", "whats that supposed", "what do you want", "seriously?", "wtf", "huh", "are you for real", "what is your problem", "what's your problem"]
+    tests:
+      - "Sorry??"
+      - "huh what's that supposed to mean"
+      - "What do you want from me"
+      - "Seriously?"
+      - "wtf"
+  - id: left_on_read
+    situations: [textchat]
+    say: "(Reads it, stops replying.)"
+    answer: "I can see you've read it. Take your time -- I'd be glad if you write one word about it tonight."
+    repair: "I probably ran you over with too much text. One sentence from you is enough for me."
+    keywords: ["read it", "reads it", "left on read", "blue ticks", "two ticks", "doesn't reply", "doesnt reply", "no reply", "no answer", "stops replying", "ignores", "ignoring", "online but", "went quiet", "ghosting", "ghosts"]
+    tests:
+      - "She reads it and stops replying"
+      - "Blue ticks and no answer"
+      - "He just ignores me"
+      - "left on read"
+      - "online but no reply"
+  - id: screenshot
+    situations: [textchat]
+    say: "screenshot 😏"
+    answer: "You can forward that. I'd like this to stay between us -- and I'm telling you honestly that it matters to me."
+    repair: "I notice we're threatening each other now. I don't want that. Let's sort it out in person tomorrow, briefly."
+    keywords: ["screenshot", "screen", "forward", "send it to", "show everyone", "post it", "😏", "saved it", "got proof", "receipts"]
+    tests:
+      - "screenshot 😏"
+      - "I'll just forward that"
+      - "Saved it, I'll show everyone"
+      - "😏 got the screen"
+      - "I have receipts"
+  - id: everyone_agrees
+    situations: [textchat]
+    say: "Everyone thinks so."
+    answer: "Maybe others see it that way too. I'm talking to you now, and what you say matters to me."
+    repair: "I notice I'm counting people on my side as well. Let's stay with the two of us."
+    keywords: ["everyone thinks", "everyone says", "everyone agrees", "everybody thinks", "everybody says", "the others", "ask anyone", "ask the others", "not just me", "we all think", "everyone here"]
+    tests:
+      - "Everyone thinks so"
+      - "Ask the others"
+      - "Everybody says that here"
+      - "It's not just me"
+      - "we all think it's embarrassing"
+  - id: chill
+    situations: [textchat]
+    say: "chill, it was a joke"
+    answer: "For you it was a joke, okay. It didn't land that way with me -- that's why I'm writing to you."
+    repair: "I'm not saying you meant it badly. All I want is for it to stop."
+    keywords: ["chill", "joke", "joking", "kidding", "banter", "not that deep", "relax", "so sensitive", "touchy", "drama", "overreact", "calm down", "snowflake"]
+    tests:
+      - "chill, it was a joke"
+      - "it was just banter"
+      - "relax, not that deep"
+      - "you're so sensitive"
+      - "calm down, it's not that deep"
+
+generic:
+  answer: "I'll take that on board. Let me still finish my point, and then it's your turn."
+  repair: "Hold on – this is going wrong, and I've played my part in it. Can we start again from the top?"
+  tests:
+    - "What's for dinner?"
+    - "Have you seen my keys?"
+    - "Okay, fair enough."

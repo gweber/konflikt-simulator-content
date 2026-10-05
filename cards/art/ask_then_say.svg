@@ -1,0 +1,12 @@
+<!-- First a question, then your own point. -->
+<ellipse cx="330" cy="190" rx="200" ry="135" fill="$accent"/>
+<path d="M 210,290 L 160,385 L 285,312 Z" fill="$accent"/>
+<text x="330" y="245" text-anchor="middle" font-size="160" font-weight="900" fill="#ffffff">?</text>
+<ellipse cx="660" cy="300" rx="185" ry="120" fill="$wash" stroke="$accent" stroke-width="7"/>
+<path d="M 770,390 L 820,460 L 712,412" fill="$wash" stroke="$accent" stroke-width="7" stroke-linejoin="round"/>
+<path d="M 718,400 L 768,386" stroke="$wash" stroke-width="12"/>
+<g stroke="$accent" stroke-width="14" stroke-linecap="round">
+  <path d="M 565,265 L 755,265"/><path d="M 565,305 L 735,305"/><path d="M 565,345 L 680,345"/>
+</g>
+<text x="105" y="70" font-size="48" font-weight="700" fill="$soft">1</text>
+<text x="860" y="170" font-size="48" font-weight="700" fill="$soft">2</text>

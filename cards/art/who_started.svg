@@ -1,0 +1,13 @@
+<!-- A circle of two arrows: each reaction is the other's cause. -->
+<defs>
+  <marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto">
+    <path d="M 0,0 L 10,5 L 0,10 Z" fill="$accent"/>
+  </marker>
+</defs>
+<path d="M 334.8,198.8 A 140 140 0 0 1 605.2,198.8" fill="none" stroke="$accent" stroke-width="16" stroke-linecap="round" marker-end="url(#ah)"/>
+<path d="M 605.2,271.2 A 140 140 0 0 1 334.8,271.2" fill="none" stroke="$accent" stroke-width="16" stroke-linecap="round" marker-end="url(#ah)"/>
+<circle cx="300" cy="235" r="34" fill="$ink"/>
+<circle cx="640" cy="235" r="34" fill="$soft"/>
+<text x="470" y="262" text-anchor="middle" font-size="96" font-weight="700" fill="$line2">?</text>
+<text x="470" y="60" text-anchor="middle" font-size="42" font-weight="700" fill="$ink">$a →</text>
+<text x="470" y="450" text-anchor="middle" font-size="42" font-weight="700" fill="$ink">← $b</text>

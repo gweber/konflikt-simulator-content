@@ -1,0 +1,195 @@
+# Crisis net, German patterns and the German help texts.
+#
+# What this is: before any rule rewrites a sentence, the net looks at the whole
+# input. When one of these patterns matches, the page shows the helplines below
+# instead of a rewrite. See internal/safety for the mechanics.
+#
+# Source of truth: the practice bot, consim/safety.py (patterns) and
+# consim/locales/de.json "safety" (texts and numbers). Numbers are copied
+# verbatim; internal/content/safety_drift_test.go compares them with consim
+# whenever ~/code/consim is present. Never type a number that is not there.
+#
+# The patterns of ALL languages are matched against every input, whatever the
+# page language. The help text follows the page.
+#
+# Where this file deliberately differs from consim (the site reads sentences
+# written TO the other person, the bot reads sentences ABOUT them):
+#   - du-forms are added ("du schlägst mich", "du hast mich geschlagen").
+#   - "ich bring mich um" is caught by a word pattern; consim leaves it to its
+#     language model, which the site does not have. "Das bringt mich um den
+#     Verstand" and "bring mich um acht zum Bahnhof" stay out.
+#   - "mich verletzen" only with "selbst" or "ich will …": "du hast mich
+#     verletzt" is the most common sentence this tool ever sees.
+#   - "kein Sinn mehr" only about life or everything: "es hat keinen Sinn mehr,
+#     darüber zu reden" is a conflict sentence, not a crisis.
+#   - "nicht mehr da sein" only with wollen/möchten.
+#   - "würgt mich ab" (cuts me off) is not choking.
+#   - "umbringen" with someone else as object counts as violence, crisis wins
+#     only for first-person forms. "Ich könnte dich umbringen" therefore shows
+#     the violence block: a threat is not rewritten into a tidier threat.
+#   - "ich kann nicht mehr" and "halte das nicht mehr aus" count, even
+#     when they are only exhaustion (decision of 04.10.2026: better overreach).
+# When in doubt between a figure of speech and a real phrase of self-harm or
+# violence, the rule errs toward showing the helplines.
+#
+# `match` is RE2 without \b (the compiler adds Unicode word guards, as for the
+# lexicon). Use \p{L}* for word endings, never \w*: \w is ASCII and stops at
+# an umlaut. `unless` lists figures of speech: a match overlapping one of them
+# does not count.
+
+rules:
+  - id: de-crisis-suicide
+    kind: crisis
+    match: 'suizid\p{L}*|selbstmord\p{L}*|lebensm(ü|ue)de'
+    tests:
+      hits: ["Ich denke an Suizid.", "Manchmal habe ich Selbstmordgedanken.", "Ich bin lebensmüde."]
+
+  - id: de-crisis-die
+    kind: crisis
+    match: 'sterben wollen|will sterben|m(ö|oe)chte? sterben|nicht mehr leben|besser dran ohne mich|keinen ausweg( mehr)?|(will|möchte|moechte|mag|wollte) (einfach |lieber )?nicht mehr da sein|(nie|nicht) (mehr|wieder) aufwachen|ich kann (einfach |so |echt )?nicht mehr|halte (es|das|das alles) nicht mehr aus'
+    tests:
+      hits:
+        - "Ich will nicht mehr leben."
+        - "ich will nicht mehr leben"
+        - "Ich will sterben."
+        - "Ich möchte einfach nicht mehr da sein."
+        - "Alle wären besser dran ohne mich."
+        - "Ich sehe keinen Ausweg mehr."
+        - "Ich will einschlafen und nie wieder aufwachen."
+        - "Ich kann nicht mehr."
+        - "Ich kann so nicht mehr, wir müssen reden."
+        - "Ich halte das nicht mehr aus."
+      misses:
+        - "Ich werde am Montag nicht mehr da sein, das weißt du."
+        - "Ich will nicht mehr in dieses Meeting."
+
+  - id: de-crisis-kill-self
+    kind: crisis
+    match: '(ich )?bring(e)? mich (noch |gleich |jetzt |selbst )?um|ich (will|möchte|moechte|werde|wollte|könnte|koennte|sollte|würde|wuerde) mich (einfach |am liebsten |selbst )?(umbringen|t(ö|oe)ten)|(daran|überlege|ueberlege|vor),? mich (selbst )?umzubringen|mir (selbst )?das leben (zu )?nehmen'
+    unless:
+      - 'bring(e|st|t)? mich (\p{L}+ )?um (den|die|das|\d|halb|viertel|eins|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|mitternacht)'
+    tests:
+      hits:
+        - "ich bring mich um"
+        - "Ich bringe mich um."
+        - "Ich will mich umbringen."
+        - "Ich denke daran, mich umzubringen."
+        - "Ich will mir das Leben nehmen."
+      misses:
+        - "Das bringt mich um den Verstand."
+        - "Du bringst mich noch um den Schlaf."
+        - "Diese Warterei bringt mich um."
+        - "Bring mich um acht zum Bahnhof."
+
+  - id: de-crisis-self-harm
+    kind: crisis
+    match: 'ich (will|möchte|moechte|werde|könnte|koennte) mir (etwas|was) (an)?tun|ritzen|ritze mich|mich selbst (zu )?verletzen|ich (will|möchte|moechte|werde) mich verletzen|verletze mich selbst|selbstverletz\p{L}*'
+    tests:
+      hits:
+        - "Ich will mir etwas antun."
+        - "Ich ritze mich wieder."
+        - "Manchmal will ich mich selbst verletzen."
+      misses:
+        - "Du hast mich verletzt."
+        - "Du willst mich verletzen."
+
+  - id: de-crisis-meaning
+    kind: crisis
+    match: '(mein|das) leben (hat|macht) (doch |einfach )?kein(en)? sinn mehr|nichts (hat|macht) mehr (einen )?sinn|alles (hat|macht) kein(en)? sinn mehr'
+    tests:
+      hits: ["Mein Leben hat keinen Sinn mehr.", "Nichts hat mehr einen Sinn."]
+      misses: ["Es hat keinen Sinn mehr, mit dir darüber zu reden."]
+
+  - id: de-violence-hit
+    kind: violence
+    match: 'schl(ä|ae)gs?t ((er|sie|es|du|ihr|mein\p{L}* \p{L}+) )?mich|(hat|hast|habt) mich (\p{L}+ ){0,2}geschlagen|schlugs?t mich|verpr(ü|ue)gel\p{L}*|tritt mich|trittst mich|(hat|hast) mich (\p{L}+ ){0,2}getreten|w(ü|ue)rg(t|st|te|test) mich|(hat|hast) mich (\p{L}+ ){0,2}gew(ü|ue)rgt|schubs(t|st) mich|(hat|hast) mich (\p{L}+ ){0,2}geschubst|ohrfeig\p{L}*'
+    unless:
+      - 'schl(ä|ae)gs?t ((er|sie|es|du|ihr) )?mich (\p{L}+ ){0,3}vor'
+      - 'w(ü|ue)rg(t|st|te|test) mich (\p{L}+ ){0,3}ab'
+    tests:
+      hits:
+        - "Mein Mann schlägt mich."
+        - "er hat mich geschlagen"
+        - "Du schlägst mich, wenn du getrunken hast."
+        - "Du hast mich gestern geschlagen."
+        - "Er würgt mich."
+        - "Sie hat mich verprügelt."
+        - "Wenn ich das sage, dann schlägt er mich."
+        - "Manchmal schlägt sie mich."
+      misses:
+        - "Er schlägt mich als Teamleiter vor."
+        - "Dann schlägt er mich als Teamleiter vor."
+        - "Du würgst mich jedes Mal ab, wenn ich etwas sage."
+        - "Wir hatten einen gewaltigen Streit."
+
+  - id: de-violence-threat
+    kind: violence
+    match: '(droht|drohst|drohte|drohtest|gedroht|bedroht|bedrohst)\p{L}*.{0,40}(schlagen|umbringen|umzubringen|zu t(ö|oe)ten|t(ö|oe)ten|wehtun|weh tun|weh zu tun|verletzen|messer|waffe|kinder weg(zu)?nehmen)|(bedroht|bedrohst) mich|umbringen|umzubringen|mir (etwas|was) (antun|anzutun)'
+    tests:
+      hits:
+        - "Er hat gedroht, mich umzubringen."
+        - "Er droht mir mit dem Messer."
+        - "Du drohst, mir die Kinder wegzunehmen."
+        - "Er will mich umbringen."
+        - "Du bedrohst mich."
+      misses:
+        - "Er hat mir gedroht, mich zu kündigen."
+        - "Du drohst mit Trennung, wenn ich nicht mitkomme."
+
+  - id: de-violence-abuse
+    kind: violence
+    match: 'gewaltt(ä|ae)tig\p{L}*|h(ä|ae)usliche gewalt|sexuelle gewalt|gewalt (gegen|an) mich|vergewaltig\p{L}*|missbrauchs?t mich|missbrauchte mich|(hat|hast) mich missbraucht|sexuell\p{L}* missbrauch\p{L}*'
+    tests:
+      hits:
+        - "Er wird gewalttätig, wenn er trinkt."
+        - "Das ist häusliche Gewalt."
+        - "Er hat mich vergewaltigt."
+      misses:
+        - "Sie hat mein Vertrauen missbraucht."
+        - "Ich übe gewaltfreie Kommunikation."
+
+  - id: de-violence-fear
+    kind: violence
+    match: 'angst vor (ihm|ihr|dir)|stalks?t|verfolgs?t mich|sperrs?t mich ein|(hat|hast) mich eingesperrt'
+    unless:
+      - 'keine angst vor'
+      - '(das|es|der gedanke|dieser gedanke|die sache|das thema|die arbeit|das projekt) verfolgt mich'
+    tests:
+      hits: ["Ich habe Angst vor ihm.", "Mein Ex stalkt mich.", "Er sperrt mich ein."]
+      misses:
+        - "Ich habe Angst vor deiner Reaktion."
+        - "Der Gedanke verfolgt mich seit Tagen."
+        - "Ich habe keine Angst vor dir."
+
+# Look-alikes that must not trigger any rule of any language.
+misses:
+  - "Ich bin so sauer, ich könnte schreien."
+  - "Das bringt mich um den Verstand."
+  - "Du killst mich mit deiner Unpünktlichkeit."
+  - "Wie bringe ich ihn dazu, pünktlich zu sein?"
+  - "Er schlägt vor, dass wir reden."
+  - "Ich fühle mich übergangen und bin wütend."
+  - "Am liebsten wäre ich im Boden versunken."
+
+# Texts and numbers from consim/locales/de.json "safety"; only the bot's
+# "/start" line is replaced by the come-back line, and the violence block
+# names 112 next to the police (both numbers are in consim's German texts).
+help:
+  crisis:
+    title: "Was du schreibst, klingt ernst."
+    lead: "Wenn du gerade daran denkst, nicht mehr leben zu wollen: Du musst damit nicht allein sein. Rede jetzt mit jemandem – kostenlos, anonym, rund um die Uhr:"
+    lines:
+      - "Deutschland: Telefonseelsorge 0800 111 0 111 · 0800 111 0 222 · 116 123 (auch Chat: online.telefonseelsorge.de)"
+      - "Österreich: 142 · Schweiz: 143"
+      - "Kinder und Jugendliche: Nummer gegen Kummer 116 111"
+      - "Akute Gefahr: 112"
+    note: "Dieses Werkzeug ist ein Gesprächstraining und kann keine Hilfe ersetzen. Deinen Satz formuliert es deshalb hier nicht um. Wenn es dir wieder passt, kannst du jederzeit zurückkommen und weiterüben."
+  violence:
+    title: "Das klingt nach Gewalt oder Bedrohung."
+    lead: "Dann ist ein vorbereitetes Gespräch nicht der richtige Weg – deine Sicherheit geht vor, und eine Konfrontation kann gefährlich werden. Hilfe, kostenlos und anonym, rund um die Uhr:"
+    lines:
+      - "Hilfetelefon Gewalt gegen Frauen: 116 016 (auch für Angehörige, in vielen Sprachen)"
+      - "Hilfetelefon Gewalt an Männern: 0800 1239900"
+      - "Kinder und Jugendliche: Nummer gegen Kummer 116 111"
+      - "Akute Gefahr: Polizei 110 · Notruf 112"
+    note: "Deinen Satz formuliert das Werkzeug deshalb hier nicht um. Wenn du ein anderes Gespräch vorbereiten möchtest, kannst du jederzeit zurückkommen."

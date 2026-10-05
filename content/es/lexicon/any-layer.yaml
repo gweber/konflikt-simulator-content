@@ -1,0 +1,147 @@
+# Checks for every layer (Spanish).
+#
+# From the multi-school concept (04.10.2026, research D2): they look at how a
+# sentence is said, not at which layer it belongs to, so they run on the
+# occasion, the impact and the request alike. cmd/corpusc copies every group
+# of this file into each of the three layers.
+#
+# All of them are hints, not doctrine. Only contempt costs something
+# (`warn`); the rest is `info`.
+#
+# Same rules as the layer files: `match` is RE2 without \b, every rule brings
+# its own `hits` and `misses`, `source` is the background line under a hint.
+#
+# Checked against the existing Spanish rules so that nothing fires twice:
+#   - "quizás", "a lo mejor", "puede que" are hedge-quizas (occasion layer),
+#     "si no es mucha molestia" is soft-a-lo-mejor (request layer).
+#   - "ridículo", "qué cara" are esc-desprecio (occasion layer).
+#   - "uno se siente", "cualquiera se sentiría" are pseudo-uno (impact layer).
+
+layer: any
+
+groups:
+  - kind: yes_but
+    severity: info
+    source: "Stone, Patton y Heen: «y» en lugar de «pero»"
+    why: |
+      Después de un reconocimiento, el «pero» lo retira. Solo se oye lo que
+      viene después, y el reconocimiento suena a carrerilla. Con «y» se
+      sostienen las dos mitades: tu punto de vista cuenta, y el mío también.
+    rules:
+      - id: but-after-ack
+        match: "(entiendo|lo entiendo|ya sé|ya se|sé que|veo que|te agradezco|gracias|tienes razón|tienes razon|es verdad|claro|por supuesto)[^.!?]{0,80},? pero"
+        message: "Después de un reconocimiento, el «pero» lo retira."
+        ask: "Prueba con «y»: «Sé que ibas con mucho trabajo, y tu parte estaba prevista para el jueves.»"
+        tests:
+          hits:
+            - "Sé que ibas con mucho trabajo, pero tu parte llegó el viernes."
+            - "Tienes razón, pero así no podemos seguir."
+            - "Gracias por ayudarme, pero necesito la lista el lunes."
+          misses:
+            - "Pero el martes no llegó ningún mensaje."
+            - "Sé que ibas con mucho trabajo, y tu parte estaba prevista para el jueves."
+
+  - kind: why_question
+    severity: info
+    source: "Thomas Gordon y la entrevista motivacional: preguntas abiertas (saber práctico)"
+    why: |
+      Un «¿por qué?» pide una justificación. La otra persona se pone a buscar
+      razones que pueda defender en lugar de contar qué pasó. «¿Qué pasó?»
+      pregunta lo mismo e invita a contarlo.
+    rules:
+      - id: why-por-que
+        match: "por qu[eé]"
+        message: "«{match}» pide una justificación."
+        ask: "Pregunta mejor: «¿Qué pasó?» o «¿Cómo fue?»"
+        tests:
+          hits:
+            - "¿Por qué no me avisaste?"
+            - "Por qué siempre haces lo mismo"
+            - "¿por que no contestaste?"
+          misses:
+            - "Lo hago porque me importa."
+            - "¿Qué pasó el martes?"
+
+  - kind: over_apology
+    severity: info
+    source: "Asertividad: pedir sin disculparse por pedir"
+    why: |
+      Quien se disculpa por sacar un tema dice a la vez que su asunto no
+      cuenta de verdad. Tienes derecho a pedir. Disculparte por algo que
+      hiciste es otra cosa: eso se queda.
+    rules:
+      - id: apology-for-asking
+        match: "(perdona|perdón|perdon|disculpa|siento|lo siento),? (que te moleste|la molestia|por molestar|si te molesto|por preguntar|que insista|por darte la lata|que te dé la lata|que te de la lata)|no (te )?quiero (ser pesad[oa]|molestar|molestarte|darte la lata|agobiarte|ser un pesado|ser una pesada)|igual es una tontería|igual es una tonteria|igual te parece una tontería|igual te parece una tonteria|igual suena (tont[oa]|ridícul[oa]|ridicul[oa]|exagerad[oa])|solo una cosita|sólo una cosita"
+        message: "«{match}» pide perdón por el propio asunto."
+        ask: "Tienes derecho a pedir. Quita la disculpa y di de qué se trata."
+        tests:
+          hits:
+            - "Perdona que te moleste, pero falta la lista."
+            - "No quiero ser pesada, pero falta la lista."
+            - "Igual es una tontería, pero me molestó."
+          misses:
+            - "Siento haberte levantado la voz."
+            - "Quiero hablar de la lista."
+
+  - kind: speak_for_yourself
+    severity: info
+    source: "Ruth Cohn: hablar en primera persona"
+    more: ich-botschaften
+    why: |
+      «Todo el mundo lo piensa» trae refuerzos que no están en la sala. La
+      otra persona no puede hablar con una mayoría invisible, solo contigo. Y
+      tu propia impresión basta como motivo para la conversación.
+    rules:
+      - id: speak-everyone
+        match: "todo el mundo (dice|piensa|sabe|ve|opina|cree|lo sabe|lo piensa|lo ve)|todos (dicen|piensan|saben|opinan|creen|sabemos|pensamos|lo sabemos|lo vemos)|nadie (quiere|piensa|cree|entiende|soporta)|eso no se hace|así no se hace|asi no se hace|la gente (dice|piensa|comenta|habla)"
+        message: "«{match}» habla por otros en lugar de por ti."
+        ask: "Habla en primera persona: ¿qué viste tú, qué te importa a ti?"
+        tests:
+          hits:
+            - "Todo el mundo piensa que así no funciona."
+            - "Todos sabemos que el plazo era el viernes."
+            - "Eso no se hace."
+          misses:
+            - "Creo que así no funciona."
+            - "Todos los papeles estaban en la mesa."
+
+  - kind: contempt
+    severity: warn
+    source: "John Gottman: el desprecio"
+    more: vier-gifte
+    why: |
+      La burla y los ojos en blanco llegan antes que cualquier argumento: como
+      desprecio. De todos los patrones que tuercen una conversación, el
+      desprecio es al que la otra parte reacciona con más fuerza.
+    rules:
+      - id: contempt-markers
+        match: "lo que tú digas|lo que tu digas|vaya sorpresa|menuda sorpresa|qué sorpresa|que sorpresa|enhorabuena|pues genial|pues muy bien|ya,? ya|🙄|pon(go|es|e) los ojos en blanco"
+        message: "«{match}» se va a oír como burla."
+        ask: "Di lo que pasó, sin ironía. La burla pone a la otra persona a la defensiva."
+        tests:
+          hits:
+            - "Lo que tú digas, como siempre."
+            - "Enhorabuena, te ha salido de maravilla."
+            - "Ya, ya, me lo sé."
+            - "La lista llegó el viernes 🙄"
+          misses:
+            - "El resultado fue genial."
+            - "Me alegro de que haya salido bien."
+
+  - kind: monologue
+    severity: info
+    source: "Thomas Gordon: hablar y escuchar por turnos"
+    why: |
+      Un párrafo largo es un discurso, no un comienzo de conversación. Cuanto
+      más llega de una vez, más puntos tiene la otra persona para engancharse,
+      y menos oye lo que importa.
+    length_check:
+      id: monologue-long
+      max_words: 55
+      message: "{words} palabras de un tirón: eso ya es un pequeño discurso."
+      ask: "Di una sola cosa y luego escucha. ¿Qué frase tiene que estar aquí?"
+      tests:
+        hits:
+          - "El martes tu parte estaba prevista para las doce, y estuve toda la mañana esperándola, luego te pregunté, luego no contestaste, luego tuve que darle largas al cliente, y el viernes por fin llegó el archivo, pero para entonces la reunión ya se había movido y se me había ido media semana y tuve que volver a organizarlo todo desde cero."
+        misses:
+          - "El martes tu parte estaba prevista para las doce; llegó el viernes."

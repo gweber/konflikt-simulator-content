@@ -1,0 +1,133 @@
+# Crisis net, English patterns and the English help texts.
+#
+# Source of truth: consim/safety.py and consim/locales/en.json "safety".
+# Numbers verbatim; internal/content/safety_drift_test.go guards them.
+# Mechanics and format: see content/de/safety.yaml and internal/safety.
+#
+# Deliberate differences from consim (the site reads sentences written TO the
+# other person, so everyday conflict phrasing must not trip the net):
+#   - "threatens to kill me", "he will hurt me": consim only had
+#     "threaten(s|ed) me"; threats with a harm verb are added.
+#   - "don't want to be here" only with "anymore": "I don't want to be here
+#     when your parents visit" is a conflict sentence.
+#   - "can't go on (like this)" counts, with or without "like this" (decision of
+#     04.10.2026: better show the helplines when it overreaches than miss one).
+#   - "abus…" only about a person ("abused me", "abusive", "domestic abuse"),
+#     not "you abuse my trust".
+#   - "violent" does not count inside "non-violent".
+#   - idioms "it hit me", "hit me up", "beat me to it", "beats me why" are out.
+
+rules:
+  - id: en-crisis-kill-self
+    kind: crisis
+    match: 'kill(ing)? myself|take my (own )?life|end (it all|my life)|suicid\p{L}*|self[- ]?harm\p{L}*|hurt(ing)? myself|cut(ting)? myself'
+    tests:
+      hits:
+        - "I want to kill myself."
+        - "I'm thinking about suicide."
+        - "Sometimes I want to end it all."
+        - "I keep hurting myself."
+      misses:
+        - "You're killing me with your lateness."
+
+  - id: en-crisis-die
+    kind: crisis
+    match: 'want(ed)? to die|wish i (was|were) dead|(don''?t|do not) want to (live|exist|be alive)|(don''?t|do not) want to be here any ?more|better off without me|can''?t go on|cannot go on|no reason to live|(don''?t|do not) want to wake up'
+    tests:
+      hits:
+        - "I want to die."
+        - "I don't want to live anymore."
+        - "I don’t want to live anymore."
+        - "Everyone would be better off without me."
+        - "I can't go on."
+        - "I can't go on like this, we need to talk."
+      misses:
+        - "I don't want to be here when your parents visit."
+
+  - id: en-violence-hit
+    kind: violence
+    match: 'hits me|hit me|beats? me|beat me up|beating me|chok(es|ed|ing) me|kick(s|ed)? me|slap(s|ped)? me|strangl\p{L}* me|punch(es|ed)? me'
+    unless:
+      - '(it|that|this|reality|the realization|the truth|the news) (finally |really |suddenly |just )?hit me'
+      - 'hit me up'
+      - 'beat me (to|at|in)'
+      - '(it|that) beats me|beats me (why|how|what|where|when)'
+      - 'kick(s|ed)? me out'
+    tests:
+      hits:
+        - "He hits me."
+        - "You hit me last night."
+        - "My husband beats me."
+        - "He choked me."
+        - "She slapped me."
+      misses:
+        - "It finally hit me that you weren't coming."
+        - "You beat me to it."
+        - "Hit me up when you're free."
+
+  - id: en-violence-threat
+    kind: violence
+    match: 'threaten\p{L}* me|threaten\p{L}*.{0,40}(kill|hurt|hit|beat|stab|shoot|knife|gun|take (the|my|our) (kids|children))|(he|she|they|you)(''ll| will| would|''d| is going to|''s going to| are going to|''re going to| wants? to| tried to| has tried to| swore to| said (he|she|they)''d| said (he|she|they) would) (kill|hurt|hit|beat|stab|shoot|strangle) me'
+    tests:
+      hits:
+        - "He threatens to kill me."
+        - "he threatens to kill me"
+        - "He threatened me with a knife."
+        - "You threaten me every time you drink."
+        - "She said she'd hurt me."
+      misses:
+        - "He threatened to quit the project."
+
+  - id: en-violence-abuse
+    kind: violence
+    match: 'abus(e|es|ed|ing) me|abusive|abuser|(domestic|sexual|physical|emotional|verbal|child) abuse|(was|been|being|got) abused|sexually assault\p{L}*|rap(e|es|ed|ing) me|raped|domestic violence|violent'
+    unless:
+      - 'non-?violent'
+    tests:
+      hits:
+        - "My partner is abusive."
+        - "He raped me."
+        - "This is domestic violence."
+        - "He gets violent when he drinks."
+      misses:
+        - "I want to practise non-violent communication."
+        - "You abuse my trust."
+
+  - id: en-violence-fear
+    kind: violence
+    match: '(afraid|scared|terrified) of (him|her|you)|stalk(s|ed|ing)? me|stalker|locks? me (in|up)|locked me (in|up)'
+    unless:
+      - '(not|never) (afraid|scared|terrified) of'
+    tests:
+      hits: ["I'm afraid of him.", "He stalks me.", "He locked me in the flat."]
+      misses: ["I'm not afraid of you."]
+
+misses:
+  - "I could scream."
+  - "You hurt me when you said that."
+  - "That joke killed me."
+  - "My mom will kill me if I'm late."
+  - "Nonviolent communication examples"
+  - "You always interrupt me in meetings."
+
+# Texts and numbers from consim/locales/en.json "safety"; the bot's "/start"
+# line is replaced by the come-back line. consim names no youth helpline for
+# English, so none is named here.
+help:
+  crisis:
+    title: "What you wrote sounds serious."
+    lead: "If you are thinking about not wanting to live: you don't have to be alone with it. Talk to someone now – free, confidential, day and night:"
+    lines:
+      - "International: findahelpline.com lists a line for your country"
+      - "UK & Ireland: Samaritans 116 123 · USA: 988 · Germany: 0800 111 0 111"
+      - "Emergency: 112 (Europe) · 911 (North America)"
+    note: "This tool is a conversation trainer and can't replace help, so it won't rephrase your sentence here. Whenever you feel ready, you can come back and keep practising."
+  violence:
+    title: "It sounds like this is about violence or threats."
+    lead: "Then preparing a conversation isn't the right path – your safety comes first, and a confrontation can be dangerous. Help, free and confidential:"
+    lines:
+      - "International: findahelpline.com (domestic violence lines by country)"
+      - "Germany: 116 016 (women, also in English) · 0800 1239900 (men)"
+      - "UK: 0808 2000 247 · USA: 1-800-799-7233"
+      - "Emergency: 112 (Europe) · 911 (North America)"
+    note: "So the tool won't rephrase your sentence here. If you'd like to prepare a different conversation, you can come back any time."

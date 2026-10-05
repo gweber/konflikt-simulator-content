@@ -1,0 +1,292 @@
+# "If they say …" block, German.
+#
+# If-then plans (Peter Gollwitzer's implementation intentions): the user picks
+# the sentence they most fear to hear and gets one calm answer to keep ready,
+# plus one repair phrase for when the conversation has already slipped.
+# A typed sentence is matched by keywords (lower-case word beginnings) to the
+# closest item, else it gets the generic answer. Every test sentence is
+# checked by `go run ./cmd/corpusc -check`; see internal/corpus/ifthen.go.
+#
+# Items without situations apply to all six situations; the others to the
+# situations listed. Each situation shows six items.
+source: "Wenn-dann-Pläne (Peter Gollwitzer)"
+items:
+  # --- Common to all situations ---
+  - id: exaggerate
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Du übertreibst."
+    answer: "Vielleicht wirkt es auf dich übertrieben. Ich möchte trotzdem, dass du einmal hörst, wie es bei mir angekommen ist."
+    repair: "Lass uns nochmal anfangen. Ich bin lauter geworden, als ich wollte."
+    keywords: ["übertreib", "uebertreib", "ubertreib", "dramatisier", "drama", "überreagier", "ueberreagier", "hysterisch", "mücke", "muecke", "elefant", "aufbausch"]
+    tests:
+      - "Jetzt übertreibst du aber."
+      - "Du dramatisierst das total"
+      - "du uebertreibst mal wieder"
+      - "Mach doch keinen Elefanten aus einer Mücke"
+      - "Du reagierst völlig über, das ist doch kein Drama"
+  - id: not_true
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Das stimmt doch gar nicht."
+    answer: "Wir erinnern es unterschiedlich, das ist okay. Ich muss nicht recht haben – ich will nur, dass du weißt, wie es für mich war."
+    repair: "Wir streiten gerade darüber, wer recht hat. Darum ging es mir gar nicht. Können wir neu ansetzen?"
+    keywords: ["stimmt nicht", "stimmt doch nicht", "stimmt gar nicht", "stimmt doch gar nicht", "stimmt so nicht", "stimmt überhaupt nicht", "nicht wahr", "gelogen", "lügst", "luegst", "quatsch", "blödsinn", "bloedsinn", "unsinn", "erfunden"]
+    tests:
+      - "Das stimmt doch gar nicht!"
+      - "Das ist überhaupt nicht wahr"
+      - "So ein Quatsch, das war ganz anders"
+      - "Du lügst doch"
+      - "Das hast du dir erfunden"
+  - id: always_my_fault
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Immer bin ich schuld."
+    answer: "Ich suche keinen Schuldigen. Ich will diese eine Sache klären, damit es nächstes Mal besser läuft."
+    repair: "Das klang wohl wie eine Anklage. So war es nicht gemeint. Ich versuche es nochmal anders."
+    keywords: ["schuld", "immer ich", "immer bin ich", "immer auf mich", "an allem", "sündenbock", "suendenbock", "der böse", "die böse", "der boese", "die boese"]
+    tests:
+      - "Immer bin ich schuld."
+      - "Klar, wieder ist alles meine Schuld"
+      - "Immer ich, immer ich!"
+      - "Ich bin hier wohl der Sündenbock"
+      - "immer bin ich der Böse"
+  - id: silence
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "(Schweigt oder geht.)"
+    answer: "Okay, wir machen eine Pause. Lass uns morgen um die gleiche Zeit weiterreden – mir ist das wichtig."
+    repair: "Ich glaube, das war zu viel auf einmal. Tut mir leid. Wollen wir es nochmal in Ruhe versuchen?"
+    keywords: ["schweig", "sagt nichts", "sagt gar nichts", "sagt kein wort", "geht raus", "geht weg", "geht einfach", "verlässt", "verlaesst", "antwortet nicht", "antwortet nie", "keine antwort", "ignorier", "legt auf", "knallt die tür", "knallt die tuer", "zieht sich zurück", "zieht sich zurueck", "nicht mehr reden", "dreht sich um"]
+    tests:
+      - "Er schweigt einfach."
+      - "Sie sagt nichts mehr und geht raus"
+      - "Er verlässt den Raum"
+      - "Ich will darüber nicht mehr reden."
+      - "Sie ignoriert mich und dreht sich um"
+
+  # --- reliability_deadlines ---
+  - id: too_much_on
+    situations: [reliability_deadlines]
+    say: "Ich hatte einfach zu viel um die Ohren."
+    answer: "Das glaube ich dir. Dann lass uns schauen, wie du mir nächstes Mal früher Bescheid sagen kannst."
+    repair: "Ich bin gerade ziemlich ungeduldig geworden, entschuldige. Mir geht es nur darum, dass ich mich auf dich verlassen kann."
+    keywords: ["zu viel", "zuviel", "um die ohren", "stress", "gestresst", "überlastet", "ueberlastet", "viel los", "kam nicht dazu", "nicht dazu gekommen", "keine zeit", "vergessen"]
+    tests:
+      - "Ich hatte einfach zu viel um die Ohren."
+      - "Sorry, ich war total im Stress"
+      - "Ich bin einfach nicht dazu gekommen"
+      - "Bei mir war gerade so viel los"
+      - "Hab's vergessen, ich hatte keine Zeit"
+  - id: its_done_now
+    situations: [reliability_deadlines]
+    say: "Ist doch jetzt erledigt. Was willst du noch?"
+    answer: "Gut, dass es jetzt da ist. Mir geht es ums nächste Mal – dass ich vorher weiß, woran ich bin."
+    repair: "Ich glaube, ich habe dir gerade einen Vortrag gehalten. Das wollte ich nicht. Danke, dass es jetzt da ist."
+    keywords: ["erledigt", "was willst du", "ist doch da", "jetzt da", "ist doch fertig", "jetzt fertig", "hauptsache", "nicht drauf an", "nicht darauf an", "paar tage", "was ist das problem", "wo ist das problem"]
+    tests:
+      - "Ist doch jetzt erledigt, was willst du noch?"
+      - "Hauptsache, es ist fertig."
+      - "Auf ein paar Tage kommt es doch nicht an"
+      - "Es ist doch da, wo ist das Problem?"
+
+  # --- criticism_feedback ---
+  - id: not_perfect_either
+    situations: [criticism_feedback]
+    say: "Du bist doch auch nicht perfekt."
+    answer: "Stimmt, bin ich nicht. Über mich können wir gleich auch reden – erst möchte ich das hier zu Ende bringen."
+    repair: "Jetzt rechnen wir uns gegenseitig Fehler vor. Das bringt uns beide nicht weiter. Fangen wir nochmal an?"
+    keywords: ["perfekt", "du auch", "du doch auch", "du bist auch", "du machst auch", "was ist mit dir", "und du", "eigene nase", "glashaus", "fehlerfrei"]
+    tests:
+      - "Du bist doch auch nicht perfekt."
+      - "Und was ist mit dir?"
+      - "Fass dich mal an die eigene Nase"
+      - "Als ob du keine Fehler machst, du machst auch genug"
+  - id: do_it_yourself
+    situations: [criticism_feedback]
+    say: "Dann mach es doch selbst."
+    answer: "Darum geht es mir nicht. Ich will es ja mit dir machen – nur an dieser einen Stelle anders."
+    repair: "Das kam härter an, als ich es meinte. Ich weiß, was du alles machst – mir ging es nur um diesen einen Punkt."
+    keywords: ["selbst", "selber", "dann mach", "besser kannst", "alles besser", "besser weiß", "besser weiss", "kannst es ja", "kannst du ja", "mach du"]
+    tests:
+      - "Dann mach es doch selbst."
+      - "Machs doch selber, wenn du es besser kannst"
+      - "Du weißt ja eh alles besser"
+      - "Bitte, dann mach du es halt"
+
+  # --- boundary_violation ---
+  - id: dont_make_fuss
+    situations: [boundary_violation]
+    say: "Stell dich nicht so an."
+    answer: "Für mich war das zu viel. Ich sage es dir, damit es nicht wieder passiert."
+    repair: "Ich bin gerade scharf geworden. Das Thema ist mir trotzdem ernst – lass es mich nochmal ruhig sagen."
+    keywords: ["stell dich nicht", "stell dich doch nicht", "anstell", "empfindlich", "überempfindlich", "ueberempfindlich", "sensibel", "mimose", "zimperlich", "hab dich nicht so", "hab dich mal nicht so", "reg dich ab", "reg dich nicht", "entspann", "locker"]
+    tests:
+      - "Stell dich nicht so an."
+      - "Jetzt hab dich mal nicht so"
+      - "Du bist echt empfindlich"
+      - "Sei nicht so eine Mimose"
+      - "Reg dich ab, bleib mal locker"
+  - id: just_joking
+    situations: [boundary_violation]
+    say: "Das war doch nur Spaß."
+    answer: "Kann sein, dass es für dich Spaß war. Für mich war es nicht lustig – bitte lass das."
+    repair: "Ich will dir nicht unterstellen, dass du es böse gemeint hast. Mir ist nur wichtig, dass es aufhört."
+    keywords: ["spaß", "spass", "witz", "humor", "scherz", "nicht ernst gemeint", "nicht so gemeint", "nicht böse gemeint", "nicht boese gemeint", "verarsch"]
+    tests:
+      - "Das war doch nur Spaß."
+      - "War doch nur ein Witz, Mann"
+      - "Verstehst du keinen Spass?"
+      - "Das war nicht ernst gemeint"
+      - "Du hast echt keinen Humor"
+
+  # --- misunderstanding ---
+  - id: never_said
+    situations: [misunderstanding]
+    say: "Das habe ich so nie gesagt."
+    answer: "Dann habe ich dich vielleicht falsch verstanden. Sag mir, wie du es gemeint hast – und ich sage dir, wie es bei mir ankam."
+    repair: "Wir drehen uns gerade um einzelne Worte. Lass uns kurz zurückgehen: Was wolltest du mir eigentlich sagen?"
+    keywords: ["nie gesagt", "nicht gesagt", "nie behauptet", "nicht behauptet", "nicht so gemeint", "nicht gemeint", "anders gemeint", "so nie", "hab ich nie", "habe ich nie"]
+    tests:
+      - "Das habe ich so nie gesagt."
+      - "Hab ich nie behauptet"
+      - "Das war ganz anders gemeint"
+      - "So habe ich das nicht gesagt"
+  - id: hear_what_you_want
+    situations: [misunderstanding]
+    say: "Du hörst nur, was du hören willst."
+    answer: "Dann sag es mir nochmal, ich höre zu. Danach sage ich dir, was ich verstanden habe."
+    repair: "Ich habe dich vorhin unterbrochen. Entschuldige – erzähl zu Ende."
+    keywords: ["hören willst", "hoeren willst", "hörst nur", "hoerst nur", "hörst nicht zu", "hoerst nicht zu", "hörst mir nie", "hoerst mir nie", "hörst mir nicht", "hoerst mir nicht", "verdrehst", "verdreh", "worte in den mund", "interpretier"]
+    tests:
+      - "Du hörst nur, was du hören willst."
+      - "Du hörst mir nie richtig zu"
+      - "Du verdrehst mir die Worte"
+      - "Leg mir keine Worte in den Mund"
+      - "Da interpretierst du was rein"
+
+  # --- power_decision ---
+  - id: my_decision
+    situations: [power_decision]
+    say: "Das entscheide immer noch ich."
+    answer: "Ich will dir die Entscheidung nicht wegnehmen. Ich möchte nur gefragt werden, bevor etwas entschieden wird, das mich betrifft."
+    repair: "Ich habe mich gerade ziemlich aufgeregt. Ich will dir nichts streitig machen – ich möchte nur mitreden können."
+    keywords: ["entscheide ich", "entscheide immer", "ich entscheide", "meine entscheidung", "nicht deine entscheidung", "chef", "ich bestimme", "bestimme ich", "das sagen", "mein haus", "meine regeln", "geht dich nichts an"]
+    tests:
+      - "Das entscheide immer noch ich."
+      - "Das ist meine Entscheidung, nicht deine"
+      - "Ich bin hier der Chef"
+      - "Ich hab hier das Sagen"
+      - "Das geht dich nichts an"
+
+  - id: no_time
+    situations: [power_decision]
+    say: "Dafür war keine Zeit."
+    answer: "Das kann gut sein. Wie machen wir es, dass ich es nächstes Mal wenigstens kurz vorher erfahre?"
+    repair: "Ich mache dir keinen Vorwurf daraus, dass es schnell gehen musste. Lass uns nur ausmachen, wie wir es künftig handhaben."
+    keywords: ["keine zeit", "schnell gehen", "musste schnell", "kurzfristig", "eilig", "nicht erreich", "nicht fragen", "nicht abwarten", "nicht warten", "auf die schnelle"]
+    tests:
+      - "Dafür war keine Zeit."
+      - "Das musste halt schnell gehen"
+      - "Ich hab dich nicht erreicht"
+      - "Das war zu kurzfristig, ich konnte nicht warten"
+
+  # --- breakup_closure ---
+  - id: ruining_everything
+    situations: [breakup_closure]
+    say: "Du machst alles kaputt."
+    answer: "Ich verstehe, dass es sich für dich so anfühlt. Ich habe es mir gut überlegt, und ich bleibe dabei."
+    repair: "Das ist gerade für uns beide schwer. Ich will nicht im Streit auseinandergehen – können wir kurz durchatmen?"
+    keywords: ["kaputt", "zerstör", "zerstoer", "ruinier", "wegwirf", "wegwerf", "wirfst alles", "wirfst das", "alles weg", "aufs spiel"]
+    tests:
+      - "Du machst alles kaputt."
+      - "Du zerstörst alles, was wir hatten"
+      - "Du wirfst alles weg"
+      - "Damit ruinierst du alles"
+  - id: after_all_i_did
+    situations: [breakup_closure]
+    say: "Nach allem, was ich für dich getan habe?"
+    answer: "Ich weiß, was du für mich getan hast, und dafür bin ich dankbar. Das ändert nichts daran, dass es für mich so nicht weitergeht."
+    repair: "Das klang jetzt so, als wäre alles umsonst gewesen. So meine ich es nicht – vieles war gut."
+    keywords: ["nach allem", "für dich getan", "fuer dich getan", "alles getan", "alles für dich", "alles fuer dich", "undankbar", "dankst du", "dank dafür", "dank dafuer", "geopfert", "aufgeopfert"]
+    tests:
+      - "Nach allem, was ich für dich getan habe?"
+      - "Du bist so undankbar"
+      - "So dankst du es mir also"
+      - "Ich hab alles für dich aufgegeben und mich aufgeopfert"
+
+  # --- textchat: Streit im Gruppenchat / Klassenchat (04.10.2026) -- the chat's own six, the spoken items stay out ---
+  - id: lol
+    situations: [textchat]
+    say: "lol"
+    answer: "Ich meine das ernst. Kannst du es einmal ohne lol lesen und mir sagen, was du davon hältst?"
+    repair: "Ich hab das grad zu scharf geschrieben. Ich fang nochmal an: Mir geht es um das Foto von gestern."
+    keywords: ["lol", "lmao", "haha", "😂", "🤣", "rofl"]
+    tests:
+      - "lol"
+      - "hahaha was"
+      - "😂😂😂"
+      - "lol ok"
+      - "lmao"
+  - id: sorry_what
+    situations: [textchat]
+    say: "Sorry??"
+    answer: "Ja, ich meine das so. Ich bin nicht auf Streit aus -- ich will, dass du weißt, wie es bei mir angekommen ist."
+    repair: "Das klang wohl wie ein Angriff. So war es nicht gemeint. Ich versuch es nochmal anders."
+    keywords: ["sorry?", "sorry??", "wie bitte", "hä", "hae", "häh", "was soll das", "was willst du", "ernsthaft?", "echt jetzt"]
+    tests:
+      - "Sorry??"
+      - "hä was soll das"
+      - "Was willst du eigentlich"
+      - "Echt jetzt?"
+      - "Wie bitte?"
+  - id: left_on_read
+    situations: [textchat]
+    say: "(Liest es, schreibt nicht mehr.)"
+    answer: "Ich seh, dass du es gelesen hast. Nimm dir Zeit -- ich würde mich freuen, wenn du heute Abend noch ein Wort dazu schreibst."
+    repair: "Ich hab dich wahrscheinlich mit zu viel Text überfahren. Ein Satz von dir reicht mir."
+    keywords: ["liest", "gelesen", "blaue haken", "zwei haken", "antwortet nicht", "antwortet nie", "schreibt nicht", "schreibt nichts", "keine antwort", "ignoriert", "online aber", "online, aber", "lässt mich", "laesst mich"]
+    tests:
+      - "Sie liest es und schreibt nicht mehr"
+      - "Blaue Haken und keine Antwort"
+      - "Er ignoriert mich einfach"
+      - "online, aber antwortet nicht"
+  - id: screenshot
+    situations: [textchat]
+    say: "screenshot 😏"
+    answer: "Du kannst das weiterschicken. Ich wünsche mir, dass das hier zwischen uns bleibt -- und ich sag dir ehrlich, dass mir das wichtig ist."
+    repair: "Ich merke, wir drohen uns gerade gegenseitig. Das will ich nicht. Lass uns das morgen kurz persönlich klären."
+    keywords: ["screenshot", "screen", "weiterleit", "weiterschick", "schick ich", "zeig ich", "poste ich", "an alle", "😏", "beweis", "gespeichert"]
+    tests:
+      - "screenshot 😏"
+      - "das schick ich mal weiter"
+      - "Hab ich gespeichert, zeig ich allen"
+      - "😏 hab nen Screen"
+  - id: everyone_agrees
+    situations: [textchat]
+    say: "Alle finden das."
+    answer: "Kann sein, dass andere das auch so sehen. Ich rede jetzt mit dir, und mir ist wichtig, was du dazu sagst."
+    repair: "Ich merke, ich zähle gerade auch Leute auf meiner Seite. Lass uns bei uns beiden bleiben."
+    keywords: ["alle finden", "alle sagen", "alle denken", "alle sehen das", "jeder sagt", "jeder findet", "die anderen", "frag mal", "nicht nur ich", "alle hier"]
+    tests:
+      - "Alle finden das"
+      - "Frag mal die anderen"
+      - "Das sagen alle hier"
+      - "Nicht nur ich seh das so"
+      - "jeder findet das peinlich"
+  - id: chill
+    situations: [textchat]
+    say: "chill, war nur spaß"
+    answer: "Für dich war es Spaß, okay. Bei mir ist es nicht so angekommen -- und darum schreib ich dir."
+    repair: "Ich will dir nicht unterstellen, dass du es böse gemeint hast. Mir geht es nur darum, dass es aufhört."
+    keywords: ["chill", "spaß", "spass", "witz", "joke", "nicht so gemeint", "stell dich nicht so an", "übertreib", "uebertreib", "drama", "sensibel", "mimimi"]
+    tests:
+      - "chill, war nur spaß"
+      - "war doch nur ein joke"
+      - "stell dich nicht so an"
+      - "mimimi"
+      - "bist du sensibel"
+
+generic:
+  answer: "Das nehme ich mit. Lass mich trotzdem meinen Punkt zu Ende sagen, dann bist du dran."
+  repair: "Stopp, das läuft gerade schief, und ich habe meinen Teil dazu beigetragen. Können wir nochmal von vorne anfangen?"
+  tests:
+    - "Was gibt's heute zum Abendessen?"
+    - "Hast du meine Schlüssel gesehen?"
+    - "Okay, verstehe."

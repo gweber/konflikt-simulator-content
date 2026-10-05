@@ -1,0 +1,323 @@
+# Regeln für die Bitte-Ebene (Appell).
+#
+# Doktrin: positiv formuliert, zukunftsgerichtet, überprüfbar. Eine Bitte ist
+# erst dann eine Bitte, wenn beide Seiten hinterher feststellen können, ob sie
+# erfüllt wurde.
+#
+# Mehrere Regeln hier sind `risk_sensitive`. Bei hoher Risikotoleranz ist
+# Härte eine bewusste Wahl und keine Verfehlung — der Lader stuft solche
+# Funde dann auf `info` herab, statt sie anzumahnen. Siehe
+# internal/rules/rules.go → Finding.applyRisk.
+
+layer: request
+
+groups:
+  - kind: negative_request
+    severity: warn
+    source: "Marshall B. Rosenberg: positive Handlungssprache"
+    why: |
+      Eine Bitte, die nur sagt was aufhören soll, lässt offen was stattdessen
+      geschehen soll. Die Gegenseite weiß danach, was sie falsch macht, aber
+      nicht, was richtig wäre — und du hast nichts, woran du Erfolg erkennst.
+    rules:
+      - id: neg-hoer-auf
+        match: "hör auf|hoer auf|lass das|lass es|unterlass|hör bitte auf"
+        message: "„{match}“ sagt, was enden soll — nicht, was beginnen soll."
+        ask: "Was soll die andere Person stattdessen tun?"
+        tests:
+          hits: ["Hör auf mich zu unterbrechen", "Lass das einfach"]
+          misses: ["Ich möchte ausreden dürfen"]
+
+      - id: neg-nicht-mehr
+        match: "nicht mehr|nie wieder|kein \\p{L}+ mehr|keine \\p{L}+ mehr"
+        message: "„{match}“ beschreibt die Abwesenheit von Verhalten."
+        ask: "Formuliere die Bitte positiv: Was wünschst du dir konkret?"
+        tests:
+          hits: ["Mach das nicht mehr", "Ich will nie wieder warten"]
+          misses: ["Ich möchte rechtzeitig Bescheid bekommen"]
+
+      - id: neg-aufhoeren-zu
+        match: "damit aufhören|damit aufhoeren|abstellen|einstellen"
+        message: "„{match}“ verlangt eine Unterlassung."
+        ask: "Beschreibe das gewünschte Verhalten statt des unerwünschten."
+        tests:
+          hits: ["Du sollst damit aufhören", "Das musst du abstellen"]
+          misses: ["Ich hätte gern eine kurze Rückmeldung"]
+
+  - kind: vague_request
+    severity: warn
+    source: "Marshall B. Rosenberg: konkrete, überprüfbare Bitte"
+    why: |
+      "Mehr Respekt" ist keine Bitte, sondern eine Haltungsnote. Niemand kann
+      sie erfüllen, und niemand kann prüfen, ob sie erfüllt wurde. Die Bitte
+      muss ein Verhalten benennen, das man sehen oder hören kann.
+    rules:
+      - id: vague-mehr-x
+        match: "mehr Respekt|mehr Rücksicht|mehr Ruecksicht|mehr Verständnis|mehr Verstaendnis|mehr Mühe|mehr Muehe|mehr Einsatz"
+        message: "„{match}“ ist nicht überprüfbar."
+        ask: "Woran würdest du merken, dass es passiert ist? Das ist die Bitte."
+        offer:
+          - "mich ausreden zu lassen, bevor du antwortest"
+          - "mir bis Freitag eine kurze Rückmeldung zu geben"
+          - "vor der Zusage einmal nachzufragen, ob es passt"
+        tests:
+          hits: ["Ich will mehr Respekt", "Zeig mehr Rücksicht"]
+          misses: ["Ich möchte ausreden dürfen"]
+
+      - id: vague-aendern
+        # Trennbare Verben brauchen beide Formen: "dich zusammenreißen" und
+        # "reiß dich zusammen" sind dasselbe Verb. Der Selbsttest hat genau
+        # diesen Fall aufgedeckt — siehe CONTENT.md → Trennbare Verben.
+        match: "dich ändern|dich aendern|anders werden|besser werden|dich zusammenreißen|dich zusammenreissen|reiß dich zusammen|reiss dich zusammen|dir Mühe geben"
+        message: "„{match}“ verlangt eine Person, kein Verhalten."
+        ask: "Welches einzelne Verhalten soll sich ändern?"
+        tests:
+          hits: ["Du musst dich ändern", "Reiß dich zusammen"]
+          misses: ["Sag mir bitte vorher Bescheid"]
+
+      - id: vague-irgendwie
+        match: "irgendwie|generell|grundsätzlich anders|grundsaetzlich anders|in Zukunft besser"
+        message: "„{match}“ bleibt unbestimmt."
+        ask: "Nenne den konkreten Anlass, bei dem es das nächste Mal gelten soll."
+        tests:
+          hits: ["Mach das irgendwie anders", "Generell mehr Sorgfalt"]
+          misses: ["Beim nächsten Angebot bitte vorher abstimmen"]
+
+  - kind: absolute_demand
+    severity: warn
+    source: "Marshall B. Rosenberg: Bitte statt Forderung"
+    risk_sensitive: true
+    why: |
+      Ein Befehl lässt der Gegenseite keinen Raum für ein Ja aus eigenem
+      Entschluss — und ein erzwungenes Ja hält selten. Bei hoher
+      Risikotoleranz ist die harte Form eine bewusste Entscheidung; dann
+      weist der Simulator nur noch darauf hin.
+    rules:
+      - id: dem-du-musst
+        match: "du musst|du hast zu|ich verlange|ich fordere|gefälligst|gefaelligst"
+        message: "„{match}“ ist eine Forderung, keine Bitte."
+        ask: "Willst du das als Forderung stellen? Als Bitte ist die Zustimmung haltbarer."
+        tests:
+          hits: ["Du musst das machen", "Ich verlange eine Erklärung"]
+          misses: ["Ich bitte dich darum"]
+
+      - id: dem-sofort
+        match: "sofort|auf der Stelle|umgehend|unverzüglich|unverzueglich"
+        message: "„{match}“ setzt eine Frist ohne Verhandlung."
+        ask: "Nenne einen Zeitpunkt, statt Dringlichkeit zu behaupten."
+        tests:
+          hits: ["Ich will das sofort", "Melde dich umgehend"]
+          misses: ["Bitte bis Freitag"]
+
+  - kind: threat
+    severity: warn
+    source: "Friedrich Glasl: Drohstrategien als Eskalationsstufe"
+    more: glasl-eskalationsstufen
+    risk_sensitive: true
+    why: |
+      Eine Drohung erzwingt eine Entscheidung unter Druck. Sie kann legitim
+      sein — wenn du bereit bist, sie einzulösen. Ist sie es nicht, kostet
+      sie beim nächsten Mal deine Glaubwürdigkeit.
+    rules:
+      - id: threat-konsequenzen
+        match: "Konsequenzen haben|wird Folgen haben|das wirst du bereuen|dann ist Schluss|dann war es das"
+        message: "„{match}“ ist eine Drohung."
+        ask: "Bist du bereit, das einzulösen? Wenn nein, lass es weg."
+        tests:
+          hits: ["Das wird Konsequenzen haben", "Dann ist Schluss"]
+          misses: ["Ich möchte eine Lösung finden"]
+
+      - id: threat-sonst
+        match: "sonst werde ich|andernfalls werde ich|wenn nicht, dann"
+        message: "„{match}“ knüpft eine Bedingung mit Druck."
+        ask: "Sag, was du selbst tun wirst — nicht, was der anderen Person blüht."
+        tests:
+          hits: ["Sonst werde ich kündigen", "Wenn nicht, dann sehen wir weiter"]
+          misses: ["Ich werde mich dann zurückziehen"]
+
+  - kind: dissolving_softener
+    severity: info
+    source: "Selbstsicherheitstraining: eine Bitte darf klar sein"
+    why: |
+      Zu viele Weichmacher lösen die Bitte auf. Die Gegenseite hört ein
+      Angebot statt eines Anliegens und darf es folgenlos überhören.
+    rules:
+      - id: soft-eigentlich
+        match: "eigentlich|vielleicht|wenn es geht|wenn's geht|wenn du magst|wäre nett|waere nett|nur mal"
+        message: "„{match}“ macht die Bitte unverbindlich."
+        ask: "Streich den Weichmacher — die Bitte darf klar dastehen."
+        tests:
+          hits: ["Vielleicht könntest du mal", "Wäre nett wenn du"]
+          misses: ["Ich bitte dich, mir Bescheid zu geben"]
+
+      - id: soft-frage-getarnt
+        match: "wäre es möglich|waere es moeglich|könntest du eventuell|koenntest du eventuell|hättest du vielleicht"
+        message: "„{match}“ verpackt die Bitte in eine Rückzugsmöglichkeit."
+        ask: "Sag direkt, worum du bittest."
+        tests:
+          hits: ["Wäre es möglich dass du", "Könntest du eventuell mal"]
+          misses: ["Bitte gib mir Bescheid"]
+
+  - kind: missing_addressee_action
+    severity: warn
+    source: "Marshall B. Rosenberg: konkrete, überprüfbare Bitte"
+    why: |
+      Eine Bitte braucht eine Handlung. Sätze, die nur einen Zustand
+      beschreiben ("dass es besser läuft"), benennen kein Verhalten, das
+      jemand ausführen könnte.
+    absence_check:
+      id: req-missing-verb
+      message: "Hier steht noch keine Handlung."
+      ask: "Was genau soll die andere Person tun? Ein Verb macht die Bitte prüfbar."
+      # Schlägt an, wenn keiner dieser Handlungsmarker vorkommt.
+      #
+      # Die Liste ist bewusst als Wortformen gepflegt und nicht als Lemmata:
+      # ohne Morphologie-Analyse ist die explizite Form die ehrlichere
+      # Lösung. Fehlt eine Form, meldet sich der Build über die Korpus-Lints,
+      # nicht der Nutzer über einen Fehlalarm. Siehe CONTENT.md.
+      vocabulary:
+        # Mitteilen
+        - sagen
+        - sagst
+        - sag
+        - sagt
+        - bescheid
+        - melden
+        - meldest
+        - mitteilen
+        - mitteilst
+        - informieren
+        - informierst
+        - schreiben
+        - schreibst
+        - anrufen
+        - anzurufen
+        - erzählen
+        - erzählst
+        - schildern
+        - erklären
+        - erklärst
+        - begründest
+        - antwortest
+        - antworten
+        # Nachfragen
+        - fragen
+        - fragst
+        - frag
+        - nachfragen
+        - hören
+        - hörst
+        - zuhören
+        - zuhörst
+        - zuzuhören
+        - anhörst
+        - anhören
+        - ausreden
+        # Abstimmen
+        - absprechen
+        - sprechen
+        - sprich
+        - sprichst
+        - reden
+        - redest
+        - austauschen
+        - abstimmen
+        - besprechen
+        - klären
+        - klärst
+        - durchgehen
+        - überlegen
+        - entscheiden
+        - einigen
+        - festlegen
+        - festhalten
+        - notieren
+        - zusammensetzen
+        - treffen
+        - planen
+        - beteiligen
+        - einbeziehen
+        - mittragen
+        - abholen
+        # Einhalten und liefern
+        - warten
+        - einhalten
+        - hältst
+        - liefern
+        - schicken
+        - schickst
+        - übernehmen
+        - übernimmst
+        - anpassen
+        - prüfen
+        - eintragen
+        - erinnern
+        - zusagen
+        - abschließen
+        - beenden
+        - vorbeikommen
+        # Umsetzen
+        - umsetzen
+        - erledigen
+        - bearbeiten
+        - kümmerst
+        - kümmern
+        - achtest
+        - achten
+        - berücksichtigen
+        - respektierst
+        - respektieren
+        - halten
+        - hältst
+        - bleiben
+        - bleibst
+        - kommen
+        - kommst
+        # Nachgetragen beim Schreiben der szenenspezifischen Bitten. Die
+        # Regel hat 19 Einträge zurückgewiesen, weil genau diese Wortformen
+        # fehlten — kein Fehlalarm, sondern eine zu kurze Liste. Genau dafür
+        # ist der Korpus-Lint da.
+        - weißt
+        - wisse
+        - zeigen
+        - zeigst
+        - zeig
+        - schauen
+        - schaust
+        - vereinbaren
+        - vereinbarst
+        - bestätigst
+        - bestätigen
+        - richten
+        - richtest
+        - nachfragst
+        - zurückzumelden
+        - zurückmelden
+        - abzustimmen
+        - festzuhalten
+        - einbeziehst
+        - einzubeziehen
+        - zuzusagen
+        - verabschieden
+        - entscheidest
+        - meldest
+        - melde
+        - halten
+        - hältst
+        - einhältst
+        - achtest
+        - achte
+        # Allgemeine Handlungsverben
+        - lassen
+        - lässt
+        - geben
+        - gibst
+        - nehmen
+        - nimmst
+        - machen
+        - machst
+        - tun
+        - tust
+      tests:
+        hits: ["Ich wünsche mir, dass es besser läuft"]
+        misses: ["Ich wünsche mir, dass du mir Bescheid sagst"]

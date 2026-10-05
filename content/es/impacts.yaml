@@ -1,0 +1,119 @@
+# Sentimiento (la capa del mensaje en primera persona).
+#
+# Clave: situation × state = 6 × 6 = 36 casillas.
+#
+# Desacoplado de la relación a propósito: cómo te llega algo depende de lo que
+# pasó y de cómo estás, no de con quién hablas. Lo que cambia la relación es
+# el tono, y eso se gestiona en otro sitio.
+#
+# Cada entrada nombra un sentimiento. Si no, la comprobación de ausencia de la
+# capa la marcaría, y con razón.
+#
+# ── Geschlechtsneutral, mit Absicht ────────────────────────────────────
+#
+# „Estoy enfadado" oder „Estoy enfadada"? Der Korpus weiß nicht, wer
+# spricht. Deshalb steht das Gefühl hier als Substantiv („siento rabia") oder
+# als Verb mit Dativ („me duele", „me preocupa") — beides ist im Spanischen
+# idiomatisch und braucht kein Geschlecht. Gefühlsadjektive kommen im Korpus
+# nicht vor; in eigenen Sätzen erkennt das Regelwerk sie in beiden Formen.
+
+min_per_bucket: 2
+
+entries:
+  # ── reliability_deadlines ─────────────────────────────────────────────
+  - { situation: reliability_deadlines, state: calm, text: "Me inquieta, porque organizo mis cosas según lo que acordamos." }
+  - { situation: reliability_deadlines, state: calm, text: "Siento cierta intranquilidad, porque contaba con esa fecha." }
+  - { situation: reliability_deadlines, state: annoyed, text: "Me molesta, porque tuve que reorganizar mi día dos veces." }
+  - { situation: reliability_deadlines, state: annoyed, text: "Siento fastidio, porque la espera me costó una tarde." }
+  - { situation: reliability_deadlines, state: disappointed, text: "Siento decepción, porque daba el compromiso por hecho." }
+  - { situation: reliability_deadlines, state: disappointed, text: "Me decepciona, porque yo también se lo había prometido a otras personas." }
+  - { situation: reliability_deadlines, state: hurt, text: "Me duele, porque me dio la impresión de que mi tiempo contaba poco." }
+  - { situation: reliability_deadlines, state: hurt, text: "Siento pena, porque era yo quien tenía que ir detrás." }
+  - { situation: reliability_deadlines, state: exhausted, text: "Siento agotamiento, porque ya me he reorganizado varias veces por esto." }
+  - { situation: reliability_deadlines, state: exhausted, text: "Me agota, porque ir detrás me cuesta más que el propio trabajo." }
+  - { situation: reliability_deadlines, state: angry, text: "Siento rabia, porque di mi palabra a otra persona contando con ello." }
+  - { situation: reliability_deadlines, state: angry, text: "Me enfada, porque me tocó a mí explicar el retraso." }
+
+  # ── criticism_feedback ────────────────────────────────────────────────
+  - { situation: criticism_feedback, state: calm, text: "Me inquieta, porque no sabía de dónde venía." }
+  - { situation: criticism_feedback, state: calm, text: "Siento desconcierto, porque no supe ubicar a qué te referías." }
+  - { situation: criticism_feedback, state: annoyed, text: "Me molesta, porque me lo podías haber dicho directamente." }
+  - { situation: criticism_feedback, state: annoyed, text: "Siento fastidio, porque no tuve ocasión de responder." }
+  - { situation: criticism_feedback, state: disappointed, text: "Siento decepción, porque esperaba que lo habláramos antes." }
+  - { situation: criticism_feedback, state: disappointed, text: "Me decepciona, porque yo había pedido tu opinión antes." }
+  - { situation: criticism_feedback, state: hurt, text: "Me duele, porque se dijo delante de todo el mundo." }
+  - { situation: criticism_feedback, state: hurt, text: "Siento vergüenza, porque los demás estaban escuchando." }
+  - { situation: criticism_feedback, state: exhausted, text: "Siento cansancio, porque llevo semanas defendiendo el mismo trabajo." }
+  - { situation: criticism_feedback, state: exhausted, text: "Me agota, porque cada ronda empieza desde cero." }
+  - { situation: criticism_feedback, state: angry, text: "Siento rabia, porque el trabajo se juzgó sin hacer ni una pregunta." }
+  - { situation: criticism_feedback, state: angry, text: "Me enfada, porque llegó a otros antes que a mí." }
+
+  # ── boundary_violation ────────────────────────────────────────────────
+  - { situation: boundary_violation, state: calm, text: "Siento incomodidad, porque había dicho dónde está mi límite." }
+  - { situation: boundary_violation, state: calm, text: "Me inquieta, porque quiero que se me pregunte por mis cosas." }
+  - { situation: boundary_violation, state: annoyed, text: "Me molesta, porque lo había dicho antes." }
+  - { situation: boundary_violation, state: annoyed, text: "Siento fastidio, porque se dio mi acuerdo por supuesto." }
+  - { situation: boundary_violation, state: disappointed, text: "Siento decepción, porque pensaba que esto estaba claro entre tú y yo." }
+  - { situation: boundary_violation, state: disappointed, text: "Me decepciona, porque ya lo había pedido una vez." }
+  - { situation: boundary_violation, state: hurt, text: "Me duele, porque toca algo muy privado para mí." }
+  - { situation: boundary_violation, state: hurt, text: "Siento inseguridad, porque ya no sé qué sigue siendo mío." }
+  - { situation: boundary_violation, state: exhausted, text: "Siento cansancio, porque tengo que marcar el mismo límite una y otra semana." }
+  - { situation: boundary_violation, state: exhausted, text: "Me agota, porque defenderlo me quita energía que quiero para otras cosas." }
+  - { situation: boundary_violation, state: angry, text: "Siento rabia, porque pasó después de que yo dijera que no." }
+  - { situation: boundary_violation, state: angry, text: "Me enfada, porque se cruzó el límite sabiendo que estaba ahí." }
+
+  # ── misunderstanding ──────────────────────────────────────────────────
+  - { situation: misunderstanding, state: calm, text: "Me inquieta, porque quiero saber dónde nos separamos." }
+  - { situation: misunderstanding, state: calm, text: "Siento desconcierto, porque yo lo había leído de otra forma." }
+  - { situation: misunderstanding, state: annoyed, text: "Me molesta, porque el esfuerzo se podía haber evitado." }
+  - { situation: misunderstanding, state: annoyed, text: "Siento fastidio, porque trabajamos en lo mismo por duplicado." }
+  - { situation: misunderstanding, state: disappointed, text: "Siento decepción, porque creía que estábamos de acuerdo." }
+  - { situation: misunderstanding, state: disappointed, text: "Me decepciona, porque había preguntado si estaba claro." }
+  - { situation: misunderstanding, state: hurt, text: "Me duele, porque me pareció que mi mensaje no se había leído." }
+  - { situation: misunderstanding, state: hurt, text: "Siento tristeza, porque mi mensaje pasó desapercibido." }
+  - { situation: misunderstanding, state: exhausted, text: "Siento cansancio, porque la misma confusión nos sigue costando días." }
+  - { situation: misunderstanding, state: exhausted, text: "Me agota, porque lo he explicado tres veces." }
+  - { situation: misunderstanding, state: angry, text: "Siento rabia, porque rehacerlo me tocó a mí." }
+  - { situation: misunderstanding, state: angry, text: "Me enfada, porque una sola pregunta lo habría evitado." }
+
+  # ── power_decision ────────────────────────────────────────────────────
+  - { situation: power_decision, state: calm, text: "Me inquieta, porque afecta a mi área." }
+  - { situation: power_decision, state: calm, text: "Siento intranquilidad, porque me enteré tarde." }
+  - { situation: power_decision, state: annoyed, text: "Me molesta, porque yo habría tenido algo que aportar." }
+  - { situation: power_decision, state: annoyed, text: "Siento fastidio, porque me enteré por otra persona." }
+  - { situation: power_decision, state: disappointed, text: "Siento decepción, porque pensaba que se me preguntaría." }
+  - { situation: power_decision, state: disappointed, text: "Me decepciona, porque habíamos acordado decidirlo entre tú y yo." }
+  - { situation: power_decision, state: hurt, text: "Me duele, porque me quedé con la sensación de no contar aquí." }
+  - { situation: power_decision, state: hurt, text: "Siento tristeza, porque se decidió sobre mi parte sin mí." }
+  - { situation: power_decision, state: exhausted, text: "Siento cansancio, porque me sigo enterando de las cosas a posteriori." }
+  - { situation: power_decision, state: exhausted, text: "Siento impotencia, porque preguntar ha cambiado poco hasta ahora." }
+  - { situation: power_decision, state: angry, text: "Siento rabia, porque las consecuencias las cargo yo." }
+  - { situation: power_decision, state: angry, text: "Me enfada, porque lo que yo había prometido a otros quedó anulado." }
+
+  # ── breakup_closure ───────────────────────────────────────────────────
+  - { situation: breakup_closure, state: calm, text: "Me inquieta, porque me gustaría un final claro." }
+  - { situation: breakup_closure, state: calm, text: "Siento intranquilidad, porque los puntos abiertos lo mantienen vivo." }
+  - { situation: breakup_closure, state: annoyed, text: "Me molesta, porque los cabos sueltos siguen volviendo a mí." }
+  - { situation: breakup_closure, state: annoyed, text: "Siento fastidio, porque la espera no tiene fecha de final." }
+  - { situation: breakup_closure, state: disappointed, text: "Siento decepción, porque esperaba otro cierre." }
+  - { situation: breakup_closure, state: disappointed, text: "Me decepciona, porque la última conversación se quedó a medias." }
+  - { situation: breakup_closure, state: hurt, text: "Me duele, porque el silencio me dice más que una palabra." }
+  - { situation: breakup_closure, state: hurt, text: "Siento soledad, porque no hubo despedida." }
+  - { situation: breakup_closure, state: exhausted, text: "Siento cansancio, porque lleva meses sin resolverse." }
+  - { situation: breakup_closure, state: exhausted, text: "Me agota, porque cada intento ha acabado en nada." }
+  - { situation: breakup_closure, state: angry, text: "Siento rabia, porque lo prometido no ha llegado." }
+  - { situation: breakup_closure, state: angry, text: "Me enfada, porque el final se anunció y luego se dejó en el aire." }
+
+  # ── textchat: pelea en el chat del grupo / de clase (04.10.2026) ────────────────────────────
+  - { situation: textchat, state: calm, text: "Estoy tranquilo, y aun así inquieto desde que leí el chat ayer." }
+  - { situation: textchat, state: calm, text: "Estoy tranquila, y al mismo tiempo insegura de cómo iba tu «ok.»." }
+  - { situation: textchat, state: annoyed, text: "Estoy molesto porque he leído el mensaje tres veces para entender el tono." }
+  - { situation: textchat, state: annoyed, text: "Estoy irritada porque esto estuvo delante de todo el grupo y no entre nosotros dos." }
+  - { situation: textchat, state: disappointed, text: "Estoy decepcionado porque esperé una respuesta y recibí un doble check azul." }
+  - { situation: textchat, state: disappointed, text: "Estoy decepcionada de que la captura estuviera en el grupo antes de que me escribieras." }
+  - { situation: textchat, state: hurt, text: "Estoy dolida porque los emojis debajo de mi mensaje me parecieron risas hacia mí." }
+  - { situation: textchat, state: hurt, text: "Me siento pequeño porque leí el mensaje delante de todos y no sabía dónde mirar." }
+  - { situation: textchat, state: exhausted, text: "Estoy agotada porque llevo dos días tomándome cada mensaje del grupo como algo personal." }
+  - { situation: textchat, state: exhausted, text: "Estoy cansado de darle vueltas a cada frase en el chat para que no llegue mal." }
+  - { situation: textchat, state: angry, text: "Estoy enfadado porque la captura de nuestro chat acabó en el grupo." }
+  - { situation: textchat, state: angry, text: "Estoy furiosa, y noto que en el chat escribo más rápido de lo que pienso." }

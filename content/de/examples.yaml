@@ -1,0 +1,161 @@
+# Anlässe (Fakten-Ebene) — Belege, keine Bausteine.
+#
+# Diese Sätze ersetzen NICHT die Formulierung der Nutzerin. Sie werden als
+# Beispiele angeboten, damit sichtbar wird, wie ein beobachtbarer Anlass
+# klingt. Der Simulator arbeitet mit dem Text, den die Person selbst
+# mitbringt — das Korpus zeigt den Maßstab.
+#
+# Schlüssel: relationship × situation = 9 × 6 = 54 Fächer.
+#
+# ACHTUNG: Jeder Eintrag wird beim Build gegen content/lexicon/example-layer.yaml
+# geprüft. Ein Eintrag mit Zuschreibung oder Verallgemeinerung bricht `make lint`.
+# Genau darin liegt der Sinn: die Doktrin gilt auch für uns.
+
+min_per_bucket: 2
+
+entries:
+  # ── partner ────────────────────────────────────────────────────────────
+  - { relationship: partner, situation: reliability_deadlines, text: "Wir hatten für Dienstag die Mietzahlung besprochen; am Mittwoch stand der Betrag nicht auf dem Konto." }
+  - { relationship: partner, situation: reliability_deadlines, text: "Du hattest zugesagt, den Termin beim Amt zu übernehmen; die Frist ist gestern abgelaufen." }
+  - { relationship: partner, situation: criticism_feedback, text: "Als ich von meinem Tag erzählt habe, hast du auf dein Telefon geschaut." }
+  - { relationship: partner, situation: criticism_feedback, text: "Beim Essen mit deinen Eltern hast du meinen Vorschlag als „Quatsch“ bezeichnet." }
+  - { relationship: partner, situation: boundary_violation, text: "Mein Telefon lag auf dem Tisch; du hast die Nachrichten geöffnet." }
+  - { relationship: partner, situation: boundary_violation, text: "Ich hatte gesagt, dass ich den Abend für mich brauche; um acht standest du vor der Tür." }
+  - { relationship: partner, situation: misunderstanding, text: "Ich hatte den Termin für Montag eingetragen; du bist von Freitag ausgegangen." }
+  - { relationship: partner, situation: misunderstanding, text: "Auf meine Nachricht kam ein Daumen-hoch; ich habe das als Zusage gelesen." }
+  - { relationship: partner, situation: power_decision, text: "Der Urlaub war gebucht, als ich davon erfahren habe." }
+  - { relationship: partner, situation: power_decision, text: "Die Couch stand am Samstag in der Wohnung; wir hatten über zwei Modelle gesprochen." }
+  - { relationship: partner, situation: breakup_closure, text: "Seit drei Wochen haben wir über die Trennung nicht gesprochen; deine Kisten stehen im Flur." }
+  - { relationship: partner, situation: breakup_closure, text: "Du hast gesagt, dass du ausziehen willst; einen Termin dafür gibt es noch nicht." }
+
+  # ── colleague ──────────────────────────────────────────────────────────
+  - { relationship: colleague, situation: reliability_deadlines, text: "Die Zuarbeit war für Donnerstag zwölf Uhr vereinbart; sie kam am Freitagnachmittag." }
+  - { relationship: colleague, situation: reliability_deadlines, text: "Im Standup hast du die Übernahme des Tickets zugesagt; es steht seit Montag unverändert." }
+  - { relationship: colleague, situation: criticism_feedback, text: "In der Teamrunde hast du meinen Entwurf als „nicht durchdacht“ bezeichnet, ohne auf die Punkte einzugehen." }
+  - { relationship: colleague, situation: criticism_feedback, text: "Meine Kommentare im Dokument sind seit zwei Wochen unbeantwortet." }
+  - { relationship: colleague, situation: boundary_violation, text: "Du hast meinen eingetragenen Urlaubstag im Kalender überschrieben." }
+  - { relationship: colleague, situation: boundary_violation, text: "Ich hatte um 19 Uhr Feierabend gemeldet; danach kamen vier Anrufe auf mein Privathandy." }
+  - { relationship: colleague, situation: misunderstanding, text: "Ich hatte „Entwurf“ in die Betreffzeile geschrieben; die Datei ging an den Kunden." }
+  - { relationship: colleague, situation: misunderstanding, text: "Wir haben beide an derselben Auswertung gearbeitet, ohne voneinander zu wissen." }
+  - { relationship: colleague, situation: power_decision, text: "Die Aufgabenverteilung stand fest, als ich in die Besprechung kam." }
+  - { relationship: colleague, situation: power_decision, text: "Du hast dem Kunden einen Termin zugesagt, für den ich liefern soll." }
+  - { relationship: colleague, situation: breakup_closure, text: "Das gemeinsame Projekt endet zum Monatsende; die Übergabe ist nicht besprochen." }
+  - { relationship: colleague, situation: breakup_closure, text: "Du wechselst das Team; die Punkte aus unserer Liste sind offen." }
+
+  # ── manager ────────────────────────────────────────────────────────────
+  - { relationship: manager, situation: reliability_deadlines, text: "Das Feedbackgespräch war für den 3. angesetzt und wurde zweimal ohne neuen Termin abgesagt." }
+  - { relationship: manager, situation: reliability_deadlines, text: "Die zugesagte Budgetfreigabe steht seit vier Wochen aus." }
+  - { relationship: manager, situation: criticism_feedback, text: "In der Abteilungsrunde hast du meine Auswertung als „oberflächlich“ bezeichnet." }
+  - { relationship: manager, situation: criticism_feedback, text: "Mein Zwischenstand kam vor zwei Wochen; eine Rückmeldung habe ich nicht erhalten." }
+  - { relationship: manager, situation: boundary_violation, text: "Am Sonntagvormittag kamen drei Nachrichten zu einer Aufgabe für Montag." }
+  - { relationship: manager, situation: boundary_violation, text: "Meine Krankmeldung lag vor; im Chat kam die Frage nach dem Bericht." }
+  - { relationship: manager, situation: misunderstanding, text: "Ich hatte um eine Priorisierung gebeten; zurück kam die Freigabe für beide Aufgaben." }
+  - { relationship: manager, situation: misunderstanding, text: "In der Notiz stand „zur Kenntnis“; ich habe daraus einen Auftrag gelesen." }
+  - { relationship: manager, situation: power_decision, text: "Die Zuständigkeit für das Projekt wurde neu verteilt; erfahren habe ich es aus dem Protokoll." }
+  - { relationship: manager, situation: power_decision, text: "Mein Vorschlag stand auf der Agenda und wurde ohne Aussprache vertagt." }
+  - { relationship: manager, situation: breakup_closure, text: "Die Vertragsverlängerung läuft in sechs Wochen aus; ein Gespräch dazu gab es nicht." }
+  - { relationship: manager, situation: breakup_closure, text: "Ich habe die Kündigung eingereicht; die Übergabeplanung steht aus." }
+
+  # ── customer ───────────────────────────────────────────────────────────
+  - { relationship: customer, situation: reliability_deadlines, text: "Die Freigabe war für Montag zugesagt; sie kam am Donnerstag." }
+  - { relationship: customer, situation: reliability_deadlines, text: "Die Rechnung vom 12. ist seit 30 Tagen offen." }
+  - { relationship: customer, situation: criticism_feedback, text: "In der Abnahme kam die Rückmeldung „so nicht brauchbar“ ohne Angabe der Punkte." }
+  - { relationship: customer, situation: criticism_feedback, text: "Die Änderungswünsche kamen nach der Freigabe des Layouts." }
+  - { relationship: customer, situation: boundary_violation, text: "Der Anruf kam um 21:40 Uhr auf meine Privatnummer." }
+  - { relationship: customer, situation: boundary_violation, text: "Der Systemzugang wurde an eine dritte Person weitergegeben." }
+  - { relationship: customer, situation: misunderstanding, text: "Im Angebot standen zwei Korrekturschleifen; die vierte Fassung wurde angefragt." }
+  - { relationship: customer, situation: misunderstanding, text: "Die Anfrage nannte „kurzfristig“; ich habe das als „diese Woche“ verstanden." }
+  - { relationship: customer, situation: power_decision, text: "Der Liefertermin wurde im Nachtrag geändert, ohne dass wir darüber gesprochen haben." }
+  - { relationship: customer, situation: power_decision, text: "Der Auftragsumfang wurde erweitert; die Vergütung blieb unverändert." }
+  - { relationship: customer, situation: breakup_closure, text: "Die Zusammenarbeit endet zum Quartalsende; die offenen Positionen sind nicht abgestimmt." }
+  - { relationship: customer, situation: breakup_closure, text: "Die Kündigung kam per E-Mail; zu den laufenden Aufgaben steht darin nichts." }
+
+  # ── friend ─────────────────────────────────────────────────────────────
+  - { relationship: friend, situation: reliability_deadlines, text: "Wir waren um acht verabredet; du bist um Viertel vor zehn gekommen." }
+  - { relationship: friend, situation: reliability_deadlines, text: "Du hattest zugesagt, mich vom Bahnhof abzuholen; ich habe ein Taxi genommen." }
+  - { relationship: friend, situation: criticism_feedback, text: "Vor den anderen hast du meinen neuen Job als „Notlösung“ bezeichnet." }
+  - { relationship: friend, situation: criticism_feedback, text: "Auf meine Nachricht zu dem Streit kam keine Antwort." }
+  - { relationship: friend, situation: boundary_violation, text: "Ich hatte dich gebeten, das für dich zu behalten; am Wochenende wusste es die Runde." }
+  - { relationship: friend, situation: boundary_violation, text: "Du hast meinen Schlüssel benutzt, ohne vorher zu fragen." }
+  - { relationship: friend, situation: misunderstanding, text: "Ich hatte geschrieben, dass ich es noch nicht sicher sagen kann; du hast mich fest eingeplant." }
+  - { relationship: friend, situation: misunderstanding, text: "Du hast von „dem Abend“ gesprochen; ich hatte den Samstag im Kopf, du den Freitag." }
+  - { relationship: friend, situation: power_decision, text: "Der Tisch war für sechs Personen reserviert, als ich von dem Abend erfahren habe." }
+  - { relationship: friend, situation: power_decision, text: "Ihr habt das Reiseziel festgelegt; bei der Absprache war ich nicht dabei." }
+  - { relationship: friend, situation: breakup_closure, text: "Seit dem Streit im Mai haben wir nicht telefoniert." }
+  - { relationship: friend, situation: breakup_closure, text: "Meine letzten beiden Nachrichten sind ohne Antwort geblieben." }
+
+  # ── family ─────────────────────────────────────────────────────────────
+  - { relationship: family, situation: reliability_deadlines, text: "Du hattest zugesagt, am Samstag beim Umzug zu helfen; du bist nicht gekommen." }
+  - { relationship: family, situation: reliability_deadlines, text: "Die Unterlagen für das Amt sollten letzte Woche fertig sein; sie liegen noch hier." }
+  - { relationship: family, situation: criticism_feedback, text: "Beim Abendessen hast du meine Erziehung vor den Kindern kommentiert." }
+  - { relationship: family, situation: criticism_feedback, text: "Zu meiner Wohnungseinrichtung kam der Satz „das hätte ich anders gemacht“." }
+  - { relationship: family, situation: boundary_violation, text: "Ihr habt am Sonntag ohne Ankündigung vor der Tür gestanden." }
+  - { relationship: family, situation: boundary_violation, text: "Meine Post lag geöffnet auf dem Küchentisch." }
+  - { relationship: family, situation: misunderstanding, text: "Ich hatte gesagt, dass ich Weihnachten hierbleibe; geplant wurde mit mir." }
+  - { relationship: family, situation: misunderstanding, text: "Am Telefon war von „dem Zuschuss“ die Rede; ich bin von einem Geschenk ausgegangen." }
+  - { relationship: family, situation: power_decision, text: "Der Termin für die Feier stand fest, als ich gefragt wurde." }
+  - { relationship: family, situation: power_decision, text: "Über die Aufteilung wurde ohne mich gesprochen." }
+  - { relationship: family, situation: breakup_closure, text: "Seit dem Gespräch im Februar gab es keinen Kontakt." }
+  - { relationship: family, situation: breakup_closure, text: "Ich habe gesagt, dass ich Abstand brauche; danach kamen weiter tägliche Anrufe." }
+
+  # ── classmate ──────────────────────────────────────────────────────────
+  - { relationship: classmate, situation: reliability_deadlines, text: "Deine Folien für das Referat waren für Sonntagabend abgesprochen; am Montag um halb acht waren sie nicht in der Gruppe." }
+  - { relationship: classmate, situation: reliability_deadlines, text: "Du hattest mein Ladekabel am Dienstag ausgeliehen und zugesagt, es am Mittwoch mitzubringen; heute ist Freitag." }
+  - { relationship: classmate, situation: criticism_feedback, text: "Bei der Gruppenarbeit hast du meine drei Vorschläge mit „nee“ abgehakt und den nächsten Punkt aufgerufen." }
+  - { relationship: classmate, situation: criticism_feedback, text: "Bei der Präsentation hast du mich zweimal unterbrochen und meine Folie selbst erklärt." }
+  - { relationship: classmate, situation: boundary_violation, text: "Du hast das Foto von mir aus der Pause in den Klassenchat gestellt, ohne zu fragen." }
+  - { relationship: classmate, situation: boundary_violation, text: "Ich hatte dir erzählt, dass ich die Mathearbeit nachschreibe; am nächsten Tag stand es im Klassenchat." }
+  - { relationship: classmate, situation: misunderstanding, text: "Ich hatte im Chat „mach ich“ geschrieben und die Quellenliste gemeint; du hast mir die ganze Einleitung zugeteilt." }
+  - { relationship: classmate, situation: misunderstanding, text: "Unter dein Foto hatte ich einen lachenden Smiley gesetzt; eine Minute später bist du aus dem Chat ausgetreten." }
+  - { relationship: classmate, situation: power_decision, text: "Als ich nach zwei Krankheitstagen wieder in der Schule war, waren die Referatsthemen verteilt; für mich war das übrige Thema eingetragen." }
+  - { relationship: classmate, situation: power_decision, text: "Du hast Frau Keller gesagt, dass ich die Präsentation eröffne; erfahren habe ich es, als sie meinen Namen aufgerufen hat." }
+  - { relationship: classmate, situation: breakup_closure, text: "Seit den Herbstferien sitzt du neben Lena, und in den Pausen stehen wir nicht mehr zusammen." }
+  - { relationship: classmate, situation: breakup_closure, text: "Du hast mich aus unserer Vierergruppe im Chat entfernt; eine Nachricht dazu kam nicht." }
+
+  # ── teacher ────────────────────────────────────────────────────────────
+  - { relationship: teacher, situation: reliability_deadlines, text: "Sie hatten angekündigt, die Klassenarbeiten vor den Herbstferien zurückzugeben; drei Wochen danach haben wir sie nicht." }
+  - { relationship: teacher, situation: reliability_deadlines, text: "Beim Elternsprechtag hatten Sie einen Rückruf bis Ende der Woche zugesagt; er ist nicht gekommen." }
+  - { relationship: teacher, situation: criticism_feedback, text: "Unter meinem Aufsatz steht eine Vier, ohne Randbemerkung und ohne Kommentar." }
+  - { relationship: teacher, situation: criticism_feedback, text: "Als ich nach der Bewertung gefragt habe, haben Sie „nicht jetzt“ gesagt und mit dem Unterricht weitergemacht." }
+  - { relationship: teacher, situation: boundary_violation, text: "Sie haben den Zettel, den ich an Jonas geschrieben hatte, vor der Klasse vorgelesen." }
+  - { relationship: teacher, situation: boundary_violation, text: "Bei der Rückgabe haben Sie meine Note und meine Fehlerzahl vor der Klasse genannt." }
+  - { relationship: teacher, situation: misunderstanding, text: "In der Mail stand „bis Montag“; ich bin von Montagabend ausgegangen, Sie von Unterrichtsbeginn." }
+  - { relationship: teacher, situation: misunderstanding, text: "Ich hatte mich gemeldet, um eine Frage zu stellen; Sie haben mich die Aufgabe an der Tafel vorrechnen lassen." }
+  - { relationship: teacher, situation: power_decision, text: "Die Mathearbeit wurde von Donnerstag auf Dienstag vorverlegt; erfahren habe ich es am Sonntag aus dem Klassenchat." }
+  - { relationship: teacher, situation: power_decision, text: "Der neue Sitzplan hing am Montag an der Tafel; ich sitze jetzt in der ersten Reihe, getrennt von meiner Lernpartnerin." }
+  - { relationship: teacher, situation: breakup_closure, text: "In der letzten Stunde vor den Sommerferien haben Sie gesagt, dass Sie die Schule verlassen." }
+  - { relationship: teacher, situation: breakup_closure, text: "Unsere Tochter wechselt nach diesem Halbjahr die Schule; das Abschlussgespräch, um das wir gebeten hatten, hat nicht stattgefunden." }
+
+  # ── stranger ───────────────────────────────────────────────────────────
+  - { relationship: stranger, situation: reliability_deadlines, text: "Der Handwerkstermin war für zehn Uhr vereinbart; um 13 Uhr war niemand da." }
+  - { relationship: stranger, situation: reliability_deadlines, text: "Die Lieferung war für Dienstag angekündigt; sie ist bisher nicht eingetroffen." }
+  - { relationship: stranger, situation: criticism_feedback, text: "Auf meine Nachfrage kam an der Kasse der Satz „das steht doch da“." }
+  - { relationship: stranger, situation: criticism_feedback, text: "Auf meine Frage nach dem Weg kam keine Antwort." }
+  - { relationship: stranger, situation: boundary_violation, text: "In der Bahn hat sich jemand so gesetzt, dass mein Arm eingeklemmt war." }
+  - { relationship: stranger, situation: boundary_violation, text: "Auf dem Parkplatz stand ein Auto so, dass meine Fahrertür nicht aufging." }
+  - { relationship: stranger, situation: misunderstanding, text: "Ich hatte auf den freien Sitzplatz gezeigt; es wurde als Aufforderung verstanden." }
+  - { relationship: stranger, situation: misunderstanding, text: "Meine Frage nach der Uhrzeit wurde als Anmache aufgefasst." }
+  - { relationship: stranger, situation: power_decision, text: "Die Reihenfolge an der Theke wurde geändert; ich stand seit zehn Minuten an." }
+  - { relationship: stranger, situation: power_decision, text: "Der Platz war reserviert; die Reservierung war vergeben, als ich kam." }
+  - { relationship: stranger, situation: breakup_closure, text: "Das Gespräch wurde beendet, bevor meine Frage beantwortet war." }
+  - { relationship: stranger, situation: breakup_closure, text: "Der Vorgang wurde geschlossen; meine Rückfrage steht offen." }
+
+  # ── textchat: Streit im Gruppenchat / Klassenchat (04.10.2026) ────────────────────────────────
+  - { relationship: partner, situation: textchat, text: "Auf meine Nachricht gestern Abend kam ein Daumen hoch; bis Sonntagabend kam danach nichts mehr." }
+  - { relationship: partner, situation: textchat, text: "Du hast im Familienchat geschrieben, dass ich mit der Buchung zu spät dran bin, bevor wir zu zweit darüber gesprochen hatten." }
+  - { relationship: colleague, situation: textchat, text: "Du hast meine Frage im Teamchat mit „ok.“ beantwortet; die Datei kam zwei Tage später." }
+  - { relationship: colleague, situation: textchat, text: "Im Projektchat stand gestern um 22 Uhr deine Nachricht an alle, dass mein Teil noch fehlt." }
+  - { relationship: manager, situation: textchat, text: "Sie haben im Teamchat vor zwölf Leuten geschrieben, dass meine Zahlen nicht stimmen; eine Nachricht an mich kam nicht." }
+  - { relationship: manager, situation: textchat, text: "Auf meine Nachricht von Montag mit zwei Fragen kam am Donnerstag ein „passt schon“." }
+  - { relationship: customer, situation: textchat, text: "Sie haben am Sonntagabend drei Nachrichten in Großbuchstaben geschickt; am Montag um neun habe ich geantwortet." }
+  - { relationship: customer, situation: textchat, text: "In der Gruppe mit Ihrem Team stand, unser Angebot sei „ein Witz“; mich hatten Sie dazu nicht angeschrieben." }
+  - { relationship: friend, situation: textchat, text: "Ich habe dir am Dienstag geschrieben, ob wir reden können; die zwei Haken sind blau, eine Antwort kam nicht." }
+  - { relationship: friend, situation: textchat, text: "Du hast den Screenshot aus unserem Chat in die Gruppe gestellt." }
+  - { relationship: family, situation: textchat, text: "Im Familienchat hast du geschrieben, dass ich mich um Oma „auch mal kümmern könnte“; den Plan hatten wir zu zweit gemacht." }
+  - { relationship: family, situation: textchat, text: "Auf die Frage nach Weihnachten kam von dir ein „wie ihr wollt.“ -- und danach drei Tage nichts." }
+  - { relationship: classmate, situation: textchat, text: "Du hast im Klassenchat ein Foto von mir mit zwei lachenden Emojis gepostet." }
+  - { relationship: classmate, situation: textchat, text: "Nach meiner Nachricht in der Gruppe haben vier Leute mit 😂 reagiert; du hast „lol“ geschrieben." }
+  - { relationship: teacher, situation: textchat, text: "Sie haben in die Klassengruppe geschrieben, dass drei Leute die Hausaufgabe nicht abgegeben haben, und meinen Namen genannt." }
+  - { relationship: teacher, situation: textchat, text: "Auf meine Nachricht wegen der Klausur kam „Das besprechen wir im Unterricht.“; im Unterricht kam es nicht dran." }
+  - { relationship: stranger, situation: textchat, text: "In der Nachbarschaftsgruppe stand Ihre Nachricht über mein Auto vor der Einfahrt; angeschrieben hatten Sie mich nicht." }
+  - { relationship: stranger, situation: textchat, text: "Unter meinem Beitrag in der Gruppe stand von Ihnen ein Wort: „Unsinn.“" }

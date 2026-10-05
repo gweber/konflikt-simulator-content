@@ -1,0 +1,12 @@
+<!-- A parcel (the content) carried by two hands (the relationship). -->
+<path d="M 90,445 L 300,318" stroke="$accent" stroke-width="64" stroke-linecap="round"/>
+<path d="M 850,445 L 640,318" stroke="$accent" stroke-width="64" stroke-linecap="round"/>
+<rect x="320" y="70" width="300" height="230" rx="18" fill="$wash2" stroke="$ink" stroke-width="7"/>
+<path d="M 320,130 L 620,130" stroke="$ink" stroke-width="5"/>
+<rect x="445" y="70" width="50" height="60" fill="$accent" opacity="0.35"/>
+<text x="470" y="238" text-anchor="middle" font-size="58" font-weight="700" fill="$ink">$what</text>
+<ellipse cx="320" cy="312" rx="70" ry="30" fill="$accent"/>
+<ellipse cx="620" cy="312" rx="70" ry="30" fill="$accent"/>
+<rect x="250" y="268" width="38" height="58" rx="19" fill="$accent"/>
+<rect x="652" y="268" width="38" height="58" rx="19" fill="$accent"/>
+<text x="470" y="430" text-anchor="middle" font-size="58" font-weight="700" fill="$accent">$how</text>

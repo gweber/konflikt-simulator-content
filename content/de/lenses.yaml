@@ -1,0 +1,136 @@
+# Lens content, German: "Myself", "The other", "Listen" and the conversation card.
+#
+# Everything here is a template a deterministic page fills in — no engine
+# layer, no rule. cmd/examplegen compiles the three locales to
+# web/src/lib/lenses.gen.json and aborts when a situation lacks an entry,
+# a list is too short or the locales do not share the same keys.
+#
+# Models are credited in `sources`; drawings and wording are our own. No
+# institute graphics, no programme names.
+
+sources:
+  ears: "Vier Seiten einer Nachricht nach Friedemann Schulz von Thun (eigene Darstellung)"
+  interests: "Interessen statt Positionen nach Roger Fisher und William Ury"
+  circle: "Teufelskreis nach Schulz von Thun und Thomann; Interpunktion nach Paul Watzlawick"
+  identity: "Die drei Gespräche nach Douglas Stone, Bruce Patton und Sheila Heen"
+  values: "Werte- und Entwicklungsquadrat nach Friedemann Schulz von Thun"
+  distance: "Selbstdistanzierung nach Ethan Kross"
+  feelings: "Gefühls- und Bedürfniswörter nach Marshall B. Rosenberg"
+  listen: "Aktives Zuhören nach Carl Rogers und Thomas Gordon; offene Fragen nach Miller und Rollnick"
+  agreement: "Abmachung mit Prüftermin, nach dem Harvard-Konzept und den Schritten der Mediation"
+
+# "The other": what the other person probably hears in the first sentence,
+# with four ears — one guess per ear and situation. The user can edit each.
+ears:
+  reliability_deadlines:
+    fact: "Eine Abmachung wurde nicht eingehalten."
+    self: "Dir ist Verlässlichkeit wichtig, und du bist enttäuscht."
+    relation: "Du hältst mich für unzuverlässig."
+    appeal: "Halt dich an das, was wir abgemacht haben."
+  criticism_feedback:
+    fact: "Etwas an der Zusammenarbeit läuft aus deiner Sicht nicht gut."
+    self: "Dich beschäftigt das schon länger."
+    relation: "Du bist mit mir nicht zufrieden."
+    appeal: "Mach es anders."
+  boundary_violation:
+    fact: "Es ist etwas passiert, das du nicht wolltest."
+    self: "Dir ist etwas zu nah gekommen; es hat dich verletzt."
+    relation: "Du siehst mich als rücksichtslos."
+    appeal: "Frag mich vorher."
+  misunderstanding:
+    fact: "Etwas ist anders angekommen, als es gemeint war."
+    self: "Du bist verunsichert und willst es klären."
+    relation: "Du denkst, ich hätte dich absichtlich falsch verstanden."
+    appeal: "Erklär mir, wie du es gemeint hast."
+  power_decision:
+    fact: "Eine Entscheidung wurde ohne dich getroffen."
+    self: "Du fühlst dich übergangen und willst mitreden."
+    relation: "Du stellst meine Entscheidung in Frage."
+    appeal: "Bezieh mich vorher ein."
+  breakup_closure:
+    fact: "Etwas endet oder soll enden."
+    self: "Dir fällt das nicht leicht; du willst Klarheit."
+    relation: "Du machst mir einen Vorwurf."
+    appeal: "Lass uns das sauber zu Ende bringen."
+  textchat:
+    fact: "Im Chat ist etwas angekommen, das dich getroffen hat."
+    self: "Du hast die Nachricht mehrmals gelesen; ohne Stimme klang sie kalt."
+    relation: "Du hältst mich für gemein -- und ich habe es vor allen gesagt."
+    appeal: "Schreib mir direkt, nicht in die Gruppe."
+
+# "Listen": one open question per situation for the moment the other
+# person has answered — a W-question, never one that a yes or no closes.
+open_question:
+  reliability_deadlines: "Was ist dir zwischen der Zusage und dem Termin dazwischengekommen?"
+  criticism_feedback: "Wie hast du die Situation erlebt?"
+  boundary_violation: "Wie sieht die Sache von deiner Seite aus?"
+  misunderstanding: "Wie ist das bei dir angekommen?"
+  power_decision: "Was hat damals für diese Entscheidung gesprochen?"
+  breakup_closure: "Was brauchst du, damit es für dich gut abgeschlossen ist?"
+  textchat: "Wie hast du meine Nachricht gelesen, als sie ankam?"
+
+# Three reflection openers; the user keeps one for the card.
+reflections:
+  - "Du meinst also, …"
+  - "Wenn ich dich richtig verstehe, …"
+  - "Klingt, als ob …"
+
+# "Myself": the identity question after Stone, Patton and Heen. One short
+# grounding line per chip, for the card.
+identity:
+  question: "Was sagt dieser Konflikt über dich aus — und stimmt das?"
+  chips:
+    competence:
+      label: "Ob ich kompetent bin"
+      line: "Dieser Konflikt sagt nicht, ob du kompetent bist. Er sagt, dass hier eine Sache zu klären ist."
+    goodness:
+      label: "Ob ich ein guter Mensch bin"
+      line: "Dass du etwas ansprichst, macht dich nicht zum schlechten Menschen. Beide haben beigetragen, und beide dürfen das sagen."
+    worth:
+      label: "Ob ich gemocht werde"
+      line: "Dein Wert hängt nicht an dieser Antwort. Du kannst klar sein und trotzdem in Beziehung bleiben."
+
+# The value square: a value, its sister virtue, and what the value becomes
+# on its own. {value}, {sister} and {alone} fill the line.
+values:
+  line: "Dein Wert {value} hat eine Schwester-Tugend: {sister}. Allein kippt er leicht in {alone} — zusammen trägt er."
+  pairs:
+    - { key: reliability, value: "Zuverlässigkeit", sister: "Gelassenheit", alone: "Kontrolle" }
+    - { key: honesty, value: "Ehrlichkeit", sister: "Takt", alone: "Schonungslosigkeit" }
+    - { key: closeness, value: "Nähe", sister: "Eigenständigkeit", alone: "Klammern" }
+    - { key: assertion, value: "Durchsetzung", sister: "Rücksicht", alone: "Härte" }
+    - { key: thrift, value: "Sparsamkeit", sister: "Großzügigkeit", alone: "Geiz" }
+    - { key: order, value: "Ordnung", sister: "Flexibilität", alone: "Starrheit" }
+    - { key: loyalty, value: "Loyalität", sister: "eigenes Urteil", alone: "Hörigkeit" }
+    - { key: care, value: "Fürsorge", sister: "Vertrauen", alone: "Bevormundung" }
+
+# Self-distancing (Kross): one line before writing.
+distance: "Stell dir vor, eine gute Freundin beschreibt deine Lage in der dritten Person. Was würde sie sagen?"
+
+# Feeling words (one click puts the sentence start into the impact field)
+# and need words (ticked ones go on the card).
+feeling_template: "Ich bin {feeling}, weil "
+feelings:
+  - enttäuscht
+  - gekränkt
+  - wütend
+  - traurig
+  - erschöpft
+  - unsicher
+  - überfordert
+  - ratlos
+  - besorgt
+  - genervt
+  - hilflos
+  - allein
+needs:
+  - Verlässlichkeit
+  - Respekt
+  - Klarheit
+  - Ruhe
+  - Mitsprache
+  - Nähe
+  - Anerkennung
+  - Fairness
+  - Sicherheit
+  - Freiraum

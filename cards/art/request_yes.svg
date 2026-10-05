@@ -1,0 +1,17 @@
+<!-- A small checklist: who, what, by when. -->
+<rect x="230" y="25" width="480" height="430" rx="28" fill="#ffffff" stroke="$line2" stroke-width="5"/>
+<g fill="$wash" stroke="$accent" stroke-width="7">
+  <rect x="280" y="82" width="62" height="62" rx="12"/>
+  <rect x="280" y="209" width="62" height="62" rx="12"/>
+  <rect x="280" y="336" width="62" height="62" rx="12"/>
+</g>
+<g fill="none" stroke="$accent" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M 292,113 L 307,130 L 334,92"/>
+  <path d="M 292,240 L 307,257 L 334,219"/>
+  <path d="M 292,367 L 307,384 L 334,346"/>
+</g>
+<g font-size="46" font-weight="700" fill="$ink">
+  <text x="372" y="129">$who</text>
+  <text x="372" y="256">$what</text>
+  <text x="372" y="383">$when</text>
+</g>

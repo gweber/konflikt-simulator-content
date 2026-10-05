@@ -1,0 +1,112 @@
+# Wirkungen (Empfindens-Ebene) — Ich-Botschaften.
+#
+# Schlüssel: situation × state = 6 × 6 = 36 Fächer.
+#
+# Beachte die Entkopplung: Wirkungen hängen an Situation und Zustand, NICHT
+# an der Beziehung. Wer sich übergangen fühlt, fühlt sich übergangen — ob
+# gegenüber der Partnerin oder der Vorgesetzten. Genau diese Unabhängigkeit
+# lässt den Schlüsselraum von Tausenden auf 36 schrumpfen.
+#
+# Jeder Eintrag wird gegen content/lexicon/impact-layer.yaml geprüft und muss
+# ein Gefühlswort aus dem dortigen Vokabular enthalten.
+
+min_per_bucket: 2
+
+entries:
+  # ── reliability_deadlines ──────────────────────────────────────────────
+  - { situation: reliability_deadlines, state: calm, text: "Ich bin gelassen und trotzdem unsicher, wie ich weiterplanen soll." }
+  - { situation: reliability_deadlines, state: calm, text: "Ich bin gefasst, merke aber, dass ich angespannt werde, wenn ich an den Termin denke." }
+  - { situation: reliability_deadlines, state: annoyed, text: "Ich bin genervt, weil ich meinen Tag zweimal umgeplant habe." }
+  - { situation: reliability_deadlines, state: annoyed, text: "Ich bin ärgerlich, weil ich mich auf die Zusage verlassen hatte." }
+  - { situation: reliability_deadlines, state: disappointed, text: "Ich bin enttäuscht, weil ich fest mit der Zusage gerechnet habe." }
+  - { situation: reliability_deadlines, state: disappointed, text: "Ich bin enttäuscht und frage mich, worauf ich mich noch verlassen kann." }
+  - { situation: reliability_deadlines, state: hurt, text: "Ich bin verletzt, weil ich mir damit nicht wichtig genug vorkomme." }
+  - { situation: reliability_deadlines, state: hurt, text: "Ich fühle mich übergangen, und das trifft mich mehr, als ich erwartet hätte." }
+  - { situation: reliability_deadlines, state: exhausted, text: "Ich bin erschöpft, weil ich das Nachhalten übernehme." }
+  - { situation: reliability_deadlines, state: exhausted, text: "Ich bin müde davon, an Abmachungen zu erinnern." }
+  - { situation: reliability_deadlines, state: angry, text: "Ich bin wütend, weil ich meine Zeit danach ausgerichtet habe." }
+  - { situation: reliability_deadlines, state: angry, text: "Ich bin wütend und gleichzeitig ratlos, wie wir das lösen." }
+
+  # ── criticism_feedback ─────────────────────────────────────────────────
+  - { situation: criticism_feedback, state: calm, text: "Ich bin ruhig und trotzdem unsicher, wie die Rückmeldung gemeint war." }
+  - { situation: criticism_feedback, state: calm, text: "Ich bin gefasst und zugleich unruhig, weil ich die Formulierung nicht einordnen kann." }
+  - { situation: criticism_feedback, state: annoyed, text: "Ich bin genervt, weil die Kritik ohne konkrete Punkte kam." }
+  - { situation: criticism_feedback, state: annoyed, text: "Ich bin ärgerlich, weil das vor anderen gefallen ist." }
+  - { situation: criticism_feedback, state: disappointed, text: "Ich bin enttäuscht, weil ich mir eine Rückmeldung unter vier Augen gewünscht hätte." }
+  - { situation: criticism_feedback, state: disappointed, text: "Ich bin enttäuscht, weil die Arbeit daran nicht vorkam." }
+  - { situation: criticism_feedback, state: hurt, text: "Ich bin verletzt, weil das vor der ganzen Runde gefallen ist." }
+  - { situation: criticism_feedback, state: hurt, text: "Ich fühle mich kleingemacht und brauche einen Moment, um zu antworten." }
+  - { situation: criticism_feedback, state: exhausted, text: "Ich bin erschöpft, weil ich mich innerlich schon auf die nächste Kritik einstelle." }
+  - { situation: criticism_feedback, state: exhausted, text: "Ich bin müde und merke, wie wenig Kraft ich für diese Diskussion habe." }
+  - { situation: criticism_feedback, state: angry, text: "Ich bin wütend, weil die Form der Rückmeldung mich sprachlos zurückgelassen hat." }
+  - { situation: criticism_feedback, state: angry, text: "Ich bin wütend und fassungslos über den Zeitpunkt." }
+
+  # ── boundary_violation ─────────────────────────────────────────────────
+  - { situation: boundary_violation, state: calm, text: "Ich bin ruhig und will trotzdem sagen, dass mich das unsicher zurücklässt." }
+  - { situation: boundary_violation, state: calm, text: "Ich bin gefasst und zugleich angespannt, weil mir diese Grenze wichtig ist." }
+  - { situation: boundary_violation, state: annoyed, text: "Ich bin genervt, weil ich die Grenze schon einmal benannt hatte." }
+  - { situation: boundary_violation, state: annoyed, text: "Ich bin ärgerlich, weil ich mich dafür erklären muss." }
+  - { situation: boundary_violation, state: disappointed, text: "Ich bin enttäuscht, weil ich mich darauf verlassen hatte." }
+  - { situation: boundary_violation, state: disappointed, text: "Ich bin enttäuscht und unsicher, was zwischen uns noch gilt." }
+  - { situation: boundary_violation, state: hurt, text: "Ich bin verletzt, weil mir das sehr nah geht." }
+  - { situation: boundary_violation, state: hurt, text: "Ich fühle mich übergangen und ungeschützt." }
+  - { situation: boundary_violation, state: exhausted, text: "Ich bin erschöpft, weil ich meine Grenzen wiederholt erkläre." }
+  - { situation: boundary_violation, state: exhausted, text: "Ich bin müde und habe wenig Kraft, das erneut zu verhandeln." }
+  - { situation: boundary_violation, state: angry, text: "Ich bin wütend, weil eine klare Absprache übergangen wurde." }
+  - { situation: boundary_violation, state: angry, text: "Ich bin wütend und will, dass das ernst genommen wird." }
+
+  # ── misunderstanding ───────────────────────────────────────────────────
+  - { situation: misunderstanding, state: calm, text: "Ich bin ruhig und trotzdem unsicher, wo wir aneinander vorbeigeredet haben." }
+  - { situation: misunderstanding, state: calm, text: "Ich bin gelassen und zugleich ratlos, wie es dazu kam." }
+  - { situation: misunderstanding, state: annoyed, text: "Ich bin genervt, weil der Aufwand vermeidbar gewesen wäre." }
+  - { situation: misunderstanding, state: annoyed, text: "Ich bin ärgerlich über die doppelte Arbeit." }
+  - { situation: misunderstanding, state: disappointed, text: "Ich bin enttäuscht, weil ich dachte, wir wären uns einig." }
+  - { situation: misunderstanding, state: disappointed, text: "Ich bin enttäuscht und unsicher, ob ich mich klar genug ausgedrückt habe." }
+  - { situation: misunderstanding, state: hurt, text: "Ich bin verletzt, weil mein Anteil daran nicht gesehen wurde." }
+  - { situation: misunderstanding, state: hurt, text: "Ich fühle mich allein damit, und das tut weh." }
+  - { situation: misunderstanding, state: exhausted, text: "Ich bin erschöpft, weil ich vieles zweimal erkläre." }
+  - { situation: misunderstanding, state: exhausted, text: "Ich bin müde und möchte das einfach geklärt haben." }
+  - { situation: misunderstanding, state: angry, text: "Ich bin wütend, weil daraus ein Schaden entstanden ist." }
+  - { situation: misunderstanding, state: angry, text: "Ich bin wütend und zugleich frustriert über den Verlauf." }
+
+  # ── power_decision ─────────────────────────────────────────────────────
+  - { situation: power_decision, state: calm, text: "Ich bin ruhig und trotzdem unsicher, welche Rolle ich hier noch habe." }
+  - { situation: power_decision, state: calm, text: "Ich bin gefasst und fühle mich zugleich übergangen." }
+  - { situation: power_decision, state: annoyed, text: "Ich bin genervt, weil ich es aus zweiter Hand erfahren habe." }
+  - { situation: power_decision, state: annoyed, text: "Ich bin ärgerlich, weil ich betroffen bin und nicht gefragt wurde." }
+  - { situation: power_decision, state: disappointed, text: "Ich bin enttäuscht, weil ich mit einer Rückfrage gerechnet hatte." }
+  - { situation: power_decision, state: disappointed, text: "Ich bin enttäuscht, weil meine Sicht darin nicht vorkam." }
+  - { situation: power_decision, state: hurt, text: "Ich bin verletzt und fühle mich übergangen." }
+  - { situation: power_decision, state: hurt, text: "Ich fühle mich kleingemacht, und das sitzt tiefer, als es sollte." }
+  - { situation: power_decision, state: exhausted, text: "Ich bin erschöpft, weil ich meinen Platz wiederholt erklären muss." }
+  - { situation: power_decision, state: exhausted, text: "Ich bin müde und resigniert, was Mitsprache angeht." }
+  - { situation: power_decision, state: angry, text: "Ich bin wütend, weil über meinen Kopf hinweg entschieden wurde." }
+  - { situation: power_decision, state: angry, text: "Ich bin wütend und fassungslos über das Vorgehen." }
+
+  # ── breakup_closure ────────────────────────────────────────────────────
+  - { situation: breakup_closure, state: calm, text: "Ich bin ruhig und trotzdem unsicher, wie wir das gut zu Ende bringen." }
+  - { situation: breakup_closure, state: calm, text: "Ich bin gefasst und zugleich traurig darüber." }
+  - { situation: breakup_closure, state: annoyed, text: "Ich bin genervt, weil die offenen Punkte liegen bleiben." }
+  - { situation: breakup_closure, state: annoyed, text: "Ich bin ärgerlich über die Hängepartie." }
+  - { situation: breakup_closure, state: disappointed, text: "Ich bin enttäuscht, weil ich mir einen klaren Abschluss gewünscht hätte." }
+  - { situation: breakup_closure, state: disappointed, text: "Ich bin enttäuscht darüber, wie es geendet ist." }
+  - { situation: breakup_closure, state: hurt, text: "Ich bin verletzt und brauche einen klaren Schlusspunkt." }
+  - { situation: breakup_closure, state: hurt, text: "Ich fühle mich allein damit und bin traurig." }
+  - { situation: breakup_closure, state: exhausted, text: "Ich bin erschöpft von der Ungewissheit." }
+  - { situation: breakup_closure, state: exhausted, text: "Ich bin müde und möchte das abschließen." }
+  - { situation: breakup_closure, state: angry, text: "Ich bin wütend, weil die Klärung ausbleibt." }
+  - { situation: breakup_closure, state: angry, text: "Ich bin wütend und zugleich traurig, dass es so endet." }
+
+  # ── textchat: Streit im Gruppenchat / Klassenchat (04.10.2026) ────────────────────────────────
+  - { situation: textchat, state: calm, text: "Ich bin gelassen und trotzdem unruhig, seit ich den Chat gestern gelesen habe." }
+  - { situation: textchat, state: calm, text: "Ich bin ruhig und zugleich unsicher, wie dein „ok.“ gemeint war." }
+  - { situation: textchat, state: annoyed, text: "Ich bin genervt, weil ich die Nachricht dreimal gelesen habe, um den Ton zu verstehen." }
+  - { situation: textchat, state: annoyed, text: "Ich bin ärgerlich, weil die Sache vor der ganzen Gruppe stand und nicht bei uns beiden." }
+  - { situation: textchat, state: disappointed, text: "Ich bin enttäuscht, weil ich auf eine Antwort gewartet habe und zwei blaue Haken bekam." }
+  - { situation: textchat, state: disappointed, text: "Ich bin enttäuscht, dass der Screenshot in der Gruppe war, bevor du mit mir geschrieben hast." }
+  - { situation: textchat, state: hurt, text: "Ich bin verletzt, weil die Emojis unter meiner Nachricht für mich wie Auslachen aussahen." }
+  - { situation: textchat, state: hurt, text: "Ich bin gekränkt, weil ich die Nachricht vor allen gelesen habe und nicht wusste, wohin mit meinem Gesicht." }
+  - { situation: textchat, state: exhausted, text: "Ich bin erschöpft, weil ich seit zwei Tagen jede Nachricht in der Gruppe auf mich beziehe." }
+  - { situation: textchat, state: exhausted, text: "Ich bin müde davon, im Chat Sätze zu drehen, bis sie nicht falsch ankommen können." }
+  - { situation: textchat, state: angry, text: "Ich bin wütend, weil der Screenshot aus unserem Chat in der Gruppe gelandet ist." }
+  - { situation: textchat, state: angry, text: "Ich bin wütend, und ich merke, dass ich im Chat schneller tippe, als ich denke." }

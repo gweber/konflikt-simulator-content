@@ -1,0 +1,98 @@
+# catalog.yaml — die Struktur der Domäne. Ohne einen einzigen Satz Text.
+#
+# Hier stehen Schlüssel, Reihenfolge und die Tonlagen-Tabellen. Alles, was
+# eine Nutzerin liest, steht in locales/<sprache>.yaml.
+#
+# Der Schnitt ist der Kern der Mehrsprachigkeit: Struktur gibt es einmal,
+# Wortlaut je Sprache. Damit ist die Vollständigkeit einer Sprache eine
+# maschinelle Frage — `make gen` bricht ab, sobald einer Sprache ein
+# Schlüssel fehlt, statt im Betrieb einen leeren Knopf anzuzeigen.
+#
+# Erzeugt: internal/catalog/catalog.gen.go, web/src/lib/catalog.gen.ts
+# Reihenfolge der Werte ist die Anzeigereihenfolge im Assistenten.
+
+version: 1
+dimensions:
+  relationship:
+    values:
+    - partner
+    - colleague
+    - manager
+    - customer
+    - friend
+    - family
+    - classmate
+    - teacher
+    - stranger
+  situation:
+    values:
+    - reliability_deadlines
+    - criticism_feedback
+    - boundary_violation
+    - misunderstanding
+    - power_decision
+    - breakup_closure
+    - textchat
+  goal:
+    values:
+    - understand
+    - change
+    - set_boundary
+    - seek_solution
+    - express_feeling
+    - closure
+  state:
+    # Der Eskalationspegel ist Struktur, kein Wortlaut: Die Engine dämpft
+    # damit die Tonlage. 0 = gelassen, 4 = stark aktiviert.
+    values:
+    - calm
+    - annoyed
+    - disappointed
+    - hurt
+    - exhausted
+    - angry
+    escalation:
+      calm: 0
+      annoyed: 2
+      disappointed: 2
+      hurt: 3
+      exhausted: 3
+      angry: 4
+  risk:
+    values:
+    - low
+    - medium
+    - high
+  opening_style:
+    values:
+    - observational
+    - curious_question
+    - appreciation_then_topic
+    - direct
+    - clear_boundary
+layers:
+- example
+- impact
+- request
+tone:
+  values:
+  - warm
+  - neutral
+  - firm
+  by_relationship:
+    partner: warm
+    friend: warm
+    family: warm
+    classmate: warm
+    teacher: neutral
+    colleague: neutral
+    customer: neutral
+    stranger: neutral
+    manager: firm
+  by_goal:
+    understand: warm
+    express_feeling: warm
+    seek_solution: neutral
+    change: neutral
+    set_boundary: firm
+    closure: firm

@@ -1,0 +1,157 @@
+# Observations (the fact layer).
+#
+# Key: relationship × situation = 9 × 6 = 54 buckets.
+#
+# Every entry has to survive the rules of its own layer — `make lint` runs
+# them. That is stricter than it sounds: "again", "as usual" and "typical"
+# are flagged, so is every adjective about a person. What is left is what a
+# camera could have recorded, which is the point.
+
+min_per_bucket: 2
+
+entries:
+  # ── partner ───────────────────────────────────────────────────────────
+  - { relationship: partner, situation: reliability_deadlines, text: "We agreed you would call the landlord on Monday; on Thursday the call had not been made." }
+  - { relationship: partner, situation: reliability_deadlines, text: "You said you would be home by seven; you came in at half past nine." }
+  - { relationship: partner, situation: criticism_feedback, text: "At dinner with your parents you called my suggestion nonsense." }
+  - { relationship: partner, situation: criticism_feedback, text: "When I showed you the plan, you said it would not work and turned back to your phone." }
+  - { relationship: partner, situation: boundary_violation, text: "My phone was on the table; you opened the messages." }
+  - { relationship: partner, situation: boundary_violation, text: "I said I wanted an hour to myself, and you came into the room three times." }
+  - { relationship: partner, situation: misunderstanding, text: "I wrote that I would be late; the message stayed unread until midnight." }
+  - { relationship: partner, situation: misunderstanding, text: "I said I would handle the booking, and a second booking arrived in my inbox." }
+  - { relationship: partner, situation: power_decision, text: "The holiday was booked before we had talked about the dates." }
+  - { relationship: partner, situation: power_decision, text: "You told your family we would come, and I heard about it from your sister." }
+  - { relationship: partner, situation: breakup_closure, text: "We have not spoken about the flat since the conversation on Sunday." }
+  - { relationship: partner, situation: breakup_closure, text: "The boxes have been in the hallway for three weeks." }
+
+  # ── colleague ─────────────────────────────────────────────────────────
+  - { relationship: colleague, situation: reliability_deadlines, text: "The input was due Thursday at noon; it arrived on Friday afternoon." }
+  - { relationship: colleague, situation: reliability_deadlines, text: "I asked on Monday for a date and had no answer by Wednesday evening." }
+  - { relationship: colleague, situation: criticism_feedback, text: "In the team meeting you said my part of the document was unusable." }
+  - { relationship: colleague, situation: criticism_feedback, text: "You forwarded my draft to the client with a note that it needed reworking." }
+  - { relationship: colleague, situation: boundary_violation, text: "You opened the folder I had marked as private." }
+  - { relationship: colleague, situation: boundary_violation, text: "You called me twice on my day off about a task that was due the following week." }
+  - { relationship: colleague, situation: misunderstanding, text: "I had written “draft” in the subject line; the file went to the client." }
+  - { relationship: colleague, situation: misunderstanding, text: "We each prepared the same section, and neither of us had told the other." }
+  - { relationship: colleague, situation: power_decision, text: "The scope was changed in the ticket without a message to me." }
+  - { relationship: colleague, situation: power_decision, text: "You committed to the deadline with the client while I was on leave." }
+  - { relationship: colleague, situation: breakup_closure, text: "The handover list has been open since your last day was announced." }
+  - { relationship: colleague, situation: breakup_closure, text: "Four of my questions from the shared document are still unanswered." }
+
+  # ── manager ───────────────────────────────────────────────────────────
+  - { relationship: manager, situation: reliability_deadlines, text: "The review was set for last Tuesday and has been moved twice since." }
+  - { relationship: manager, situation: reliability_deadlines, text: "The budget approval was promised for the first of the month; it is still open." }
+  - { relationship: manager, situation: criticism_feedback, text: "In front of the team you said my estimate was off by a factor of two." }
+  - { relationship: manager, situation: criticism_feedback, text: "The feedback in my review named no example I could work with." }
+  - { relationship: manager, situation: boundary_violation, text: "You wrote to me at half past eleven at night and asked for an answer that evening." }
+  - { relationship: manager, situation: boundary_violation, text: "My holiday was entered in the shared calendar as available." }
+  - { relationship: manager, situation: misunderstanding, text: "I had understood the deadline as the end of the month; the ticket said the fifteenth." }
+  - { relationship: manager, situation: misunderstanding, text: "The task was described in two sentences, and I built something other than what arrived in review." }
+  - { relationship: manager, situation: power_decision, text: "My area was reassigned in a meeting I was not in." }
+  - { relationship: manager, situation: power_decision, text: "The decision about the tool was announced after it had been signed." }
+  - { relationship: manager, situation: breakup_closure, text: "My notice was acknowledged three weeks ago; no handover date has been set." }
+  - { relationship: manager, situation: breakup_closure, text: "The reference letter was promised for last Friday." }
+
+  # ── customer ──────────────────────────────────────────────────────────
+  - { relationship: customer, situation: reliability_deadlines, text: "The material was agreed for the first of the month; it arrived on the eleventh." }
+  - { relationship: customer, situation: reliability_deadlines, text: "The invoice was due thirty days ago and is unpaid." }
+  - { relationship: customer, situation: criticism_feedback, text: "In the call you said the delivery did not meet what had been ordered." }
+  - { relationship: customer, situation: criticism_feedback, text: "The feedback arrived as a list of thirty points, two days before launch." }
+  - { relationship: customer, situation: boundary_violation, text: "You called my private number on a Sunday morning." }
+  - { relationship: customer, situation: boundary_violation, text: "The scope was extended in the shared document without a signed change." }
+  - { relationship: customer, situation: misunderstanding, text: "The specification named two variants; we built the first, and the second was expected." }
+  - { relationship: customer, situation: misunderstanding, text: "“By the end of the week” was read as Friday on one side and Sunday on the other." }
+  - { relationship: customer, situation: power_decision, text: "The launch date was announced publicly before we had confirmed it." }
+  - { relationship: customer, situation: power_decision, text: "A second supplier was briefed on our design without a note to us." }
+  - { relationship: customer, situation: breakup_closure, text: "The contract runs out in six weeks and the extension question is open." }
+  - { relationship: customer, situation: breakup_closure, text: "The final invoice and the handover files are both still outstanding." }
+
+  # ── friend ────────────────────────────────────────────────────────────
+  - { relationship: friend, situation: reliability_deadlines, text: "We were meeting at eight; at half past eight there was no message." }
+  - { relationship: friend, situation: reliability_deadlines, text: "You said you would take care of the tickets, and the event sold out." }
+  - { relationship: friend, situation: criticism_feedback, text: "In front of the others you said my new job was a step backwards." }
+  - { relationship: friend, situation: criticism_feedback, text: "When I told you about the plan, you laughed and changed the subject." }
+  - { relationship: friend, situation: boundary_violation, text: "I asked you not to mention it, and it came up at the table on Saturday." }
+  - { relationship: friend, situation: boundary_violation, text: "You took the spare key without asking and were in the flat when I got home." }
+  - { relationship: friend, situation: misunderstanding, text: "I wrote that I could not make it, and the invitation went out with my name on it." }
+  - { relationship: friend, situation: misunderstanding, text: "We had different dates in mind, and neither of us had written one down." }
+  - { relationship: friend, situation: power_decision, text: "The weekend was booked for all of us before anyone had asked me." }
+  - { relationship: friend, situation: power_decision, text: "You told the group I would drive, and I heard it from someone else." }
+  - { relationship: friend, situation: breakup_closure, text: "We have not spoken since the argument in March." }
+  - { relationship: friend, situation: breakup_closure, text: "My last two messages have gone unanswered for four weeks." }
+
+  # ── family ────────────────────────────────────────────────────────────
+  - { relationship: family, situation: reliability_deadlines, text: "You said you would pick the children up at four; at five you had not arrived." }
+  - { relationship: family, situation: reliability_deadlines, text: "The paperwork was promised for last month and has not been sent." }
+  - { relationship: family, situation: criticism_feedback, text: "At the table you said my way of raising the children would not hold." }
+  - { relationship: family, situation: criticism_feedback, text: "When I described my plans, you said I had not thought them through." }
+  - { relationship: family, situation: boundary_violation, text: "You came to the flat on Sunday without letting me know beforehand." }
+  - { relationship: family, situation: boundary_violation, text: "My post was opened before I got home." }
+  - { relationship: family, situation: misunderstanding, text: "I said I would bring the dessert; two desserts were on the table." }
+  - { relationship: family, situation: misunderstanding, text: "The date I gave for the visit was passed on with a different weekend." }
+  - { relationship: family, situation: power_decision, text: "The family gathering was arranged at my flat before I had been asked." }
+  - { relationship: family, situation: power_decision, text: "The decision about the house was taken while I was abroad." }
+  - { relationship: family, situation: breakup_closure, text: "We have not been in contact since the funeral." }
+  - { relationship: family, situation: breakup_closure, text: "The items from the flat have not been divided since February." }
+
+  # ── classmate ─────────────────────────────────────────────────────────
+  - { relationship: classmate, situation: reliability_deadlines, text: "Your slides were due in the group chat on Sunday night; at half eight on Monday they were not there." }
+  - { relationship: classmate, situation: reliability_deadlines, text: "You borrowed my charger in maths on Tuesday and said you would bring it back the next day; it is Friday." }
+  - { relationship: classmate, situation: criticism_feedback, text: "During the group task you read out my paragraph and said \"that's not going in\"." }
+  - { relationship: classmate, situation: criticism_feedback, text: "In the presentation you answered the questions on my slides before I had started on them." }
+  - { relationship: classmate, situation: boundary_violation, text: "You posted the photo of me from the field trip on your story without asking." }
+  - { relationship: classmate, situation: boundary_violation, text: "I told you about my resit at break, and by lunch two other people had asked me about it." }
+  - { relationship: classmate, situation: misunderstanding, text: "I wrote \"I'll do the end bit\" and meant the conclusion; you left me the last three slides." }
+  - { relationship: classmate, situation: misunderstanding, text: "I put a laughing emoji under your post, and a minute later you left the chat." }
+  - { relationship: classmate, situation: power_decision, text: "When I came back after two days off sick, the topics had been split up and mine was the one left over." }
+  - { relationship: classmate, situation: power_decision, text: "You told Mr Hughes I would present first, and I found out when he called my name." }
+  - { relationship: classmate, situation: breakup_closure, text: "Since half term you have sat with Sam, and at break we have not stood together." }
+  - { relationship: classmate, situation: breakup_closure, text: "You removed me from our group chat, and there was no message about it." }
+
+  # ── teacher ───────────────────────────────────────────────────────────
+  - { relationship: teacher, situation: reliability_deadlines, text: "You said the mock papers would come back before half term; three weeks later we have not had them." }
+  - { relationship: teacher, situation: reliability_deadlines, text: "At parents' evening you said you would email us by Friday; the email has not arrived." }
+  - { relationship: teacher, situation: criticism_feedback, text: "My essay came back with a C and no comments in the margin." }
+  - { relationship: teacher, situation: criticism_feedback, text: "When I asked about my mark, you said \"not now\" and went on with the lesson." }
+  - { relationship: teacher, situation: boundary_violation, text: "You read my note to Priya out loud to the class." }
+  - { relationship: teacher, situation: boundary_violation, text: "When you handed the tests back, you said my score in front of the class." }
+  - { relationship: teacher, situation: misunderstanding, text: "The email said \"by Monday\"; I took it as Monday evening, and the deadline was the start of the lesson." }
+  - { relationship: teacher, situation: misunderstanding, text: "I put my hand up to ask a question, and you asked me to work the problem out on the board." }
+  - { relationship: teacher, situation: power_decision, text: "The test was moved from Thursday to Tuesday, and I found out from the class chat on Sunday." }
+  - { relationship: teacher, situation: power_decision, text: "The new seating plan was on the board on Monday; I am now at the front, apart from my revision partner." }
+  - { relationship: teacher, situation: breakup_closure, text: "In the last lesson before the summer you told us you are leaving the school." }
+  - { relationship: teacher, situation: breakup_closure, text: "Our son changes school after this term; the meeting we asked for before he leaves has not been arranged." }
+
+  # ── stranger ──────────────────────────────────────────────────────────
+  - { relationship: stranger, situation: reliability_deadlines, text: "The appointment was booked for ten; at half past ten the desk was unstaffed." }
+  - { relationship: stranger, situation: reliability_deadlines, text: "A call-back was promised within two working days; it has been eight." }
+  - { relationship: stranger, situation: criticism_feedback, text: "At the counter you said in front of the queue that my form was filled in wrongly." }
+  - { relationship: stranger, situation: criticism_feedback, text: "The reply to my complaint said the fault was on my side, without naming a reason." }
+  - { relationship: stranger, situation: boundary_violation, text: "You stood close enough that I stepped back twice." }
+  - { relationship: stranger, situation: boundary_violation, text: "You photographed my car and the number plate without asking." }
+  - { relationship: stranger, situation: misunderstanding, text: "I asked for the small size and the large one was handed over." }
+  - { relationship: stranger, situation: misunderstanding, text: "The sign said the queue starts here, and I was told I was in the wrong place." }
+  - { relationship: stranger, situation: power_decision, text: "The parking space I had reserved was allocated to someone else." }
+  - { relationship: stranger, situation: power_decision, text: "The terms were changed in the app without a notice being sent." }
+  - { relationship: stranger, situation: breakup_closure, text: "The contract was cancelled and the deposit has not come back." }
+  - { relationship: stranger, situation: breakup_closure, text: "The case has been marked as closed while two of my questions are open." }
+
+  # ── textchat: a fight in the group chat / class chat (04.10.2026) ────────────────────────────
+  - { relationship: partner, situation: textchat, text: "My message last night got a thumbs-up; by Sunday evening nothing else had come." }
+  - { relationship: partner, situation: textchat, text: "You wrote in the family chat that I was late with the booking before we had talked about it between us." }
+  - { relationship: colleague, situation: textchat, text: "You answered my question in the team chat with \"ok.\"; the file came two days later." }
+  - { relationship: colleague, situation: textchat, text: "At 10 pm yesterday your message to the whole project chat said my part was still missing." }
+  - { relationship: manager, situation: textchat, text: "You wrote in the team chat, in front of twelve people, that my numbers were wrong; no message came to me." }
+  - { relationship: manager, situation: textchat, text: "My Monday message had two questions; on Thursday the reply was \"fine\"." }
+  - { relationship: customer, situation: textchat, text: "You sent three messages in capital letters on Sunday evening; I replied on Monday at nine." }
+  - { relationship: customer, situation: textchat, text: "In the group with your team our offer was called \"a joke\"; you had not written to me about it." }
+  - { relationship: friend, situation: textchat, text: "I texted you on Tuesday asking whether we could talk; the two ticks went blue and no answer came." }
+  - { relationship: friend, situation: textchat, text: "You put the screenshot from our chat into the group." }
+  - { relationship: family, situation: textchat, text: "In the family chat you wrote that I \"could look after Grandma too\"; we had made the plan between the two of us." }
+  - { relationship: family, situation: textchat, text: "To the question about Christmas you wrote \"up to you.\" -- then nothing for three days." }
+  - { relationship: classmate, situation: textchat, text: "You posted a photo of me in the class chat with two laughing emojis." }
+  - { relationship: classmate, situation: textchat, text: "After my message in the group four people reacted with 😂; you wrote \"lol\"." }
+  - { relationship: teacher, situation: textchat, text: "You wrote to the class group that three people had not handed in the homework and named me." }
+  - { relationship: teacher, situation: textchat, text: "My message about the exam got \"We'll discuss it in class.\"; in class it did not come up." }
+  - { relationship: stranger, situation: textchat, text: "In the neighbourhood group your message was about my car in front of the drive; you had not written to me." }
+  - { relationship: stranger, situation: textchat, text: "Under my post in the group you wrote one word: \"Nonsense.\"" }

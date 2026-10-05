@@ -1,0 +1,251 @@
+# Reglas de la capa de observación (los hechos).
+#
+# Doctrina: ¿qué habría grabado una cámara? Solo conducta observable — sin
+# etiquetas, sin generalizaciones, sin intenciones atribuidas.
+#
+# Cada regla lleva sus propios casos de prueba (`hits` / `misses`). `make lint`
+# los ejecuta; una regla que falla con sus propios ejemplos rompe el build.
+#
+# `match` es un patrón RE2 SIN anclas \b — el cargador lo envuelve él mismo
+# en límites de palabra Unicode.
+#
+# ── Was beim Übertragen ins Spanische anders ist ──────────────────────────
+#
+# Kein Nachbau der deutschen oder englischen Datei. Vier Unterschiede, die
+# die Regeln tatsächlich verändern:
+#
+#   1. Akzente werden beim Tippen oft weggelassen („jamas", „tipico"). Die
+#      geläufigen Wörter stehen deshalb in beiden Schreibungen drin, wie im
+#      Deutschen „ständig|staendig".
+#   2. Adjektive haben zwei Formen (descuidado/descuidada). Wo es geht,
+#      fängt eine Zeichenklasse beide: „descuidad[oa]".
+#   3. Zuschreibungen laufen im Spanischen oft über „estás siendo X" oder
+#      ein Substantiv („una falta de respeto", „una chapuza"). Beides sind
+#      eigene Muster.
+#   4. Mehrere naheliegende Wörter sind zu doppeldeutig für einen Block:
+#      „informal" (auch: ein zwangloses Treffen), „dejado" (auch: liegen
+#      gelassen), „interesado" (auch: interessiert), „borde" (auch: Rand).
+#      Sie fehlen absichtlich — ein falscher Block kostet mehr Vertrauen als
+#      ein übersehenes Etikett.
+
+layer: example
+
+groups:
+  - kind: generalizer
+    severity: block
+    source: "Trampas de pensamiento (terapia cognitivo-conductual): generalizar"
+    more: beobachten-statt-bewerten
+    why: |
+      Las generalizaciones no se pueden comprobar e invitan a buscar la
+      excepción. Basta un contraejemplo («la semana pasada llegué puntual»)
+      para que la conversación gire en torno a si «siempre» es verdad, en vez
+      de en torno al hecho concreto del que querías hablar.
+    rules:
+      - id: gen-siempre
+        match: "siempre|constantemente|continuamente|todo el rato|todo el tiempo|a todas horas|sin parar"
+        message: "«{match}» es una generalización."
+        ask: "¿Cuándo lo notaste por última vez? Nombra esa ocasión concreta."
+        tests:
+          hits: ["Siempre llegas tarde", "Me interrumpes constantemente", "Estás todo el rato con el móvil"]
+          misses: ["El martes pasado el archivo llegó después del plazo"]
+
+      - id: gen-nunca
+        match: "nunca|jamás|jamas|ni una sola vez|ni una vez"
+        message: "«{match}» es una generalización."
+        ask: "¿Hubo una situación concreta en la que lo echaste en falta? Describe esa."
+        tests:
+          hits: ["Nunca me escuchas", "Jamás preguntas", "Ni una vez me has llamado"]
+          misses: ["El lunes no contestaste a mi mensaje"]
+
+      - id: gen-cada-vez
+        match: "cada vez que|cada dos por tres|una y otra vez|todas las veces"
+        message: "«{match}» afirma un patrón en lugar de un hecho."
+        ask: "¿Qué episodio concreto lo representa? Quédate con ese."
+        tests:
+          hits: ["Cada vez que hablamos pasa lo mismo", "Lo haces una y otra vez"]
+          misses: ["Esa vez llegaste a las nueve", "Cada martes hay reunión"]
+
+      - id: gen-otra-vez
+        match: "otra vez|de nuevo|como siempre|lo de siempre|típico de ti|tipico de ti|ya estamos"
+        message: "«{match}» trae la historia entera, no esta ocasión."
+        ask: "Deja el historial fuera del arranque. ¿Qué pasó esta vez?"
+        tests:
+          hits: ["Otra vez lo mismo", "Típico de ti", "Tarde, como siempre"]
+          misses: ["Lo hablamos otra semana", "Volveré más tarde"]
+
+  - kind: attribution
+    severity: block
+    source: "Marshall B. Rosenberg: observar sin evaluar"
+    more: beobachten-statt-bewerten
+    why: |
+      Los adjetivos describen a la persona, no la conducta. La otra parte no
+      puede defender una conducta que nadie le ha nombrado, así que se
+      defiende de la etiqueta. Y entonces estáis negociando su carácter, no
+      el asunto.
+    rules:
+      - id: attr-fiabilidad
+        match: "irresponsable|poco fiable|nada fiable|poco serio|poco seria|descuidad[oa]|chapucer[oa]|una chapuza|impuntual"
+        message: "«{match}» juzga a la persona, no la conducta."
+        ask: "¿Qué conducta te llevó a esa valoración?"
+        offer:
+          - "el compromiso del martes no se cumplió"
+          - "el archivo llegó dos días después de la fecha acordada"
+          - "mi recordatorio se quedó sin respuesta"
+        tests:
+          hits: ["Eres un irresponsable", "Eso fue una chapuza", "Eres muy poco fiable"]
+          misses: ["La medición es fiable", "Lo revisé con cuidado"]
+
+      - id: attr-respeto
+        # Auch die Nominalform: „una falta de respeto" wertet genauso ab wie
+        # „irrespetuoso", und die Wortgrenzen-Klammerung trifft sie sonst nicht.
+        match: "irrespetuos[oa]|falta de respeto|maleducad[oa]|desconsiderad[oa]|groser[oa]|prepotente|arrogante|condescendiente|de malas maneras"
+        message: "«{match}» es un juicio, no una conducta observable."
+        ask: "¿Qué se dijo o se hizo exactamente?"
+        offer:
+          - "me interrumpiste dos veces en la reunión"
+          - "mi propuesta se descartó sin una pregunta"
+          - "la respuesta llegó delante de todo el equipo"
+        tests:
+          hits: ["Eso fue una falta de respeto", "Eres un maleducado", "Estuviste muy prepotente"]
+          misses: ["Respeto tu decisión", "Con todo respeto al proceso"]
+
+      - id: attr-egoismo
+        match: "egoísta|egoista|egoístas|egoistas|egocéntric[oa]|egocentric[oa]|aprovechad[oa]|caprichos[oa]"
+        message: "«{match}» le atribuye un motivo a la persona."
+        ask: "Describe lo que pasó, no por qué crees que lo hizo."
+        offer:
+          - "la decisión se tomó sin preguntarme"
+          - "el plan se cambió después de haberlo acordado"
+        tests:
+          hits: ["Eres un egoísta", "Fue muy egocéntrico por tu parte"]
+          misses: ["El autoservicio está cerrado"]
+
+      - id: attr-competencia
+        # „vago" heißt auch „vage". Im Anlass ist beides kein Befund, den man
+        # stehen lassen sollte; der Fehltreffer ist hier also billig.
+        match: "vag[oa]|perezos[oa]|inútil|inutil|inútiles|inutiles|incompetente|incompetentes|torpe|un desastre|una desastre"
+        message: "«{match}» etiqueta a la persona en lugar de la situación."
+        ask: "¿Qué quedó sin hacer, y para cuándo lo esperabas?"
+        offer:
+          - "el informe era para el jueves y sigue pendiente"
+          - "la pregunta que hice el lunes sigue sin respuesta"
+        tests:
+          hits: ["Eres un vago", "Eso fue incompetente", "Eres un desastre"]
+          misses: ["El informe era para el jueves y sigue pendiente"]
+
+      - id: attr-actitud
+        match: "injust[oa]|pasota|indiferente|desleal|insensible|cabezota|terc[oa]|hipócrita|hipocrita"
+        message: "«{match}» describe una actitud, no lo que pasó."
+        ask: "¿Qué hizo o dijo, en concreto? Nombra la acción, no el adjetivo."
+        tests:
+          hits: ["Fuiste injusta conmigo", "Eres un pasota"]
+          misses: ["Llegaste a las diez y media"]
+
+      - id: attr-estar-siendo
+        # Das Gegenstück zu „you're being X": eine Verlaufsform, die ein
+        # Etikett mit Anlauf verteilt.
+        match: "estás siendo (\\p{L}+)|estas siendo (\\p{L}+)|te estás poniendo (\\p{L}+)|te estas poniendo (\\p{L}+)"
+        message: "«{match}» describe a la persona, no lo que pasó."
+        ask: "¿Qué hizo realmente? Nombra la acción, no el adjetivo."
+        tests:
+          hits: ["Estás siendo muy difícil", "Te estás poniendo pesado"]
+          misses: ["Estás en la lista", "Me están pidiendo que decida"]
+
+  - kind: mind_reading
+    severity: block
+    source: "Trampas de pensamiento (terapia cognitivo-conductual): leer la mente"
+    more: beobachten-statt-bewerten
+    why: |
+      Afirmar el motivo de otra persona le dice que ya lo tienes decidido.
+      Lo único que puede contestar es negarlo, y una negación no es una
+      conversación. El motivo es justo lo que no se puede observar.
+    rules:
+      - id: mind-aposta
+        # „a propósito" heißt auch „übrigens". Im Anlass selten, deshalb
+        # bleibt es drin; der Fehltreffer-Fall hält das Substantiv frei.
+        match: "a propósito|a proposito|aposta|adrede|queriendo|con toda la intención|con toda la intencion|deliberadamente|intencionadamente|solo para (\\p{L}+)|sólo para (\\p{L}+)"
+        message: "«{match}» atribuye una intención."
+        ask: "La intención no se ve. ¿Qué observaste?"
+        tests:
+          hits: ["Lo hiciste a propósito", "Me dejaste fuera adrede", "Lo dijiste solo para fastidiar"]
+          misses: ["El propósito de la reunión", "Fui con intención de escuchar"]
+
+      - id: mind-crees-que
+        match: "(crees|piensas|te crees|te piensas|das por hecho|supones) que (yo|me|mi|soy|estoy|no me)"
+        message: "«{match}» habla por la otra persona."
+        ask: "Deja que diga ella lo que piensa. ¿Qué viste u oíste tú?"
+        tests:
+          hits: ["Crees que me lo invento", "Das por hecho que no me importa"]
+          misses: ["Creo que tienes razón", "¿Qué piensas tú?"]
+
+      - id: mind-te-da-igual
+        match: "te da igual|te importa un pimiento|te importa un bledo|te trae sin cuidado|no te importa|no te importo|pasas de mí|pasas de mi|no me escuchas|no me respetas|no me valoras|no me tomas en serio"
+        message: "«{match}» afirma saber lo que pasa por dentro de la otra persona."
+        ask: "¿Qué conducta te dio esa impresión?"
+        tests:
+          hits: ["Te da igual lo que diga", "No me escuchas", "Pasas de mí"]
+          misses: ["Me da igual el café", "No escucharon la grabación"]
+
+  - kind: escalator
+    severity: block
+    source: "John Gottman: el desprecio; Friedrich Glasl: escalada del conflicto"
+    more: vier-gifte
+    why: |
+      Los desprecios terminan la conversación antes de que empiece. Es el
+      único caso en el que el simulador no reformula, sino que desaconseja.
+    rules:
+      - id: esc-desprecio
+        match: "ridícul[oa]|ridicul[oa]|patétic[oa]|patetic[oa]|vergonzos[oa]|una vergüenza|una verguenza|una desfachatez|qué cara|que cara|caradura|cara dura|sinvergüenza|sinverguenza"
+        message: "«{match}» es un desprecio."
+        ask: "Los desprecios llevan a la defensa. ¿Cuál es el hecho que hay debajo?"
+        tests:
+          hits: ["Es ridículo", "Qué cara tienes", "Es una vergüenza"]
+          misses: ["Me reí un rato", "Lo encaré con calma"]
+
+      - id: esc-hasta-aqui
+        match: "hasta aquí hemos llegado|hasta aqui hemos llegado|ya está bien|ya esta bien|se acabó|se acabo|no lo voy a consentir|no pienso consentir|no pienso tolerar|no lo pienso tolerar"
+        message: "«{match}» es un anuncio, no un hecho."
+        ask: "Eso pertenece a la petición, no a la observación. ¿Qué pasó en concreto?"
+        tests:
+          hits: ["Ya está bien", "Hasta aquí hemos llegado", "No lo voy a consentir"]
+          misses: ["Llegamos hasta la plaza", "Está bien hecho"]
+
+  - kind: escalator
+    severity: warn
+    source: "Trampas de pensamiento (terapia cognitivo-conductual): catastrofismo"
+    risk_sensitive: true
+    why: |
+      Los superlativos suben la apuesta antes de terminar la primera frase.
+      Además, hacen fácil descartar lo dicho: nadie ha hecho jamás lo peor
+      posible, así que la respuesta irá sobre la exageración.
+    rules:
+      - id: esc-lo-peor
+        match: "lo peor|insoportable|intolerable|inaceptable|indignante|una barbaridad|el colmo|de locos"
+        message: "«{match}» sube la tensión antes de que el tema esté sobre la mesa."
+        ask: "Dilo un tono más bajo. ¿Qué pasó, dicho sin adornos?"
+        tests:
+          hits: ["Es indignante", "Esto es el colmo"]
+          misses: ["Ha habido cosas peores"]
+
+      - id: esc-absolutos
+        match: "totalmente|completamente|absolutamente|para nada"
+        message: "«{match}» exagera e invita a discutir sobre la palabra."
+        ask: "¿Seguiría siendo verdad sin el intensificador?"
+        tests:
+          hits: ["Es totalmente inaceptable", "Me ignoraste completamente"]
+          misses: ["El total fueron cuarenta euros"]
+
+  - kind: hedge
+    severity: info
+    source: "Asertividad: nombrar con claridad lo que pasó"
+    why: |
+      Los atenuantes en la observación dejan abierto si pasó algo siquiera.
+      La otra parte puede negar entonces que haya un tema del que hablar.
+    rules:
+      - id: hedge-quizas
+        match: "quizás|quizas|quizá|quiza|tal vez|a lo mejor|puede que|un poco|un poquito|de alguna manera|como que"
+        message: "«{match}» rebaja el hecho."
+        ask: "La observación puede quedar clara. Quita el atenuante."
+        tests:
+          hits: ["Quizás se te olvidó algo", "Fue un poco raro"]
+          misses: ["El camino era largo"]

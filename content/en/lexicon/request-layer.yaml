@@ -1,0 +1,268 @@
+# Rules for the request layer (the ask).
+#
+# Doctrine: a request is only a request once both sides can tell afterwards
+# whether it was met. Positive, concrete, checkable.
+#
+# Die Härteregeln sind risikosensitiv (`risk_sensitive: true`): Wer bei der
+# Deutlichkeit „direct" gewählt hat, will Klartext, und dann ist „from now
+# on" kein Fehler, sondern die Absicht. Der Linter stuft solche Befunde
+# dort auf einen Hinweis herab, statt sie anzumahnen.
+
+layer: request
+
+groups:
+  - kind: negative_request
+    severity: block
+    source: "Marshall B. Rosenberg: positive action language"
+    why: |
+      "Stop interrupting me" says what should end, not what should happen.
+      The other side is left to guess the replacement — and will guess
+      something you did not mean. A request that names no action cannot be
+      agreed to, only submitted to.
+    rules:
+      - id: neg-stop
+        match: "stop (\\p{L}+ing)|quit (\\p{L}+ing)|cut it out|knock it off"
+        message: "“{match}” says what should end, not what should happen."
+        ask: "What should they do instead?"
+        offer:
+          - "let me finish before you reply"
+          - "tell me by Thursday whether it works"
+        tests:
+          hits: ["Stop interrupting me", "Quit changing the plan"]
+          misses: ["I want to stop at the next town", "The bus stop is closed"]
+
+      - id: neg-dont
+        match: "(don'?t|do not|never) (\\p{L}+) (me|us|it|that|again)"
+        message: "“{match}” is a prohibition, not a request."
+        ask: "Turn it around: what do you want to happen?"
+        tests:
+          hits: ["Don't interrupt me", "Do not do that again"]
+          misses: ["I don't mind waiting", "Don't worry about it"]
+
+      - id: neg-nomore
+        match: "no more|never again|not any more|not anymore"
+        message: "“{match}” closes a door without opening one."
+        ask: "Name the behaviour you do want, in one sentence."
+        tests:
+          hits: ["No more surprises", "Never again like that"]
+          misses: ["Please tell me by Thursday whether it works"]
+
+  - kind: vague_request
+    severity: warn
+    source: "Marshall B. Rosenberg: a concrete, checkable request"
+    why: |
+      "Show more respect" cannot be met, because nobody knows what would
+      count. Both of you will believe you were reasonable, and neither will
+      be able to point at anything.
+    rules:
+      - id: vague-more
+        match: "more (respect|effort|support|understanding|commitment|attention)"
+        message: "“{match}” cannot be checked afterwards."
+        ask: "What would that look like, concretely, next week?"
+        offer:
+          - "tell me by Thursday noon whether the work is coming"
+          - "ask me before you decide about my part"
+        tests:
+          hits: ["I want more respect", "Show more commitment"]
+          misses: ["One more coffee please", "More people came than expected"]
+
+      - id: vague-somehow
+        match: "somehow|at some point|sometime|eventually|when you can|whenever"
+        message: "“{match}” leaves the time open, so nothing is agreed."
+        ask: "By when? A date makes the request checkable."
+        tests:
+          hits: ["Get back to me at some point", "Somehow we should fix this"]
+          misses: ["It is some kind of error"]
+
+      - id: vague-better
+        match: "be (better|nicer|kinder|more careful)|do better|try harder"
+        message: "“{match}” asks for a different person, not a different action."
+        ask: "Which single action would you like to see?"
+        tests:
+          hits: ["Just be better", "Try harder next time"]
+          misses: ["The weather is better today"]
+
+  - kind: absolute_demand
+    severity: warn
+    source: "Marshall B. Rosenberg: request, not demand"
+    risk_sensitive: true
+    why: |
+      A demand leaves no room to say yes. Where there is no room to agree,
+      what you get is compliance or refusal — and both cost more than the
+      thing you asked for.
+    rules:
+      - id: dem-must
+        match: "you (must|have to|need to|will) (\\p{L}+)"
+        message: "“{match}” is a demand, not a request."
+        ask: "Would it still carry as a request? Try “I would like you to …”."
+        tests:
+          hits: ["You must tell me first", "You have to change that"]
+          misses: ["I have to leave at six", "We need to talk"]
+
+      - id: dem-immediately
+        match: "immediately|right now|at once|from now on|as of today"
+        message: "“{match}” sets a pace the other side cannot negotiate."
+        ask: "Is the urgency real? If so, say why — otherwise name a date."
+        tests:
+          hits: ["I want that from now on", "Answer me right now"]
+          misses: ["The train leaves now", "Now that we agree"]
+
+  - kind: threat
+    severity: block
+    source: "Friedrich Glasl: threats as a stage of escalation"
+    more: glasl-eskalationsstufen
+    why: |
+      A threat ends the conversation and starts a negotiation about power.
+      Whatever you wanted is no longer on the table; what is on the table is
+      whether you meant it.
+    rules:
+      - id: threat-otherwise
+        match: "or else|otherwise i (will|'ll)|if not,? i (will|'ll)|last (warning|chance)"
+        message: "“{match}” is a threat."
+        ask: "What do you actually want? A consequence belongs later, if at all."
+        tests:
+          hits: ["Do it, or else", "Otherwise I will leave"]
+          misses: ["Otherwise it went well", "I will call you later"]
+
+      - id: threat-consequences
+        match: "there will be consequences|you'?ll regret|you will regret|don'?t make me"
+        message: "“{match}” threatens instead of asking."
+        ask: "Say the request plainly. The pressure is doing the opposite of what you want."
+        tests:
+          hits: ["There will be consequences", "You will regret that"]
+          misses: ["The consequences were discussed in the report"]
+
+  - kind: dissolving_softener
+    severity: info
+    source: "Assertiveness training: a request may be clear"
+    why: |
+      A little hedging is polite. Too much of it dissolves the request: if
+      you only "kind of maybe" want something, the other side is entitled to
+      hear that it does not matter.
+    rules:
+      - id: soft-stack
+        match: "maybe (you )?could (just )?(possibly|perhaps)|if it'?s not too much trouble|i don'?t know,? but maybe"
+        message: "“{match}” hedges so far that the request disappears."
+        ask: "Say it once, plainly. Politeness survives that."
+        tests:
+          hits: ["Maybe you could possibly help", "If it's not too much trouble"]
+          misses: ["Maybe on Friday", "I could help you"]
+
+  - kind: missing_addressee_action
+    severity: warn
+    source: "Marshall B. Rosenberg: a concrete, checkable request"
+    why: |
+      Without a verb there is nothing to do. A sentence that names a wish
+      but no action leaves both of you with a feeling instead of an
+      agreement.
+    rules: []
+    absence_check:
+      id: req-missing-verb
+      message: "There is no action here yet."
+      ask: "What exactly should the other person do? A verb makes the request checkable."
+      # Schlägt an, wenn keiner dieser Handlungsmarker vorkommt.
+      #
+      # Die schwächste Stelle des Regelwerks, hier wie im Deutschen: Die
+      # Liste kann ein Verb übersehen, das nicht draufsteht. Die erste
+      # Fassung hat prompt 24 einwandfreie eigene Bitten angemahnt, weil
+      # „hear", „settle", „commit" und die Vergangenheitsform „told"
+      # fehlten. Beugungsformen stehen deshalb einzeln drin — ohne
+      # Morphologie gibt es keinen anderen Weg.
+      vocabulary:
+        - tell
+        - say
+        - ask
+        - let
+        - give
+        - send
+        - call
+        - write
+        - come
+        - check
+        - confirm
+        - agree
+        - decide
+        - keep
+        - hold
+        - stick
+        - meet
+        - talk
+        - listen
+        - answer
+        - reply
+        - respond
+        - inform
+        - update
+        - involve
+        - include
+        - discuss
+        - arrange
+        - schedule
+        - set
+        - put
+        - take
+        - bring
+        - leave
+        - wait
+        - finish
+        - deliver
+        - share
+        - explain
+        - clarify
+        - review
+        - sign
+        - return
+        - knock
+        - text
+        - hear
+        - heard
+        - settle
+        - settled
+        - close
+        - closed
+        - commit
+        - name
+        - named
+        - think
+        - told
+        - tells
+        - help
+        - go
+        - goes
+        - prepare
+        - prepared
+        - plan
+        - part
+        - draw
+        - work
+        - rest
+        - rests
+        - done
+        - state
+        - note
+        - hand
+        # Nachgezogen beim Register-Durchgang: Als die Bitten aus dem
+        # Schablonenmodus („I would like you to …“) in gesprochenes Englisch
+        # umgeschrieben wurden, kamen Verben dazu, die vorher nicht
+        # vorkamen. Die Liste wächst mit dem Korpus — das ist der Preis
+        # dafür, ohne Morphologie auszukommen.
+        - sit
+        - get
+        - walk
+        - carry
+        - kept
+        - keeps
+        - runs
+        - stands
+        - stay
+        - stays
+        - divide
+        - involve
+        - look
+        - think
+        - write
+      tests:
+        hits: ["More respect from your side"]
+        misses:
+          - "Please tell me by Thursday noon whether it works"
+          - "I would like you to ask me before you decide"

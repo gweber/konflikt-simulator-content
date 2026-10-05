@@ -1,0 +1,209 @@
+{
+  "_about": "Explanatory cards (04.10.2026; source: docs/research/2026-10-04-communication-models.md, Part D4). One idea per card, at most 60 words of text. Every language has the same card ids and the same keys (tests check that). In 'text': **bold**, a line break starts a new paragraph. 'labels' are the words inside the drawing (consim/cards/art/<id>.svg). Render: python3 -m consim.cards.render",
+  "order": ["four_ears", "content_relationship", "who_started", "how_heated", "seen_thought",
+            "four_poisons", "ask_then_say", "want_why", "request_yes", "if_then", "in_your_hands"],
+  "de": {
+    "four_ears": {
+      "title": "Vier Ohren",
+      "text": "Jeder Satz lässt sich vierfach hören: als Sache, als etwas über die Person, die spricht, als etwas über eure Beziehung und als Bitte. „Der Müll ist voll“ kann heißen: Er ist voll · Ich bin genervt · Du hilfst nie · Bring ihn raus.\nBevor du antwortest, frag dich: Mit welchem Ohr höre ich gerade?",
+      "credit": "nach Friedemann Schulz von Thun",
+      "labels": {"sentence": "„Der Müll ist voll.“", "fact": "Sache", "self": "Ich", "rel": "Beziehung", "ask": "Bitte"}
+    },
+    "content_relationship": {
+      "title": "Sache und Beziehung",
+      "text": "Jede Nachricht hat ein „Was“ und ein „Wie gehen wir miteinander um“. Der Streit ums Geschirr ist oft ein Streit um Wertschätzung.\nSag beides: „Es geht ums Geschirr – und darum, ob ich dir wichtig bin.“",
+      "credit": "nach Paul Watzlawick",
+      "labels": {"what": "Was", "how": "Wie"}
+    },
+    "who_started": {
+      "title": "Wer hat angefangen?",
+      "text": "Jeder von euch glaubt, nur zu reagieren. „Ich dränge, weil du dich zurückziehst.“ „Ich ziehe mich zurück, weil du drängst.“ Der Kreis hat keinen Anfang.\nStatt zu suchen, wer angefangen hat: Sag, was du in der nächsten Runde anders machst.",
+      "credit": "nach Paul Watzlawick und Friedemann Schulz von Thun",
+      "labels": {"a": "Du ziehst dich zurück", "b": "Ich dränge"}
+    },
+    "how_heated": {
+      "title": "Wie heiß ist es schon?",
+      "text": "**Grün:** Ihr seid uneins, aber beide können noch gut rauskommen – sprecht direkt.\n**Gelb:** Andere werden hineingezogen, jemand hat das Gesicht verloren – redet, aber holt eine neutrale dritte Person dazu.\n**Rot:** Drohungen oder Versuche zu verletzen – nicht allein konfrontieren. Hol dir Hilfe.",
+      "credit": "nach den neun Eskalationsstufen von Friedrich Glasl",
+      "labels": {"g": "1–3", "a": "4–6", "r": "7–9"}
+    },
+    "seen_thought": {
+      "title": "Gesehen oder gedacht?",
+      "text": "**Kamera:** „Du kamst um 9:20, das Treffen war um\u00a09.“\n**Gedanke:** „Dir ist meine Zeit egal.“\nFang mit dem an, was eine Kamera aufnehmen würde. Dann sag, was es für dich bedeutet hat – als deine Sicht, nicht als Tatsache.",
+      "credit": "Beobachtung vor Bewertung – aus der Gewaltfreien Kommunikation (Marshall Rosenberg)",
+      "labels": {"time": "9:20"}
+    },
+    "four_poisons": {
+      "title": "Vier Gifte im Streit",
+      "text": "**Vorwurf** an die Person → benenne das Verhalten und was du brauchst.\n**Spott** → sag, was du fühlst.\n**Rechtfertigung** → übernimm deinen Teil, auch wenn es nur\u00a010\u00a0% sind.\n**Mauern** → sag „Ich brauche 20 Minuten“ und komm zurück.",
+      "credit": "nach der Forschung von John Gottman",
+      "labels": {}
+    },
+    "ask_then_say": {
+      "title": "Erst fragen, dann sagen",
+      "text": "Bevor du dein Argument bringst, fass die andere Seite zusammen: „Für dich ist das Problem also …, richtig?“\nWer sich verstanden fühlt, hört besser zu. Einmal gut gespiegelt wiegt mehr als drei Argumente.",
+      "credit": "aktives Zuhören – nach Carl Rogers und Thomas Gordon",
+      "labels": {}
+    },
+    "want_why": {
+      "title": "Was du willst – und wozu",
+      "text": "Ihr wollt beide die Orange. Sie braucht die Schale für einen Kuchen, er will den Saft.\nFrag: „Warum ist dir das wichtig?“ Hinter gegensätzlichen Positionen stecken oft Interessen, die zusammenpassen.",
+      "credit": "nach Roger Fisher und William Ury (Harvard Negotiation Project)",
+      "labels": {}
+    },
+    "request_yes": {
+      "title": "Eine Bitte, zu der man Ja sagen kann",
+      "text": "„Sei zuverlässiger“ ist ein Wunsch. „Schreibst du mir bis 18 Uhr, wenn es später wird?“ ist eine Bitte: konkret, machbar, positiv, mit Zeitpunkt.\nUnd eine echte Bitte erlaubt ein Nein – dann redet ihr darüber, was sonst gehen könnte.",
+      "credit": "nach Marshall Rosenberg (Gewaltfreie Kommunikation) und Marsha Linehan (DBT)",
+      "labels": {"who": "Wer?", "what": "Was?", "when": "Bis wann?"}
+    },
+    "if_then": {
+      "title": "Wenn …, dann sag ich …",
+      "text": "Nimm den Satz, vor dem du dich am meisten fürchtest („Du übertreibst“). Leg dir eine ruhige Antwort zurecht: „Vielleicht. Mir ist es trotzdem wichtig.“\nPläne nach dem Muster „Wenn …, dann …“ helfen nachweislich, unter Druck bei sich zu bleiben.",
+      "credit": "Wenn-dann-Pläne nach Peter Gollwitzer",
+      "labels": {"if": "Wenn …", "then": "dann …"}
+    },
+    "in_your_hands": {
+      "title": "Was in deiner Hand liegt",
+      "text": "Was die andere Person sagt oder tut, liegt nicht in deiner Hand. Dein Urteil darüber und dein nächster Satz schon.\nDein Gefühl kommt aus deinem Bedürfnis; die andere Person ist der Auslöser, nicht die Ursache. **Wer seinen Zug ändert, ändert die Schleife.**\nDas gilt für schwierige Menschen, nicht für Misshandlung: Eine Grenze bleibt eine Grenze.",
+      "credit": "nach Epiktet, Viktor Frankl, Albert Ellis, Paul Watzlawick und Marshall Rosenberg",
+      "labels": {"a": "deine Antwort", "b": "die andere Person"}
+    }
+  },
+  "en": {
+    "four_ears": {
+      "title": "Four ears",
+      "text": "Every sentence can be heard four ways: as a fact, as something about the speaker, as something about your relationship, and as a request. “The bin is full” can mean: it’s full · I’m annoyed · you never help · take it out.\nBefore you answer, ask yourself: which ear am I listening with?",
+      "credit": "after Friedemann Schulz von Thun",
+      "labels": {"sentence": "“The bin is full.”", "fact": "Fact", "self": "Me", "rel": "Us", "ask": "Request"}
+    },
+    "content_relationship": {
+      "title": "Content and relationship",
+      "text": "Every message has a “what” and a “how we treat each other”. A fight about the dishes is often a fight about respect.\nSay both: “It’s about the dishes – and it’s about whether I matter to you.”",
+      "credit": "after Paul Watzlawick",
+      "labels": {"what": "What", "how": "How"}
+    },
+    "who_started": {
+      "title": "Who started it?",
+      "text": "Each of you thinks you’re only reacting. “I push because you withdraw.” “I withdraw because you push.” The circle has no beginning.\nInstead of looking for who started, say what you’ll do differently next round.",
+      "credit": "after Paul Watzlawick and Friedemann Schulz von Thun",
+      "labels": {"a": "You withdraw", "b": "I push"}
+    },
+    "how_heated": {
+      "title": "How heated is it?",
+      "text": "**Green:** you disagree, but you can both still come out well – talk directly.\n**Amber:** others are being pulled in, someone has lost face – talk, but bring in a neutral third person.\n**Red:** threats or attempts to hurt – don’t confront them alone. Get help.",
+      "credit": "after Friedrich Glasl’s nine stages of escalation",
+      "labels": {"g": "1–3", "a": "4–6", "r": "7–9"}
+    },
+    "seen_thought": {
+      "title": "Seen or thought?",
+      "text": "**Camera:** “You came at 9:20, the meeting was at\u00a09.”\n**Thought:** “You don’t respect my time.”\nStart with what a camera would record. Then say what it meant to you – as your view, not as a fact.",
+      "credit": "observation before evaluation – from Nonviolent Communication (Marshall Rosenberg)",
+      "labels": {"time": "9:20"}
+    },
+    "four_poisons": {
+      "title": "Four poison habits",
+      "text": "**Blaming** the person → name the behaviour and what you need.\n**Mocking** → say what you feel.\n**Defending** → own your part, even if it’s only\u00a010%.\n**Shutting down** → say “I need 20 minutes” and come back.",
+      "credit": "after John Gottman’s research",
+      "labels": {}
+    },
+    "ask_then_say": {
+      "title": "Ask, then say",
+      "text": "Before you make your point, sum up theirs: “So for you the problem is …, right?”\nPeople who feel understood listen better. One good reflection is worth more than three arguments.",
+      "credit": "active listening – after Carl Rogers and Thomas Gordon",
+      "labels": {}
+    },
+    "want_why": {
+      "title": "What you want – and why",
+      "text": "You both want the orange. She needs the peel for a cake, he wants the juice.\nAsk: “Why is that important to you?” Behind opposite positions there are often interests that fit together.",
+      "credit": "after Roger Fisher and William Ury (Harvard Negotiation Project)",
+      "labels": {}
+    },
+    "request_yes": {
+      "title": "A request they can say yes to",
+      "text": "“Be more reliable” is a wish. “Could you text me by 6 if you’ll be late?” is a request: concrete, doable, positive, with a time.\nAnd a real request allows a “no” – then you talk about what else could work.",
+      "credit": "after Marshall Rosenberg (Nonviolent Communication) and Marsha Linehan (DBT)",
+      "labels": {"who": "Who?", "what": "What?", "when": "By when?"}
+    },
+    "if_then": {
+      "title": "If they say …, I’ll say …",
+      "text": "Pick the sentence you fear most (“You’re overreacting”). Prepare one calm answer: “Maybe. It still matters to me.”\nPlans in the form “If …, then I …” really do help people stay on course under stress.",
+      "credit": "if-then plans – after Peter Gollwitzer",
+      "labels": {"if": "If …", "then": "then …"}
+    },
+    "in_your_hands": {
+      "title": "What is in your hands",
+      "text": "What the other person says or does is not in your hands. Your judgement of it and your next line are.\nYour feeling comes from your need; the other person is the trigger, not the cause. **Change your move, and the loop changes.**\nThis is about difficult people, not abuse: a boundary stays a boundary.",
+      "credit": "after Epictetus, Viktor Frankl, Albert Ellis, Paul Watzlawick and Marshall Rosenberg",
+      "labels": {"a": "your answer", "b": "the other person"}
+    }
+  },
+  "es": {
+    "four_ears": {
+      "title": "Cuatro oídos",
+      "text": "Cada frase se puede oír de cuatro maneras: como un hecho, como algo sobre quien habla, sobre vuestra relación o como una petición. «La basura está llena» puede querer decir: está llena · me molesta · nunca ayudas · sácala.\nAntes de responder, pregúntate: ¿con qué oído estoy escuchando?",
+      "credit": "según Friedemann Schulz von Thun",
+      "labels": {"sentence": "«La basura está llena.»", "fact": "Hecho", "self": "Yo", "rel": "Nosotros", "ask": "Petición"}
+    },
+    "content_relationship": {
+      "title": "Contenido y relación",
+      "text": "Cada mensaje tiene un «qué» y un «cómo nos tratamos». Una pelea por los platos suele ser, en el fondo, una pelea por el respeto.\nDi las dos cosas: «Va de los platos… y de si te importo».",
+      "credit": "según Paul Watzlawick",
+      "labels": {"what": "Qué", "how": "Cómo"}
+    },
+    "who_started": {
+      "title": "¿Quién empezó?",
+      "text": "Cada uno cree que solo está reaccionando. «Insisto porque te alejas.» «Me alejo porque insistes.» El círculo no tiene principio.\nEn vez de buscar quién empezó, di qué vas a hacer distinto en la próxima vuelta.",
+      "credit": "según Paul Watzlawick y Friedemann Schulz von Thun",
+      "labels": {"a": "Te alejas", "b": "Insisto"}
+    },
+    "how_heated": {
+      "title": "¿Cómo de caldeado está?",
+      "text": "**Verde:** no estáis de acuerdo, pero los dos aún podéis salir bien – hablad directamente.\n**Ámbar:** se está metiendo a otras personas, alguien ha quedado mal – hablad, pero con una tercera persona neutral.\n**Rojo:** amenazas o intentos de hacer daño – no te enfrentes a solas. Pide ayuda.",
+      "credit": "según las nueve etapas de escalada de Friedrich Glasl",
+      "labels": {"g": "1–3", "a": "4–6", "r": "7–9"}
+    },
+    "seen_thought": {
+      "title": "¿Visto o pensado?",
+      "text": "**Cámara:** «Llegaste a las 9:20 y la reunión era a\u00a0las\u00a09.»\n**Pensamiento:** «No respetas mi tiempo.»\nEmpieza por lo que grabaría una cámara. Después di lo que significó para ti, como tu punto de vista y no como un hecho.",
+      "credit": "observar antes de evaluar – de la Comunicación No Violenta (Marshall Rosenberg)",
+      "labels": {"time": "9:20"}
+    },
+    "four_poisons": {
+      "title": "Cuatro venenos al discutir",
+      "text": "**Culpar** a la persona → nombra la conducta y lo que necesitas.\n**Burlarse** → di lo que sientes.\n**Defenderse** → asume tu parte, aunque sea un\u00a010\u00a0%.\n**Cerrarse** → di «Necesito 20 minutos» y vuelve.",
+      "credit": "según la investigación de John Gottman",
+      "labels": {}
+    },
+    "ask_then_say": {
+      "title": "Primero pregunta, luego habla",
+      "text": "Antes de defender lo tuyo, resume lo del otro: «Entonces, para ti el problema es…, ¿verdad?»\nQuien se siente comprendido escucha mejor. Repetir bien lo que has entendido vale más que tres argumentos.",
+      "credit": "escucha activa – según Carl Rogers y Thomas Gordon",
+      "labels": {}
+    },
+    "want_why": {
+      "title": "Lo que quieres y para qué",
+      "text": "Los dos queréis la naranja. Ella necesita la piel para un bizcocho; él quiere el zumo.\nPregunta: «¿Por qué es importante para ti?» Detrás de posturas opuestas suele haber intereses que encajan.",
+      "credit": "según Roger Fisher y William Ury (Harvard Negotiation Project)",
+      "labels": {}
+    },
+    "request_yes": {
+      "title": "Una petición a la que puedan decir sí",
+      "text": "«Sé más fiable» es un deseo. «¿Me escribes antes de las 6 si vas a llegar tarde?» es una petición: concreta, posible, en positivo y con\u00a0hora.\nUna petición de verdad admite un «no»: entonces habláis de qué más podría funcionar.",
+      "credit": "según Marshall Rosenberg (Comunicación No Violenta) y Marsha Linehan (DBT)",
+      "labels": {"who": "¿Quién?", "what": "¿Qué?", "when": "¿Para cuándo?"}
+    },
+    "if_then": {
+      "title": "Si me dice…, le diré…",
+      "text": "Elige la frase que más temes («Estás exagerando»). Prepara una respuesta tranquila: «Puede ser. Aun así, para mí es importante.»\nLos planes del tipo «Si…, entonces yo…» ayudan de verdad a no perder el rumbo bajo presión.",
+      "credit": "planes «si…, entonces…» – según Peter Gollwitzer",
+      "labels": {"if": "Si…", "then": "entonces…"}
+    },
+    "in_your_hands": {
+      "title": "Lo que está en tus manos",
+      "text": "Lo que la otra persona dice o hace no está en tus manos. Tu juicio y tu próxima frase, sí.\nTu sentimiento nace de tu necesidad; la otra persona es el detonante, no la causa. **Cambia tu jugada y cambiará el bucle.**\nVale para personas difíciles, no para el maltrato: un límite sigue siendo límite.",
+      "credit": "según Epicteto, Viktor Frankl, Albert Ellis, Paul Watzlawick y Marshall Rosenberg",
+      "labels": {"a": "tu respuesta", "b": "la otra persona"}
+    }
+  }
+}

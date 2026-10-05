@@ -1,0 +1,221 @@
+# Peticiones.
+#
+# Dos capas, igual que en alemán.
+#
+# La capa general es la de reserva. Depende solo del objetivo y de la
+# claridad, así que tiene que servir para las seis situaciones, y eso limita
+# mucho la redacción: ninguna entrada puede nombrar un objeto, un lugar o un
+# motivo. Una entrada general se concreta por el momento y la acción («antes
+# del jueves a mediodía», «el mismo día»), nunca por la cosa en sí.
+#
+# Las entradas con `situation` están en la capa de escena y se ofrecen
+# primero. Véase internal/corpus/corpus.go → SceneRequestKey.
+#
+# Se comprueban contra content/es/lexicon/request-layer.yaml con la claridad
+# de la propia entrada: una entrada `high` puede decir «a partir de ahora»,
+# una `low` no.
+#
+# Register: gesprochenes Spanisch aus Spanien, Imperativ mit tú und eine
+# Zeitangabe, wo die Bitte prüfbar werden soll. „Por favor" fehlt fast
+# überall mit Absicht — im Spanischen macht es eine Bitte oft eher förmlich
+# als freundlich, und die Wärme trägt hier die Tonlage des Rahmens.
+
+min_per_bucket: 2
+
+entries:
+  # ══ Capa general — clave: goal × risk = 18 casillas ════════════════════
+
+  # ── understand ────────────────────────────────────────────────────────
+  - { goal: understand, risk: low, text: "Ayúdame a entender cómo se llegó a esto: ¿cómo lo viste tú?" }
+  - { goal: understand, risk: low, text: "Cuéntame cómo viviste tú la situación." }
+  - { goal: understand, risk: medium, text: "Explícame antes de mañana cómo llegaste a esa decisión." }
+  - { goal: understand, risk: medium, text: "¿Nos sentamos esta semana y repasamos los puntos? Dime qué día te va bien." }
+  - { goal: understand, risk: high, text: "Explícamelo hoy: ¿cómo llegaste ahí?" }
+  - { goal: understand, risk: high, text: "Dame tus razones, y dámelas en esta conversación." }
+
+  # ── change ────────────────────────────────────────────────────────────
+  - { goal: change, risk: low, text: "Avísame con tiempo cuando la cosa se ponga justa." }
+  - { goal: change, risk: low, text: "Me ayudaría que me avisaras pronto cuando algo cambie." }
+  - { goal: change, risk: medium, text: "Dime antes del jueves a mediodía a qué atenerme contigo." }
+  - { goal: change, risk: medium, text: "Pregúntame una vez antes de comprometerte en mi nombre." }
+  - { goal: change, risk: high, text: "A partir de ahora necesito que me lo digas el mismo día en que algo cambie." }
+  - { goal: change, risk: high, text: "Para el viernes cuento con que se cumpla lo que acordamos." }
+
+  # ── set_boundary ──────────────────────────────────────────────────────
+  - { goal: set_boundary, risk: low, text: "Pregúntame antes de decidir sobre ello." }
+  - { goal: set_boundary, risk: low, text: "Para mí es importante que lo hablemos primero entre tú y yo." }
+  - { goal: set_boundary, risk: medium, text: "Pregúntame primero y espera mi respuesta." }
+  - { goal: set_boundary, risk: medium, text: "Dime algo antes de hacerlo de otra manera." }
+  - { goal: set_boundary, risk: high, text: "Lo que acabo de decir es lo que espero que se mantenga." }
+  - { goal: set_boundary, risk: high, text: "Aquí está mi límite. Te pido que lo respetes desde hoy." }
+
+  # ── seek_solution ─────────────────────────────────────────────────────
+  - { goal: seek_solution, risk: low, text: "¿Le damos una vuelta entre tú y yo, media hora esta semana?" }
+  - { goal: seek_solution, risk: low, text: "Me importa que fijemos una regla para esto entre tú y yo." }
+  - { goal: seek_solution, risk: medium, text: "Acordemos un orden fijo antes del viernes y pongámoslo por escrito." }
+  - { goal: seek_solution, risk: medium, text: "Háblalo conmigo: ¿cómo lo hacemos la próxima vez?" }
+  - { goal: seek_solution, risk: high, text: "Lo resolvemos hoy, y salimos de aquí con ello por escrito." }
+  - { goal: seek_solution, risk: high, text: "Para el lunes necesito un acuerdo firme que asumamos tú y yo." }
+
+  # ── express_feeling ───────────────────────────────────────────────────
+  - { goal: express_feeling, risk: low, text: "Me importa que sepas cómo me llegó. ¿Me escuchas un momento?" }
+  - { goal: express_feeling, risk: low, text: "Déjame contarte lo que me provocó, y déjame terminar." }
+  - { goal: express_feeling, risk: medium, text: "Escúchame diez minutos antes de responder." }
+  - { goal: express_feeling, risk: medium, text: "Escucha lo que me ronda la cabeza, y luego dime cómo lo ves." }
+  - { goal: express_feeling, risk: high, text: "Escúchame ahora. Te lo digo en serio." }
+  - { goal: express_feeling, risk: high, text: "Tómate un momento con esto, y luego dime qué vas a hacer con ello." }
+
+  # ── closure ───────────────────────────────────────────────────────────
+  - { goal: closure, risk: low, text: "¿Podemos cerrarlo con calma? Dime cómo te imaginas el final." }
+  - { goal: closure, risk: low, text: "Me importa que repasemos una vez, tú y yo, los puntos abiertos." }
+  - { goal: closure, risk: medium, text: "Repasa conmigo el traspaso antes de que acabe la semana." }
+  - { goal: closure, risk: medium, text: "Fijemos una fecha en la que terminemos con esto." }
+  - { goal: closure, risk: high, text: "Lo doy por terminado aquí. Dime antes del viernes si lo aceptas." }
+  - { goal: closure, risk: high, text: "Pongo un punto final. Lo pendiente se cierra antes de fin de mes." }
+
+  # ══════════════════════════════════════════════════════════════════════
+  # Capa de escena — clave: situation × goal × risk = 108 casillas
+  #
+  # Una petición nombra una acción, y las acciones pertenecen al motivo. Por
+  # eso es la única capa afinada por situación.
+  # ══════════════════════════════════════════════════════════════════════
+
+  # ── Fiabilidad y compromisos ─────────────────────────────────────────
+  - { situation: reliability_deadlines, goal: understand, risk: low, text: "¿Me cuentas qué se cruzó por el camino?" }
+  - { situation: reliability_deadlines, goal: understand, risk: medium, text: "Dime antes de mañana qué impidió cumplir la fecha." }
+  - { situation: reliability_deadlines, goal: understand, risk: high, text: "Explícame hoy por qué no se cumplió el compromiso." }
+  - { situation: reliability_deadlines, goal: change, risk: low, text: "Avísame pronto cuando una fecha corra peligro." }
+  - { situation: reliability_deadlines, goal: change, risk: medium, text: "Mira el calendario antes de comprometerte." }
+  - { situation: reliability_deadlines, goal: change, risk: high, text: "A partir de ahora, dime el mismo día cuando una fecha se retrase." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: low, text: "Comprométete solo con lo que puedas cumplir." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: medium, text: "Confírmame una fecha solo después de haberla comprobado." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: high, text: "Si te comprometes, cumple. Si no puedes, dímelo y planifico sin ti." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: low, text: "¿Vemos entre tú y yo cómo fijamos las fechas en adelante?" }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: medium, text: "Acordemos un recordatorio dos días antes de cada fecha." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: high, text: "Hoy decidimos cómo se confirman las fechas entre tú y yo." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: low, text: "Escúchame un momento sobre lo que me provoca la espera." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: medium, text: "Escucha lo que me cuesta cuando una fecha se mueve." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa cuando yo ya he dado mi palabra a otros." }
+  - { situation: reliability_deadlines, goal: closure, risk: low, text: "¿Repasamos una vez las fechas pendientes y las cerramos?" }
+  - { situation: reliability_deadlines, goal: closure, risk: medium, text: "Dame esta semana una fecha definitiva para lo pendiente." }
+  - { situation: reliability_deadlines, goal: closure, risk: high, text: "Necesito una fecha firme antes del viernes. Con eso queda cerrado." }
+
+  # ── Críticas y comentarios ───────────────────────────────────────────
+  - { situation: criticism_feedback, goal: understand, risk: low, text: "¿Me cuentas qué te llevó a esa valoración?" }
+  - { situation: criticism_feedback, goal: understand, risk: medium, text: "Dime a qué parte te referías, con un ejemplo." }
+  - { situation: criticism_feedback, goal: understand, risk: high, text: "Dime hoy qué estabas juzgando exactamente." }
+  - { situation: criticism_feedback, goal: change, risk: low, text: "Cuéntame primero a mí lo que piensas." }
+  - { situation: criticism_feedback, goal: change, risk: medium, text: "Dime tus comentarios a mí antes de que lleguen a otros." }
+  - { situation: criticism_feedback, goal: change, risk: high, text: "Háblame directamente a mí, no delante del grupo." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: low, text: "Comenta primero conmigo tu valoración." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: medium, text: "Habla del resultado y deja mi persona al margen." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: high, text: "Los juicios sobre mi persona no van delante de otros. Dímelos a mí." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: low, text: "¿Acordamos cómo nos damos comentarios?" }
+  - { situation: criticism_feedback, goal: seek_solution, risk: medium, text: "Fijemos un rato cada dos semanas para comentarnos las cosas." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: high, text: "Hoy acordamos cómo me llegan las críticas en adelante." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: low, text: "Escúchame un momento sobre cómo me llegó la frase." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: medium, text: "Escucha lo que me provocó delante de los demás." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa que te juzguen delante de todos." }
+  - { situation: criticism_feedback, goal: closure, risk: low, text: "¿Lo hablamos una vez y luego lo dejamos estar?" }
+  - { situation: criticism_feedback, goal: closure, risk: medium, text: "Dime antes de que acabe la semana si el punto sigue en pie." }
+  - { situation: criticism_feedback, goal: closure, risk: high, text: "Lo aclaramos antes del viernes, y después queda cerrado." }
+
+  # ── Un límite traspasado ─────────────────────────────────────────────
+  - { situation: boundary_violation, goal: understand, risk: low, text: "¿Me cuentas qué te llevó a decidirlo así?" }
+  - { situation: boundary_violation, goal: understand, risk: medium, text: "Dime por qué no me preguntaste antes." }
+  - { situation: boundary_violation, goal: understand, risk: high, text: "Explícame hoy cómo llegaste a pasar por encima de eso." }
+  - { situation: boundary_violation, goal: change, risk: low, text: "La próxima vez, pregúntame primero." }
+  - { situation: boundary_violation, goal: change, risk: medium, text: "Espera mi respuesta antes de seguir adelante." }
+  - { situation: boundary_violation, goal: change, risk: high, text: "A partir de ahora: pregúntame primero y espera la respuesta." }
+  - { situation: boundary_violation, goal: set_boundary, risk: low, text: "Pregúntame antes de decidir sobre algo mío." }
+  - { situation: boundary_violation, goal: set_boundary, risk: medium, text: "Pregúntame en lugar de dar mi acuerdo por supuesto." }
+  - { situation: boundary_violation, goal: set_boundary, risk: high, text: "Lo que es mío y lo que me afecta lo decido yo. Pregúntame primero." }
+  - { situation: boundary_violation, goal: seek_solution, risk: low, text: "¿Acordamos dónde está el límite, para ti y para mí?" }
+  - { situation: boundary_violation, goal: seek_solution, risk: medium, text: "Apuntemos qué cosas hay que consultar antes." }
+  - { situation: boundary_violation, goal: seek_solution, risk: high, text: "Hoy dejamos claro qué decido yo." }
+  - { situation: boundary_violation, goal: express_feeling, risk: low, text: "Escúchame un momento sobre por qué esto me importa." }
+  - { situation: boundary_violation, goal: express_feeling, risk: medium, text: "Escucha lo que me provoca cuando se cruza ese límite." }
+  - { situation: boundary_violation, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa para mí que se pase por encima de mi límite." }
+  - { situation: boundary_violation, goal: closure, risk: low, text: "¿Lo dejamos atrás cuando esté claro?" }
+  - { situation: boundary_violation, goal: closure, risk: medium, text: "Confírmame antes de que acabe la semana que esto queda así." }
+  - { situation: boundary_violation, goal: closure, risk: high, text: "Necesito tu palabra hoy. Con eso queda cerrado." }
+
+  # ── Un malentendido ──────────────────────────────────────────────────
+  - { situation: misunderstanding, goal: understand, risk: low, text: "¿Me cuentas cómo lo habías entendido tú?" }
+  - { situation: misunderstanding, goal: understand, risk: medium, text: "Dime en qué punto se nos separó." }
+  - { situation: misunderstanding, goal: understand, risk: high, text: "Explícame hoy qué entendiste tú." }
+  - { situation: misunderstanding, goal: change, risk: low, text: "Pregúntame cuando algo no esté claro." }
+  - { situation: misunderstanding, goal: change, risk: medium, text: "Consúltame antes de decidir sobre un punto que no está claro." }
+  - { situation: misunderstanding, goal: change, risk: high, text: "A partir de ahora, pregúntame antes de actuar por una suposición." }
+  - { situation: misunderstanding, goal: set_boundary, risk: low, text: "Pregúntame cuando algo no esté claro, en lugar de decidirlo." }
+  - { situation: misunderstanding, goal: set_boundary, risk: medium, text: "Comprométete en mi nombre solo con lo que hayamos hablado." }
+  - { situation: misunderstanding, goal: set_boundary, risk: high, text: "En mi nombre no te comprometes a nada. Pregúntame primero." }
+  - { situation: misunderstanding, goal: seek_solution, risk: low, text: "¿Vemos cómo dejarlo claro en adelante?" }
+  - { situation: misunderstanding, goal: seek_solution, risk: medium, text: "Después de acordar algo, escribamos el acuerdo en dos frases." }
+  - { situation: misunderstanding, goal: seek_solution, risk: high, text: "Hoy fijamos cómo confirmamos lo acordado." }
+  - { situation: misunderstanding, goal: express_feeling, risk: low, text: "Escúchame un momento sobre lo que me provocó la confusión." }
+  - { situation: misunderstanding, goal: express_feeling, risk: medium, text: "Escucha lo que me costó rehacerlo." }
+  - { situation: misunderstanding, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa explicarlo tres veces." }
+  - { situation: misunderstanding, goal: closure, risk: low, text: "¿Lo aclaramos y luego lo dejamos estar?" }
+  - { situation: misunderstanding, goal: closure, risk: medium, text: "Confírmame esta semana lo que vale ahora." }
+  - { situation: misunderstanding, goal: closure, risk: high, text: "Lo necesito por escrito antes del viernes. Con eso queda cerrado." }
+
+  # ── Poder y decisiones ───────────────────────────────────────────────
+  - { situation: power_decision, goal: understand, risk: low, text: "¿Me cuentas cómo se llegó a la decisión?" }
+  - { situation: power_decision, goal: understand, risk: medium, text: "Dime quién participó y cuándo." }
+  - { situation: power_decision, goal: understand, risk: high, text: "Explícame hoy por qué me quedé fuera." }
+  - { situation: power_decision, goal: change, risk: low, text: "Inclúyeme cuando afecte a mi área." }
+  - { situation: power_decision, goal: change, risk: medium, text: "Comenta conmigo primero las decisiones sobre mis tareas." }
+  - { situation: power_decision, goal: change, risk: high, text: "A partir de ahora, inclúyeme antes de que se decida." }
+  - { situation: power_decision, goal: set_boundary, risk: low, text: "Acuerda conmigo cuál es mi área de responsabilidad." }
+  - { situation: power_decision, goal: set_boundary, risk: medium, text: "Consúltame antes las decisiones sobre mis tareas." }
+  - { situation: power_decision, goal: set_boundary, risk: high, text: "Sobre mi área decides conmigo, no por encima de mí." }
+  - { situation: power_decision, goal: seek_solution, risk: low, text: "¿Pensamos entre tú y yo cómo se preparan este tipo de decisiones?" }
+  - { situation: power_decision, goal: seek_solution, risk: medium, text: "Fijemos quién participa y cuándo." }
+  - { situation: power_decision, goal: seek_solution, risk: high, text: "Hoy ponemos por escrito cómo se decide en adelante en mi área." }
+  - { situation: power_decision, goal: express_feeling, risk: low, text: "Escúchame un momento sobre lo que es enterarse después." }
+  - { situation: power_decision, goal: express_feeling, risk: medium, text: "Escucha lo que me provoca que se me pase por alto." }
+  - { situation: power_decision, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa cargar con lo que otros deciden." }
+  - { situation: power_decision, goal: closure, risk: low, text: "¿Aclaramos cómo seguimos a partir de aquí?" }
+  - { situation: power_decision, goal: closure, risk: medium, text: "Dime antes de que acabe la semana qué vale ahora para mi área." }
+  - { situation: power_decision, goal: closure, risk: high, text: "Necesito claridad antes del viernes sobre quién decide qué. Con eso queda resuelto." }
+
+  # ── Cierre y despedida ───────────────────────────────────────────────
+  - { situation: breakup_closure, goal: understand, risk: low, text: "¿Me cuentas cómo lo ves ahora?" }
+  - { situation: breakup_closure, goal: understand, risk: medium, text: "Dime qué te ha traído hasta este punto." }
+  - { situation: breakup_closure, goal: understand, risk: high, text: "Explícame hoy dónde estás." }
+  - { situation: breakup_closure, goal: change, risk: low, text: "Avísame cuando algo cambie para ti." }
+  - { situation: breakup_closure, goal: change, risk: medium, text: "Contesta a mis mensajes en el plazo de una semana." }
+  - { situation: breakup_closure, goal: change, risk: high, text: "Respóndeme antes del viernes. Así sabremos dónde estamos." }
+  - { situation: breakup_closure, goal: set_boundary, risk: low, text: "Dame algo de tiempo antes de resolver el resto." }
+  - { situation: breakup_closure, goal: set_boundary, risk: medium, text: "Deja las llamadas en pausa las próximas dos semanas." }
+  - { situation: breakup_closure, goal: set_boundary, risk: high, text: "Necesito distancia. Escríbeme cuando yo te escriba." }
+  - { situation: breakup_closure, goal: seek_solution, risk: low, text: "¿Repasamos una vez, tú y yo, los puntos abiertos?" }
+  - { situation: breakup_closure, goal: seek_solution, risk: medium, text: "Fijemos una fecha para repartir lo que queda." }
+  - { situation: breakup_closure, goal: seek_solution, risk: high, text: "Hoy cerramos lo pendiente y apuntamos lo que queda acordado." }
+  - { situation: breakup_closure, goal: express_feeling, risk: low, text: "Escúchame un momento sobre lo que me provoca este final." }
+  - { situation: breakup_closure, goal: express_feeling, risk: medium, text: "Escucha lo que me provoca el silencio." }
+  - { situation: breakup_closure, goal: express_feeling, risk: high, text: "Tómate un momento para ver lo que significa quedarse sin una despedida." }
+  - { situation: breakup_closure, goal: closure, risk: low, text: "¿Podemos cerrarlo con calma y despedirnos bien?" }
+  - { situation: breakup_closure, goal: closure, risk: medium, text: "Dime antes de que acabe la semana cómo lo terminamos." }
+  - { situation: breakup_closure, goal: closure, risk: high, text: "Le pongo fin. Dime antes del viernes si lo aceptas." }
+
+  # ── textchat: pelea en el chat del grupo / de clase (04.10.2026) ────────────────────────────
+  - { situation: textchat, goal: understand, risk: low, text: "¿Me dices cómo iba tu «ok.»?" }
+  - { situation: textchat, goal: understand, risk: medium, text: "Te pido que me escribas en una frase qué te molestó de mi mensaje." }
+  - { situation: textchat, goal: understand, risk: high, text: "Quiero que me expliques hoy cómo llegó la captura al grupo." }
+  - { situation: textchat, goal: change, risk: low, text: "Me ayudaría que estas cosas me las escribas a mí directamente en vez de al grupo." }
+  - { situation: textchat, goal: change, risk: medium, text: "Te pido que los mensajes sobre mí me los mandes primero a mí, no al grupo." }
+  - { situation: textchat, goal: change, risk: high, text: "Espero que las capturas de nuestro chat solo las mandes a otros con mi permiso." }
+  - { situation: textchat, goal: set_boundary, risk: low, text: "Quiero que estas cosas las aclaremos entre los dos y las dejemos fuera del grupo." }
+  - { situation: textchat, goal: set_boundary, risk: medium, text: "Te pido que me preguntes antes de poner una foto mía en el grupo." }
+  - { situation: textchat, goal: set_boundary, risk: high, text: "Te pido que borres hoy la foto de ayer y que la próxima vez me preguntes antes." }
+  - { situation: textchat, goal: seek_solution, risk: low, text: "Hablemos cinco minutos en vez de resolverlo por chat: ¿cuándo te viene bien?" }
+  - { situation: textchat, goal: seek_solution, risk: medium, text: "Quiero que quedemos mañana cinco minutos y lo resolvamos, en vez de seguir escribiendo." }
+  - { situation: textchat, goal: seek_solution, risk: high, text: "Quiero que hablemos hoy y acordemos qué de nuestro chat puede ir al grupo y qué no." }
+  - { situation: textchat, goal: express_feeling, risk: low, text: "Quiero contarte cómo me llegó el mensaje: ¿me escuchas dos minutos?" }
+  - { situation: textchat, goal: express_feeling, risk: medium, text: "Te pido que leas mi mensaje entero antes de contestar." }
+  - { situation: textchat, goal: express_feeling, risk: high, text: "Quiero que escuches lo que me hizo el mensaje delante del grupo antes de que expliques nada." }
+  - { situation: textchat, goal: closure, risk: low, text: "Me salgo del grupo, y te pido que lo dejes así, sin comentarlo en el grupo." }
+  - { situation: textchat, goal: closure, risk: medium, text: "Te pido que me escribas solo para citas y nada más." }
+  - { situation: textchat, goal: closure, risk: high, text: "Hoy bloqueo nuestro chat. Si hay algo importante, dímelo en persona." }

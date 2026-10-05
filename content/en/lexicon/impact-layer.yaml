@@ -1,0 +1,228 @@
+# Rules for the impact layer (I-statements).
+#
+# Doctrine: describe your own reaction. Nobody can argue with what you felt;
+# everybody will argue with what you claim they did to you.
+#
+# ── Zur Reichweite der Umformulierungen ───────────────────────────────
+#
+# Die Engine formuliert nur am Satzanfang um. Diese Schranke stammt aus dem
+# Deutschen: „Wegen dir bin ich unruhig" lässt sich nicht in „Ich bin
+# unruhig" verwandeln, ohne den Satzbau zu zerlegen.
+#
+# Fürs Englische wäre sie nicht nötig — „you make me angry" → „I get angry"
+# trägt an jeder Stelle im Satz. Sie gilt hier trotzdem, weil sie in
+# internal/rules global ist und nicht an der Sprache hängt.
+#
+# Das ist eine bewusste Vereinfachung, kein Versehen: Eine zu vorsichtige
+# Umformulierung erzeugt nie einen kaputten Satz. Der Befund wird ohnehin
+# gemeldet, nur eben als Rückfrage statt als fertiger Vorschlag — „and you
+# ignored me" mitten im Satz wird angemahnt, aber nicht ersetzt.
+#
+# Wer das ändern will, braucht eine Eigenschaft am Regelwerk
+# (rewrite_scope: sentence_start | anywhere) statt einer festen Prüfung in
+# rules.go. Solange es sie nicht gibt, gilt die strengere Regel für alle.
+
+layer: impact
+
+groups:
+  - kind: you_message
+    severity: block
+    source: "Thomas Gordon, I-messages"
+    more: ich-botschaften
+    why: |
+      "You make me angry" asserts a cause, and a cause can be denied.
+      "I get angry" describes what actually happened and cannot be argued
+      with. The sentence gets weaker as a claim and stronger in effect.
+    rules:
+      - id: you-make-me
+        match: "you make me (\\p{L}+)"
+        message: "“{match}” makes the other person the cause of your feeling."
+        ask: "The reaction is yours. Put it in the I-form."
+        rewrite:
+          - template: "I get $1"
+            note: "The attribution becomes your own reaction."
+        tests:
+          hits: ["You make me angry", "you make me nervous"]
+          misses: ["I get angry", "You make coffee every morning"]
+
+      - id: you-made-me-feel
+        match: "you made me feel (\\p{L}+)"
+        message: "“{match}” hands the responsibility for your feeling across."
+        ask: "Say what you felt, without making them the author of it."
+        rewrite:
+          - template: "I felt $1"
+            note: "The feeling stays, the perspective moves."
+        tests:
+          hits: ["You made me feel small", "you made me feel stupid"]
+          misses: ["I felt small", "That made the room feel small"]
+
+      - id: you-hurt-me
+        # Geschlossene Liste statt eines Musters auf Partizipien: Ohne
+        # Morphologie wäre jedes Wort nach „you have" ein Kandidat, und die
+        # Umformulierung würde Unsinn erzeugen.
+        match: "you (hurt|ignored|dismissed|overruled|humiliated|belittled|interrupted|excluded|overlooked|criticised|criticized|embarrassed|betrayed|misled) me"
+        message: "“{match}” assigns the effect to the other person."
+        ask: "Describe how it landed with you."
+        rewrite:
+          - template: "I felt $1"
+            note: "The verb stays, the perspective moves."
+        tests:
+          hits: ["You ignored me", "you humiliated me"]
+          misses: ["I felt ignored", "You saw me at the station"]
+
+      - id: because-of-you
+        match: "because of you|thanks to you|it'?s your fault|its your fault"
+        message: "“{match}” names a culprit instead of a reaction."
+        ask: "Leave the cause out for the opening. What is going on with you?"
+        tests:
+          hits: ["Because of you I could not sleep", "It's your fault"]
+          misses: ["Because of the weather we stayed in"]
+
+  - kind: pseudo_i_message
+    severity: warn
+    source: "Thomas Gordon, I-messages"
+    more: ich-botschaften
+    why: |
+      "I feel that you are unfair" is an I-statement in grammar only. What
+      follows "I feel" is a judgement about the other person, and it will be
+      heard as one — with the extra irritation of being dressed up.
+    rules:
+      - id: pseudo-feel-that
+        match: "i feel (that|like) you"
+        message: "“{match}” is a judgement in the shape of a feeling."
+        ask: "What is the feeling itself? One word is enough."
+        tests:
+          hits: ["I feel that you do not care", "I feel like you ignore me"]
+          misses: ["I feel tired", "I feel that this is difficult for me"]
+
+
+  - kind: faux_feeling
+    severity: info
+    source: "Marshall B. Rosenberg: feeling or interpretation"
+    more: ich-botschaften
+    why: |
+      "I feel ignored" isn't wrong — it just says more about the other
+      person than about you: what you think they did. The feeling underneath
+      (hurt, sad, angry) is harder to argue with and easier to hear. Both may
+      stay.
+    rules:
+      - id: pseudo-feel-adverb
+        match: "i (feel|felt|have felt|'ve felt|was feeling|am feeling|'m feeling) (so |really |completely |a bit |quite |very )?(ignored|attacked|patronised|patronized|dismissed|manipulated|controlled|judged|used|unheard|unseen|disrespected|belittled|pressured|blamed|criticised|criticized|rejected|abandoned|betrayed|left out|taken for granted|talked down to)"
+        message: "“{match}” — that says what you think they did."
+        ask: "What do you feel underneath — hurt, sad, angry?"
+        tests:
+          hits: ["I feel ignored", "I felt completely dismissed", "I feel taken for granted"]
+          misses: ["I feel uneasy", "I feel angry"]
+
+  - kind: blame_framing
+    severity: warn
+    source: "John Gottman: gentle start-up"
+    more: ich-botschaften
+    why: |
+      A sentence that opens with the other person's failure has already
+      chosen its subject. Whatever comes after it is heard as the charge
+      sheet, not as your experience.
+    rules:
+      - id: blame-you-always-me
+        match: "you (always|never) (\\p{L}+) me"
+        message: "“{match}” turns your reaction into their record."
+        ask: "Start with yourself. What did this one occasion do to you?"
+        tests:
+          hits: ["You never tell me", "You always interrupt me"]
+          misses: ["I never told you", "You told me yesterday"]
+
+      - id: blame-if-you-had
+        # Ohne das Leerzeichen am Ende: Der Lader hängt selbst eine
+        # Wortgrenze an, ein zusätzliches Leerzeichen im Muster verlangt
+        # damit zwei Nicht-Buchstaben hintereinander — und die Regel traf
+        # nie. Der Selbsttest hat es sofort gemeldet.
+        match: "if you (had|would have|'d) (just|only)"
+        message: "“{match}” argues about a past that cannot be changed."
+        ask: "What is true now? Say that instead."
+        tests:
+          hits: ["If you had just asked me", "If you would have only said"]
+          misses: ["If I had known", "If you want, we can start now"]
+
+  - kind: missing_feeling
+    severity: warn
+    source: "Thomas Gordon, I-messages"
+    more: ich-botschaften
+    why: |
+      Without a feeling, this layer says nothing the other side could not
+      have worked out themselves. The feeling is the part that is yours and
+      that nobody can dispute — leaving it out gives away the only thing
+      that makes the sentence unarguable.
+    rules: []
+    absence_check:
+      id: feel-missing
+      message: "There is no feeling here yet."
+      ask: "What was the feeling? One word is enough."
+      # Schlägt an, wenn keines dieser Wörter vorkommt.
+      #
+      # Die erste Fassung war zu knapp und hat 23 einwandfreie Einträge des
+      # eigenen Korpus angemahnt — „worn out", „furious", „let down" waren
+      # nicht drin. Derselbe Fehler wie im deutschen Regelwerk, wo die Liste
+      # zweimal nachgezogen werden musste. Sie ist eher zu lang als zu kurz:
+      # Ein übersehenes Gefühlswort erzeugt eine falsche Mahnung, ein
+      # überflüssiges nur eine ausbleibende.
+      vocabulary:
+        - hurt
+        - upset
+        - angry
+        - annoyed
+        - irritated
+        - frustrated
+        - disappointed
+        - sad
+        - lonely
+        - anxious
+        - uneasy
+        - nervous
+        - worried
+        - helpless
+        - powerless
+        - exhausted
+        - drained
+        - tired
+        - ashamed
+        - embarrassed
+        - relieved
+        - unsettled
+        - overwhelmed
+        - discouraged
+        - resentful
+        - insecure
+        - uncomfortable
+        - stressed
+        - furious
+        - exposed
+        - overlooked
+        - sidelined
+        - unsafe
+        - small
+        - let down
+        - worn out
+        - worn
+        - fed up
+        - torn
+        - numb
+        - restless
+        - apprehensive
+        # Faux feelings count as a feeling here: they get their own soft
+        # hint (pseudo-feel-adverb), never "no feeling yet".
+        - ignored
+        - attacked
+        - dismissed
+        - manipulated
+        - controlled
+        - judged
+        - unheard
+        - disrespected
+        - belittled
+        - pressured
+        - rejected
+        - left out
+        - taken for granted
+      tests:
+        hits: ["It happened on Tuesday and I replanned my day"]
+        misses: ["I am annoyed because I replanned my day twice", "I felt hurt", "I feel ignored"]

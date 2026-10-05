@@ -1,0 +1,81 @@
+# Eröffnungen und Gesprächswerkzeuge.
+#
+# Hier findet die Reassemblierung statt: die drei geprüften Ebenen werden zu
+# einem Einstiegssatz zusammengesetzt. Das ist der Teil, in dem Vorlagen
+# unbedenklich sind — es werden ganze, bereits validierte Bausteine
+# aneinandergefügt, nicht Wortformen erzeugt.
+#
+# Platzhalter: {example} {impact} {request}
+# Schlüssel der Eröffnungen: opening_style × tone = 5 × 3 = 15 Fächer.
+
+min_per_bucket: 1
+
+openings:
+  - { style: observational, tone: warm, template: "Mir ist etwas aufgefallen, das ich gern mit dir teilen möchte. {example} {impact} {request}" }
+  - { style: observational, tone: neutral, template: "Ich möchte etwas ansprechen. {example} {impact} {request}" }
+  - { style: observational, tone: firm, template: "Ich beschreibe kurz, worum es geht. {example} {impact} {request}" }
+
+  - { style: curious_question, tone: warm, template: "Ich würde gern deine Sicht dazu hören. {example} {impact} {request}" }
+  - { style: curious_question, tone: neutral, template: "Ich habe eine Frage dazu. {example} {impact} {request}" }
+  - { style: curious_question, tone: firm, template: "Ich möchte das verstehen, bevor wir weitermachen. {example} {impact} {request}" }
+
+  - { style: appreciation_then_topic, tone: warm, template: "Mir liegt an uns, und deshalb spreche ich es an. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: neutral, template: "Vieles läuft gut zwischen uns — ein Punkt beschäftigt mich. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: firm, template: "Ich schätze die Zusammenarbeit, und genau deshalb sage ich es deutlich. {example} {impact} {request}" }
+
+  - { style: direct, tone: warm, template: "Ich sage es dir direkt, weil du mir wichtig bist. {example} {impact} {request}" }
+  - { style: direct, tone: neutral, template: "Ich komme gleich zum Punkt. {example} {impact} {request}" }
+  - { style: direct, tone: firm, template: "Ich sage es ohne Umschweife. {example} {impact} {request}" }
+
+  - { style: clear_boundary, tone: warm, template: "Ich möchte dir eine Grenze benennen, ohne dass sie zwischen uns steht. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: neutral, template: "Hier verläuft für mich eine Grenze. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: firm, template: "Das ist für mich eine Grenze, und ich benenne sie klar. {example} {impact} {request}" }
+
+# Anschlussfragen: was nach dem Einstieg das Gespräch offen hält.
+followups:
+  - { kind: clarifying, tone: warm, text: "Wie hast du die Situation erlebt?" }
+  - { kind: clarifying, tone: neutral, text: "Wie ist das aus deiner Sicht gelaufen?" }
+  - { kind: clarifying, tone: firm, text: "Was war aus deiner Sicht der Grund?" }
+  - { kind: agreement, tone: warm, text: "Was davon kannst du mittragen?" }
+  - { kind: agreement, tone: neutral, text: "Worauf können wir uns für das nächste Mal einigen?" }
+  - { kind: agreement, tone: firm, text: "Sagst du mir zu, dass das ab jetzt so läuft?" }
+
+# Gegenwind: die vier Reaktionen, auf die man sich vorbereiten kann.
+# Jede Antwort hält am eigenen Anliegen fest, ohne die Gegenseite zu
+# entwerten — das ist der Unterschied zwischen Standhalten und Gewinnen.
+pushback:
+  - kind: denial
+    label: "„Das stimmt so nicht.“"
+    response: "Es kann sein, dass du das anders erinnerst. Mir geht es um das, was ich erlebt habe — und darüber möchte ich sprechen."
+  - kind: counterattack
+    label: "„Und was ist mit dir?“"
+    response: "Dein Punkt kann drankommen, und ich nehme ihn ernst. Lass uns diesen hier zuerst zu Ende bringen."
+  - kind: minimizing
+    label: "„So schlimm war das doch nicht.“"
+    response: "Für dich mag es klein sein. Für mich ist es das nicht, und deshalb spreche ich es an."
+  - kind: withdrawal
+    label: "Schweigen oder Rückzug"
+    response: "Ich merke, dass es gerade viel ist. Sollen wir eine Pause machen und in einer Stunde weitersprechen?"
+
+# Ausstiege: wie man ein Gespräch beendet, das gerade nichts mehr bringt.
+exits:
+  - { tone: warm, text: "Ich möchte hier kurz pausieren und später weitermachen — mir ist wichtig, dass wir gut auseinandergehen." }
+  - { tone: neutral, text: "Ich möchte an dieser Stelle unterbrechen und zu einem anderen Zeitpunkt weitersprechen." }
+  - { tone: firm, text: "Ich beende das Gespräch hier und komme darauf zurück, wenn wir beide ruhiger sind." }
+
+# Mikrotipps: situationsabhängige Hinweise, die vor dem Gespräch helfen.
+microtips:
+  - when: { state: angry }
+    text: "Bei starker Anspannung hilft ein Zeitfenster: Nimm dir vor, nach 15 Minuten eine Pause anzubieten."
+  - when: { state: exhausted }
+    text: "Erschöpft geführte Gespräche enden oft in Zugeständnissen, die man später bereut. Wenn es geht: verschieben."
+  - when: { state: hurt }
+    text: "Verletzung sucht Anerkennung, nicht Recht. Wenn die Wirkung ankommt, ist viel erreicht."
+  - when: { risk: high }
+    text: "Klartext trägt weiter, wenn du vorher weißt, was du tust, falls die Gegenseite nicht mitgeht."
+  - when: { risk: low }
+    text: "Harmonie zu bewahren ist legitim. Achte darauf, dass die Bitte trotzdem überprüfbar bleibt."
+  - when: { goal: closure }
+    text: "Für einen Abschluss braucht es keine Einigung über die Vergangenheit — nur Klarheit über das, was jetzt gilt."
+  - when: { relationship: manager }
+    text: "Im Gefälle hilft Schriftlichkeit: Halte die Verabredung danach in zwei Sätzen fest."

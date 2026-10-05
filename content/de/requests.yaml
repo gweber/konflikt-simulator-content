@@ -1,0 +1,225 @@
+# Bitten (Appell-Ebene) — positiv, konkret, überprüfbar.
+#
+# Schlüssel: goal × risk = 6 × 3 = 18 Fächer.
+#
+# Diese Schicht ist die Rückfallebene. Sie hängt nur am Ziel und an der
+# Risikotoleranz — und muss deshalb für alle sechs Situationen tragen.
+#
+# Das ist eine harte Vorgabe an die Formulierung: Kein Eintrag hier darf
+# einen Gegenstand, einen Ort oder einen Anlass nennen. "Ich erwarte, dass
+# du meine Unterlagen nur mit meiner Zustimmung nimmst" stand hier einmal
+# und war damit falsch — konkret genug, aber eben eine Szene. Konkret wird
+# ein allgemeiner Eintrag über die Zeit und die Handlung, nicht über den
+# Gegenstand: "bis Donnerstagmittag", "am selben Tag", "bevor du es tust".
+#
+# Szenisches gehört in den Block weiter unten.
+#
+# Die Einträge werden gegen content/lexicon/request-layer.yaml geprüft — und
+# zwar mit der Risikostufe des Eintrags. Deshalb darf ein high-Eintrag "ab
+# sofort" enthalten: bei hoher Risikotoleranz stuft der Linter Härte auf
+# einen Hinweis herab, statt sie anzumahnen.
+
+min_per_bucket: 2
+
+entries:
+  # ── understand ─────────────────────────────────────────────────────────
+  - { goal: understand, risk: low, text: "Ich möchte gern verstehen, wie es dazu gekommen ist — magst du mir deine Sicht schildern?" }
+  - { goal: understand, risk: low, text: "Ich bitte dich, mir zu erzählen, wie du die Situation erlebt hast." }
+  - { goal: understand, risk: medium, text: "Ich bitte dich, mir bis morgen zu sagen, wie du zu der Entscheidung gekommen bist." }
+  - { goal: understand, risk: medium, text: "Ich möchte, dass wir uns diese Woche zusammensetzen und die Punkte durchgehen — sagst du mir, wann es dir passt?" }
+  - { goal: understand, risk: high, text: "Ich erwarte, dass du mir heute erklärst, wie du dazu gekommen bist." }
+  - { goal: understand, risk: high, text: "Ich möchte von dir hören, wie du das begründest — und zwar in diesem Gespräch." }
+
+  # ── change ─────────────────────────────────────────────────────────────
+  - { goal: change, risk: low, text: "Ich wünsche mir, dass du mir beim nächsten Mal vorher Bescheid sagst, wenn es knapp wird." }
+  - { goal: change, risk: low, text: "Mir würde es helfen, wenn du mich frühzeitig informierst, wenn sich etwas ändert." }
+  - { goal: change, risk: medium, text: "Ich bitte dich, mir künftig bis Donnerstagmittag zu sagen, woran ich bei dir bin." }
+  - { goal: change, risk: medium, text: "Ich möchte, dass du mich vor einer Zusage an Dritte einmal fragst." }
+  - { goal: change, risk: high, text: "Ich erwarte, dass du mich ab sofort am selben Tag informierst, wenn sich etwas ändert." }
+  - { goal: change, risk: high, text: "Ich will, dass du dich bis Freitag an das hältst, was wir vereinbart haben." }
+
+  # ── set_boundary ───────────────────────────────────────────────────────
+  - { goal: set_boundary, risk: low, text: "Ich möchte dich bitten, mich vorher zu fragen, bevor du darüber entscheidest." }
+  - { goal: set_boundary, risk: low, text: "Mir ist wichtig, dass wir das vorher miteinander klären." }
+  - { goal: set_boundary, risk: medium, text: "Ich bitte dich, mich vorher zu fragen und meine Antwort abzuwarten." }
+  - { goal: set_boundary, risk: medium, text: "Ich möchte, dass du mir sagst, wenn du etwas anders machen willst, bevor du es tust." }
+  - { goal: set_boundary, risk: high, text: "Ich erwarte, dass du dich an das hältst, was ich dir gerade gesagt habe." }
+  - { goal: set_boundary, risk: high, text: "Ich sage es klar: Hier verläuft meine Grenze. Ich erwarte, dass du sie einhältst." }
+
+  # ── seek_solution ──────────────────────────────────────────────────────
+  - { goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir das nächste Mal planen — hast du diese Woche eine halbe Stunde?" }
+  - { goal: seek_solution, risk: low, text: "Mir wäre wichtig, dass wir gemeinsam eine Regel dafür festlegen." }
+  - { goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir bis Freitag eine feste Reihenfolge abstimmen und sie notieren." }
+  - { goal: seek_solution, risk: medium, text: "Ich bitte dich, mit mir einen Weg zu besprechen, wie wir künftig damit umgehen." }
+  - { goal: seek_solution, risk: high, text: "Ich möchte, dass wir das heute klären und am Ende eine schriftliche Abmachung haben." }
+  - { goal: seek_solution, risk: high, text: "Ich erwarte, dass wir bis Montag eine verbindliche Regelung festhalten, die beide mittragen." }
+
+  # ── express_feeling ────────────────────────────────────────────────────
+  - { goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, wie es bei mir angekommen ist — hörst du mir kurz zu?" }
+  - { goal: express_feeling, risk: low, text: "Ich möchte dir schildern, was das mit mir gemacht hat, und bitte dich, mich dabei ausreden zu lassen." }
+  - { goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zehn Minuten zuzuhören, bevor du antwortest." }
+  - { goal: express_feeling, risk: medium, text: "Ich möchte, dass du dir anhörst, was mich daran beschäftigt, und mir danach sagst, wie du es siehst." }
+  - { goal: express_feeling, risk: high, text: "Ich will, dass du mir jetzt zuhörst — mir ist damit ernst." }
+  - { goal: express_feeling, risk: high, text: "Ich erwarte, dass du dir das anhörst und mir danach sagst, was du damit machst." }
+
+  # ── closure ────────────────────────────────────────────────────────────
+  - { goal: closure, risk: low, text: "Ich möchte, dass wir das in Ruhe abschließen — magst du mir sagen, wie du dir das Ende vorstellst?" }
+  - { goal: closure, risk: low, text: "Mir wäre wichtig, dass wir die offenen Punkte einmal gemeinsam durchgehen." }
+  - { goal: closure, risk: medium, text: "Ich bitte dich, mit mir bis Ende der Woche die Übergabe zu besprechen." }
+  - { goal: closure, risk: medium, text: "Ich möchte einen Termin festhalten, an dem wir das abschließen." }
+  - { goal: closure, risk: high, text: "Ich möchte das hier beenden und bitte dich, mir bis Freitag zu sagen, ob du das mitträgst." }
+  - { goal: closure, risk: high, text: "Ich ziehe einen Schlussstrich und erwarte, dass wir die offenen Positionen bis zum Monatsende klären." }
+
+  # ══════════════════════════════════════════════════════════════════════
+  # Szenenspezifische Bitten
+  #
+  # Mit `situation` versehene Einträge liegen in der verfeinerten Schicht
+  # und werden bevorzugt angeboten. Die allgemeinen oben bleiben als
+  # Rückfallebene und garantieren weiterhin die Abdeckung.
+  #
+  # Grund: Eine Bitte benennt eine Handlung, und Handlungen gehören zum
+  # Anlass. Wer schildert, dass die Familie sonntags unangekündigt vor der
+  # Tür stand, bekam vorher „Termine an meinen freien Tagen sprichst du
+  # vorher mit mir ab“ angeboten — tadellos formuliert und an der Szene
+  # vorbei. Siehe internal/corpus/corpus.go → SceneRequestKey.
+  # ══════════════════════════════════════════════════════════════════════
+
+  # ── Zuverlässigkeit & Zusagen ────────────────────────────────────────
+  - { situation: reliability_deadlines, goal: understand, risk: low, text: "Magst du mir erzählen, was dazwischengekommen ist?" }
+  - { situation: reliability_deadlines, goal: understand, risk: medium, text: "Ich bitte dich, mir zu sagen, woran es gelegen hat — dann kann ich es besser einordnen." }
+  - { situation: reliability_deadlines, goal: understand, risk: high, text: "Ich möchte heute von dir hören, warum die Zusage nicht gehalten hat." }
+  - { situation: reliability_deadlines, goal: change, risk: low, text: "Mir würde helfen, wenn du dich meldest, sobald ein Termin wackelt." }
+  - { situation: reliability_deadlines, goal: change, risk: medium, text: "Ich bitte dich, mir bis Donnerstagmittag zu sagen, ob es klappt." }
+  - { situation: reliability_deadlines, goal: change, risk: high, text: "Ich erwarte, dass du jede Verschiebung am selben Tag mitteilst." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, mir nur zuzusagen, was du auch halten kannst." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: medium, text: "Ich bitte dich, vor einer Zusage in den Kalender zu schauen." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: high, text: "Ich sage es klar: Eine Zusage von dir muss halten. Sonst plane ich ohne dich." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir Termine künftig absichern." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir einen festen Zwischenstand am Dienstag vereinbaren." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: high, text: "Ich möchte heute mit dir festhalten, wie wir das künftig regeln — und es aufschreiben." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, was das Warten mit mir macht — hörst du kurz zu?" }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zehn Minuten zuzuhören, wie das bei mir angekommen ist." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, was diese Verschiebungen mich kosten." }
+  - { situation: reliability_deadlines, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir die offenen Zusagen einmal gemeinsam durchgehen." }
+  - { situation: reliability_deadlines, goal: closure, risk: medium, text: "Ich bitte dich, mit mir bis Freitag festzuhalten, was noch offen ist." }
+  - { situation: reliability_deadlines, goal: closure, risk: high, text: "Ich möchte das abschließen und erwarte bis Montag eine Liste, was noch kommt." }
+
+  # ── Kritik & Feedback ────────────────────────────────────────────────
+  - { situation: criticism_feedback, goal: understand, risk: low, text: "Magst du mir erzählen, was genau dir aufgefallen ist?" }
+  - { situation: criticism_feedback, goal: understand, risk: medium, text: "Ich bitte dich, mir an einem Beispiel zu zeigen, was du meinst." }
+  - { situation: criticism_feedback, goal: understand, risk: high, text: "Ich möchte von dir hören, worauf sich deine Kritik konkret bezieht." }
+  - { situation: criticism_feedback, goal: change, risk: low, text: "Mir würde helfen, wenn du mir das nächste Mal unter vier Augen sagst." }
+  - { situation: criticism_feedback, goal: change, risk: medium, text: "Ich bitte dich, deine Kritik künftig direkt an mich zu richten." }
+  - { situation: criticism_feedback, goal: change, risk: high, text: "Ich erwarte, dass du Rückmeldungen ab jetzt im Zweiergespräch gibst." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, deine Einschätzung zuerst mit mir zu besprechen." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: medium, text: "Ich bitte dich, beim Ergebnis zu bleiben und meine Person herauszuhalten." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: high, text: "Ich sage es klar: Urteile über meine Person gehören nicht vor andere. Sprich mich direkt an." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir uns künftig Rückmeldung geben." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir ein kurzes Format für Feedback festlegen." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: high, text: "Ich möchte heute mit dir festhalten, wie Kritik hier künftig läuft." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, wie die Bemerkung bei mir angekommen ist." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zuzuhören, was der Satz vor der Runde mit mir gemacht hat." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, wie das bei mir angekommen ist." }
+  - { situation: criticism_feedback, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir das in Ruhe besprechen und dann ruhen lassen." }
+  - { situation: criticism_feedback, goal: closure, risk: medium, text: "Ich bitte dich, mir zu sagen, was aus deiner Sicht offen ist — dann schließen wir es ab." }
+  - { situation: criticism_feedback, goal: closure, risk: high, text: "Ich möchte das beenden und erwarte, dass die Sache damit erledigt ist." }
+
+  # ── Grenzüberschreitung ──────────────────────────────────────────────
+  - { situation: boundary_violation, goal: understand, risk: low, text: "Magst du mir erzählen, wie es dazu gekommen ist?" }
+  - { situation: boundary_violation, goal: understand, risk: medium, text: "Ich bitte dich, mir zu sagen, was dich dazu gebracht hat." }
+  - { situation: boundary_violation, goal: understand, risk: high, text: "Ich möchte heute von dir hören, warum du dich darüber hinweggesetzt hast." }
+  - { situation: boundary_violation, goal: change, risk: low, text: "Mir würde helfen, wenn du mich vorher fragst." }
+  - { situation: boundary_violation, goal: change, risk: medium, text: "Ich bitte dich, mich künftig vorher zu fragen." }
+  - { situation: boundary_violation, goal: change, risk: high, text: "Ich erwarte, dass du ab sofort vorher fragst." }
+  - { situation: boundary_violation, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, mich zu fragen, bevor du über etwas von mir verfügst." }
+  - { situation: boundary_violation, goal: set_boundary, risk: medium, text: "Ich bitte dich, mich vorher zu fragen, statt mein Einverständnis vorauszusetzen." }
+  - { situation: boundary_violation, goal: set_boundary, risk: high, text: "Ich sage es klar: Was mir gehört und was mich betrifft, entscheide ich. Frag mich vorher." }
+  - { situation: boundary_violation, goal: seek_solution, risk: low, text: "Ich würde gern mit dir klären, wie wir mit solchen Situationen umgehen." }
+  - { situation: boundary_violation, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir festlegen, was für uns beide privat bleibt." }
+  - { situation: boundary_violation, goal: seek_solution, risk: high, text: "Ich möchte heute festhalten, wo die Grenze verläuft — und dass sie gilt." }
+  - { situation: boundary_violation, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, wie nah mir das geht — hörst du kurz zu?" }
+  - { situation: boundary_violation, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zuzuhören, was das mit mir gemacht hat." }
+  - { situation: boundary_violation, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, was das bei mir ausgelöst hat." }
+  - { situation: boundary_violation, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir das aussprechen und dann hinter uns lassen." }
+  - { situation: boundary_violation, goal: closure, risk: medium, text: "Ich bitte dich, mir zuzusagen, dass es dabei bleibt — dann lasse ich es ruhen." }
+  - { situation: boundary_violation, goal: closure, risk: high, text: "Ich ziehe hier eine Linie und erwarte, dass du sie ab jetzt achtest." }
+
+  # ── Missverständnis ──────────────────────────────────────────────────
+  - { situation: misunderstanding, goal: understand, risk: low, text: "Magst du mir erzählen, wie du es verstanden hast?" }
+  - { situation: misunderstanding, goal: understand, risk: medium, text: "Ich bitte dich, mir zu schildern, was bei dir angekommen ist." }
+  - { situation: misunderstanding, goal: understand, risk: high, text: "Ich möchte von dir hören, woran du dich orientiert hast." }
+  - { situation: misunderstanding, goal: change, risk: low, text: "Mir würde helfen, wenn du kurz nachfragst, sobald etwas unklar ist." }
+  - { situation: misunderstanding, goal: change, risk: medium, text: "Ich bitte dich, mir künftig kurz zurückzumelden, wie du es verstanden hast." }
+  - { situation: misunderstanding, goal: change, risk: high, text: "Ich erwarte, dass du Absprachen ab jetzt schriftlich bestätigst." }
+  - { situation: misunderstanding, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, mich bei Unklarheiten zu fragen, bevor du entscheidest." }
+  - { situation: misunderstanding, goal: set_boundary, risk: medium, text: "Ich bitte dich, in meinem Namen nur zuzusagen, was du vorher mit mir besprochen hast." }
+  - { situation: misunderstanding, goal: set_boundary, risk: high, text: "Ich sage es klar: In meinem Namen sagst du nichts zu. Frag mich vorher." }
+  - { situation: misunderstanding, goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir uns künftig klarer abstimmen." }
+  - { situation: misunderstanding, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir Absprachen kurz schriftlich festhalten." }
+  - { situation: misunderstanding, goal: seek_solution, risk: high, text: "Ich möchte heute festlegen, wie wir Absprachen künftig bestätigen." }
+  - { situation: misunderstanding, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, was der doppelte Aufwand für mich bedeutet hat." }
+  - { situation: misunderstanding, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zuzuhören, was das für meine Woche hieß." }
+  - { situation: misunderstanding, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, was mich das gekostet hat." }
+  - { situation: misunderstanding, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir es einmal klären und dann abhaken." }
+  - { situation: misunderstanding, goal: closure, risk: medium, text: "Ich bitte dich, das mit mir kurz durchzugehen, damit wir es abschließen können." }
+  - { situation: misunderstanding, goal: closure, risk: high, text: "Ich möchte das heute klären und dann abschließen." }
+
+  # ── Hierarchie & Entscheidung ────────────────────────────────────────
+  - { situation: power_decision, goal: understand, risk: low, text: "Magst du mir erzählen, wie die Entscheidung zustande gekommen ist?" }
+  - { situation: power_decision, goal: understand, risk: medium, text: "Ich bitte dich, mir zu erklären, was den Ausschlag gegeben hat." }
+  - { situation: power_decision, goal: understand, risk: high, text: "Ich möchte heute von dir hören, warum ich nicht gefragt wurde." }
+  - { situation: power_decision, goal: change, risk: low, text: "Mir würde helfen, wenn du mich bei solchen Entscheidungen kurz einbeziehst." }
+  - { situation: power_decision, goal: change, risk: medium, text: "Ich bitte dich, mich künftig zu fragen, bevor über meinen Bereich entschieden wird." }
+  - { situation: power_decision, goal: change, risk: high, text: "Ich erwarte, dass du mich ab sofort vor solchen Entscheidungen einbeziehst." }
+  - { situation: power_decision, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, meinen Zuständigkeitsbereich mit mir abzustimmen." }
+  - { situation: power_decision, goal: set_boundary, risk: medium, text: "Ich bitte dich, Entscheidungen über meine Aufgaben vorher mit mir zu besprechen." }
+  - { situation: power_decision, goal: set_boundary, risk: high, text: "Ich sage es klar: Über meinen Bereich entscheidest du mit mir, nicht über mich hinweg." }
+  - { situation: power_decision, goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir solche Entscheidungen künftig vorbereiten." }
+  - { situation: power_decision, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir festlegen, wer wann einbezogen wird." }
+  - { situation: power_decision, goal: seek_solution, risk: high, text: "Ich möchte heute mit dir festhalten, wie Entscheidungen in meinem Bereich künftig laufen." }
+  - { situation: power_decision, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, wie übergangen ich mich damit fühle." }
+  - { situation: power_decision, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zuzuhören, wie das bei mir angekommen ist." }
+  - { situation: power_decision, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, was es heißt, davon erst hinterher zu erfahren." }
+  - { situation: power_decision, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir das einmal besprechen und dann nach vorn schauen." }
+  - { situation: power_decision, goal: closure, risk: medium, text: "Ich bitte dich, mit mir zu klären, was künftig gilt — dann lasse ich es ruhen." }
+  - { situation: power_decision, goal: closure, risk: high, text: "Ich möchte das abschließen und erwarte eine klare Ansage, wie es weitergeht." }
+
+  # ── Abschluss & Trennung ─────────────────────────────────────────────
+  - { situation: breakup_closure, goal: understand, risk: low, text: "Magst du mir erzählen, wie du zu dem Entschluss gekommen bist?" }
+  - { situation: breakup_closure, goal: understand, risk: medium, text: "Ich bitte dich, mir zu sagen, was für dich den Ausschlag gegeben hat." }
+  - { situation: breakup_closure, goal: understand, risk: high, text: "Ich möchte von dir hören, wann du das entschieden hast." }
+  - { situation: breakup_closure, goal: change, risk: low, text: "Mir würde helfen, wenn wir den Übergang gemeinsam planen." }
+  - { situation: breakup_closure, goal: change, risk: medium, text: "Ich bitte dich, mit mir bis Freitag die Übergabe zu besprechen." }
+  - { situation: breakup_closure, goal: change, risk: high, text: "Ich erwarte, dass du mir bis Montag sagst, wie du dir den Ablauf vorstellst." }
+  - { situation: breakup_closure, goal: set_boundary, risk: low, text: "Ich möchte dich bitten, mir etwas Zeit zu lassen, bevor wir das Weitere klären." }
+  - { situation: breakup_closure, goal: set_boundary, risk: medium, text: "Ich bitte dich, Anrufe für die nächsten zwei Wochen ruhen zu lassen." }
+  - { situation: breakup_closure, goal: set_boundary, risk: high, text: "Ich sage es klar: Ich brauche Abstand. Melde dich erst wieder, wenn ich mich bei dir melde." }
+  - { situation: breakup_closure, goal: seek_solution, risk: low, text: "Ich würde gern mit dir überlegen, wie wir das gut zu Ende bringen." }
+  - { situation: breakup_closure, goal: seek_solution, risk: medium, text: "Ich schlage vor, dass wir die offenen Punkte einmal durchgehen und aufteilen." }
+  - { situation: breakup_closure, goal: seek_solution, risk: high, text: "Ich möchte heute festhalten, wer was übernimmt und bis wann." }
+  - { situation: breakup_closure, goal: express_feeling, risk: low, text: "Mir ist wichtig, dass du weißt, wie es mir damit geht — hörst du kurz zu?" }
+  - { situation: breakup_closure, goal: express_feeling, risk: medium, text: "Ich bitte dich, mir zuzuhören, was dieser Abschluss für mich bedeutet." }
+  - { situation: breakup_closure, goal: express_feeling, risk: high, text: "Ich will, dass du dir anhörst, wie ich das erlebt habe, bevor wir auseinandergehen." }
+  - { situation: breakup_closure, goal: closure, risk: low, text: "Mir wäre wichtig, dass wir uns in Ruhe verabschieden." }
+  - { situation: breakup_closure, goal: closure, risk: medium, text: "Ich bitte dich, mit mir einen Termin festzuhalten, an dem wir das abschließen." }
+  - { situation: breakup_closure, goal: closure, risk: high, text: "Ich möchte das beenden und bitte dich, mir bis Freitag zu sagen, wann du die Sachen abholst." }
+
+  # ── textchat: Streit im Gruppenchat / Klassenchat (04.10.2026) ────────────────────────────────
+  - { situation: textchat, goal: understand, risk: low, text: "Magst du mir sagen, wie du dein „ok.“ gemeint hast?" }
+  - { situation: textchat, goal: understand, risk: medium, text: "Ich bitte dich, mir in einem Satz zu schreiben, was dich an meiner Nachricht gestört hat." }
+  - { situation: textchat, goal: understand, risk: high, text: "Ich möchte heute von dir hören, wie der Screenshot in die Gruppe gekommen ist." }
+  - { situation: textchat, goal: change, risk: low, text: "Mir würde helfen, wenn du mir so etwas direkt schreibst statt in die Gruppe." }
+  - { situation: textchat, goal: change, risk: medium, text: "Ich bitte dich, Nachrichten über mich zuerst an mich zu schicken, nicht an die Gruppe." }
+  - { situation: textchat, goal: change, risk: high, text: "Ich erwarte, dass du Screenshots aus unserem Chat nur mit meinem Okay an andere schickst." }
+  - { situation: textchat, goal: set_boundary, risk: low, text: "Ich möchte, dass wir solche Sachen zu zweit klären und nicht im Gruppenchat." }
+  - { situation: textchat, goal: set_boundary, risk: medium, text: "Ich bitte dich, mich zu fragen, bevor du ein Foto von mir in die Gruppe stellst." }
+  - { situation: textchat, goal: set_boundary, risk: high, text: "Ich bitte dich, das Foto von gestern heute zu löschen und mich beim nächsten Mal vorher zu fragen." }
+  - { situation: textchat, goal: seek_solution, risk: low, text: "Lass uns kurz telefonieren, statt das im Chat zu klären -- wann passt es dir?" }
+  - { situation: textchat, goal: seek_solution, risk: medium, text: "Ich bitte dich, dass wir uns morgen fünf Minuten treffen und das klären, statt weiter zu schreiben." }
+  - { situation: textchat, goal: seek_solution, risk: high, text: "Ich möchte, dass wir heute noch sprechen und festlegen, was aus unserem Chat in die Gruppe darf und was nicht." }
+  - { situation: textchat, goal: express_feeling, risk: low, text: "Ich möchte dir sagen, wie die Nachricht bei mir angekommen ist -- hörst du mir zwei Minuten zu?" }
+  - { situation: textchat, goal: express_feeling, risk: medium, text: "Ich bitte dich, meine Nachricht einmal ganz zu lesen, bevor du antwortest." }
+  - { situation: textchat, goal: express_feeling, risk: high, text: "Ich möchte, dass du hörst, was die Nachricht vor der Gruppe mit mir gemacht hat, bevor du etwas erklärst." }
+  - { situation: textchat, goal: closure, risk: low, text: "Ich gehe aus dem Gruppenchat raus, und ich bitte dich, es dabei zu lassen und dazu nichts in die Gruppe zu schreiben." }
+  - { situation: textchat, goal: closure, risk: medium, text: "Ich bitte dich, mir nur noch zu Terminen zu schreiben und sonst nichts." }
+  - { situation: textchat, goal: closure, risk: high, text: "Ich blockiere den Chat mit dir heute. Wenn es etwas Wichtiges gibt, sag es mir persönlich." }

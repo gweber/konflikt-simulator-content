@@ -1,0 +1,205 @@
+# Rules for the observation layer (facts).
+#
+# Doctrine: what would a camera have recorded? Observable behaviour only —
+# no labels, no generalisations, no imputed motives.
+#
+# Every rule carries its own test cases (`hits` / `misses`). `make lint`
+# runs them; a rule that misses its own examples breaks the build. The
+# lexicon is executable doctrine, not prose about it.
+#
+# `match` is an RE2 pattern WITHOUT \b anchors — the loader wraps it in
+# ([^\p{L}]) boundaries itself. See internal/rules/load.go.
+#
+# ── Was beim Übersetzen anders ist als im Deutschen ────────────────────
+#
+# Kein Nachbau der deutschen Datei. Drei Unterschiede, die die Regeln
+# tatsächlich verändern:
+#
+#   1. Englisch kennt keine Verbzweitstellung. Umformulierungen sind
+#      deshalb weniger heikel — „you make me angry" → „I get angry" ist
+#      strukturell sicher, während das deutsche Gegenstück nur am
+#      Satzanfang funktioniert.
+#   2. Dafür sind englische Wortformen kürzer und kollidieren häufiger.
+#      „nie" hat im Deutschen kaum Fehltreffer, „never" steckt in
+#      „nevertheless". Solche Fälle stehen als `misses` drin.
+#   3. Zuschreibungen laufen im Englischen oft über „you're being X"
+#      statt über ein bloßes Adjektiv. Das ist eine eigene Regel.
+
+layer: example
+
+groups:
+  - kind: generalizer
+    severity: block
+    source: "Thinking traps (CBT): overgeneralising"
+    more: beobachten-statt-bewerten
+    why: |
+      Generalisations cannot be checked, and they invite a counter-example.
+      One exception ("I was on time last week") turns the whole conversation
+      into an argument about whether "always" is true — instead of the one
+      incident you actually wanted to talk about.
+    rules:
+      - id: gen-always
+        match: "always|constantly|forever|non-?stop|round the clock"
+        message: "“{match}” is a generalisation."
+        ask: "When did you last notice it? Name that one occasion."
+        # Anders als im Deutschen gibt es hier keine Wortgrenzen-Falle:
+        # Kein englisches Wort enthält „always" als Bestandteil. Der
+        # Fehltreffer-Fall prüft deshalb das, worauf es ankommt — dass ein
+        # sauber formulierter Anlass ungeschoren durchgeht.
+        tests:
+          hits: ["You are always late", "You interrupt me constantly"]
+          misses: ["Last Tuesday the file arrived after the deadline"]
+
+      - id: gen-never
+        match: "never|not once|not a single time"
+        message: "“{match}” is a generalisation."
+        ask: "Was there one situation where you missed it? Describe that one."
+        tests:
+          hits: ["You never listen to me", "Not once did you ask"]
+          misses: ["Nevertheless I came", "The nevermore raven"]
+
+      - id: gen-everytime
+        match: "every time|each time|every single time|all the time"
+        message: "“{match}” claims a pattern instead of an incident."
+        ask: "Which single incident stands for it? Take that one."
+        tests:
+          hits: ["Every time it is the same", "You do it all the time"]
+          misses: ["I enjoyed every minute", "One time only"]
+
+      - id: gen-again
+        match: "again|yet again|once again|typical|as usual|same old"
+        message: "“{match}” calls up the history, not this occasion."
+        ask: "Leave the history out of the opening. What happened this time?"
+        tests:
+          hits: ["You did it again", "Typical of you", "Late as usual"]
+          misses: ["I will come back later", "Against the wall"]
+
+  - kind: attribution
+    severity: block
+    source: "Marshall B. Rosenberg: observing without evaluating"
+    more: beobachten-statt-bewerten
+    why: |
+      Adjectives describe the person, not the behaviour. The other side
+      cannot defend a behaviour they were never told about — so they defend
+      themselves against the label instead. Now you are negotiating their
+      character rather than the matter at hand.
+    rules:
+      - id: attr-unreliable
+        match: "unreliable|sloppy|careless|flaky|slapdash|half-?hearted"
+        message: "“{match}” judges the person, not the behaviour."
+        ask: "Which behaviour led you to that assessment?"
+        offer:
+          - "the commitment made on Tuesday was not kept"
+          - "the file arrived two days after the agreed date"
+          - "my follow-up got no answer"
+        tests:
+          hits: ["You are unreliable", "That was sloppy work"]
+          misses: ["The measurement is reliable", "I was careful about it"]
+
+      - id: attr-respect
+        match: "rude|disrespectful|inconsiderate|dismissive|condescending|patronising|patronizing"
+        message: "“{match}” is a judgement, not observable behaviour."
+        ask: "What exactly was said or done?"
+        offer:
+          - "I was interrupted twice in the meeting"
+          - "my proposal was passed over without a question"
+          - "the reply came in front of everyone"
+        tests:
+          hits: ["That was rude", "You are being dismissive"]
+          misses: ["I respect your decision", "With all due respect to the process"]
+
+      - id: attr-egoistic
+        match: "selfish|self-?centred|self-?centered|egotistical|entitled"
+        message: "“{match}” assigns a motive to the person."
+        ask: "Describe what happened, not why you think they did it."
+        offer:
+          - "the decision was made without asking me"
+          - "the plan was changed after we had agreed on it"
+        tests:
+          hits: ["You are selfish", "That is entitled behaviour"]
+          misses: ["The self-service desk is closed"]
+
+      - id: attr-lazy
+        match: "lazy|useless|incompetent|hopeless|clueless"
+        message: "“{match}” labels the person instead of the situation."
+        ask: "What was left undone, and by when had you expected it?"
+        offer:
+          - "the report was due Thursday and is still open"
+          - "the question I asked on Monday is unanswered"
+        tests:
+          hits: ["You are lazy", "That was incompetent"]
+          misses: ["The report was due on Thursday and is still open"]
+
+      - id: attr-being
+        # Englisch verpackt Zuschreibungen gern in eine Verlaufsform. Das
+        # ist keine Beobachtung, sondern dasselbe Etikett mit Anlauf.
+        match: "you'?re being (\\p{L}+)|you are being (\\p{L}+)"
+        message: "“{match}” describes the person, not what happened."
+        ask: "What did they actually do? Name the action, not the adjective."
+        tests:
+          hits: ["You are being difficult", "You're being unfair"]
+          misses: ["You are late", "I am being asked to decide"]
+
+  - kind: mind_reading
+    severity: block
+    source: "Thinking traps (CBT): mind reading"
+    more: beobachten-statt-bewerten
+    why: |
+      Stating someone else's motive tells them you have already decided.
+      Whatever they say next can only be a denial, and a denial is not a
+      conversation. The motive is the one thing you cannot observe.
+    rules:
+      - id: mind-onpurpose
+        match: "on purpose|deliberately|intentionally|just to (\\p{L}+)"
+        message: "“{match}” imputes an intention."
+        ask: "You cannot see intent. What did you observe?"
+        tests:
+          hits: ["You did it on purpose", "You deliberately left me out"]
+          misses: ["The purpose of the meeting", "I came intent on listening"]
+
+      - id: mind-youthink
+        match: "you (think|thought|believe|assume|reckon) (that )?(i|my|we)"
+        message: "“{match}” speaks for the other person."
+        ask: "Let them say what they think. What did you see or hear?"
+        tests:
+          hits: ["You think I am overreacting", "You assume that I do not care"]
+          misses: ["I think you are right", "What do you think?"]
+
+      - id: mind-dontcare
+        match: "you (don'?t|do not) (care|listen|respect|value)"
+        message: "“{match}” claims to know what goes on inside them."
+        ask: "Which behaviour gave you that impression?"
+        tests:
+          hits: ["You don't care about this", "You do not listen to me"]
+          misses: ["I don't care for coffee", "They did not listen to the recording"]
+
+  - kind: escalator
+    severity: warn
+    source: "Thinking traps (CBT): catastrophising"
+    risk_sensitive: true
+    why: |
+      Superlatives raise the stakes before the first sentence is finished.
+      They also make the claim easy to dismiss: nobody has ever done the
+      worst possible thing, so the reply is about the exaggeration.
+    rules:
+      - id: esc-worst
+        # Bekannter Fehltreffer: „worst-case" wird mitgenommen. RE2 kennt
+        # keinen Lookahead, und der Bindestrich ist für den Lader eine
+        # Wortgrenze wie jede andere. Bleibt drin, weil die Stufe `warn`
+        # ist und bei gewählter Deutlichkeit ohnehin zum Hinweis herabfällt
+        # — ein gelegentliches „hier ginge es eine Stufe leiser" kostet
+        # weniger als eine übersehene Zuspitzung.
+        match: "the worst|unbearable|outrageous|disgraceful|appalling|a disaster"
+        message: "“{match}” raises the stakes before the topic is on the table."
+        ask: "Say it one notch lower. What happened, plainly put?"
+        tests:
+          hits: ["That is outrageous", "This is the worst"]
+          misses: ["Worse things have happened"]
+
+      - id: esc-absolutes
+        match: "totally|completely|utterly|absolutely (\\p{L}+)"
+        message: "“{match}” overstates and invites a fight about the word."
+        ask: "Would it still be true without the intensifier?"
+        tests:
+          hits: ["That is totally unacceptable", "You completely ignored me"]
+          misses: ["The total came to forty euros"]

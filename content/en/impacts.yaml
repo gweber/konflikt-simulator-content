@@ -1,0 +1,112 @@
+# Impact (the I-statement layer).
+#
+# Key: situation × state = 6 × 6 = 36 buckets.
+#
+# Decoupled from the relationship on purpose: how something lands depends on
+# what happened and on the state you are in — not on who you are talking to.
+# The tone is what the relationship changes, and that is handled elsewhere.
+#
+# Every entry names a feeling. The absence check in the impact layer would
+# otherwise flag it, and rightly so: without a feeling this layer says
+# nothing the other side could not have worked out themselves.
+
+min_per_bucket: 2
+
+entries:
+  # ── reliability_deadlines ─────────────────────────────────────────────
+  - { situation: reliability_deadlines, state: calm, text: "I am uneasy about it, because I plan around what we agree." }
+  - { situation: reliability_deadlines, state: calm, text: "I feel unsettled, because I had counted on the date." }
+  - { situation: reliability_deadlines, state: annoyed, text: "I am annoyed, because I replanned my day twice." }
+  - { situation: reliability_deadlines, state: annoyed, text: "I am irritated, because the waiting cost me an afternoon." }
+  - { situation: reliability_deadlines, state: disappointed, text: "I am disappointed, because I had taken the commitment as settled." }
+  - { situation: reliability_deadlines, state: disappointed, text: "I feel let down, because I had made the promise to others as well." }
+  - { situation: reliability_deadlines, state: hurt, text: "I am hurt, because it looked to me as if my time counted for little." }
+  - { situation: reliability_deadlines, state: hurt, text: "I feel small, because I was the one chasing it." }
+  - { situation: reliability_deadlines, state: exhausted, text: "I am worn out, because I have organised around this several times." }
+  - { situation: reliability_deadlines, state: exhausted, text: "I feel drained, because the chasing takes more out of me than the work." }
+  - { situation: reliability_deadlines, state: angry, text: "I am angry, because I gave my word to someone else on the strength of it." }
+  - { situation: reliability_deadlines, state: angry, text: "I am furious, because the delay landed on my desk to explain." }
+
+  # ── criticism_feedback ────────────────────────────────────────────────
+  - { situation: criticism_feedback, state: calm, text: "I am uneasy about it, because I did not know where it was coming from." }
+  - { situation: criticism_feedback, state: calm, text: "I feel unsettled, because I could not place what was meant." }
+  - { situation: criticism_feedback, state: annoyed, text: "I am annoyed, because the point could have been made to me directly." }
+  - { situation: criticism_feedback, state: annoyed, text: "I am irritated, because I had no chance to answer." }
+  - { situation: criticism_feedback, state: disappointed, text: "I am disappointed, because I had expected the conversation to come first." }
+  - { situation: criticism_feedback, state: disappointed, text: "I feel let down, because I had asked for feedback earlier." }
+  - { situation: criticism_feedback, state: hurt, text: "I am hurt, because it was said in front of the whole room." }
+  - { situation: criticism_feedback, state: hurt, text: "I feel exposed, because the others were listening." }
+  - { situation: criticism_feedback, state: exhausted, text: "I am worn out, because I have been defending the same work for weeks." }
+  - { situation: criticism_feedback, state: exhausted, text: "I feel drained, because every round starts from the beginning." }
+  - { situation: criticism_feedback, state: angry, text: "I am angry, because the work was judged without a question being asked." }
+  - { situation: criticism_feedback, state: angry, text: "I am furious, because it went to others before it came to me." }
+
+  # ── boundary_violation ────────────────────────────────────────────────
+  - { situation: boundary_violation, state: calm, text: "I feel uncomfortable, because I had said where my limit is." }
+  - { situation: boundary_violation, state: calm, text: "I am uneasy, because I want to be asked about my own things." }
+  - { situation: boundary_violation, state: annoyed, text: "I am annoyed, because I had named it beforehand." }
+  - { situation: boundary_violation, state: annoyed, text: "I am irritated, because my agreement was taken as given." }
+  - { situation: boundary_violation, state: disappointed, text: "I am disappointed, because I had thought this was settled between us." }
+  - { situation: boundary_violation, state: disappointed, text: "I feel let down, because I had asked for it once already." }
+  - { situation: boundary_violation, state: hurt, text: "I am hurt, because it goes to something private for me." }
+  - { situation: boundary_violation, state: hurt, text: "I feel unsafe, because I no longer know what stays mine." }
+  - { situation: boundary_violation, state: exhausted, text: "I am worn out, because I keep having to state the same limit." }
+  - { situation: boundary_violation, state: exhausted, text: "I feel drained, because guarding it takes energy I want elsewhere." }
+  - { situation: boundary_violation, state: angry, text: "I am angry, because it happened after I had said no." }
+  - { situation: boundary_violation, state: angry, text: "I am furious, because the limit was crossed knowingly." }
+
+  # ── misunderstanding ──────────────────────────────────────────────────
+  - { situation: misunderstanding, state: calm, text: "I am uneasy about it, because I want to know where it went apart." }
+  - { situation: misunderstanding, state: calm, text: "I feel unsettled, because I had read it differently." }
+  - { situation: misunderstanding, state: annoyed, text: "I am annoyed, because the effort was avoidable." }
+  - { situation: misunderstanding, state: annoyed, text: "I am irritated, because we both worked on the same thing." }
+  - { situation: misunderstanding, state: disappointed, text: "I am disappointed, because I had thought we were aligned." }
+  - { situation: misunderstanding, state: disappointed, text: "I feel let down, because I had asked whether it was clear." }
+  - { situation: misunderstanding, state: hurt, text: "I am hurt, because it looked as if I had not been read." }
+  - { situation: misunderstanding, state: hurt, text: "I feel overlooked, because my message went unnoticed." }
+  - { situation: misunderstanding, state: exhausted, text: "I am worn out, because the same confusion keeps costing us days." }
+  - { situation: misunderstanding, state: exhausted, text: "I feel drained, because I have explained it three times." }
+  - { situation: misunderstanding, state: angry, text: "I am angry, because the rework fell to me." }
+  - { situation: misunderstanding, state: angry, text: "I am furious, because a single question would have prevented it." }
+
+  # ── power_decision ────────────────────────────────────────────────────
+  - { situation: power_decision, state: calm, text: "I am uneasy about it, because it touches my area." }
+  - { situation: power_decision, state: calm, text: "I feel unsettled, because I heard about it late." }
+  - { situation: power_decision, state: annoyed, text: "I am annoyed, because I would have had something to add." }
+  - { situation: power_decision, state: annoyed, text: "I am irritated, because I found out from someone else." }
+  - { situation: power_decision, state: disappointed, text: "I am disappointed, because I had thought I would be asked." }
+  - { situation: power_decision, state: disappointed, text: "I feel let down, because we had agreed to decide together." }
+  - { situation: power_decision, state: hurt, text: "I am hurt, because it left me feeling I do not count here." }
+  - { situation: power_decision, state: hurt, text: "I feel sidelined, because my part was decided without me." }
+  - { situation: power_decision, state: exhausted, text: "I am worn out, because I keep learning things after the fact." }
+  - { situation: power_decision, state: exhausted, text: "I feel powerless, because asking has changed little so far." }
+  - { situation: power_decision, state: angry, text: "I am angry, because I carry the consequences of it." }
+  - { situation: power_decision, state: angry, text: "I am furious, because my commitment to others was overwritten." }
+
+  # ── breakup_closure ───────────────────────────────────────────────────
+  - { situation: breakup_closure, state: calm, text: "I am uneasy about it, because I would like a clear ending." }
+  - { situation: breakup_closure, state: calm, text: "I feel unsettled, because the open points keep it going." }
+  - { situation: breakup_closure, state: annoyed, text: "I am annoyed, because the loose ends keep coming back to me." }
+  - { situation: breakup_closure, state: annoyed, text: "I am irritated, because the waiting has no end date." }
+  - { situation: breakup_closure, state: disappointed, text: "I am disappointed, because I had hoped for a different close." }
+  - { situation: breakup_closure, state: disappointed, text: "I feel let down, because the last conversation stopped mid-way." }
+  - { situation: breakup_closure, state: hurt, text: "I am hurt, because the silence says more to me than a word would." }
+  - { situation: breakup_closure, state: hurt, text: "I feel lonely with it, because there was no goodbye." }
+  - { situation: breakup_closure, state: exhausted, text: "I am worn out, because it has been unresolved for months." }
+  - { situation: breakup_closure, state: exhausted, text: "I feel drained, because every attempt has led nowhere." }
+  - { situation: breakup_closure, state: angry, text: "I am angry, because what was promised has not come." }
+  - { situation: breakup_closure, state: angry, text: "I am furious, because the ending was announced and then left hanging." }
+
+  # ── textchat: a fight in the group chat / class chat (04.10.2026) ────────────────────────────
+  - { situation: textchat, state: calm, text: "I'm calm and still uneasy since I read the chat yesterday." }
+  - { situation: textchat, state: calm, text: "I'm calm, and at the same time unsettled by how your \"ok.\" might be meant." }
+  - { situation: textchat, state: annoyed, text: "I'm annoyed because I read the message three times to work out the tone." }
+  - { situation: textchat, state: annoyed, text: "I'm irritated because this was in front of the whole group and not between the two of us." }
+  - { situation: textchat, state: disappointed, text: "I'm disappointed because I waited for an answer and got two blue ticks." }
+  - { situation: textchat, state: disappointed, text: "I'm disappointed that the screenshot was in the group before you had written to me." }
+  - { situation: textchat, state: hurt, text: "I'm hurt because the emojis under my message looked like laughing at me." }
+  - { situation: textchat, state: hurt, text: "I feel small because I read the message in front of everyone and did not know where to look." }
+  - { situation: textchat, state: exhausted, text: "I'm exhausted because for two days I've taken every message in the group personally." }
+  - { situation: textchat, state: exhausted, text: "I'm tired of turning sentences round in the chat until they can't land wrong." }
+  - { situation: textchat, state: angry, text: "I'm angry because the screenshot from our chat ended up in the group." }
+  - { situation: textchat, state: angry, text: "I'm angry, and I notice I type faster in the chat than I think." }

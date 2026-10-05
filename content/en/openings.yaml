@@ -1,0 +1,79 @@
+# Openings and conversation tools.
+#
+# This is where reassembly happens: the three checked layers are joined into
+# one opening sentence. Templates are safe here — whole, already validated
+# blocks are put next to each other, no word forms are generated.
+#
+# Placeholders: {example} {impact} {request}
+# Keys: opening_style × tone = 5 × 3 = 15 buckets.
+
+min_per_bucket: 1
+
+openings:
+  - { style: observational, tone: warm, template: "There is something I noticed and would like to share with you. {example} {impact} {request}" }
+  - { style: observational, tone: neutral, template: "There is something I would like to raise. {example} {impact} {request}" }
+  - { style: observational, tone: firm, template: "Let me describe what this is about. {example} {impact} {request}" }
+
+  - { style: curious_question, tone: warm, template: "I would like to hear how you see this. {example} {impact} {request}" }
+  - { style: curious_question, tone: neutral, template: "I have a question about this. {example} {impact} {request}" }
+  - { style: curious_question, tone: firm, template: "I want to understand this before we go on. {example} {impact} {request}" }
+
+  - { style: appreciation_then_topic, tone: warm, template: "This matters to me, and that is why I am raising it. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: neutral, template: "Much of this works well between us — one point is on my mind. {example} {impact} {request}" }
+  - { style: appreciation_then_topic, tone: firm, template: "I value working with you, and that is exactly why I am saying this plainly. {example} {impact} {request}" }
+
+  - { style: direct, tone: warm, template: "I will say this plainly, because you matter to me. {example} {impact} {request}" }
+  - { style: direct, tone: neutral, template: "Let me get straight to the point. {example} {impact} {request}" }
+  - { style: direct, tone: firm, template: "I will say this without dressing it up. {example} {impact} {request}" }
+
+  - { style: clear_boundary, tone: warm, template: "I want to name a limit, without it standing between us. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: neutral, template: "This is where a limit runs for me. {example} {impact} {request}" }
+  - { style: clear_boundary, tone: firm, template: "This is a limit for me, and I am naming it clearly. {example} {impact} {request}" }
+
+# Follow-up questions: what keeps the conversation open after the opening.
+followups:
+  - { kind: clarifying, tone: warm, text: "How did you experience the situation?" }
+  - { kind: clarifying, tone: neutral, text: "How did that go from where you stand?" }
+  - { kind: clarifying, tone: firm, text: "What was the reason, from your side?" }
+  - { kind: agreement, tone: warm, text: "Which part of that could you go along with?" }
+  - { kind: agreement, tone: neutral, text: "What can we agree on for next time?" }
+  - { kind: agreement, tone: firm, text: "What exactly are you committing to?" }
+
+# Pushback: what commonly comes back, and an answer that stays with the
+# matter without putting the other person down.
+pushback:
+  - kind: denial
+    label: "“That is not how it was.”"
+    response: "You may well remember it differently. What I want to talk about is what I experienced — and that is what I am bringing."
+  - kind: counterattack
+    label: "“And what about you?”"
+    response: "Your point can have its turn, and I take it seriously. Let us finish this one first."
+  - kind: minimizing
+    label: "“It was not that bad.”"
+    response: "It may be small for you. It is not for me, and that is why I am raising it."
+  - kind: withdrawal
+    label: "Silence or withdrawal"
+    response: "I can see this is a lot right now. Shall we pause and pick it up again in an hour?"
+
+# Exits: how to end a conversation that has stopped being useful.
+exits:
+  - { tone: warm, text: "I would like to pause here and carry on later — it matters to me that we part on good terms." }
+  - { tone: neutral, text: "I would like to stop here and continue at another time." }
+  - { tone: firm, text: "I am ending the conversation here and will come back to it when we are both calmer." }
+
+# Microtips: situation-dependent notes that help before the conversation.
+microtips:
+  - when: { state: angry }
+    text: "When tension is high, a time frame helps: plan to offer a break after fifteen minutes."
+  - when: { state: exhausted }
+    text: "Conversations held while worn out often end in concessions you regret later. If you can: postpone."
+  - when: { state: hurt }
+    text: "Hurt is looking for acknowledgement, not for a verdict. If the impact lands, a lot has been achieved."
+  - when: { risk: high }
+    text: "Plain speaking carries further when you know in advance what you will do if the other side does not come along."
+  - when: { risk: low }
+    text: "Keeping the peace is a legitimate aim. Make sure the request stays checkable all the same."
+  - when: { goal: closure }
+    text: "Closure does not need agreement about the past — only clarity about what holds from now on."
+  - when: { relationship: manager }
+    text: "Where there is a power gap, writing helps: put the agreement in two sentences afterwards."

@@ -1,0 +1,120 @@
+# Lens content, Spanish (Spain-first, tú): "Myself", "The other", "Listen" and the conversation card.
+# See content/de/lenses.yaml for the structure and the rules.
+#
+# Feelings are nouns ("siento decepción"), so that no sentence assumes a
+# grammatical gender — the same rule as in the Spanish corpus.
+
+sources:
+  ears: "Los cuatro lados de un mensaje, según Friedemann Schulz von Thun (dibujo propio)"
+  interests: "Intereses en vez de posiciones, según Roger Fisher y William Ury"
+  circle: "Círculo vicioso según Schulz von Thun y Thomann; puntuación según Paul Watzlawick"
+  identity: "Las tres conversaciones, según Douglas Stone, Bruce Patton y Sheila Heen"
+  values: "Cuadrado de valores y desarrollo, según Friedemann Schulz von Thun"
+  distance: "Distanciamiento de uno mismo, según Ethan Kross"
+  feelings: "Palabras de sentimientos y necesidades, según Marshall B. Rosenberg"
+  listen: "Escucha activa según Carl Rogers y Thomas Gordon; preguntas abiertas según Miller y Rollnick"
+  agreement: "Un acuerdo con fecha de revisión, según el método Harvard y los pasos de la mediación"
+
+ears:
+  reliability_deadlines:
+    fact: "No se cumplió lo acordado."
+    self: "La fiabilidad te importa, y estás con decepción."
+    relation: "Piensas que no soy de fiar."
+    appeal: "Cumple lo que acordamos."
+  criticism_feedback:
+    fact: "Algo en cómo trabajamos juntos no va bien, tal como tú lo ves."
+    self: "Esto te ronda desde hace tiempo."
+    relation: "No estás a gusto conmigo."
+    appeal: "Hazlo de otra manera."
+  boundary_violation:
+    fact: "Pasó algo que tú no querías."
+    self: "Algo se te acercó demasiado; te ha hecho daño."
+    relation: "Me ves como alguien sin consideración."
+    appeal: "Pregúntame antes."
+  misunderstanding:
+    fact: "Algo llegó distinto de como se quiso decir."
+    self: "Te ha dejado con inseguridad y quieres aclararlo."
+    relation: "Crees que te entendí mal a propósito."
+    appeal: "Explícame cómo lo decías."
+  power_decision:
+    fact: "Se tomó una decisión sin ti."
+    self: "Te sientes al margen y quieres opinar."
+    relation: "Cuestionas mi decisión."
+    appeal: "Cuenta conmigo antes."
+  breakup_closure:
+    fact: "Algo termina, o debería terminar."
+    self: "No te resulta fácil; quieres claridad."
+    relation: "Me estás echando la culpa."
+    appeal: "Cerremos esto bien."
+  textchat:
+    fact: "Algo del chat te ha llegado mal."
+    self: "Has leído el mensaje varias veces; sin voz sonaba frío."
+    relation: "Piensas que soy mala persona, y lo dije delante de todos."
+    appeal: "Escríbeme a mí directamente, no al grupo."
+
+open_question:
+  reliability_deadlines: "¿Qué se te cruzó entre el compromiso y la fecha?"
+  criticism_feedback: "¿Cómo viviste tú la situación?"
+  boundary_violation: "¿Cómo se ve esto desde tu lado?"
+  misunderstanding: "¿Cómo te llegó a ti?"
+  power_decision: "¿Qué pesó entonces a favor de esa decisión?"
+  breakup_closure: "¿Qué necesitas para que esto quede bien cerrado para ti?"
+  textchat: "¿Cómo leíste mi mensaje cuando te llegó?"
+
+reflections:
+  - "O sea, que …"
+  - "Si te entiendo bien, …"
+  - "Suena a que …"
+
+identity:
+  question: "¿Qué dice este conflicto de ti — y es verdad?"
+  chips:
+    competence:
+      label: "Si soy competente"
+      line: "Este conflicto no dice si eres competente. Dice que hay una cosa que aclarar."
+    goodness:
+      label: "Si soy buena persona"
+      line: "Plantear algo no te convierte en mala persona. Las dos partes han contribuido, y las dos pueden decirlo."
+    worth:
+      label: "Si me quieren"
+      line: "Tu valor no depende de esta respuesta. Puedes ser claro o clara y seguir en la relación."
+
+values:
+  line: "Tu valor, {value}, tiene una virtud hermana: {sister}. A solas se vuelve fácilmente {alone}; juntas, sostienen."
+  pairs:
+    - { key: reliability, value: "la fiabilidad", sister: "la calma", alone: "control" }
+    - { key: honesty, value: "la sinceridad", sister: "el tacto", alone: "crudeza" }
+    - { key: closeness, value: "la cercanía", sister: "la autonomía", alone: "apego" }
+    - { key: assertion, value: "la firmeza", sister: "la consideración", alone: "dureza" }
+    - { key: thrift, value: "el ahorro", sister: "la generosidad", alone: "tacañería" }
+    - { key: order, value: "el orden", sister: "la flexibilidad", alone: "rigidez" }
+    - { key: loyalty, value: "la lealtad", sister: "el criterio propio", alone: "sumisión" }
+    - { key: care, value: "el cuidado", sister: "la confianza", alone: "sobreprotección" }
+
+distance: "Imagina que una buena amiga describe tu situación en tercera persona. ¿Qué diría?"
+
+feeling_template: "Siento {feeling} porque "
+feelings:
+  - decepción
+  - dolor
+  - rabia
+  - tristeza
+  - cansancio
+  - inseguridad
+  - agobio
+  - desconcierto
+  - preocupación
+  - fastidio
+  - impotencia
+  - soledad
+needs:
+  - fiabilidad
+  - respeto
+  - claridad
+  - tranquilidad
+  - voz en las decisiones
+  - cercanía
+  - reconocimiento
+  - justicia
+  - seguridad
+  - espacio

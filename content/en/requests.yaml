@@ -1,0 +1,215 @@
+# Requests (the ask).
+#
+# Two layers, same as in German.
+#
+# The general layer is the fallback. It hangs on goal and directness only,
+# so it has to carry for all six situations — which is a hard constraint on
+# wording: no entry here may name an object, a place or an occasion. A
+# general entry becomes concrete through time and action ("by Thursday
+# noon", "on the same day"), never through the thing itself.
+#
+# Entries carrying a `situation` sit in the refined layer and are offered
+# first. See internal/corpus/corpus.go → SceneRequestKey.
+#
+# Checked against content/en/lexicon/request-layer.yaml at the entry's own
+# directness: a `high` entry may say "from now on", a `low` one may not.
+
+min_per_bucket: 2
+
+entries:
+  # ══ General layer — key: goal × risk = 18 buckets ═════════════════════
+
+  # ── understand ────────────────────────────────────────────────────────
+  - { goal: understand, risk: low, text: "Help me understand how this came about — how did you see it?" }
+  - { goal: understand, risk: low, text: "Tell me how the situation was for you." }
+  - { goal: understand, risk: medium, text: "Come back to me by tomorrow with how you arrived at the decision." }
+  - { goal: understand, risk: medium, text: "Can we sit down this week and go through the points? Say when suits you." }
+  - { goal: understand, risk: high, text: "Walk me through it today — how did you get there?" }
+  - { goal: understand, risk: high, text: "Give me your reasoning, and give it to me in this conversation." }
+
+  # ── change ────────────────────────────────────────────────────────────
+  - { goal: change, risk: low, text: "Let me know beforehand when it is getting tight." }
+  - { goal: change, risk: low, text: "It would help me to hear early when something changes." }
+  - { goal: change, risk: medium, text: "Tell me by Thursday noon where I stand with you." }
+  - { goal: change, risk: medium, text: "Ask me once before you commit on my behalf." }
+  - { goal: change, risk: high, text: "From now on I need to hear it the same day when something changes." }
+  - { goal: change, risk: high, text: "By Friday I expect what we agreed to hold." }
+
+  # ── set_boundary ──────────────────────────────────────────────────────
+  - { goal: set_boundary, risk: low, text: "Ask me before you decide about it." }
+  - { goal: set_boundary, risk: low, text: "It matters to me that we settle this between us first." }
+  - { goal: set_boundary, risk: medium, text: "Ask me first, and wait for my answer." }
+  - { goal: set_boundary, risk: medium, text: "Say something before you do it differently." }
+  - { goal: set_boundary, risk: high, text: "What I have just said is what I expect to hold." }
+  - { goal: set_boundary, risk: high, text: "This is where my limit runs. I expect it to be kept." }
+
+  # ── seek_solution ─────────────────────────────────────────────────────
+  - { goal: seek_solution, risk: low, text: "Can we think this through together for half an hour this week?" }
+  - { goal: seek_solution, risk: low, text: "It matters to me that we set a rule for it together." }
+  - { goal: seek_solution, risk: medium, text: "Let us agree a fixed order by Friday and write it down." }
+  - { goal: seek_solution, risk: medium, text: "Talk it through with me: how do we handle it next time?" }
+  - { goal: seek_solution, risk: high, text: "We settle this today, and we leave with it in writing." }
+  - { goal: seek_solution, risk: high, text: "By Monday I need a binding arrangement that we both carry." }
+
+  # ── express_feeling ───────────────────────────────────────────────────
+  - { goal: express_feeling, risk: low, text: "It matters to me that you know how it landed. Will you listen a moment?" }
+  - { goal: express_feeling, risk: low, text: "Let me tell you what it did to me, and let me finish." }
+  - { goal: express_feeling, risk: medium, text: "Listen for ten minutes before you reply." }
+  - { goal: express_feeling, risk: medium, text: "Hear what is on my mind, then say how you see it." }
+  - { goal: express_feeling, risk: high, text: "Listen to me now. I mean this seriously." }
+  - { goal: express_feeling, risk: high, text: "Sit with this, and then say what you will do with it." }
+
+  # ── closure ───────────────────────────────────────────────────────────
+  - { goal: closure, risk: low, text: "Can we close this calmly? Say how you picture the ending." }
+  - { goal: closure, risk: low, text: "It matters to me that we go through the open points once, together." }
+  - { goal: closure, risk: medium, text: "Talk the handover through with me by the end of the week." }
+  - { goal: closure, risk: medium, text: "Let us set a date on which we finish this." }
+  - { goal: closure, risk: high, text: "I am ending this here. Say by Friday whether you carry that." }
+  - { goal: closure, risk: high, text: "I am drawing a line. The open items get settled by the end of the month." }
+
+  # ══════════════════════════════════════════════════════════════════════
+  # Scene layer — key: situation × goal × risk = 108 buckets
+  #
+  # A request names an action, and actions belong to the occasion. That is
+  # why this is the only layer refined by situation.
+  # ══════════════════════════════════════════════════════════════════════
+
+  # ── Reliability and commitments ──────────────────────────────────────
+  - { situation: reliability_deadlines, goal: understand, risk: low, text: "Would you tell me what came up?" }
+  - { situation: reliability_deadlines, goal: understand, risk: medium, text: "Tell me by tomorrow what got in the way of the date." }
+  - { situation: reliability_deadlines, goal: understand, risk: high, text: "Explain to me today why the commitment did not hold." }
+  - { situation: reliability_deadlines, goal: change, risk: low, text: "Let me know early when a date is at risk." }
+  - { situation: reliability_deadlines, goal: change, risk: medium, text: "Check the calendar before you commit." }
+  - { situation: reliability_deadlines, goal: change, risk: high, text: "From now on, tell me the same day when a date slips." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: low, text: "Commit only to what you can hold." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: medium, text: "Confirm a date only after you have checked it." }
+  - { situation: reliability_deadlines, goal: set_boundary, risk: high, text: "A commitment from you has to hold. Otherwise I plan without you." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: low, text: "Can we look together at how we set dates in future?" }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: medium, text: "Let us agree a reminder two days before each date." }
+  - { situation: reliability_deadlines, goal: seek_solution, risk: high, text: "Today we settle how dates get confirmed between us." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: low, text: "Hear me out on what the waiting does to me." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: medium, text: "Listen to what it costs me when a date moves." }
+  - { situation: reliability_deadlines, goal: express_feeling, risk: high, text: "Sit with what it means when I have given my word onwards." }
+  - { situation: reliability_deadlines, goal: closure, risk: low, text: "Can we go through the open dates once and close them?" }
+  - { situation: reliability_deadlines, goal: closure, risk: medium, text: "Give me a final date for the outstanding items this week." }
+  - { situation: reliability_deadlines, goal: closure, risk: high, text: "I need a binding date from you by Friday. Then this is settled." }
+
+  # ── Criticism and feedback ───────────────────────────────────────────
+  - { situation: criticism_feedback, goal: understand, risk: low, text: "Would you tell me what led you to that assessment?" }
+  - { situation: criticism_feedback, goal: understand, risk: medium, text: "Tell me which part you meant, with an example." }
+  - { situation: criticism_feedback, goal: understand, risk: high, text: "Name today what exactly you were judging." }
+  - { situation: criticism_feedback, goal: change, risk: low, text: "Share your view with me first." }
+  - { situation: criticism_feedback, goal: change, risk: medium, text: "Bring feedback to me before it goes to others." }
+  - { situation: criticism_feedback, goal: change, risk: high, text: "Talk to me directly, not in front of the group." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: low, text: "Discuss your assessment with me first." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: medium, text: "Stick to the result and leave my person out of it." }
+  - { situation: criticism_feedback, goal: set_boundary, risk: high, text: "Judgements about me as a person do not belong in front of others. Say them to me." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: low, text: "Can we arrange how we give each other feedback?" }
+  - { situation: criticism_feedback, goal: seek_solution, risk: medium, text: "Let us set a fixed slot for feedback every two weeks." }
+  - { situation: criticism_feedback, goal: seek_solution, risk: high, text: "Today we agree how criticism reaches me in future." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: low, text: "Hear me out on how the sentence landed." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: medium, text: "Listen to what it did to me in front of the others." }
+  - { situation: criticism_feedback, goal: express_feeling, risk: high, text: "Sit with what it means to be judged in front of the room." }
+  - { situation: criticism_feedback, goal: closure, risk: low, text: "Can we talk this through once and then leave it?" }
+  - { situation: criticism_feedback, goal: closure, risk: medium, text: "Tell me by the end of the week whether the point still stands." }
+  - { situation: criticism_feedback, goal: closure, risk: high, text: "This gets settled by Friday, and then it stays closed." }
+
+  # ── A boundary crossed ───────────────────────────────────────────────
+  - { situation: boundary_violation, goal: understand, risk: low, text: "Would you tell me what made you decide that?" }
+  - { situation: boundary_violation, goal: understand, risk: medium, text: "Tell me why you did not ask me first." }
+  - { situation: boundary_violation, goal: understand, risk: high, text: "Explain to me today how you came to go past that." }
+  - { situation: boundary_violation, goal: change, risk: low, text: "Ask me first next time." }
+  - { situation: boundary_violation, goal: change, risk: medium, text: "Wait for my answer before you go ahead." }
+  - { situation: boundary_violation, goal: change, risk: high, text: "From now on: ask me first, and wait for the answer." }
+  - { situation: boundary_violation, goal: set_boundary, risk: low, text: "Ask me before you decide about something of mine." }
+  - { situation: boundary_violation, goal: set_boundary, risk: medium, text: "Ask me rather than assume my agreement." }
+  - { situation: boundary_violation, goal: set_boundary, risk: high, text: "What is mine and what concerns me, I decide. Ask me first." }
+  - { situation: boundary_violation, goal: seek_solution, risk: low, text: "Can we agree where the line runs for both of us?" }
+  - { situation: boundary_violation, goal: seek_solution, risk: medium, text: "Let us write down what needs asking about beforehand." }
+  - { situation: boundary_violation, goal: seek_solution, risk: high, text: "Today we settle what stays mine to decide." }
+  - { situation: boundary_violation, goal: express_feeling, risk: low, text: "Hear me out on why this matters to me." }
+  - { situation: boundary_violation, goal: express_feeling, risk: medium, text: "Listen to what it does to me when that line goes." }
+  - { situation: boundary_violation, goal: express_feeling, risk: high, text: "Sit with what it means to me when my limit is passed over." }
+  - { situation: boundary_violation, goal: closure, risk: low, text: "Can we leave this behind once it is clear?" }
+  - { situation: boundary_violation, goal: closure, risk: medium, text: "Confirm to me by the end of the week that this stands." }
+  - { situation: boundary_violation, goal: closure, risk: high, text: "I need your word on this today. Then it is done." }
+
+  # ── A misunderstanding ───────────────────────────────────────────────
+  - { situation: misunderstanding, goal: understand, risk: low, text: "Would you tell me how you had read it?" }
+  - { situation: misunderstanding, goal: understand, risk: medium, text: "Tell me at which point it went apart for you." }
+  - { situation: misunderstanding, goal: understand, risk: high, text: "Explain to me today what you understood by it." }
+  - { situation: misunderstanding, goal: change, risk: low, text: "Ask me when something is unclear." }
+  - { situation: misunderstanding, goal: change, risk: medium, text: "Check back with me before you decide on an unclear point." }
+  - { situation: misunderstanding, goal: change, risk: high, text: "From now on, ask me before you act on an assumption." }
+  - { situation: misunderstanding, goal: set_boundary, risk: low, text: "Ask me when something is unclear, rather than decide it." }
+  - { situation: misunderstanding, goal: set_boundary, risk: medium, text: "Commit in my name only to what we have discussed." }
+  - { situation: misunderstanding, goal: set_boundary, risk: high, text: "In my name you commit to nothing. Ask me first." }
+  - { situation: misunderstanding, goal: seek_solution, risk: low, text: "Can we look at how we keep this clear in future?" }
+  - { situation: misunderstanding, goal: seek_solution, risk: medium, text: "Let us write the agreement down in two sentences afterwards." }
+  - { situation: misunderstanding, goal: seek_solution, risk: high, text: "Today we set how we confirm what has been agreed." }
+  - { situation: misunderstanding, goal: express_feeling, risk: low, text: "Hear me out on what the confusion did to me." }
+  - { situation: misunderstanding, goal: express_feeling, risk: medium, text: "Listen to what the rework cost me." }
+  - { situation: misunderstanding, goal: express_feeling, risk: high, text: "Sit with what it means when I explain it three times." }
+  - { situation: misunderstanding, goal: closure, risk: low, text: "Can we clear this up and then let it go?" }
+  - { situation: misunderstanding, goal: closure, risk: medium, text: "Confirm to me this week what now holds." }
+  - { situation: misunderstanding, goal: closure, risk: high, text: "I need it in writing by Friday. Then this is closed." }
+
+  # ── Authority and decisions ──────────────────────────────────────────
+  - { situation: power_decision, goal: understand, risk: low, text: "Would you tell me how the decision came about?" }
+  - { situation: power_decision, goal: understand, risk: medium, text: "Tell me who was involved and when." }
+  - { situation: power_decision, goal: understand, risk: high, text: "Explain to me today why I was left out of it." }
+  - { situation: power_decision, goal: change, risk: low, text: "Involve me when it touches my area." }
+  - { situation: power_decision, goal: change, risk: medium, text: "Discuss decisions about my tasks with me first." }
+  - { situation: power_decision, goal: change, risk: high, text: "From now on, include me before it is decided." }
+  - { situation: power_decision, goal: set_boundary, risk: low, text: "Agree my area of responsibility with me." }
+  - { situation: power_decision, goal: set_boundary, risk: medium, text: "Discuss decisions about my tasks with me beforehand." }
+  - { situation: power_decision, goal: set_boundary, risk: high, text: "About my area you decide with me, not over my head." }
+  - { situation: power_decision, goal: seek_solution, risk: low, text: "Can we think through how such decisions are prepared?" }
+  - { situation: power_decision, goal: seek_solution, risk: medium, text: "Let us set who is involved and when." }
+  - { situation: power_decision, goal: seek_solution, risk: high, text: "Today we write down how decisions in my area run in future." }
+  - { situation: power_decision, goal: express_feeling, risk: low, text: "Hear me out on how it is to find out afterwards." }
+  - { situation: power_decision, goal: express_feeling, risk: medium, text: "Listen to what it does to me to be passed over." }
+  - { situation: power_decision, goal: express_feeling, risk: high, text: "Sit with what it means when I carry what others decide." }
+  - { situation: power_decision, goal: closure, risk: low, text: "Can we settle how we go on from here?" }
+  - { situation: power_decision, goal: closure, risk: medium, text: "Tell me by the end of the week what now applies to my area." }
+  - { situation: power_decision, goal: closure, risk: high, text: "I need clarity by Friday about who decides what. Then this rests." }
+
+  # ── Ending and closure ───────────────────────────────────────────────
+  - { situation: breakup_closure, goal: understand, risk: low, text: "Would you tell me how you look at it now?" }
+  - { situation: breakup_closure, goal: understand, risk: medium, text: "Tell me what brought you to this point." }
+  - { situation: breakup_closure, goal: understand, risk: high, text: "Explain to me today where you stand." }
+  - { situation: breakup_closure, goal: change, risk: low, text: "Let me know when something changes for you." }
+  - { situation: breakup_closure, goal: change, risk: medium, text: "Answer my messages within a week." }
+  - { situation: breakup_closure, goal: change, risk: high, text: "Reply to me by Friday. Then we both know where we are." }
+  - { situation: breakup_closure, goal: set_boundary, risk: low, text: "Give me some time before we settle the rest." }
+  - { situation: breakup_closure, goal: set_boundary, risk: medium, text: "Let calls rest for the next two weeks." }
+  - { situation: breakup_closure, goal: set_boundary, risk: high, text: "I need distance. Get in touch when I get in touch with you." }
+  - { situation: breakup_closure, goal: seek_solution, risk: low, text: "Can we go through the open points together once?" }
+  - { situation: breakup_closure, goal: seek_solution, risk: medium, text: "Let us set a date to divide what is left." }
+  - { situation: breakup_closure, goal: seek_solution, risk: high, text: "Today we settle the open items and write down what stands." }
+  - { situation: breakup_closure, goal: express_feeling, risk: low, text: "Hear me out on what this ending does to me." }
+  - { situation: breakup_closure, goal: express_feeling, risk: medium, text: "Listen to what the silence does to me." }
+  - { situation: breakup_closure, goal: express_feeling, risk: high, text: "Sit with what it means to be left without a goodbye." }
+  - { situation: breakup_closure, goal: closure, risk: low, text: "Can we close this calmly and part on decent terms?" }
+  - { situation: breakup_closure, goal: closure, risk: medium, text: "Tell me by the end of the week how we finish it." }
+  - { situation: breakup_closure, goal: closure, risk: high, text: "I am ending this. Say by Friday whether you carry that." }
+
+  # ── textchat: a fight in the group chat / class chat (04.10.2026) ────────────────────────────
+  - { situation: textchat, goal: understand, risk: low, text: "Would you tell me how you meant your \"ok.\"?" }
+  - { situation: textchat, goal: understand, risk: medium, text: "I'd like you to write me one sentence about what bothered you in my message." }
+  - { situation: textchat, goal: understand, risk: high, text: "I want to hear from you today how the screenshot got into the group." }
+  - { situation: textchat, goal: change, risk: low, text: "It would help me if you write things like this to me directly instead of into the group." }
+  - { situation: textchat, goal: change, risk: medium, text: "I'm asking you to send messages about me to me first, not to the group." }
+  - { situation: textchat, goal: change, risk: high, text: "I expect you to share screenshots from our chat with others only with my okay." }
+  - { situation: textchat, goal: set_boundary, risk: low, text: "I'd like us to sort things like this out between the two of us, and keep them out of the group chat." }
+  - { situation: textchat, goal: set_boundary, risk: medium, text: "I'm asking you to ask me before you put a photo of me into the group." }
+  - { situation: textchat, goal: set_boundary, risk: high, text: "I'm asking you to delete yesterday's photo today and to ask me first next time." }
+  - { situation: textchat, goal: seek_solution, risk: low, text: "Let's talk for five minutes instead of settling this in the chat -- when suits you?" }
+  - { situation: textchat, goal: seek_solution, risk: medium, text: "I'd like us to meet tomorrow for five minutes and settle this, rather than keep writing." }
+  - { situation: textchat, goal: seek_solution, risk: high, text: "I want us to talk today and agree what from our chat may go to the group and what may not." }
+  - { situation: textchat, goal: express_feeling, risk: low, text: "I'd like to tell you how the message landed with me -- will you listen for two minutes?" }
+  - { situation: textchat, goal: express_feeling, risk: medium, text: "I'm asking you to read my message right through before you reply." }
+  - { situation: textchat, goal: express_feeling, risk: high, text: "I want you to hear what the message in front of the group did to me before you explain anything." }
+  - { situation: textchat, goal: closure, risk: low, text: "I'm leaving the group chat, and I'm asking you to let that be and to write nothing about it to the group." }
+  - { situation: textchat, goal: closure, risk: medium, text: "I'm asking you to text me about appointments only, and nothing else." }
+  - { situation: textchat, goal: closure, risk: high, text: "I'm blocking our chat today. If something important comes up, tell me in person." }

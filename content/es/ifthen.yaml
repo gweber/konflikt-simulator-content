@@ -1,0 +1,294 @@
+# "If they say …" block, Spanish (Spain first, "tú").
+#
+# If-then plans (Peter Gollwitzer's implementation intentions): the user picks
+# the sentence they most fear to hear and gets one calm answer to keep ready,
+# plus one repair phrase for when the conversation has already slipped.
+# A typed sentence is matched by keywords (lower-case word beginnings) to the
+# closest item, else it gets the generic answer. Keywords come with and
+# without accents, since people often type without them. Every test sentence
+# is checked by `go run ./cmd/corpusc -check`; see internal/corpus/ifthen.go.
+#
+# Items without situations apply to all six situations; the others to the
+# situations listed. Each situation shows six items.
+source: "Planes «si… entonces» (Peter Gollwitzer)"
+items:
+  # --- Common to all situations ---
+  - id: exaggerate
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Estás exagerando."
+    answer: "Puede que desde fuera parezca poca cosa. Aun así, me gustaría que escucharas cómo me llegó a mí."
+    repair: "¿Empezamos otra vez? He levantado la voz más de lo que quería."
+    keywords: ["exager", "dramatiz", "drama", "dramátic", "dramatic", "histéric", "histeric", "para tanto", "un mundo", "una montaña", "una montana", "sacas de quicio", "sacando de quicio"]
+    tests:
+      - "Estás exagerando."
+      - "No es para tanto, de verdad"
+      - "Siempre montas un drama"
+      - "estas exagerando un monton"
+      - "Haces un mundo de cualquier cosa"
+  - id: not_true
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Eso no es verdad."
+    answer: "Lo recordamos de forma distinta, y está bien. No necesito tener razón; solo quiero que sepas cómo fue para mí."
+    repair: "Estamos discutiendo quién tiene razón, y no he venido a eso. ¿Lo intentamos de nuevo?"
+    keywords: ["no es verdad", "no es cierto", "mentira", "mientes", "falso", "no fue así", "no fue asi", "nunca pasó", "nunca paso", "te lo inventas", "te lo has inventado", "inventando", "tonterías", "tonterias", "qué va"]
+    tests:
+      - "Eso no es verdad."
+      - "Mentira, no fue así"
+      - "Te lo estás inventando"
+      - "Eso nunca pasó"
+      - "Qué va, no es cierto"
+  - id: always_my_fault
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "Siempre tengo yo la culpa."
+    answer: "No busco culpables. Quiero arreglar esto en concreto para que la próxima vez salga mejor."
+    repair: "Igual ha sonado a acusación, y no lo era. Déjame decirlo de otra manera."
+    keywords: ["culpa", "siempre yo", "siempre soy yo", "siempre a mí", "siempre a mi", "chivo expiatorio", "el malo", "la mala"]
+    tests:
+      - "Siempre tengo yo la culpa."
+      - "Claro, todo es culpa mía"
+      - "Siempre soy yo, ¿no?"
+      - "Aquí siempre soy el malo de la película"
+  - id: silence
+    situations: [reliability_deadlines, criticism_feedback, boundary_violation, misunderstanding, power_decision, breakup_closure]
+    say: "(Se calla o se va.)"
+    answer: "Vale, hacemos una pausa. ¿Lo retomamos mañana a esta misma hora? Para mí es importante."
+    repair: "Creo que te he soltado demasiado de golpe. Lo siento. ¿Lo intentamos otra vez, con más calma?"
+    keywords: ["se calla", "callad", "silencio", "no dice nada", "no contesta", "no responde", "se va", "se marcha", "se larga", "portazo", "cuelga", "me ignora", "ignorando", "no quiero hablar", "no quiere hablar", "no me habla", "sale de la habitación", "sale de la habitacion"]
+    tests:
+      - "Se queda callado."
+      - "Se calla y se va"
+      - "Sale de la habitación dando un portazo"
+      - "No quiero hablar más de esto."
+      - "Me ignora por completo"
+
+  # --- reliability_deadlines ---
+  - id: too_much_on
+    situations: [reliability_deadlines]
+    say: "Es que voy hasta arriba."
+    answer: "Te creo. Entonces veamos cómo puedes avisarme antes la próxima vez."
+    repair: "Me he puesto un poco impaciente, perdona. Solo quiero poder contar contigo."
+    keywords: ["hasta arriba", "a tope", "lío", "lio", "liad", "agobi", "estresad", "estrés", "estres", "no he tenido tiempo", "no me ha dado tiempo", "no me dio tiempo", "se me pasó", "se me paso", "se me olvidó", "se me olvido", "mil cosas"]
+    tests:
+      - "Es que voy hasta arriba."
+      - "Perdona, he estado muy liado"
+      - "No me ha dado tiempo, de verdad"
+      - "Se me pasó, tenía mil cosas"
+      - "estoy agobiadisima con todo"
+  - id: its_done_now
+    situations: [reliability_deadlines]
+    say: "Ya está hecho, ¿qué más quieres?"
+    answer: "Me alegra que esté. Lo que quiero es para la próxima vez: saber antes a qué atenerme."
+    repair: "Creo que te acabo de soltar un sermón. No era mi intención. Gracias por sacarlo adelante."
+    keywords: ["ya está", "ya esta", "más quieres", "mas quieres", "ya lo tienes", "al final", "unos días", "unos dias", "cuál es el problema", "cual es el problema", "qué más da", "que mas da", "que más da"]
+    tests:
+      - "Ya está hecho, ¿qué más quieres?"
+      - "Al final lo tienes, ¿no?"
+      - "Por unos días tampoco pasa nada"
+      - "Ya lo tienes, ¿cuál es el problema?"
+
+  # --- criticism_feedback ---
+  - id: not_perfect_either
+    situations: [criticism_feedback]
+    say: "Tú tampoco eres perfecto."
+    answer: "Es verdad, no lo soy. Ahora hablamos de mí también; antes me gustaría terminar con esto."
+    repair: "Ya estamos echándonos en cara los fallos. Así no avanzamos ninguno de los dos. ¿Empezamos de nuevo?"
+    keywords: ["perfect", "tú tampoco", "tu tampoco", "y tú qué", "y tu qué", "y tu que", "mira quién habla", "mira quien habla", "no eres mejor", "tú también", "tu también", "tu tambien", "haces lo mismo"]
+    tests:
+      - "Tú tampoco eres perfecto."
+      - "¿Y tú qué?"
+      - "Mira quién habla"
+      - "tu tambien la lias, eh"
+      - "Tú haces lo mismo"
+  - id: do_it_yourself
+    situations: [criticism_feedback]
+    say: "Pues hazlo tú."
+    answer: "No es eso lo que busco. Quiero hacerlo contigo, solo que en este punto de otra manera."
+    repair: "Me ha salido más duro de lo que quería. Sé todo lo que haces; solo era este punto."
+    keywords: ["hazlo tú", "hazlo tu", "pues hazlo", "tú mism", "tu mism", "sabes más", "sabes mas", "lo sabes todo", "haces mejor", "hacerlo mejor", "a tu manera"]
+    tests:
+      - "Pues hazlo tú."
+      - "Hazlo tú misma si sabes más"
+      - "Si lo haces mejor, adelante"
+      - "Como tú lo sabes todo..."
+
+  # --- boundary_violation ---
+  - id: dont_make_fuss
+    situations: [boundary_violation]
+    say: "No te pongas así."
+    answer: "A mí me ha parecido demasiado. Te lo digo para que no vuelva a pasar."
+    repair: "Me he puesto borde. Lo que digo va en serio, pero déjame decirlo otra vez con calma."
+    keywords: ["no te pongas", "te pones así", "te pones asi", "sensible", "susceptible", "quejic", "delicad", "piel fina", "no aguantas nada", "relájate", "relajate", "tranqui"]
+    tests:
+      - "No te pongas así."
+      - "Qué susceptible eres"
+      - "Eres muy sensible"
+      - "Relájate, tampoco ha sido nada"
+      - "Tranqui, no te pongas así"
+  - id: just_joking
+    situations: [boundary_violation]
+    say: "Era solo una broma."
+    answer: "Puede que para ti fuera una broma. A mí no me hizo gracia, así que, por favor, déjalo."
+    repair: "No digo que lo hicieras con mala intención. Solo me importa que no se repita."
+    keywords: ["broma", "bromea", "de coña", "cachondeo", "vacil", "de risa", "humor", "no iba en serio", "no lo decía en serio", "no lo decia en serio", "sin mala intención", "sin mala intencion"]
+    tests:
+      - "Era solo una broma."
+      - "Que era de coña, hombre"
+      - "¿No aguantas una broma?"
+      - "Solo te estaba vacilando"
+      - "No tienes sentido del humor"
+
+  # --- misunderstanding ---
+  - id: never_said
+    situations: [misunderstanding]
+    say: "Yo nunca he dicho eso."
+    answer: "Entonces quizá te entendí mal. Dime qué querías decir, y yo te cuento cómo me llegó."
+    repair: "Nos estamos enredando con palabras sueltas. Volvamos un momento atrás: ¿qué me querías decir en realidad?"
+    keywords: ["nunca he dicho", "nunca dije", "no he dicho", "no dije", "nunca lo dije", "no es lo que dije", "no quise decir", "no me refería", "no me referia", "no lo decía así", "no lo decia asi"]
+    tests:
+      - "Yo nunca he dicho eso."
+      - "Eso no es lo que dije"
+      - "No quise decir eso"
+      - "no me referia a eso para nada"
+  - id: hear_what_you_want
+    situations: [misunderstanding]
+    say: "Solo oyes lo que quieres oír."
+    answer: "Pues dímelo otra vez, te escucho. Luego te repito lo que he entendido."
+    repair: "Antes te he cortado. Perdona; termina, por favor."
+    keywords: ["quieres oír", "quieres oir", "solo oyes", "sólo oyes", "no escuchas", "no me escuchas", "nunca escuchas", "nunca me escuchas", "tergivers", "retuerces", "le das la vuelta", "en mi boca"]
+    tests:
+      - "Solo oyes lo que quieres oír."
+      - "Nunca me escuchas de verdad"
+      - "Estás tergiversando lo que digo"
+      - "No pongas palabras en mi boca"
+      - "Siempre le das la vuelta a todo"
+
+  # --- power_decision ---
+  - id: my_decision
+    situations: [power_decision]
+    say: "Aquí decido yo."
+    answer: "No quiero quitarte la decisión. Solo quiero que me preguntes antes de decidir algo que me afecta."
+    repair: "Me he alterado bastante. No busco quitarte nada; solo quiero poder opinar."
+    keywords: ["decido yo", "yo decido", "mi decisión", "mi decision", "mando yo", "yo mando", "aquí mando", "aqui mando", "el jefe", "la jefa", "mi casa", "mis normas", "no te incumbe", "asunto tuyo", "cosa tuya"]
+    tests:
+      - "Aquí decido yo."
+      - "Es mi decisión, no la tuya"
+      - "Aquí mando yo"
+      - "En mi casa, mis normas"
+      - "Eso no es asunto tuyo"
+  - id: no_time
+    situations: [power_decision]
+    say: "No había tiempo para eso."
+    answer: "Puede ser. ¿Cómo hacemos para que la próxima vez me entere antes, aunque sea un momento?"
+    repair: "No te reprocho que hubiera que ir rápido. Solo pongámonos de acuerdo en cómo lo hacemos a partir de ahora."
+    keywords: ["no había tiempo", "no habia tiempo", "no hubo tiempo", "no tenía tiempo", "no tenia tiempo", "margen", "prisa", "urgente", "última hora", "ultima hora", "no te localic", "no podía esperar", "no podia esperar"]
+    tests:
+      - "No había tiempo para eso."
+      - "Corría prisa"
+      - "Fue todo a última hora"
+      - "No te localicé y era urgente"
+
+  # --- breakup_closure ---
+  - id: ruining_everything
+    situations: [breakup_closure]
+    say: "Lo estás echando todo a perder."
+    answer: "Entiendo que lo vivas así. Lo he pensado bien y lo mantengo."
+    repair: "Esto es duro para los dos ahora mismo. No quiero que acabemos peleados. ¿Respiramos un momento?"
+    keywords: ["a perder", "estropea", "cargando", "te lo cargas", "destroz", "destru", "arruin", "por la borda", "tirando todo"]
+    tests:
+      - "Lo estás echando todo a perder."
+      - "Te estás cargando todo"
+      - "Lo estás estropeando todo"
+      - "Estás tirando todo por la borda"
+  - id: after_all_i_did
+    situations: [breakup_closure]
+    say: "¿Después de todo lo que he hecho por ti?"
+    answer: "Sé lo que has hecho por mí, y te lo agradezco. Eso no cambia que, para mí, esto no puede seguir así."
+    repair: "Ha sonado como si todo hubiera sido en balde. No lo digo en ese sentido: hubo mucho bueno."
+    keywords: ["después de todo", "despues de todo", "hecho por ti", "desagradecid", "me lo pagas", "sacrifiqu", "sacrificad", "con todo lo que"]
+    tests:
+      - "¿Después de todo lo que he hecho por ti?"
+      - "Eres un desagradecido"
+      - "¿Así me lo pagas?"
+      - "Con todo lo que me he sacrificado por ti"
+
+  # --- textchat: pelea en el chat del grupo / de clase (04.10.2026) -- los seis propios del chat; los hablados quedan fuera ---
+  - id: lol
+    situations: [textchat]
+    say: "jaja"
+    answer: "Lo digo en serio. ¿Puedes leerlo una vez sin el jaja y decirme qué opinas?"
+    repair: "Me salió demasiado cortante. Empiezo de nuevo: es por la foto de ayer."
+    keywords: ["jaja", "jajaja", "lol", "😂", "🤣", "xd", "jsjs"]
+    tests:
+      - "jaja"
+      - "jajaja qué"
+      - "😂😂😂"
+      - "lol vale"
+      - "xd"
+  - id: sorry_what
+    situations: [textchat]
+    say: "¿Perdona??"
+    answer: "Sí, lo digo así. No busco pelea: quiero que sepas cómo me llegó."
+    repair: "Habrá sonado a ataque. No iba por ahí. Lo intento otra vez de otra forma."
+    keywords: ["perdona?", "perdona??", "¿perdona", "cómo?", "como?", "qué dices", "que dices", "qué quieres", "que quieres", "en serio?", "¿en serio", "qué te pasa", "que te pasa", "wtf", "flipas"]
+    tests:
+      - "¿Perdona??"
+      - "qué dices tú ahora"
+      - "¿Qué quieres de mí?"
+      - "en serio?"
+      - "flipas"
+  - id: left_on_read
+    situations: [textchat]
+    say: "(Lo lee y deja de contestar.)"
+    answer: "Veo que lo has leído. Tómate tu tiempo; me gustaría que esta noche me escribas aunque sea una palabra."
+    repair: "Seguramente te he soltado demasiado texto. Con una frase tuya me basta."
+    keywords: ["lo lee", "leído", "leido", "doble check", "check azul", "en visto", "me deja en visto", "no contesta", "no responde", "sin respuesta", "deja de contestar", "me ignora", "ignorando", "en línea pero", "en linea pero", "desaparece"]
+    tests:
+      - "Lo lee y deja de contestar"
+      - "Doble check azul y sin respuesta"
+      - "Me deja en visto"
+      - "Me ignora sin más"
+      - "en línea pero no contesta"
+  - id: screenshot
+    situations: [textchat]
+    say: "captura 😏"
+    answer: "Puedes reenviarlo. Me gustaría que esto quede entre nosotros, y te digo con honestidad que me importa."
+    repair: "Noto que ahora nos estamos amenazando. No quiero eso. Aclarémoslo mañana en persona, en un momento."
+    keywords: ["captura", "pantallazo", "screenshot", "reenv", "se lo mando", "lo mando", "se lo enseño", "lo subo", "lo publico", "😏", "lo tengo guardado", "guardado", "pruebas"]
+    tests:
+      - "captura 😏"
+      - "esto lo reenvío"
+      - "Lo tengo guardado, se lo enseño a todos"
+      - "😏 tengo el pantallazo"
+      - "tengo pruebas"
+  - id: everyone_agrees
+    situations: [textchat]
+    say: "Todos piensan lo mismo."
+    answer: "Puede que otros lo vean igual. Ahora hablo contigo, y me importa lo que tú digas."
+    repair: "Me doy cuenta de que yo también estoy contando gente de mi lado. Quedémonos entre los dos."
+    keywords: ["todos piensan", "todos dicen", "todos opinan", "todo el mundo", "los demás", "los demas", "pregunta a", "pregúntale a", "preguntale a", "no soy el único", "no soy la única", "no soy el unico", "no soy la unica", "todos aquí", "todos aqui"]
+    tests:
+      - "Todos piensan lo mismo"
+      - "Pregunta a los demás"
+      - "Todo el mundo lo dice aquí"
+      - "No soy el único que lo ve"
+      - "todos aquí lo dicen"
+  - id: chill
+    situations: [textchat]
+    say: "relax, era broma"
+    answer: "Para ti era broma, vale. A mí no me llegó así, y por eso te escribo."
+    repair: "No digo que lo hicieras con mala intención. Solo quiero que pare."
+    keywords: ["relax", "broma", "coña", "cachondeo", "de risa", "no era en serio", "no iba en serio", "qué sensible", "que sensible", "exageras", "exagerad", "drama", "no es para tanto", "tranqui", "cálmate", "calmate", "te lo tomas"]
+    tests:
+      - "relax, era broma"
+      - "era de coña"
+      - "tranqui, no es para tanto"
+      - "qué sensible eres"
+      - "te lo tomas todo a pecho"
+
+generic:
+  answer: "Me lo apunto. Déjame terminar lo mío y luego te toca a ti."
+  repair: "Espera, esto se está torciendo, y yo también he puesto de mi parte. ¿Empezamos otra vez desde el principio?"
+  tests:
+    - "¿Qué hay de cena?"
+    - "¿Has visto mis llaves?"
+    - "Vale, de acuerdo."

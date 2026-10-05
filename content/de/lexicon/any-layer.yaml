@@ -1,0 +1,155 @@
+# Checks for every layer (German).
+#
+# These come from the multi-school concept (04.10.2026, research D2): they
+# look at how a sentence is said, not at which layer it belongs to, so they
+# run on the occasion, the impact and the request alike. cmd/corpusc copies
+# every group of this file into each of the three layers.
+#
+# All of them are hints, not doctrine. Only contempt costs something
+# (`warn`); the rest is `info` — a nudge the user may ignore.
+#
+# Same rules as the layer files: `match` is RE2 without \b (the loader adds
+# Unicode word guards), every rule brings its own `hits` and `misses`, and
+# the build fails when one of them is not honoured. `source` is the one-line
+# background shown under every hint.
+#
+# Checked against the existing rules so that nothing fires twice:
+#   - "vielleicht", "eigentlich" are hedge-vielleicht / soft-eigentlich.
+#   - "lächerlich", "Unverschämtheit" are esc-abwertung (occasion layer).
+#   - "man fühlt sich" is pseudo-man, "jeder würde" blame-musst-wissen
+#     (impact layer).
+
+layer: any
+
+groups:
+  - kind: yes_but
+    severity: info
+    source: "Stone, Patton & Heen: „und“ statt „aber“"
+    why: |
+      Nach einer Anerkennung nimmt „aber“ sie wieder zurück. Gehört wird nur
+      noch, was danach kommt, und die Anerkennung klingt wie ein Anlauf.
+      Mit „und“ stehen beide Hälften: Deine Sicht zählt, meine auch.
+    rules:
+      - id: but-after-ack
+        match: "(ich verstehe|ich versteh|ich weiß|ich weiss|ich sehe|ich finde es gut|ich schätze|ich schaetze|du hast recht|das stimmt|klar|natürlich|natuerlich|danke)[^.!?]{0,80}, ?aber"
+        message: "Nach einer Anerkennung nimmt „aber“ sie wieder zurück."
+        ask: "Versuch es mit „und“: „Ich weiß, du hattest viel zu tun, und die Zuarbeit war für Donnerstag vereinbart.“"
+        tests:
+          hits:
+            - "Ich weiß, du hattest viel zu tun, aber die Zuarbeit kam erst am Freitag."
+            - "Du hast recht, aber so geht es nicht weiter."
+            - "Danke für deine Hilfe, aber ich brauche die Liste bis Montag."
+          misses:
+            - "Aber am Dienstag kam keine Nachricht."
+            - "Ich weiß es nicht."
+            - "Ich weiß, du hattest viel zu tun, und die Zuarbeit war für Donnerstag vereinbart."
+
+  - kind: why_question
+    severity: info
+    source: "Thomas Gordon und Motivierende Gesprächsführung: offen fragen (Praxiswissen)"
+    why: |
+      Eine Warum-Frage verlangt eine Rechtfertigung. Die andere Person sucht
+      dann nach Gründen, die sie verteidigen kann, statt zu erzählen, was los
+      war. „Was ist passiert?“ fragt dasselbe und lädt zum Erzählen ein.
+    rules:
+      - id: why-du
+        match: "(warum|wieso|weshalb|weswegen) (\\p{L}+ )?(du|ihr)"
+        message: "„{match}“ verlangt eine Rechtfertigung."
+        ask: "Frag lieber: „Was ist passiert?“ oder „Wie kam es dazu?“"
+        tests:
+          hits:
+            - "Warum hast du nicht Bescheid gesagt?"
+            - "Wieso machst du das?"
+            - "Ich frage mich, warum du nicht angerufen hast."
+          misses:
+            - "Ich weiß nicht, warum ich so laut geworden bin."
+            - "Darum geht es mir."
+            - "Was ist passiert?"
+
+  - kind: over_apology
+    severity: info
+    source: "Selbstsicherheitstraining: um etwas bitten, ohne sich dafür zu entschuldigen"
+    why: |
+      Wer sich dafür entschuldigt, dass er überhaupt etwas anspricht, sagt
+      gleich mit, dass sein Anliegen eigentlich nicht zählt. Du darfst
+      fragen. Eine Entschuldigung für das, was du getan hast, ist etwas
+      anderes — die bleibt.
+    rules:
+      - id: apology-for-asking
+        match: "(tut mir leid|sorry|entschuldige|entschuldigung),? dass ich (dich |euch |sie |dir |euch )?(damit |schon wieder |nochmal |noch mal )?(störe|stoere|frage|nerve|komme|anspreche|schreibe|melde|belästige|belaestige)|(tut mir leid|sorry|entschuldige),? dass ich (das|es) (anspreche|sage|erwähne|erwaehne)|ich will (dich |euch |sie |dir )?(ja |auch )?nicht nerven|ich will (dir |euch |ihnen )?(ja )?nicht zu nahe treten|(klingt|mag) (jetzt |vielleicht |bestimmt )*(blöd|bloed|dumm|albern|kleinlich)|nur ganz kurz"
+        message: "„{match}“ entschuldigt sich für das Anliegen selbst."
+        ask: "Du darfst fragen. Lass die Entschuldigung weg und sag, worum es geht."
+        tests:
+          hits:
+            - "Sorry, dass ich dich damit nerve, aber die Liste fehlt noch."
+            - "Tut mir leid, dass ich das anspreche."
+            - "Ich will dich ja nicht nerven."
+            - "Das klingt jetzt vielleicht kleinlich."
+          misses:
+            - "Es tut mir leid, dass ich laut geworden bin."
+            - "Das ist dumm gelaufen."
+            - "Ich möchte etwas ansprechen."
+
+  - kind: speak_for_yourself
+    severity: info
+    source: "Ruth Cohn: per „ich“ sprechen"
+    more: ich-botschaften
+    why: |
+      „Alle finden das“ holt Verstärkung, die nicht im Raum ist. Die andere
+      Person kann mit einer unsichtbaren Mehrheit nicht reden — nur mit dir.
+      Und dein eigener Eindruck reicht als Grund für das Gespräch.
+    rules:
+      - id: speak-everyone
+        match: "alle (sagen|finden|denken|wissen|sehen|merken|meinen|reden)|alle hier|jeder (weiß|weiss|sagt|findet|sieht|merkt|denkt)|jede:r (weiß|weiss|sagt|findet)|(das|so etwas|sowas|so was) macht man (doch )?nicht|man (macht|tut|sagt) (das|so etwas|sowas|so was) (doch )?nicht|niemand (hier )?(findet|mag|will|versteht)"
+        message: "„{match}“ spricht für andere statt für dich."
+        ask: "Sag „ich“: Was hast du gesehen, was ist dir wichtig?"
+        tests:
+          hits:
+            - "Alle finden, dass das so nicht geht."
+            - "Das macht man doch nicht."
+            - "Jeder weiß, dass die Frist Freitag war."
+          misses:
+            - "Ich finde, das geht so nicht."
+            - "Alle Unterlagen lagen auf dem Tisch."
+            - "Da fühlt man sich übergangen."
+
+  - kind: contempt
+    severity: warn
+    source: "John Gottman: Verachtung"
+    more: vier-gifte
+    why: |
+      Spott und Augenrollen kommen schneller an als jedes Argument — als
+      Herabsetzung. Von allen Mustern, die Gespräche kippen lassen, ist
+      Verachtung das, auf das die andere Seite am heftigsten reagiert.
+    rules:
+      - id: contempt-markers
+        match: "na toll|na super|na prima|na klasse|na großartig|na grossartig|klar doch|jaja|herzlichen glückwunsch|herzlichen glueckwunsch|wie originell|was für eine überraschung|was fuer eine ueberraschung|🙄|augenroll\\p{L}*"
+        message: "„{match}“ wird als Spott gehört."
+        ask: "Sag ohne Ironie, was passiert ist. Spott führt in die Verteidigung."
+        tests:
+          hits:
+            - "Na toll, die Liste fehlt wieder."
+            - "Herzlichen Glückwunsch, das hat ja super geklappt."
+            - "Jaja, ich weiß schon."
+            - "Die Liste kam am Freitag 🙄"
+          misses:
+            - "Das Ergebnis war toll."
+            - "Ich freue mich, dass es geklappt hat."
+
+  - kind: monologue
+    severity: info
+    source: "Thomas Gordon: sprechen und zuhören im Wechsel"
+    why: |
+      Ein langer Absatz ist eine Rede, kein Gesprächsbeginn. Je mehr in einem
+      Zug kommt, desto mehr Stellen hat die andere Person, an denen sie
+      einhaken kann — und desto weniger hört sie das Wichtigste.
+    length_check:
+      id: monologue-long
+      max_words: 45
+      message: "{words} Wörter in einem Zug — das ist schon eine kleine Rede."
+      ask: "Sag eine Sache, dann hör zu. Welcher eine Satz muss hier stehen?"
+      tests:
+        hits:
+          - "Am Dienstag war die Zuarbeit für zwölf Uhr vereinbart, und ich habe den ganzen Vormittag darauf gewartet, dann habe ich nachgefragt, dann kam keine Antwort, dann habe ich den Kunden vertröstet, und am Freitag kam die Datei endlich, aber da war der Termin schon verschoben und die halbe Woche war weg und ich musste alles neu planen."
+        misses:
+          - "Am Dienstag war die Zuarbeit für zwölf Uhr vereinbart; sie kam am Freitag."

@@ -1,0 +1,14 @@
+<!-- A camera (what was there) next to a thought bubble (what I made of it). -->
+<rect x="150" y="105" width="90" height="40" rx="10" fill="$ink"/>
+<rect x="70" y="135" width="330" height="215" rx="32" fill="$ink"/>
+<circle cx="235" cy="242" r="78" fill="$wash" stroke="$accent" stroke-width="14"/>
+<circle cx="235" cy="242" r="32" fill="$accent"/>
+<circle cx="350" cy="172" r="12" fill="$wash"/>
+<text x="235" y="430" text-anchor="middle" font-size="52" font-weight="700" fill="$ink">$time</text>
+<path d="M 470,60 L 470,420" stroke="$line2" stroke-width="5" stroke-dasharray="14 14"/>
+<g fill="$wash2" stroke="$soft" stroke-width="6">
+  <path d="M 610,300 C 545,305 530,240 575,220 C 545,170 600,120 650,145 C 670,90 760,90 780,140 C 840,120 890,175 860,220 C 900,250 870,310 815,300 C 795,340 735,345 712,312 C 690,335 635,330 610,300 Z"/>
+  <circle cx="600" cy="352" r="20"/>
+  <circle cx="568" cy="400" r="12"/>
+</g>
+<text x="718" y="250" text-anchor="middle" font-size="84" font-weight="700" fill="$soft">?!</text>

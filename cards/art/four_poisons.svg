@@ -1,0 +1,35 @@
+<!-- Four habits as four small pictures: pointing finger, rolled eyes, raised shield, wall. -->
+<g fill="$wash2">
+  <circle cx="340" cy="118" r="108"/><circle cx="600" cy="118" r="108"/>
+  <circle cx="340" cy="352" r="108"/><circle cx="600" cy="352" r="108"/>
+</g>
+<!-- pointing finger -->
+<g transform="translate(218 -117)">
+  <g fill="$ink">
+    <rect x="62" y="212" width="74" height="76" rx="24"/>
+    <rect x="104" y="212" width="98" height="24" rx="12"/>
+    <rect x="78" y="190" width="24" height="44" rx="12" transform="rotate(-20 90 212)"/>
+  </g>
+  <g stroke="$wash2" stroke-width="5" stroke-linecap="round">
+    <path d="M 100,252 L 136,252"/><path d="M 100,270 L 134,270"/>
+  </g>
+</g>
+<!-- rolled eyes -->
+<g transform="translate(244 -117)">
+  <circle cx="356" cy="235" r="66" fill="none" stroke="$ink" stroke-width="8"/>
+  <g fill="#ffffff" stroke="$ink" stroke-width="6"><ellipse cx="332" cy="218" rx="19" ry="22"/><ellipse cx="380" cy="218" rx="19" ry="22"/></g>
+  <g fill="$ink"><circle cx="335" cy="205" r="9"/><circle cx="383" cy="205" r="9"/></g>
+  <path d="M 332,270 L 384,262" stroke="$ink" stroke-width="8" stroke-linecap="round"/>
+</g>
+<!-- shield -->
+<g transform="translate(-250 117)">
+  <path d="M 590,160 L 650,182 C 650,250 630,290 590,312 C 550,290 530,250 530,182 Z" fill="$ink"/>
+  <path d="M 590,180 L 632,196 C 631,245 617,273 590,290 Z" fill="$soft"/>
+</g>
+<!-- wall -->
+<g transform="translate(-224 117)" fill="$ink">
+  <rect x="756" y="168" width="64" height="36" rx="4"/><rect x="826" y="168" width="64" height="36" rx="4"/>
+  <rect x="756" y="210" width="29" height="36" rx="4"/><rect x="791" y="210" width="64" height="36" rx="4"/><rect x="861" y="210" width="29" height="36" rx="4"/>
+  <rect x="756" y="252" width="64" height="36" rx="4"/><rect x="826" y="252" width="64" height="36" rx="4"/>
+  <rect x="756" y="294" width="29" height="10" rx="3"/><rect x="791" y="294" width="64" height="10" rx="3"/><rect x="861" y="294" width="29" height="10" rx="3"/>
+</g>
