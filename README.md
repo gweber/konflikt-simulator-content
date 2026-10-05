@@ -315,4 +315,4 @@ class is expressly welcome.
 
 Attribution line for both:
 
-> Konflikt-Simulator, Günter Weber, konflikt-simulator.de
+> Konflikt-Simulator, Taro (konflikt-simulator.de)

@@ -18,4 +18,4 @@ expressly welcome.
 The drawings are our own; they credit the model's author ("after Schulz von
 Thun") and do not reproduce any institute's graphics.
 
-Attribution: Konflikt-Simulator, Günter Weber, konflikt-simulator.de
+Attribution: Konflikt-Simulator, Taro (konflikt-simulator.de)
