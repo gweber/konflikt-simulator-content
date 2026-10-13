@@ -1,22 +1,22 @@
 ---
 id: vier-gifte
 slug: vier-gifte
-title: "Vier Gifte im Streit: Gottmans Muster und ihre Gegenmittel"
-description: "Vorwurf, Verachtung, Rechtfertigung, Mauern: Gottmans vier Muster, ihre Gegenmittel — und was an den berühmten Vorhersagequoten nicht stimmt."
+title: "Gottmans vier apokalyptische Reiter und ihre Gegenmittel"
+description: "Kritik, Verachtung, Abwehr, Mauern: Gottmans vier apokalyptische Reiter („vier Gifte“), ihre Gegenmittel — und was an den Vorhersagequoten nicht stimmt."
 card: four_poisons
 evidence: "Muster gut belegt, Vorhersagequoten nicht, Gegenmittel Praxiswissen"
 page: https://konflikt-simulator.de/hintergrund/vier-gifte
 ---
 
-# Vier Gifte im Streit
+# Gottmans vier apokalyptische Reiter
 
-*Vier Muster, die ein Gespräch zuverlässig kippen — und zu jedem ein Gegenmittel.*
+*Kritik, Verachtung, Abwehr, Mauern: vier Muster, die ein Gespräch zuverlässig kippen — und zu jedem ein Gegenmittel.*
 
-![Vier Gifte im Streit](../../cards/de/four_poisons.png)
+![Gottmans vier apokalyptische Reiter](../../cards/de/four_poisons.png)
 
 ## Was das Modell sagt
 
-John Gottman hat über Jahrzehnte Paare beim Streiten gefilmt und vier Muster gefunden, die besonders schaden. Er nennt sie die vier apokalyptischen Reiter; die Karte sagt schlichter: vier Gifte.
+John Gottman hat über Jahrzehnte Paare beim Streiten gefilmt und vier Muster gefunden, die besonders schaden. Er nennt sie die vier apokalyptischen Reiter: Kritik, Verachtung, Abwehr (Rechtfertigung) und Mauern. Die Karte sagt schlichter: vier Gifte.
 
 Vorwurf greift die Person statt des Verhaltens an („du bist so egoistisch“). Verachtung setzt sich über die andere Person — Spott, Augenrollen, „na toll“. Rechtfertigung weist jeden Anteil zurück. Mauern heißt, abzuschalten und zu schweigen, meist weil man überflutet ist.
 

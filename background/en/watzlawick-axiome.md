@@ -1,22 +1,22 @@
 ---
 id: watzlawick-axiome
 slug: watzlawick-axioms
-title: "Watzlawick: content and relationship, a loop without a start"
-description: "Three of Watzlawick's axioms for a difficult conversation: content and relationship, punctuation, digital and analogue. With the model's limits."
+title: "Watzlawick's 5 axioms: one cannot not communicate"
+description: "Paul Watzlawick's 5 axioms of communication, briefly — and the three that count before a difficult conversation: content and relationship, punctuation."
 card: who_started
 evidence: "Practice wisdom, influential, hard to test"
 page: https://conflict-simulator.com/en/background/watzlawick-axioms
 ---
 
-# Watzlawick's axioms
+# Watzlawick's 5 axioms
 
-*One cannot not communicate — and three more sentences that explain a row before it begins.*
+*One cannot not communicate — and four more sentences that explain a row before it begins.*
 
-![Watzlawick's axioms](../../cards/en/who_started.png)
+![Watzlawick's 5 axioms](../../cards/en/who_started.png)
 
 ## What the model says
 
-In 1967 Paul Watzlawick and his colleagues set out five “tentative axioms” of communication. Three of them are worth having before a difficult conversation.
+In 1967 Paul Watzlawick and his colleagues set out five “tentative axioms” of communication: one cannot not communicate; every communication has a content and a relationship aspect; the nature of a relationship depends on the punctuation of the sequence of events; human beings communicate both digitally and analogically; communication is either symmetrical or complementary. The first is the most famous — silence, looking away and not answering are messages too. The fifth describes whether two people talk as equals or complement each other: manager and employee, teacher and pupil. Three of the five are worth having before a difficult conversation.
 
 First: every message has a content and a relationship aspect, and the relationship aspect decides how the content is understood. A fight about the dishes is rarely a fight about the dishes.
 

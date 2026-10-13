@@ -1,22 +1,22 @@
 ---
 id: ich-botschaften
 slug: i-messages
-title: "I-messages after Thomas Gordon: impact instead of blame"
-description: "What makes an I-message after Thomas Gordon, why “I think you are unfair” is not one, what the evidence says — and where the site checks your lines."
+title: "I statements (I-messages): examples and printable worksheet"
+description: "I statements after Thomas Gordon: ten examples turning a you-message into an I statement, a printable worksheet — and where the site checks you."
 card: ask_then_say
 evidence: "Partly supported — the form helps but does not replace the stance"
 page: https://conflict-simulator.com/en/background/i-messages
 ---
 
-# I-messages
+# I statements (I-messages)
 
 *“You make me angry” asserts a cause. “I get angry” describes what happens — and cannot be denied.*
 
-![I-messages](../../cards/en/ask_then_say.png)
+![I statements (I-messages)](../../cards/en/ask_then_say.png)
 
 ## What the model says
 
-A you-message tells the other person what is wrong with them. An I-message tells them what is happening with me. Thomas Gordon gave it three parts: the behaviour, without judgement (“when the dishes are still there in the morning”), its concrete effect on me (“I have to wash them before work”) and my feeling about it (“and I am annoyed”).
+A you-message tells the other person what is wrong with them. An I statement — Thomas Gordon called it an I-message — tells them what is happening with me. Thomas Gordon gave it three parts: the behaviour, without judgement (“when the dishes are still there in the morning”), its concrete effect on me (“I have to wash them before work”) and my feeling about it (“and I am annoyed”).
 
 The first person alone is not enough. “I think you are unfair” begins with I and is a verdict. “I feel ignored” sounds like a feeling and is an interpretation of what the other person did. A real I-message names a feeling nobody can deny.
 
@@ -43,6 +43,23 @@ Is that a feeling — angry, sad, unsure — or an interpretation: ignored, dism
 ### Reflect the first answer
 
 Prepare an opening: “So you are saying …”, “If I understand you right …”. People who feel understood listen better — and only then is your argument worth making.
+
+## Ten examples: you-message → I statement
+
+| You-message | I statement |
+|---|---|
+| You never listen to me. | When you looked at your phone just now while I was talking, I felt unsure — I do not know whether this matters to you. |
+| You are always late. | We said seven, you arrived at half past. I waited and I was annoyed. |
+| You leave everything to me. | Yesterday’s dishes were still there this morning. I washed them before work and I am tired. |
+| You keep interrupting me. | In the meeting I started twice and did not get to finish. I am frustrated. |
+| You do not take me seriously. | When you laughed at my suggestion I flinched. I am unsure what you really think of it. |
+| You broke your promise. | You said the figures would come by Thursday; they came Friday. I sat there in the evening without them and I was tense. |
+| You are so messy. | Your jacket and bag were in the hallway and I tripped over them. I am irritated. |
+| You never answer my messages. | I wrote to you on Tuesday and Wednesday and got no reply. I was worried. |
+| You do not respect my boundaries. | I had said I do not work on Sundays; you called anyway. I am exhausted. |
+| You are unfair to me. | In the round today you named only my mistake. I am hurt, and I do not know how you see my work otherwise. |
+
+Worksheet: the [card “Ask, then say”](../../cards/en/ask_then_say.png) as a printable PNG — behaviour, effect, feeling, then listen. All eleven cards are under [Cards](https://conflict-simulator.com/en/cards); use in class is welcome.
 
 ## Where the Conflict Simulator uses it
 

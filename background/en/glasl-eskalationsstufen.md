@@ -1,22 +1,22 @@
 ---
 id: glasl-eskalationsstufen
 slug: glasl-escalation-stages
-title: "Glasl's stages of escalation: how heated is it?"
-description: "Glasl's nine stages of escalation in three phases — and why the Conflict Simulator turns red as soon as threats appear. With three moves before you talk."
+title: "Glasl's 9 stages of conflict escalation: how heated is it?"
+description: "Glasl's 9 stages of conflict escalation in three phases — and why the Conflict Simulator turns red as soon as threats appear. Three moves before you talk."
 card: how_heated
 evidence: "Practice wisdom, widely used, not validated"
 page: https://conflict-simulator.com/en/background/glasl-escalation-stages
 ---
 
-# Glasl's stages of escalation
+# Glasl's 9 stages of conflict escalation
 
-*Nine stages, three phases — and the question whether you should still have this conversation on your own.*
+*Nine stages of escalation, three phases — and the question whether you should still have this conversation on your own.*
 
-![Glasl's stages of escalation](../../cards/en/how_heated.png)
+![Glasl's 9 stages of conflict escalation](../../cards/en/how_heated.png)
 
 ## What the model says
 
-Conflicts do not escalate at random; they go down in recognisable steps. Friedrich Glasl describes nine stages and draws them as a staircase leading downwards: with every step perception narrows and the number of ways out shrinks.
+Conflict escalation is not random; it goes down in recognisable steps. Friedrich Glasl describes 9 stages of conflict escalation and draws them as a staircase leading downwards: with every step perception narrows and the number of ways out shrinks.
 
 The first three stages — hardening, debate, actions instead of words — are still a dispute both sides can win. Stages four to six tip that over: people recruit allies, expose the other side, make threats. From stage seven on, the only aim left is to hurt the other side more than you lose yourself.
 

@@ -1,22 +1,22 @@
 ---
 id: vier-gifte
 slug: cuatro-venenos
-title: "Cuatro venenos al discutir: Gottman y sus antídotos"
-description: "Culpar, despreciar, defenderse, cerrarse: los cuatro patrones de Gottman, sus antídotos, y qué falla en los famosos porcentajes de predicción."
+title: "Los cuatro jinetes del apocalipsis (Gottman) y sus antídotos"
+description: "Crítica, desprecio, actitud defensiva, cerrarse: los cuatro jinetes del apocalipsis de Gottman («cuatro venenos»), sus antídotos y qué falla en las cifras."
 card: four_poisons
 evidence: "Patrones bien respaldados; porcentajes no; antídotos, saber práctico"
 page: https://conflict-simulator.com/es/fondo/cuatro-venenos
 ---
 
-# Cuatro venenos al discutir
+# Los cuatro jinetes del apocalipsis de Gottman
 
-*Cuatro patrones que tumban una conversación con toda fiabilidad, y un antídoto para cada uno.*
+*Crítica, desprecio, actitud defensiva, cerrarse: cuatro patrones que tumban una conversación con toda fiabilidad, y un antídoto para cada uno.*
 
-![Cuatro venenos al discutir](../../cards/es/four_poisons.png)
+![Los cuatro jinetes del apocalipsis de Gottman](../../cards/es/four_poisons.png)
 
 ## Qué dice el modelo
 
-John Gottman grabó durante décadas a parejas discutiendo y encontró cuatro patrones que hacen especial daño. Él los llama los cuatro jinetes del Apocalipsis; la tarjeta lo dice más llano: cuatro venenos.
+John Gottman grabó durante décadas a parejas discutiendo y encontró cuatro patrones que hacen especial daño. Él los llama los cuatro jinetes del Apocalipsis: la crítica, el desprecio, la actitud defensiva y cerrarse en banda. La tarjeta lo dice más llano: cuatro venenos.
 
 Culpar ataca a la persona en vez de a la conducta («eres un egoísta»). El desprecio se pone por encima del otro: burla, ojos en blanco, «claro que sí». Defenderse rechaza cualquier parte de responsabilidad. Cerrarse es apagarse y callar, casi siempre porque uno está desbordado.
 

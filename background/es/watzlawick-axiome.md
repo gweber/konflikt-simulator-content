@@ -1,22 +1,22 @@
 ---
 id: watzlawick-axiome
 slug: axiomas-de-watzlawick
-title: "Watzlawick: contenido y relación, un círculo sin principio"
-description: "Tres axiomas de Watzlawick para una conversación difícil: contenido y relación, puntuación, digital y analógico. Con los límites del modelo."
+title: "Los 5 axiomas de la comunicación de Watzlawick"
+description: "Los 5 axiomas de la comunicación de Paul Watzlawick, en breve, y los tres que cuentan antes de una conversación difícil: contenido y relación, puntuación."
 card: who_started
 evidence: "Saber práctico, influyente, difícil de comprobar"
 page: https://conflict-simulator.com/es/fondo/axiomas-de-watzlawick
 ---
 
-# Los axiomas de Watzlawick
+# Los 5 axiomas de la comunicación de Watzlawick
 
-*Es imposible no comunicar, y otras tres frases que explican una pelea antes de que empiece.*
+*Es imposible no comunicar, y otras cuatro frases que explican una pelea antes de que empiece.*
 
-![Los axiomas de Watzlawick](../../cards/es/who_started.png)
+![Los 5 axiomas de la comunicación de Watzlawick](../../cards/es/who_started.png)
 
 ## Qué dice el modelo
 
-En 1967 Paul Watzlawick y sus colegas formularon cinco «axiomas provisionales» de la comunicación. Tres de ellos conviene tenerlos antes de una conversación difícil.
+En 1967 Paul Watzlawick y sus colegas formularon cinco «axiomas provisionales» de la comunicación: es imposible no comunicar; toda comunicación tiene un aspecto de contenido y otro de relación; la naturaleza de una relación depende de la puntuación de las secuencias; los seres humanos se comunican de forma digital y analógica; la comunicación es simétrica o complementaria. El primero es el más famoso: callar, mirar hacia otro lado y no responder también son mensajes. El quinto describe si dos personas hablan de igual a igual o se complementan: jefa y empleado, profesor y alumna. Tres de los cinco conviene tenerlos antes de una conversación difícil.
 
 Primero: todo mensaje tiene un aspecto de contenido y otro de relación, y el de relación decide cómo se entiende el contenido. Una pelea por los platos casi nunca va de los platos.
 

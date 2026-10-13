@@ -1,22 +1,22 @@
 ---
 id: vier-gifte
 slug: four-poison-habits
-title: "Four poison habits: Gottman's patterns and their antidotes"
-description: "Criticism, contempt, defensiveness, stonewalling: Gottman's four patterns, their antidotes — and what is wrong with the famous prediction rates."
+title: "Gottman's Four Horsemen: four patterns and their antidotes"
+description: "Criticism, contempt, defensiveness, stonewalling: Gottman's Four Horsemen (our card: poison habits), the antidotes — and what is wrong with the rates."
 card: four_poisons
 evidence: "Patterns well supported, prediction rates not, antidotes practice wisdom"
 page: https://conflict-simulator.com/en/background/four-poison-habits
 ---
 
-# Four poison habits
+# Gottman's Four Horsemen
 
-*Four patterns that reliably tip a conversation over — and an antidote for each.*
+*Criticism, contempt, defensiveness, stonewalling: four patterns that reliably tip a conversation over — and an antidote for each.*
 
-![Four poison habits](../../cards/en/four_poisons.png)
+![Gottman's Four Horsemen](../../cards/en/four_poisons.png)
 
 ## What the model says
 
-Over decades John Gottman filmed couples arguing and found four patterns that do particular damage. He calls them the four horsemen of the apocalypse; the card says it more plainly: four poison habits.
+Over decades John Gottman filmed couples arguing and found four patterns that do particular damage. He calls them the Four Horsemen of the Apocalypse: criticism, contempt, defensiveness and stonewalling. The card says it more plainly: four poison habits.
 
 Criticism attacks the person instead of the behaviour (“you are so selfish”). Contempt puts yourself above the other person — mockery, eye-rolling, “yeah, right”. Defensiveness rejects any share of the blame. Stonewalling means shutting down and going silent, usually because you are flooded.
 

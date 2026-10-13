@@ -1,8 +1,8 @@
 ---
 id: ich-botschaften
 slug: ich-botschaften
-title: "Ich-Botschaften nach Thomas Gordon: Wirkung statt Vorwurf"
-description: "Was eine Ich-Botschaft nach Thomas Gordon ausmacht, warum „Ich finde, du bist unfair“ keine ist, was belegt ist — und wo die Seite deine Sätze prüft."
+title: "Ich-Botschaften (Gordon): 10 Beispiele und Arbeitsblatt"
+description: "Ich-Botschaften nach Thomas Gordon: zehn Beispiele Du-Botschaft → Ich-Botschaft, Arbeitsblatt zum Drucken — und wo die Seite deine Sätze prüft."
 card: ask_then_say
 evidence: "Teilweise belegt — Form hilft, ersetzt aber keine Haltung"
 page: https://konflikt-simulator.de/hintergrund/ich-botschaften
@@ -43,6 +43,23 @@ Steht da ein Gefühl — wütend, traurig, verunsichert — oder eine Deutung: �
 ### Die erste Antwort spiegeln
 
 Leg dir einen Satzanfang zurecht: „Du meinst also …“, „Wenn ich dich richtig verstehe …“. Wer sich verstanden fühlt, hört besser zu — und erst dann lohnt dein Argument.
+
+## Zehn Beispiele: Du-Botschaft → Ich-Botschaft
+
+| Du-Botschaft | Ich-Botschaft |
+|---|---|
+| Du hörst mir nie zu. | Als du eben aufs Handy geschaut hast, während ich erzählt habe, bin ich verunsichert — ich weiß nicht, ob es dich interessiert. |
+| Du bist immer zu spät. | Wir waren um sieben verabredet, du kamst um halb acht. Ich habe gewartet und war genervt. |
+| Du lässt mich alles allein machen. | Das Geschirr von gestern stand heute Morgen noch da. Ich habe es vor der Arbeit gespült und bin müde. |
+| Du unterbrichst mich ständig. | Ich habe in der Besprechung zweimal angefangen und bin nicht zu Ende gekommen. Ich bin frustriert. |
+| Du nimmst mich nicht ernst. | Als du über meinen Vorschlag gelacht hast, bin ich zusammengezuckt. Ich bin unsicher, wie du ihn wirklich findest. |
+| Du hast dein Versprechen gebrochen. | Du hattest zugesagt, die Zahlen bis Donnerstag zu schicken; sie kamen Freitag. Ich saß am Abend ohne sie da und war angespannt. |
+| Du bist so unordentlich. | Deine Jacke und die Tasche lagen im Flur, ich bin darüber gestolpert. Ich bin ärgerlich. |
+| Du antwortest mir nie auf Nachrichten. | Ich habe dir Dienstag und Mittwoch geschrieben und keine Antwort bekommen. Ich habe mir Sorgen gemacht. |
+| Du respektierst meine Grenzen nicht. | Ich hatte gesagt, dass ich am Sonntag nicht arbeite; du hast trotzdem angerufen. Ich bin erschöpft. |
+| Du bist unfair zu mir. | In der Runde heute hast du nur meinen Fehler genannt. Ich bin verletzt und weiß nicht, wie du meine Arbeit sonst siehst. |
+
+Arbeitsblatt: Die [Karte „Erst fragen, dann sagen“](../../cards/de/ask_then_say.png) als PNG zum Ausdrucken — Beobachtung, Wirkung, Gefühl, dann zuhören. Alle elf Karten stehen unter [Karten](https://konflikt-simulator.de/karten), Nutzung im Unterricht erwünscht.
 
 ## Wo der Konflikt-Simulator es benutzt
 

@@ -1,22 +1,22 @@
 ---
 id: vier-ohren
 slug: four-ears
-title: "Four ears after Schulz von Thun: how your sentence lands"
-description: "Every message has four sides, every listener four ears (Schulz von Thun). What that means for your opening sentence — and where the model misleads."
+title: "Four ears model (four-sides model) after Schulz von Thun"
+description: "The four ears model, also four-sides model or communication square (Schulz von Thun): the four sides of every message — and where the model misleads."
 card: four_ears
 evidence: "Practice wisdom, didactically strong, barely tested"
 page: https://conflict-simulator.com/en/background/four-ears
 ---
 
-# Four ears
+# Four ears model (four-sides model)
 
 *Every message has four sides, and the person listening often hears a different one than you meant.*
 
-![Four ears](../../cards/en/four_ears.png)
+![Four ears model (four-sides model)](../../cards/en/four_ears.png)
 
 ## What the model says
 
-A sentence like “The bin is full” carries four messages at once: a fact (the bin is full), something about the speaker (this bothers me), something about the relationship (I think this is your job) and an appeal (take it out). Friedemann Schulz von Thun calls this the communication square.
+The four ears model of Friedemann Schulz von Thun — he calls it the communication square or four-sides model — says that a sentence like “The bin is full” carries four messages at once: a fact (the bin is full), something about the speaker (this bothers me), something about the relationship (I think this is your job) and an appeal (take it out). Those are the four sides of a message.
 
 The point is in the listening. Whoever listens has four ears and decides, mostly without noticing, which one to use. One person hears the fact and says “true”. Another hears the relationship and says “so it is my fault again”. Both heard the same sentence.
 

@@ -1,22 +1,22 @@
 ---
 id: glasl-eskalationsstufen
 slug: etapas-de-escalada-glasl
-title: "Etapas de escalada según Glasl: ¿cómo de caldeado está?"
-description: "Nueve etapas de escalada de Glasl en tres fases, y por qué el Simulador de Conflictos pasa a rojo en cuanto hay amenazas. Con tres pasos antes de hablar."
+title: "Etapas del conflicto: las 9 etapas de escalada según Glasl"
+description: "Las 9 etapas del conflicto según Friedrich Glasl, en tres fases: cómo escala un conflicto y por qué el Simulador de Conflictos pasa a rojo ante amenazas."
 card: how_heated
 evidence: "Saber práctico, muy usado, no validado"
 page: https://conflict-simulator.com/es/fondo/etapas-de-escalada-glasl
 ---
 
-# Etapas de escalada según Glasl
+# Las 9 etapas del conflicto según Glasl
 
-*Nueve etapas, tres fases, y una pregunta: ¿deberías tener esta conversación tú solo?*
+*Nueve etapas de escalada, tres fases, y una pregunta: ¿deberías tener esta conversación tú solo?*
 
-![Etapas de escalada según Glasl](../../cards/es/how_heated.png)
+![Las 9 etapas del conflicto según Glasl](../../cards/es/how_heated.png)
 
 ## Qué dice el modelo
 
-Los conflictos no se calientan al azar: bajan por escalones reconocibles. Friedrich Glasl describe nueve etapas y las dibuja como una escalera que baja. Con cada escalón la mirada se estrecha y quedan menos salidas.
+Las etapas del conflicto no se suceden al azar: un conflicto baja por escalones reconocibles. Friedrich Glasl describe 9 etapas de escalada y las dibuja como una escalera que baja. Con cada escalón la mirada se estrecha y quedan menos salidas.
 
 Las tres primeras etapas —endurecimiento, debate, hechos en lugar de palabras— siguen siendo una disputa en la que los dos pueden ganar. De la cuatro a la seis la cosa cambia: se buscan aliados, se deja en evidencia al otro, se amenaza. A partir de la siete ya solo se trata de hacer más daño al otro del que uno mismo sufre.
 

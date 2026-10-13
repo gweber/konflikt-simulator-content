@@ -1,22 +1,22 @@
 ---
 id: glasl-eskalationsstufen
 slug: glasl-eskalationsstufen
-title: "Eskalationsstufen nach Glasl: Wie heiß ist der Konflikt?"
-description: "Glasls neun Eskalationsstufen in drei Phasen — und warum der Konflikt-Simulator schon bei Drohungen auf Rot schaltet. Mit drei Schritten vor dem Gespräch."
+title: "9 Eskalationsstufen nach Glasl: Wie heiß ist der Konflikt?"
+description: "Die 9 Eskalationsstufen nach Friedrich Glasl in drei Phasen — Konflikteskalation erkennen, und warum der Konflikt-Simulator bei Drohungen auf Rot schaltet."
 card: how_heated
 evidence: "Praxiswissen, breit genutzt, nicht validiert"
 page: https://konflikt-simulator.de/hintergrund/glasl-eskalationsstufen
 ---
 
-# Eskalationsstufen nach Glasl
+# 9 Eskalationsstufen nach Glasl
 
-*Neun Stufen, drei Phasen — und die Frage, ob du dieses Gespräch noch allein führen solltest.*
+*Neun Eskalationsstufen, drei Phasen — und die Frage, ob du dieses Gespräch noch allein führen solltest.*
 
-![Eskalationsstufen nach Glasl](../../cards/de/how_heated.png)
+![9 Eskalationsstufen nach Glasl](../../cards/de/how_heated.png)
 
 ## Was das Modell sagt
 
-Konflikte eskalieren nicht zufällig, sondern in erkennbaren Schritten. Friedrich Glasl beschreibt neun Stufen, die er als Treppe nach unten zeichnet: Mit jeder Stufe wird die Wahrnehmung enger und die Zahl der Auswege kleiner.
+Konflikteskalation ist kein Zufall, sondern verläuft in erkennbaren Schritten. Friedrich Glasl beschreibt 9 Eskalationsstufen, die er als Treppe nach unten zeichnet: Mit jeder Stufe wird die Wahrnehmung enger und die Zahl der Auswege kleiner.
 
 Die ersten drei Stufen — Verhärtung, Debatte, Taten statt Worte — sind noch ein Streit, bei dem beide gewinnen können. In den Stufen vier bis sechs kippt das: Man sucht Verbündete, stellt die andere Seite bloß, droht. Ab Stufe sieben geht es nur noch darum, der anderen Seite mehr zu schaden, als man selbst verliert.
 

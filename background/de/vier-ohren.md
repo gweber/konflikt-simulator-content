@@ -1,22 +1,22 @@
 ---
 id: vier-ohren
 slug: vier-ohren
-title: "Vier Ohren nach Schulz von Thun: Wie dein Satz ankommt"
-description: "Jede Nachricht hat vier Seiten, jedes Zuhören vier Ohren (Schulz von Thun). Was das für deinen ersten Satz heißt — und wo das Modell irreführt."
+title: "Vier-Ohren-Modell und Kommunikationsquadrat: Schulz von Thun"
+description: "Das Vier-Ohren-Modell (Kommunikationsquadrat) nach Schulz von Thun: die vier Seiten einer Nachricht, am Beispiel erklärt — und wo das Modell irreführt."
 card: four_ears
 evidence: "Praxiswissen, didaktisch stark, kaum empirisch geprüft"
 page: https://konflikt-simulator.de/hintergrund/vier-ohren
 ---
 
-# Vier Ohren
+# Vier-Ohren-Modell (Kommunikationsquadrat)
 
 *Jede Nachricht hat vier Seiten, und wer zuhört, hört oft eine andere als die gemeinte.*
 
-![Vier Ohren](../../cards/de/four_ears.png)
+![Vier-Ohren-Modell (Kommunikationsquadrat)](../../cards/de/four_ears.png)
 
 ## Was das Modell sagt
 
-Ein Satz wie „Der Müll ist voll“ trägt vier Botschaften zugleich: eine Sache (der Eimer ist voll), eine Selbstkundgabe (mich stört das), eine Beziehungsbotschaft (ich halte dich für zuständig) und einen Appell (bring ihn raus). Friedemann Schulz von Thun nennt das Kommunikationsquadrat.
+Das Vier-Ohren-Modell von Friedemann Schulz von Thun — er selbst nennt es Kommunikationsquadrat oder Vier-Seiten-Modell — sagt: Ein Satz wie „Der Müll ist voll“ trägt vier Botschaften zugleich. Eine Sachinformation (der Eimer ist voll), eine Selbstkundgabe (mich stört das), eine Beziehungsbotschaft (ich halte dich für zuständig) und einen Appell (bring ihn raus). Das sind die vier Seiten einer Nachricht.
 
 Die Pointe liegt beim Zuhören. Wer hört, hat vier Ohren und entscheidet, meist unbewusst, mit welchem er hört. Der eine hört die Sache und sagt „stimmt“. Die andere hört die Beziehung und sagt „immer bin ich schuld“. Beide haben denselben Satz gehört.
 

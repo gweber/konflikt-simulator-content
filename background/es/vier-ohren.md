@@ -1,22 +1,22 @@
 ---
 id: vier-ohren
 slug: cuatro-oidos
-title: "Cuatro oídos según Schulz von Thun: cómo llega tu frase"
-description: "Cada mensaje tiene cuatro lados y quien escucha, cuatro oídos (Schulz von Thun). Qué significa para tu primera frase y dónde engaña el modelo."
+title: "Modelo de los cuatro oídos (cuatro lados) de Schulz von Thun"
+description: "El modelo de los cuatro oídos o cuadrado de la comunicación (Schulz von Thun): los cuatro lados de cada mensaje, con ejemplo, y dónde engaña el modelo."
 card: four_ears
 evidence: "Saber práctico, didácticamente fuerte, apenas comprobado"
 page: https://conflict-simulator.com/es/fondo/cuatro-oidos
 ---
 
-# Cuatro oídos
+# Modelo de los cuatro oídos (cuatro lados del mensaje)
 
 *Cada mensaje tiene cuatro lados, y quien escucha suele oír uno distinto del que querías decir.*
 
-![Cuatro oídos](../../cards/es/four_ears.png)
+![Modelo de los cuatro oídos (cuatro lados del mensaje)](../../cards/es/four_ears.png)
 
 ## Qué dice el modelo
 
-Una frase como «La basura está llena» lleva cuatro mensajes a la vez: un hecho (el cubo está lleno), algo sobre quien habla (esto me molesta), algo sobre la relación (creo que te toca a ti) y una petición (sácala). Friedemann Schulz von Thun lo llama el cuadrado de la comunicación.
+El modelo de los cuatro oídos de Friedemann Schulz von Thun —él lo llama cuadrado de la comunicación o modelo de los cuatro lados— dice que una frase como «La basura está llena» lleva cuatro mensajes a la vez: un hecho (el cubo está lleno), algo sobre quien habla (esto me molesta), algo sobre la relación (creo que te toca a ti) y una petición (sácala). Esos son los cuatro lados de un mensaje.
 
 La clave está en el que escucha. Quien escucha tiene cuatro oídos y elige, casi siempre sin darse cuenta, con cuál oye. Uno oye el hecho y dice «es verdad». Otra oye la relación y dice «otra vez la culpa es mía». Los dos han oído la misma frase.
 

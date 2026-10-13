@@ -1,22 +1,22 @@
 ---
 id: watzlawick-axiome
 slug: watzlawick-axiome
-title: "Watzlawick: Sache und Beziehung, Kreis ohne Anfang"
-description: "Drei Axiome von Paul Watzlawick für ein schwieriges Gespräch: Inhalt und Beziehung, Interpunktion, digital und analog. Mit den Grenzen des Modells."
+title: "Watzlawicks 5 Axiome: Man kann nicht nicht kommunizieren"
+description: "Die 5 Axiome von Paul Watzlawick, kurz erklärt — und die drei, die vor einem schwierigen Gespräch zählen: Inhalt und Beziehung, Interpunktion, Ton."
 card: who_started
 evidence: "Praxiswissen, einflussreich, schwer prüfbar"
 page: https://konflikt-simulator.de/hintergrund/watzlawick-axiome
 ---
 
-# Watzlawicks Axiome
+# Watzlawicks 5 Axiome
 
-*Man kann nicht nicht kommunizieren — und drei weitere Sätze, die einen Streit erklären, bevor er beginnt.*
+*Man kann nicht nicht kommunizieren — und vier weitere Sätze, die einen Streit erklären, bevor er beginnt.*
 
-![Watzlawicks Axiome](../../cards/de/who_started.png)
+![Watzlawicks 5 Axiome](../../cards/de/who_started.png)
 
 ## Was das Modell sagt
 
-Paul Watzlawick und seine Kollegen haben 1967 fünf „vorläufige Axiome“ der Kommunikation formuliert. Drei davon braucht man vor einem schwierigen Gespräch.
+Paul Watzlawick und seine Kollegen haben 1967 fünf „vorläufige Axiome“ der Kommunikation formuliert: Man kann nicht nicht kommunizieren. Jede Kommunikation hat einen Inhalts- und einen Beziehungsaspekt. Die Beziehung ist durch die Interpunktion der Ereignisfolgen bedingt. Menschen kommunizieren digital und analog. Kommunikation ist symmetrisch oder komplementär. Das erste ist das berühmteste: Auch Schweigen, Wegsehen und Nichtantworten sind eine Nachricht. Das fünfte beschreibt, ob zwei Menschen auf Augenhöhe reden oder sich ergänzen — Chefin und Mitarbeiter, Lehrer und Schülerin. Drei der fünf braucht man vor einem schwierigen Gespräch.
 
 Erstens: Jede Nachricht hat einen Inhalts- und einen Beziehungsaspekt, und der Beziehungsaspekt bestimmt, wie der Inhalt verstanden wird. Der Streit ums Geschirr ist selten ein Streit ums Geschirr.
 

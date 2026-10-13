@@ -1,22 +1,22 @@
 ---
 id: ich-botschaften
 slug: mensajes-en-primera-persona
-title: "Mensajes en primera persona (Gordon): efecto, no reproche"
-description: "Qué hace que una frase sea un mensaje en primera persona (Gordon), por qué «Creo que eres injusto» no lo es, qué está probado y dónde te revisa la web."
+title: "Mensajes yo (primera persona): 10 ejemplos y hoja de trabajo"
+description: "Mensajes yo según Thomas Gordon: diez ejemplos de reproche a mensaje yo, hoja de trabajo imprimible, qué está probado y dónde te revisa la web."
 card: ask_then_say
 evidence: "Respaldo parcial: la forma ayuda, pero no sustituye a la actitud"
 page: https://conflict-simulator.com/es/fondo/mensajes-en-primera-persona
 ---
 
-# Mensajes en primera persona
+# Mensajes yo (mensajes en primera persona)
 
 *«Me pones de los nervios» afirma una causa. «Me pongo de los nervios» describe lo que pasa, y no se puede negar.*
 
-![Mensajes en primera persona](../../cards/es/ask_then_say.png)
+![Mensajes yo (mensajes en primera persona)](../../cards/es/ask_then_say.png)
 
 ## Qué dice el modelo
 
-Un reproche le dice al otro qué falla en él. Un mensaje en primera persona dice qué me pasa a mí. Thomas Gordon le dio tres partes: la conducta, sin juicio («cuando los platos siguen ahí por la mañana»), su efecto concreto en mí («tengo que lavarlos antes de ir a trabajar») y lo que siento («y me enfado»).
+Un reproche le dice al otro qué falla en él. Un mensaje yo —o mensaje en primera persona, como lo llamó Thomas Gordon— dice qué me pasa a mí. Thomas Gordon le dio tres partes: la conducta, sin juicio («cuando los platos siguen ahí por la mañana»), su efecto concreto en mí («tengo que lavarlos antes de ir a trabajar») y lo que siento («y me enfado»).
 
 La primera persona sola no basta. «Creo que eres injusto» empieza por «creo» y es un veredicto. «Me siento ignorado» suena a sentimiento y es una interpretación de lo que hizo el otro. Un mensaje en primera persona de verdad nombra un sentimiento que nadie puede negar.
 
@@ -43,6 +43,23 @@ Conducta sin juicio, efecto en ti, tu sentimiento. Tres líneas. Si en la primer
 ### Refleja la primera respuesta
 
 Prepara un arranque: «O sea que…», «Si te he entendido bien…». Quien se siente comprendido escucha mejor, y solo entonces merece la pena tu argumento.
+
+## Diez ejemplos: reproche → mensaje yo
+
+| Reproche | Mensaje yo |
+|---|---|
+| Nunca me escuchas. | Cuando has mirado el móvil mientras te contaba, me he quedado inseguro: no sé si te interesa. |
+| Siempre llegas tarde. | Habíamos quedado a las siete y llegaste a las siete y media. Estuve esperando y me enfadé. |
+| Me lo dejas todo a mí. | Los platos de ayer seguían ahí esta mañana. Los lavé antes de ir a trabajar y estoy cansada. |
+| Me interrumpes todo el rato. | En la reunión empecé dos veces y no pude terminar. Estoy frustrado. |
+| No me tomas en serio. | Cuando te reíste de mi propuesta, me encogí. No sé qué te parece de verdad. |
+| Has roto tu promesa. | Dijiste que las cifras llegarían el jueves; llegaron el viernes. Me quedé por la noche sin ellas y estaba tenso. |
+| Eres un desordenado. | Tu chaqueta y la mochila estaban en el pasillo y tropecé con ellas. Estoy molesta. |
+| Nunca contestas a mis mensajes. | Te escribí el martes y el miércoles y no recibí respuesta. Me preocupé. |
+| No respetas mis límites. | Había dicho que los domingos no trabajo; llamaste de todas formas. Estoy agotada. |
+| Eres injusto conmigo. | En la ronda de hoy solo has nombrado mi error. Me ha dolido, y no sé cómo ves mi trabajo por lo demás. |
+
+Hoja de trabajo: la [tarjeta «Primero pregunta, luego habla»](../../cards/es/ask_then_say.png) en PNG para imprimir: conducta, efecto, sentimiento, y después escuchar. Las once tarjetas están en [Tarjetas](https://conflict-simulator.com/es/tarjetas); su uso en clase es bienvenido.
 
 ## Dónde lo usa el Simulador de Conflictos
 

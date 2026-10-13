@@ -1,8 +1,8 @@
 ---
 id: interessen-statt-positionen
 slug: interests-not-positions
-title: "Interests, not positions: principled negotiation at home"
-description: "Fisher and Ury: behind every demand there is a reason. How to separate interests from positions before you talk — and where the approach ends."
+title: "Interests, not positions: Getting to Yes in everyday life"
+description: "Fisher and Ury, “Getting to Yes”: behind every demand there is a reason. How to separate interests from positions before you talk — and where it ends."
 card: want_why
 evidence: "Core well supported, the package practice wisdom"
 page: https://conflict-simulator.com/en/background/interests-not-positions
@@ -16,7 +16,7 @@ page: https://conflict-simulator.com/en/background/interests-not-positions
 
 ## What the model says
 
-Two people want the same orange. That is a position. She needs the peel for a cake, he wants the juice — those are interests, and they fit together. Roger Fisher and William Ury built a school of negotiation on that observation.
+Two people want the same orange. That is a position. She needs the peel for a cake, he wants the juice — those are interests, and they fit together. Roger Fisher and William Ury built a school of negotiation on that observation: “Getting to Yes”, principled negotiation.
 
 Their principles: separate the people from the problem — hard on the matter, soft on the people. Look at interests, not positions. Develop several options before settling on one. And insist on checkable standards instead of pressure.
 
